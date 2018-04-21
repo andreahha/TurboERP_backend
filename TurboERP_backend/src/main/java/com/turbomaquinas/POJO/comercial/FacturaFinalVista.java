@@ -19,6 +19,7 @@ public class FacturaFinalVista {
 	public String condiciones_pago;
 	public float saldo;
 	public String folio_fiscal;
+	public String estado_factura;
 	public String cve_formap;
 	public String des_formap;
 	public String cve_metodop;
@@ -36,17 +37,20 @@ public class FacturaFinalVista {
 	public int activo;
 	public int factura_final_id_sust;
 	public String folio_fiscal_sust;
+	private int CLIENTES_id;
+	
 
 	public FacturaFinalVista() {
 		super();
-	}
+	}	
 
 	public FacturaFinalVista(int id, String tipo, int numero, Date fecha_factura, Date fecha_vencimiento,
 			float subtotal, float descuento, float iva, float iva_retenido, float total, String moneda,
-			float tipo_cambio, String condiciones_pago, float saldo, String folio_fiscal, String cve_formap,
-			String des_formap, String cve_metodop, String des_metodop, String cve_uso, String des_uso,
-			int numero_cliente, String nombre, String direccion, String colonia, String codigo_postal, String ciudad,
-			String estado, String pais, int activo, int factura_final_id_sust, String folio_fiscal_sust) {
+			float tipo_cambio, String condiciones_pago, float saldo, String folio_fiscal, String estado_factura,
+			String cve_formap, String des_formap, String cve_metodop, String des_metodop, String cve_uso,
+			String des_uso, int numero_cliente, String nombre, String direccion, String colonia, String codigo_postal,
+			String ciudad, String estado, String pais, int activo, int factura_final_id_sust, String folio_fiscal_sust,
+			int cLIENTES_id) {
 		super();
 		this.id = id;
 		this.tipo = tipo;
@@ -63,6 +67,7 @@ public class FacturaFinalVista {
 		this.condiciones_pago = condiciones_pago;
 		this.saldo = saldo;
 		this.folio_fiscal = folio_fiscal;
+		this.estado_factura = estado_factura;
 		this.cve_formap = cve_formap;
 		this.des_formap = des_formap;
 		this.cve_metodop = cve_metodop;
@@ -80,7 +85,10 @@ public class FacturaFinalVista {
 		this.activo = activo;
 		this.factura_final_id_sust = factura_final_id_sust;
 		this.folio_fiscal_sust = folio_fiscal_sust;
+		CLIENTES_id = cLIENTES_id;
 	}
+
+
 
 	public int getId() {
 		return id;
@@ -337,5 +345,22 @@ public class FacturaFinalVista {
 	public void setFolio_fiscal_sust(String folio_fiscal_sust) {
 		this.folio_fiscal_sust = folio_fiscal_sust;
 	}
+
+	public String getEstado_factura() {
+		return estado_factura;
+	}
+
+	public void setEstado_factura(String estado_factura) {
+		this.estado_factura = estado_factura;
+	}
+
+	public int getCLIENTES_id() {
+		return CLIENTES_id;
+	}
+
+	public void setCLIENTES_id(int cLIENTES_id) {
+		CLIENTES_id = cLIENTES_id;
+	}
+		
 	
 }

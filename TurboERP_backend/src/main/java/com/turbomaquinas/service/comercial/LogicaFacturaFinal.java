@@ -53,12 +53,12 @@ public class LogicaFacturaFinal implements FacturaFinalService {
 	}
 
 	@Override
-	public FacturaFinalVista buscarPorNumero(int numero, String tipo) throws DataAccessException {
-		return repFF.buscarPorNumero(numero, tipo);
+	public FacturaFinalVista buscarPorTipoNumero(int numero, String tipo,String estado) throws DataAccessException {
+		return repFF.buscarPorTipoNumero(numero, tipo,estado);
 	}
 	
 	@Override
-	public List<FacturaFinal> consultarFacturasPendientesPorCliente(int id,String moneda) {		
+	public List<FacturaFinalVista> consultarFacturasPendientesPorCliente(int id,String moneda) {		
 		return repFF.consultarFacturasPendientesPorCliente(id,moneda);
 	}
 
