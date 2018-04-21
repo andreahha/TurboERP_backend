@@ -1,0 +1,415 @@
+package com.turbomaquinas.DAO.general;
+
+
+import java.math.BigDecimal;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.jdbc.core.simple.SimpleJdbcCall;
+import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
+import org.springframework.stereotype.Repository;
+
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.turbomaquinas.POJO.general.AtributoEspecialConsulta;
+import com.turbomaquinas.POJO.general.OT;
+import com.turbomaquinas.POJO.general.Orden;
+import com.turbomaquinas.POJO.general.OrdenFactura;
+import com.turbomaquinas.POJO.general.OrdenFechasVista;
+import com.turbomaquinas.POJO.general.OrdenVista;
+
+@Repository
+public class JDBCOrden implements OrdenDAO {
+	
+	public class FoliosOrdenes{
+		private int id;
+		private String folio;
+		private Date fecha;
+
+		public FoliosOrdenes(int id, String folio, Date fecha) {
+			super();
+			this.id = id;
+			this.folio = folio;
+			this.fecha = fecha;
+		}
+
+		public int getId() {
+			return id;
+		}
+
+		public void setId(int id) {
+			this.id = id;
+		}
+
+		public String getFolio() {
+			return folio;
+		}
+
+		public void setFolio(String folio) {
+			this.folio = folio;
+		}
+
+		public Date getFecha() {
+			return fecha;
+		}
+
+		public void setFecha(Date fecha) {
+			this.fecha = fecha;
+		}
+		
+	}
+
+	@Autowired
+	private JdbcTemplate jdbcTemplate;
+	
+	
+	@Override
+	public int crear(Orden o) throws DataAccessException{
+		SimpleJdbcInsert insert = new SimpleJdbcInsert(jdbcTemplate);
+		List<String> columnas = new ArrayList<>();
+		columnas.add("descripcion");
+		columnas.add("tipo");
+		columnas.add("creado_por");
+		columnas.add("CLIENTES_id");
+		columnas.add("MARCAS_EQUIPOS_id");
+		columnas.add("MODELOS_EQUIPOS_id");
+		
+		insert.setTableName("ORDENES");
+		insert.setColumnNames(columnas);
+		
+		Map<String, Object> datos = new HashMap<>();
+		datos.put("descripcion", o.getDescripcion());
+		datos.put("tipo", o.getTipo());
+		datos.put("creado_por", o.getCreado_por());
+		datos.put("CLIENTES_id", o.getClientes_id());
+		datos.put("MARCAS_EQUIPOS_id", o.getMarcas_equipos_id());
+		datos.put("MODELOS_EQUIPOS_id", o.getModelos_equipos_id());
+		
+		insert.setGeneratedKeyName("id");
+		Number id = insert.executeAndReturnKey(datos);
+		
+		return id.intValue();
+	}
+
+	@Override
+	public void actualizar(Orden o) throws DataAccessException{
+		jdbcTemplate.update("UPDATE ORDENES SET descripcion=?, CLIENTES_id=?, MARCAS_EQUIPOS_id=?, MODELOS_EQUIPOS_id=? WHERE id=?", 
+				o.getDescripcion(), o.getClientes_id(), o.getMarcas_equipos_id(), o.getModelos_equipos_id(), o.getId());
+	}
+	
+	@Override
+	public OrdenVista buscar(int id) throws DataAccessException{
+		OrdenVista ov = jdbcTemplate.queryForObject("SELECT * FROM ORDENES_V WHERE id=?", 
+				new OrdenVistaRM(), id);
+		return ov;
+	}
+
+	@Override
+	public List<OrdenVista> consultar() throws DataAccessException{
+		List<OrdenVista> o = jdbcTemplate.query("SELECT * FROM ORDENES_V ", 
+				new OrdenVistaRM());
+			return o;
+	}
+
+	@Override
+	public OrdenVista buscarOrden(String numeroOrden) throws DataAccessException{
+		OrdenVista ov = jdbcTemplate.queryForObject("SELECT * FROM ORDENES_V WHERE numero_orden=?", 
+				new OrdenVistaRM(), numeroOrden);
+		return ov;
+	}
+
+	@Override
+	public List<Integer> anioOrden() throws DataAccessException{
+		List<Integer> o = jdbcTemplate.queryForList("SELECT DISTINCT(anio) FROM ORDENES ORDER BY anio DESC", 
+				Integer.class);
+		return o;
+	}
+
+	@Override
+	public List<OrdenVista> ordenAnio(int anio) throws DataAccessException{
+		List<OrdenVista> ov = jdbcTemplate.query("SELECT * FROM ORDENES_V WHERE anio=?", 
+				new OrdenVistaRM(), anio);
+		return ov;
+	}
+
+	@Override
+	public void actualizarMoneda(int id, String moneda) throws DataAccessException {
+		jdbcTemplate.update("UPDATE ORDENES SET moneda=? WHERE id=?", moneda, id);
+	}
+
+	@Override
+	public OT buscarPorNumero(String numero) throws DataAccessException {
+		OT o = jdbcTemplate.queryForObject("SELECT o.id, o.descripcion, o.CLIENTES_id clientes_id, o.moneda, o.importe_autorizado, o.importe_pedido, o.numero_orden, "+ 
+				"(SELECT numero FROM CLIENTES WHERE id = o.CLIENTES_id) numero_cliente, "+ 
+				"(SELECT nombre_comercial FROM CLIENTES WHERE id = o.CLIENTES_id) comercial, "+ 
+				"(SELECT nombre_fiscal FROM CLIENTES WHERE id = o.CLIENTES_id) fiscal, "+
+			    "(SELECT numero FROM GIROS WHERE id  = (SELECT GIROS_id FROM CLIENTES WHERE id = o.CLIENTES_id)) giro "+
+			    "FROM ORDENES o "+
+			    "WHERE o.numero_orden = ?", 
+				new OTRM(), numero);
+		return o;
+	}
+
+	@Override
+	public int autorizarActividades(int ordenId, String doc) throws DataAccessException  {
+		SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
+				.withProcedureName("AUTORIZAR_ACTIVIDADES");
+
+		Map<String, Object> inParamMap = new HashMap<String, Object>();
+		inParamMap.put("p_orden_id", ordenId);
+		inParamMap.put("doc", doc);
+		SqlParameterSource in = new MapSqlParameterSource(inParamMap);
+	
+		Map<String, Object> simpleJdbcCallResult = simpleJdbcCall.execute(in);
+		
+		for (Entry<String, Object> entry : simpleJdbcCallResult.entrySet()) {
+	        if (entry.getKey().compareTo("p_autorizacion_id") == 0) {
+	            return (Integer) entry.getValue();
+	        }
+	    }		
+		return 0;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<FoliosOrdenes> consultarFoliosporOrden(int id) {
+		String sql ="SELECT a.id as id, a.folio as folio, a.fecha as fecha"
+				+ " FROM ORDENES o"
+				+ " JOIN AUTORIZACIONES a ON a.ORDENES_id=o.id"
+				+ " WHERE o.id = ?";
+	
+		List<? extends Object> folios = jdbcTemplate.query(sql, new RowMapper<Object>() {
+
+			@Override
+			public Object mapRow(ResultSet rs, int i) throws SQLException {
+				return new FoliosOrdenes(
+						rs.getInt("id"),
+						rs.getString("folio"),
+						rs.getDate("fecha"));
+			}
+		}, id);
+		
+		return (List<FoliosOrdenes>) folios;
+	}
+
+	@Override
+	public void actualizarAlfresco(int idOrden, String alfresco_id) throws DataAccessException{
+		jdbcTemplate.update("UPDATE ORDENES SET alfresco_id_OIT=? WHERE id=?", 
+				alfresco_id, idOrden);
+		
+	}
+
+	
+
+
+	@Override
+	public void actualizarCambioCliente(int id,String cliente) throws DataAccessException{
+		String sql="UPDATE ORDENES set especiales=(SELECT JSON_ESPECIALES_ORDENES_CAMBIOS(?,id,'$.cambios','cambios')) where id=?";
+		jdbcTemplate.update(sql,cliente,id);
+	}
+	
+	@Override
+	public void actualizarCambioMoneda(int id,String moneda) throws DataAccessException{
+		String sql="UPDATE ORDENES set especiales=(SELECT JSON_ESPECIALES_ORDENES_CAMBIOS(?,id,'$.cambios','cambios')) where id=?";
+		jdbcTemplate.update(sql,moneda,id);
+	}
+
+	@Override
+	public void actualizarClienteOriginal(int id, int clienteId, int modificado_por) throws DataAccessException{
+		String sql="UPDATE ORDENES set CLIENTES_id = ?, modificado_por = ? where id=?";
+		jdbcTemplate.update(sql,clienteId,modificado_por,id);
+	}
+	
+	@Override
+	public void actualizarMonedaOriginal(int id, String moneda, int modificado_por) throws DataAccessException{
+		String sql="UPDATE ORDENES set moneda = ?, modificado_por = ? where id=?";
+		jdbcTemplate.update(sql,moneda,modificado_por,id);
+	}
+
+	@Override
+	public AtributoEspecialConsulta buscarClienteEspeciales(int id) throws DataAccessException{
+		String json = jdbcTemplate.queryForObject("SELECT JSON_CONSULTA_ULT_CAMBIO(?,'CLIENTE')",String.class, id);
+		ObjectMapper mapper = new ObjectMapper();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		mapper.setDateFormat(dateFormat);
+		AtributoEspecialConsulta cliente=null;
+		try {
+			cliente = mapper.readValue(json, new TypeReference<AtributoEspecialConsulta>(){});
+		} catch (Exception e) {}
+		return cliente;
+	}
+
+	@Override
+	public AtributoEspecialConsulta buscarMonedaEspeciales(int id) throws DataAccessException{
+		String json = jdbcTemplate.queryForObject("SELECT JSON_CONSULTA_ULT_CAMBIO(?,'MONEDA')",String.class, id);
+		ObjectMapper mapper = new ObjectMapper();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		mapper.setDateFormat(dateFormat);
+		AtributoEspecialConsulta moneda=null;
+		try {
+			moneda = mapper.readValue(json, new TypeReference<AtributoEspecialConsulta>(){});
+		} catch (Exception e) {}
+		return moneda;
+	}
+
+	@Override
+	public OrdenFechasVista buscarFechasPorOrden(String numOrden) {
+		OrdenFechasVista ofv = jdbcTemplate.queryForObject("SELECT * FROM ORDENES_FECHAS_V WHERE numero_orden=?",
+				new OrdenFechasRM(), numOrden);
+		return ofv;
+	}
+	
+	@Override
+	public List<Integer> consultarOrdenAAPendientesFacturar(int id) throws DataAccessException {
+	   	String sql = "select DISTINCT(o.id)"
+				+ " from ORDENES o"
+				+ " join CLIENTES c on o.clientes_id=c.id"
+				+ " join MARCAS_EQUIPOS ma on ma.id=o.MARCAS_EQUIPOS_id"
+				+ " join MODELOS_EQUIPOS mo on mo.id=o.MODELOS_EQUIPOS_id"
+				+ " join GIROS g on g.id=c.GIROS_id"
+				+ " join AUTORIZACIONES a  on a.ORDENES_id=o.id"
+				+ " join ACTIVIDADES_AUTORIZADAS aa on aa.AUTORIZACIONES_id=a.id"
+				+ " where c.id=? and aa.importe_pendiente > 0 ";	    
+	    return jdbcTemplate.queryForList(sql,Integer.class, id);
+	}
+
+	
+	@Override
+	public OrdenFactura buscarDatosFacturacion(int orden_id,String moneda,String idClienteFacturar) throws DataAccessException  {
+		SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
+				.withProcedureName("BUSCA_DATOS_FACT_ORDEN");
+
+		Map<String, Object> inParamMap = new HashMap<String, Object>();
+		inParamMap.put("p_id", orden_id);
+		inParamMap.put("p_mon", moneda);
+		inParamMap.put("p_idC", idClienteFacturar);
+		SqlParameterSource in = new MapSqlParameterSource(inParamMap);
+	
+		Map<String, Object> simpleJdbcCallResult = simpleJdbcCall.execute(in);
+		
+		OrdenFactura datos=new OrdenFactura();
+		try{
+			for (Entry<String, Object> entry : simpleJdbcCallResult.entrySet()) {
+				if (entry.getKey().compareTo("p_id_orden") == 0) {
+		            datos.setId_orden((Integer)entry.getValue());
+		        }else if (entry.getKey().compareTo("p_numero_orden") == 0) {
+		            datos.setNumero_orden((String)entry.getValue());
+		        }else if (entry.getKey().compareTo("p_descripcion") == 0) {
+		            datos.setDescripcion((String)entry.getValue());
+		        }else if (entry.getKey().compareTo("p_id_cliente") == 0) {
+		            datos.setId_cliente((Integer)entry.getValue());
+		        }else if (entry.getKey().compareTo("p_nombre_fiscal") == 0) {
+		            datos.setNombre_fiscal((String)entry.getValue());
+		        }else if (entry.getKey().compareTo("p_id_cliente_facturar") == 0) {
+		            datos.setId_cliente_facturar((Integer)entry.getValue());
+		        }else if (entry.getKey().compareTo("p_nombre_fiscal_facturar") == 0) {
+		            datos.setNombre_fiscal_facturar((String)entry.getValue());
+		        }else if (entry.getKey().compareTo("p_moneda_facturar") == 0) {
+		            datos.setMoneda_facturar((String)entry.getValue());
+		        }else if (entry.getKey().compareTo("p_importe_cotizado_facturar") == 0) {
+		            datos.setImporte_cotizado_facturar((BigDecimal) entry.getValue());
+		        }else if (entry.getKey().compareTo("p_importe_autorizado_facturar") == 0) {
+		            datos.setImporte_autorizado_facturar((BigDecimal) entry.getValue());
+		        }else if (entry.getKey().compareTo("p_importe_bajas_facturar") == 0) {
+		            datos.setImporte_bajas_facturar((BigDecimal) entry.getValue());
+		        }else if (entry.getKey().compareTo("p_importe_anticipo_facturar") == 0) {
+		            datos.setImporte_anticipo_facturar((BigDecimal) entry.getValue());
+		        }else if (entry.getKey().compareTo("p_importe_facturado_facturar") == 0) {
+		            datos.setImporte_facturado_facturar((BigDecimal) entry.getValue());
+		        }else if (entry.getKey().compareTo("p_importe_descuento_facturar") == 0) {
+		            datos.setImporte_descuento_facturar((BigDecimal) entry.getValue());
+		        }else if (entry.getKey().compareTo("p_importe_pagado_facturar") == 0) {
+		            datos.setImporte_pagado_facturar((BigDecimal) entry.getValue());;
+		        }else if (entry.getKey().compareTo("p_importe_pedido_facturar") == 0) {
+		            datos.setImporte_pedido_facturar((BigDecimal) entry.getValue());
+		        }else if (entry.getKey().compareTo("p_importe_pendiente_facturar") == 0) {
+		            datos.setImporte_pendiente_facturar((BigDecimal) entry.getValue());
+		        }else if (entry.getKey().compareTo("p_tipo_cambio_facturar") == 0) {
+		            datos.setTipo_cambio((BigDecimal) entry.getValue());
+		        }else if (entry.getKey().compareTo("p_tipo_cambio_calculado") == 0) {
+		            datos.setTipo_cambio_calculado((BigDecimal) entry.getValue());
+		        }else if (entry.getKey().compareTo("p_importe_pendiente_pago_facturar") == 0) {
+		            datos.setImporte_pendiente_pago_facturar((BigDecimal) entry.getValue());
+		        }
+		    }
+			return datos;
+		}catch(Exception e){return null;}
+	}
+
+	@Override
+	public OrdenFactura buscarDatosFacturacion(int orden_id, int idFactura) {
+		SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
+				.withProcedureName("BUSCA_DATOS_FACT_ORDEN_PAGOS");
+
+		Map<String, Object> inParamMap = new HashMap<String, Object>();
+		inParamMap.put("p_idOrden", orden_id);
+		inParamMap.put("p_idFactura", idFactura);
+		SqlParameterSource in = new MapSqlParameterSource(inParamMap);
+	
+		Map<String, Object> simpleJdbcCallResult = simpleJdbcCall.execute(in);
+		
+		OrdenFactura datos=new OrdenFactura();
+		try{
+			for (Entry<String, Object> entry : simpleJdbcCallResult.entrySet()) {
+				if (entry.getKey().compareTo("p_id_orden") == 0) {
+		            datos.setId_orden((Integer)entry.getValue());
+		        }else if (entry.getKey().compareTo("p_numero_orden") == 0) {
+		            datos.setNumero_orden((String)entry.getValue());
+		        }else if (entry.getKey().compareTo("p_descripcion") == 0) {
+		            datos.setDescripcion((String)entry.getValue());
+		        }else if (entry.getKey().compareTo("p_id_cliente") == 0) {
+		            datos.setId_cliente((Integer)entry.getValue());
+		        }else if (entry.getKey().compareTo("p_nombre_fiscal") == 0) {
+		            datos.setNombre_fiscal((String)entry.getValue());
+		        }else if (entry.getKey().compareTo("p_id_cliente_facturar") == 0) {
+		            datos.setId_cliente_facturar((Integer)entry.getValue());
+		        }else if (entry.getKey().compareTo("p_nombre_fiscal_facturar") == 0) {
+		            datos.setNombre_fiscal_facturar((String)entry.getValue());
+		        }else if (entry.getKey().compareTo("p_moneda_facturar") == 0) {
+		            datos.setMoneda_facturar((String)entry.getValue());
+		        }else if (entry.getKey().compareTo("p_importe_cotizado_facturar") == 0) {
+		            datos.setImporte_cotizado_facturar((BigDecimal) entry.getValue());
+		        }else if (entry.getKey().compareTo("p_importe_autorizado_facturar") == 0) {
+		            datos.setImporte_autorizado_facturar((BigDecimal) entry.getValue());
+		        }else if (entry.getKey().compareTo("p_importe_bajas_facturar") == 0) {
+		            datos.setImporte_bajas_facturar((BigDecimal) entry.getValue());
+		        }else if (entry.getKey().compareTo("p_importe_anticipo_facturar") == 0) {
+		            datos.setImporte_anticipo_facturar((BigDecimal) entry.getValue());
+		        }else if (entry.getKey().compareTo("p_importe_facturado_facturar") == 0) {
+		            datos.setImporte_facturado_facturar((BigDecimal) entry.getValue());
+		        }else if (entry.getKey().compareTo("p_importe_descuento_facturar") == 0) {
+		            datos.setImporte_descuento_facturar((BigDecimal) entry.getValue());
+		        }else if (entry.getKey().compareTo("p_importe_pagado_facturar") == 0) {
+		            datos.setImporte_pagado_facturar((BigDecimal) entry.getValue());;
+		        }else if (entry.getKey().compareTo("p_importe_pedido_facturar") == 0) {
+		            datos.setImporte_pedido_facturar((BigDecimal) entry.getValue());
+		        }else if (entry.getKey().compareTo("p_importe_pendiente_facturar") == 0) {
+		            datos.setImporte_pendiente_facturar((BigDecimal) entry.getValue());
+		        }else if (entry.getKey().compareTo("p_tipo_cambio_facturar") == 0) {
+		            datos.setTipo_cambio((BigDecimal) entry.getValue());
+		        }else if (entry.getKey().compareTo("p_tipo_cambio_calculado") == 0) {
+		            datos.setTipo_cambio_calculado((BigDecimal) entry.getValue());
+		        }else if (entry.getKey().compareTo("p_importe_pendiente_pago_facturar") == 0) {
+		            datos.setImporte_pendiente_pago_facturar((BigDecimal) entry.getValue());
+		        }
+		    }
+			return datos;
+		}catch(Exception e){return null;}
+	}
+	
+	
+	
+}
