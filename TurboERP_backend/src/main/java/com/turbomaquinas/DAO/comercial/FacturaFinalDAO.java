@@ -13,8 +13,8 @@ public interface FacturaFinalDAO {
 	public List<FacturaFinalVista> consultar();
 	public void cancelar(FacturaFinal ff);
 	public FacturaFinalVista facturaaSustituir (int numero);
-	public FacturaFinalVista buscarPorNumero (int numero, String tipo);
-	public List<FacturaFinal> consultarFacturasPendientesPorCliente(int id, String moneda);
+	public FacturaFinalVista buscarPorTipoNumero (int numero, String tipo,String estado);
+	public List<FacturaFinalVista> consultarFacturasPendientesPorCliente(int id, String moneda);
 	public List<Integer> consultarIdsOrdenesFactura(int id);
 	
 	

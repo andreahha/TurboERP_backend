@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.turbomaquinas.POJO.comercial.DocumentoFacturaFinal;
@@ -106,10 +107,10 @@ public class WSFacturaFinal {
 	}
 
 	@GetMapping("factura/{tipo}/{numero}")
-	public ResponseEntity<FacturaFinalVista> buscarPorNumero(@PathVariable String tipo, @PathVariable int numero){
+	public ResponseEntity<FacturaFinalVista> buscarPorNumero(@PathVariable String tipo, @PathVariable int numero,@RequestParam String estado){
 		FacturaFinalVista ffv = null;
 		try{
-			ffv = s.buscarPorNumero(numero, tipo);
+			ffv = s.buscarPorTipoNumero(numero, tipo,estado);
 		}catch(DataAccessException e){
 			bitacora.error(e.getMessage());
 			return new ResponseEntity<FacturaFinalVista>(HttpStatus.NOT_FOUND);
@@ -119,20 +120,18 @@ public class WSFacturaFinal {
 	}
 	
 	@GetMapping("/cliente/{id}/{moneda}")
-	public ResponseEntity<List<FacturaFinal>> consultarFacturasPendientesPorCliente(@PathVariable int id,@PathVariable String moneda){
-		
-		
-		List<FacturaFinal> ffl = null;
+	public ResponseEntity<List<FacturaFinalVista>> consultarFacturasPendientesPorCliente(@PathVariable int id,@PathVariable String moneda){
+		List<FacturaFinalVista> ffl = null;
 		try{
 			ffl = s.consultarFacturasPendientesPorCliente(id,moneda);
 		}catch(DataAccessException e){
 			bitacora.error(e.getMessage());
-			return new ResponseEntity<List<FacturaFinal>>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<List<FacturaFinalVista>>(HttpStatus.NOT_FOUND);
 		}
 		if (ffl.isEmpty()) {
-			return new ResponseEntity<List<FacturaFinal>>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<List<FacturaFinalVista>>(HttpStatus.NOT_FOUND);
 		}
-		return new ResponseEntity<List<FacturaFinal>>(ffl, HttpStatus.OK);
+		return new ResponseEntity<List<FacturaFinalVista>>(ffl, HttpStatus.OK);
 		
 	}
 	

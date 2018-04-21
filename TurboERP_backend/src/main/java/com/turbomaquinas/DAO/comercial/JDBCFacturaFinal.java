@@ -150,35 +150,29 @@ public class JDBCFacturaFinal implements FacturaFinalDAO {
 	}
 
 	@Override
-	public FacturaFinalVista buscarPorNumero(int numero, String tipo) {
-		FacturaFinalVista ffv = jdbcTemplate.queryForObject("SELECT * FROM FACTURA_FINAL_V WHERE numero = ? and tipo = ?",
-				new FacturaFinalVistaRM(), numero, tipo);
+	public FacturaFinalVista buscarPorTipoNumero(int numero, String tipo,String estado) {
+		FacturaFinalVista ffv = jdbcTemplate.queryForObject("SELECT * FROM FACTURA_FINAL_V WHERE numero = ? and tipo = ? and estado_factura=?",
+				new FacturaFinalVistaRM(), numero, tipo,estado);
 		return ffv;
 	}
 	
 	@Override
-	public List<FacturaFinal> consultarFacturasPendientesPorCliente(int id, String moneda) throws DataAccessException {
-		String filtradoMoneda = "";
-		
+	public List<FacturaFinalVista> consultarFacturasPendientesPorCliente(int id, String moneda) throws DataAccessException {
+		String filtradoMoneda = "";		
 	   	if(!moneda.equals("*")){
 			filtradoMoneda = "and moneda = ?";
-		}
-	   	
-		String sql = "select * "
-				+ "from FACTURA_FINAL ff "
-				+ "where saldo > 0 and (NOT DATOS_TIMBRADO_id IS NULL) and CLIENTES_id=? "+filtradoMoneda;
-		//List<FacturaFinal> ff = jdbcTemplate.query(sql, new FacturaFinalRM(),id);
-		List<FacturaFinal> ff = null;
+		}	   	
+		String sql = "SELECT * "
+				+ "FROM FACTURA_FINAL_V ff "
+				+ "WHERE saldo > 0 AND estado_factura='T' AND CLIENTES_id=? "+filtradoMoneda;
+		List<FacturaFinalVista> ff = null;
 	    
 	    if(moneda.equals("*")){
-	    	 ff = jdbcTemplate.query(sql, 
-					new FacturaFinalRM(), id);
+	    	 ff = jdbcTemplate.query(sql,new FacturaFinalVistaRM(), id);
 		}
 	    else{
-			ff = jdbcTemplate.query(sql, 
-					new FacturaFinalRM(), id, moneda);
-	    }
-			
+			ff = jdbcTemplate.query(sql,new FacturaFinalVistaRM(), id, moneda);
+	    }			
 		return ff;
 	}
 

@@ -337,7 +337,7 @@ public class JDBCOrden implements OrdenDAO {
 		            datos.setImporte_pedido_facturar((BigDecimal) entry.getValue());
 		        }else if (entry.getKey().compareTo("p_importe_pendiente_facturar") == 0) {
 		            datos.setImporte_pendiente_facturar((BigDecimal) entry.getValue());
-		        }else if (entry.getKey().compareTo("p_tipo_cambio_facturar") == 0) {
+		        }else if (entry.getKey().compareTo("p_tipo_cambio") == 0) {
 		            datos.setTipo_cambio((BigDecimal) entry.getValue());
 		        }else if (entry.getKey().compareTo("p_tipo_cambio_calculado") == 0) {
 		            datos.setTipo_cambio_calculado((BigDecimal) entry.getValue());
@@ -398,7 +398,7 @@ public class JDBCOrden implements OrdenDAO {
 		            datos.setImporte_pedido_facturar((BigDecimal) entry.getValue());
 		        }else if (entry.getKey().compareTo("p_importe_pendiente_facturar") == 0) {
 		            datos.setImporte_pendiente_facturar((BigDecimal) entry.getValue());
-		        }else if (entry.getKey().compareTo("p_tipo_cambio_facturar") == 0) {
+		        }else if (entry.getKey().compareTo("p_tipo_cambio") == 0) {
 		            datos.setTipo_cambio((BigDecimal) entry.getValue());
 		        }else if (entry.getKey().compareTo("p_tipo_cambio_calculado") == 0) {
 		            datos.setTipo_cambio_calculado((BigDecimal) entry.getValue());
