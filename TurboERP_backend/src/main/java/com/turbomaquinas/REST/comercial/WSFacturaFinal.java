@@ -147,5 +147,18 @@ public class WSFacturaFinal {
 		return new ResponseEntity<List<OrdenFactura>>(ordenes, HttpStatus.OK);
 		
 	}
+	
+	@GetMapping("/folio")
+	public ResponseEntity<FacturaFinalVista> buscarFacturaFolio(@RequestParam String folio,@RequestParam String estado){
+		FacturaFinalVista factura = null;
+		try{
+			factura = s.buscarFacturaFolio(folio,estado);
+		}catch(DataAccessException e){
+			bitacora.error(e.getMessage());
+			return new ResponseEntity<FacturaFinalVista>(HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<FacturaFinalVista>(factura, HttpStatus.OK);
+		
+	}
 
 }

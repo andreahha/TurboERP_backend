@@ -193,4 +193,10 @@ public class JDBCFacturaFinal implements FacturaFinalDAO {
 		return idsOrden;
 	}
 
+	@Override
+	public FacturaFinalVista buscarFacturaFolio(String folio,String estado) {
+		FacturaFinalVista factura = jdbcTemplate.queryForObject("SELECT * FROM FACTURA_FINAL_V ff WHERE folio_fiscal=? AND estado_factura=?",new FacturaFinalVistaRM(), folio,estado);
+		return factura;
+	}
+
 }
