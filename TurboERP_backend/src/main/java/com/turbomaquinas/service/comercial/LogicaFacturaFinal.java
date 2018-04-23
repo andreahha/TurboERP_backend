@@ -67,4 +67,9 @@ public class LogicaFacturaFinal implements FacturaFinalService {
 		return serviceOrden.consultarOrdenesPorIdsFactura(repFF.consultarIdsOrdenesFactura(id),id);
 	}
 
+	@Override
+	public FacturaFinalVista buscarFacturaFolio(String folio,String estado) {
+		return repFF.buscarFacturaFolio(folio,estado);
+	}
+
 }
