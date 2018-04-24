@@ -180,6 +180,7 @@ public class LogicaOrdenService implements OrdenService{
 			mon.creado_por=orden.getCreado_por();
 			mon.fecha=orden.getCreado();
 			mon.tipo_cambio=1;
+			mon.tipo_cambio_calculado=1;
 			return mon;
 		}
 	}
