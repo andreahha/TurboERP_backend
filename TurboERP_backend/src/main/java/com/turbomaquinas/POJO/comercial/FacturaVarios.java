@@ -34,6 +34,7 @@ public class FacturaVarios {
 	private int metodos_pago_id;
 	private int uso_cfdi_id;
 	private int clientes_id;
+	private String estado;
 	
 	public FacturaVarios() {
 		super();
@@ -44,7 +45,7 @@ public class FacturaVarios {
 			String moneda, float tipo_cambio, String condiciones_pago, Date fecha_baja, int mes_baja, int anio_baja,
 			String observaciones, int activo, int creado_por, Date creado, int modificado_por, Date modificado,
 			int factura_varios_id_sust, int datos_timbrado_id, int formas_pago_id, int metodos_pago_id, int uso_cfdi_id,
-			int clientes_id) {
+			int clientes_id, String estado) {
 		super();
 		this.id = id;
 		this.tipo = tipo;
@@ -76,6 +77,7 @@ public class FacturaVarios {
 		this.metodos_pago_id = metodos_pago_id;
 		this.uso_cfdi_id = uso_cfdi_id;
 		this.clientes_id = clientes_id;
+		this.estado = estado;
 	}
 
 	public int getId() {
@@ -317,4 +319,13 @@ public class FacturaVarios {
 	public void setClientes_id(int clientes_id) {
 		this.clientes_id = clientes_id;
 	}
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+
 }

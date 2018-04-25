@@ -41,4 +41,9 @@ public class LogicaFacturaVarios implements FacturaVariosService {
 		repFV.cancelar(fv);		
 	}
 
+	@Override
+	public List<FacturaVarios> consultarFacturasVariosPendientesPorCliente(int id, String moneda) {
+		return repFV.consultarFacturasVariosPendientesPorCliente(id,moneda);
+	}
+
 }

@@ -11,5 +11,6 @@ public interface FacturaVariosService {
 	public FacturaVarios buscar(int id);
 	public List<FacturaVarios> consultar();
 	public void cancelar(FacturaVarios fv);
+	public List<FacturaVarios> consultarFacturasVariosPendientesPorCliente(int id, String moneda); 
 	
 }

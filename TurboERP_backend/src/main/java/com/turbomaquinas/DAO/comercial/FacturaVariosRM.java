@@ -43,6 +43,7 @@ public class FacturaVariosRM implements RowMapper<FacturaVarios> {
 		fv.setMetodos_pago_id(rs.getInt("metodos_pago_id"));
 		fv.setUso_cfdi_id(rs.getInt("uso_cfdi_id"));
 		fv.setClientes_id(rs.getInt("clientes_id"));
+		fv.setEstado(rs.getString("estado"));
 		return fv;
 	}
 
