@@ -26,7 +26,7 @@ public class WSConceptosNotasCredito {
 	@GetMapping()
 	public ResponseEntity<List<ConceptosNotasCredito>> consultar(){
 		List<ConceptosNotasCredito> cnc = s.consultar();
-		if( cnc == null)
+		if( cnc.isEmpty())
 			return new ResponseEntity<List<ConceptosNotasCredito>>(HttpStatus.NO_CONTENT);
 		return new ResponseEntity<List<ConceptosNotasCredito>>(cnc, HttpStatus.OK);
 		
