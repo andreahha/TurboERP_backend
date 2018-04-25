@@ -2,8 +2,6 @@ package com.turbomaquinas.REST.comercial;
 
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,8 +15,6 @@ import com.turbomaquinas.service.comercial.ConceptosNotasCreditoService;
 @RestController
 @RequestMapping("comercial/conceptosnotascredito")
 public class WSConceptosNotasCredito {
-	
-	private static final Log bitacora = LogFactory.getLog(WSConceptosFacturacion.class);
 	
 	@Autowired
 	ConceptosNotasCreditoService s;
