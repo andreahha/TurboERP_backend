@@ -103,5 +103,25 @@ public class JDBCFacturaVarios implements FacturaVariosDAO {
 				fv.getFecha_baja(), fv.getMes_baja(), fv.getAnio_baja(), fv.getActivo(),
 				fv.getModificado_por(), fv.getId());
 	}
+
+	@Override
+	public List<FacturaVarios> consultarFacturasVariosPendientesPorCliente(int id, String moneda) throws DataAccessException {
+		String filtradoMoneda = "";		
+	   	if(!moneda.equals("*")){
+			filtradoMoneda = "and moneda = ?";
+		}	   	
+		String sql = "SELECT * "
+				+ "FROM FACTURA_VARIOS fv "
+				+ "WHERE saldo > 0 AND estado='T' AND CLIENTES_id=? "+filtradoMoneda;
+		List<FacturaVarios> fv = null;
+	    
+	    if(moneda.equals("*")){
+	    	 fv = jdbcTemplate.query(sql,new FacturaVariosRM(), id);
+		}
+	    else{
+			fv = jdbcTemplate.query(sql,new FacturaVariosRM(), id, moneda);
+	    }			
+		return fv;
+	}
 	
 }

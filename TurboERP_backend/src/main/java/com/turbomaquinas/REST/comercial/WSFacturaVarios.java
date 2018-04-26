@@ -93,4 +93,20 @@ public class WSFacturaVarios {
 			return new ResponseEntity<Void>(HttpStatus.OK);		
 	}
 	
+	@GetMapping("/cliente/{id}/{moneda}")
+	public ResponseEntity<List<FacturaVarios>> consultarFacturasVariosPendientesPorCliente(@PathVariable int id,@PathVariable String moneda){
+		List<FacturaVarios> fvl = null;
+		try{
+			fvl = s.consultarFacturasVariosPendientesPorCliente(id,moneda);
+		}catch(DataAccessException e){
+			bitacora.error(e.getMessage());
+			return new ResponseEntity<List<FacturaVarios>>(HttpStatus.CONFLICT);
+		}
+		if (fvl.isEmpty()) {
+			return new ResponseEntity<List<FacturaVarios>>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<List<FacturaVarios>>(fvl, HttpStatus.OK);
+		
+	}
+	
 }
