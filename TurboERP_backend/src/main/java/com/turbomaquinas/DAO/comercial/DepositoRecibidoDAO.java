@@ -11,7 +11,7 @@ public interface DepositoRecibidoDAO {
 	public DepositoRecibidoVista buscar(int id);
 	public List<DepositoRecibidoVista> consultar();
 	
-	public List<DepositoRecibidoVista> depositoRecibidoRangoFecha(String fecha_depositoInicio,String fecha_depositoFin);
+	public List<DepositoRecibidoVista> depositoRecibidoRangoFecha(String fecha_depositoInicio,String fecha_depositoFin,String estado);
 	
 	public void eliminar(int id,int modificado_por);
 	

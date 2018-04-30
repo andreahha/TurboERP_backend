@@ -11,7 +11,7 @@ public interface DepositoRecibidoService {
 	public DepositoRecibidoVista buscar(int id);
 	public List<DepositoRecibidoVista> consultar();
 	
-	public List<DepositoRecibidoVista> depositosRecibidosFecha(String fechainicio,String fechafin);
+	public List<DepositoRecibidoVista> depositosRecibidosFecha(String fechainicio,String fechafin,String estado);
 	public void borrarDR(int id,int modificado_por);
 	public boolean consultarMonedaDepositoRecibido(int id);
 }

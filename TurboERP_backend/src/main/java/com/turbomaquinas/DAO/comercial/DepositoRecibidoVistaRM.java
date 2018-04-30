@@ -18,7 +18,6 @@ public class DepositoRecibidoVistaRM implements RowMapper<DepositoRecibidoVista>
 		d.setCadena_pago(rs.getString("cadena_pago"));
 		d.setSello_pago(rs.getString("sello_pago"));
 		d.setImporte_deposito(rs.getFloat("importe_deposito"));
-		d.setImporte_aplicado(rs.getFloat("importe_aplicado"));
 		d.setFecha_deposito(rs.getDate("fecha_deposito"));
 		d.setCuenta_emisor(rs.getString("cuenta_emisor"));
 		d.setNumero_operacion(rs.getInt("numero_operacion"));
@@ -42,6 +41,7 @@ public class DepositoRecibidoVistaRM implements RowMapper<DepositoRecibidoVista>
 		d.setBancos_clave(rs.getString("bancos_clave"));
 		d.setBancos_descripcion(rs.getString("bancos_descripcion"));
 		d.setBanco_destino(rs.getString("banco_destino"));
+		d.setPAGOS_id(rs.getInt("PAGOS_id"));
 		return d;
 	}
 
