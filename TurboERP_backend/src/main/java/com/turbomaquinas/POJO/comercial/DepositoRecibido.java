@@ -7,7 +7,6 @@ public class DepositoRecibido {
 	private int id;
 	private String comentarios;
 	private float importe_deposito;
-	private float importe_aplicado;
 	private Date fecha_deposito;
 	private String cuenta_emisor;
 	private int numero_operacion;
@@ -23,20 +22,20 @@ public class DepositoRecibido {
 	private String certificado_pago;
 	private String cadena_pago;
 	private String sello_pago;
+	private int PAGOS_id;
 	
 	public DepositoRecibido() {
 		super();
 	}
 
-	public DepositoRecibido(int id, String comentarios, float importe_deposito, float importe_aplicado,
-			Date fecha_deposito, String cuenta_emisor, int numero_operacion, int activo, int creado_por, Date creado,
-			int modificado_por, Date modificado, int formas_pago_id, int cuentas_bancarias_id, int bancos_id_emisor,
-			int tipos_cadena_pago, String certificado_pago, String cadena_pago, String sello_pago) {
+	public DepositoRecibido(int id, String comentarios, float importe_deposito, Date fecha_deposito,
+			String cuenta_emisor, int numero_operacion, int activo, int creado_por, Date creado, int modificado_por,
+			Date modificado, int formas_pago_id, int cuentas_bancarias_id, int bancos_id_emisor, int tipos_cadena_pago,
+			String certificado_pago, String cadena_pago, String sello_pago, int PAGOS_id) {
 		super();
 		this.id = id;
 		this.comentarios = comentarios;
 		this.importe_deposito = importe_deposito;
-		this.importe_aplicado = importe_aplicado;
 		this.fecha_deposito = fecha_deposito;
 		this.cuenta_emisor = cuenta_emisor;
 		this.numero_operacion = numero_operacion;
@@ -52,6 +51,7 @@ public class DepositoRecibido {
 		this.certificado_pago = certificado_pago;
 		this.cadena_pago = cadena_pago;
 		this.sello_pago = sello_pago;
+		this.PAGOS_id = PAGOS_id;
 	}
 
 	public int getId() {
@@ -76,14 +76,6 @@ public class DepositoRecibido {
 
 	public void setImporte_deposito(float importe_deposito) {
 		this.importe_deposito = importe_deposito;
-	}
-
-	public float getImporte_aplicado() {
-		return importe_aplicado;
-	}
-
-	public void setImporte_aplicado(float importe_aplicado) {
-		this.importe_aplicado = importe_aplicado;
 	}
 
 	public Date getFecha_deposito() {
@@ -204,6 +196,14 @@ public class DepositoRecibido {
 
 	public void setSello_pago(String sello_pago) {
 		this.sello_pago = sello_pago;
+	}
+
+	public int getPAGOS_id() {
+		return PAGOS_id;
+	}
+
+	public void setPAGOS_id(int PAGOS_id) {
+		this.PAGOS_id = PAGOS_id;
 	}
 
 }

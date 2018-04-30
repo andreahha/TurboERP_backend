@@ -38,9 +38,9 @@ public class LogicaDepositoRecibido implements DepositoRecibidoService{
 	}
 
 	@Override
-	public List<DepositoRecibidoVista> depositosRecibidosFecha(String fechainicio,String fechafin) throws DataAccessException{
+	public List<DepositoRecibidoVista> depositosRecibidosFecha(String fechainicio,String fechafin,String estado) throws DataAccessException{
 		
-		return repositorio.depositoRecibidoRangoFecha(fechainicio,fechafin);
+		return repositorio.depositoRecibidoRangoFecha(fechainicio,fechafin,estado);
 	}
 
 	@Override

@@ -81,9 +81,9 @@ public class WSDepositoRecibido {
 	}
 	
 	
-	@GetMapping("/fechas")
-	public ResponseEntity<List<DepositoRecibidoVista>> consultarPorFechas(@RequestParam String fechainicio,@RequestParam String fechafin){
-		List<DepositoRecibidoVista> p = s.depositosRecibidosFecha(fechainicio,fechafin);
+	@GetMapping("/{estado}/fechas")
+	public ResponseEntity<List<DepositoRecibidoVista>> consultarPorFechas(@RequestParam String fechainicio,@RequestParam String fechafin,@PathVariable String estado){
+		List<DepositoRecibidoVista> p = s.depositosRecibidosFecha(fechainicio,fechafin,estado);
 		if (p.isEmpty())
 			return new ResponseEntity<List<DepositoRecibidoVista>> (HttpStatus.NOT_FOUND);
 		return new ResponseEntity<List<DepositoRecibidoVista>>(p, HttpStatus.OK);

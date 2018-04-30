@@ -128,11 +128,23 @@ public class JDBCDepositoRecibido implements DepositoRecibidoDAO{
 	
 
 	@Override
-	public List<DepositoRecibidoVista> depositoRecibidoRangoFecha(String fecha_depositoInicio,String fecha_depositoFin) throws DataAccessException {
+	public List<DepositoRecibidoVista> depositoRecibidoRangoFecha(String fecha_depositoInicio,String fecha_depositoFin,String estado) throws DataAccessException {
+		String depositoAplicado = "";		
+	   	if(estado.equals("*")){
+	   		depositoAplicado = "";
+		}
+	   	if(estado.equals("NA")){
+	   		depositoAplicado = "and PAGOS_id IS NULL";
+	   	}
+	   	if(estado.equals("A")){
+	   		depositoAplicado = "and PAGOS_id IS NOT NULL";
+	   	}
 		String sql = "select *"
 				+ " from DEPOSITOS_RECIBIDOS_V dr"
-				+ " where importe_aplicado=0 and fecha_deposito between ? and ? and activo=1";
-		List<DepositoRecibidoVista> dv = jdbcTemplate.query(sql, new DepositoRecibidoVistaRM(),fecha_depositoInicio,fecha_depositoFin);
+				+ " where fecha_deposito between ? and ? and activo=1 "+depositoAplicado;
+		
+		List<DepositoRecibidoVista> dv = jdbcTemplate.query(sql, new DepositoRecibidoVistaRM(),fecha_depositoInicio,fecha_depositoFin);			
+		
 		return dv;
 	}
 

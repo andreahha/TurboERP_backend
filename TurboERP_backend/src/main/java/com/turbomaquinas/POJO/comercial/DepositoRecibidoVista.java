@@ -10,7 +10,6 @@ public class DepositoRecibidoVista {
 	private String cadena_pago;
 	private String sello_pago;
 	private float importe_deposito;
-	private float importe_aplicado;
 	private Date fecha_deposito;
 	private String cuenta_emisor;
 	private int numero_operacion;
@@ -34,19 +33,20 @@ public class DepositoRecibidoVista {
 	private String bancos_descripcion;
 	private String bancos_clave;
 	private String banco_destino;
+	private int PAGOS_id;
 	
 	public DepositoRecibidoVista() {
 		super();
 	}
 
 	public DepositoRecibidoVista(int id, String comentarios, String certificado_pago, String cadena_pago,
-			String sello_pago, float importe_deposito, float importe_aplicado, Date fecha_deposito,
-			String cuenta_emisor, int numero_operacion, int activo, int creado_por, Date creado, int modificado_por,
-			Date modificado, int formas_pago_id, String formas_pago_descripcion, String formas_pago_clave,
-			int tipo_cadena_pago_id, String tipo_cadena_pago_descripcion, String tipo_cadena_pago_clave,
-			int cuentas_bancarias_id, String cuentas_bancarias_descripcion, long cuentas_bancarias_numero,
-			String bancos_rfc, String bancos_cuenta, int bancos_id_emisor, String bancos_descripcion,
-			String bancos_clave, String banco_destino) {
+			String sello_pago, float importe_deposito, Date fecha_deposito, String cuenta_emisor, int numero_operacion,
+			int activo, int creado_por, Date creado, int modificado_por, Date modificado, int formas_pago_id,
+			String formas_pago_descripcion, String formas_pago_clave, int tipo_cadena_pago_id,
+			String tipo_cadena_pago_descripcion, String tipo_cadena_pago_clave, int cuentas_bancarias_id,
+			String cuentas_bancarias_descripcion, long cuentas_bancarias_numero, String bancos_rfc,
+			String bancos_cuenta, int bancos_id_emisor, String bancos_descripcion, String bancos_clave,
+			String banco_destino, int PAGOS_id) {
 		super();
 		this.id = id;
 		this.comentarios = comentarios;
@@ -54,7 +54,6 @@ public class DepositoRecibidoVista {
 		this.cadena_pago = cadena_pago;
 		this.sello_pago = sello_pago;
 		this.importe_deposito = importe_deposito;
-		this.importe_aplicado = importe_aplicado;
 		this.fecha_deposito = fecha_deposito;
 		this.cuenta_emisor = cuenta_emisor;
 		this.numero_operacion = numero_operacion;
@@ -78,6 +77,7 @@ public class DepositoRecibidoVista {
 		this.bancos_descripcion = bancos_descripcion;
 		this.bancos_clave = bancos_clave;
 		this.banco_destino = banco_destino;
+		this.PAGOS_id = PAGOS_id;
 	}
 
 	public int getId() {
@@ -126,14 +126,6 @@ public class DepositoRecibidoVista {
 
 	public void setImporte_deposito(float importe_deposito) {
 		this.importe_deposito = importe_deposito;
-	}
-
-	public float getImporte_aplicado() {
-		return importe_aplicado;
-	}
-
-	public void setImporte_aplicado(float importe_aplicado) {
-		this.importe_aplicado = importe_aplicado;
 	}
 
 	public Date getFecha_deposito() {
@@ -318,6 +310,14 @@ public class DepositoRecibidoVista {
 
 	public void setBanco_destino(String banco_destino) {
 		this.banco_destino = banco_destino;
+	}
+
+	public int getPAGOS_id() {
+		return PAGOS_id;
+	}
+
+	public void setPAGOS_id(int PAGOS_id) {
+		this.PAGOS_id = PAGOS_id;
 	}
 
 	
