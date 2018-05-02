@@ -163,7 +163,7 @@ public class JDBCFacturaFinal implements FacturaFinalDAO {
 			filtradoMoneda = "and moneda = ?";
 		}	   	
 		String sql = "SELECT * "
-				+ "FROM FACTURA_FINAL_V ff "
+				+ "FROM FACTURAS_V ff "
 				+ "WHERE saldo > 0 AND estado_factura='T' AND CLIENTES_id=? "+filtradoMoneda;
 		List<FacturaFinalVista> ff = null;
 	    
