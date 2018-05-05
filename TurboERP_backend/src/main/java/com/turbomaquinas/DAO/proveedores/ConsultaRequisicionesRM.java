@@ -15,6 +15,7 @@ public class ConsultaRequisicionesRM  implements RowMapper<ConsultaRequisiciones
 		cr.setDepartamento(rs.getString("departamento"));
 		cr.setNumero_requisicion(rs.getInt("numero_requisicion"));
 		cr.setDescripcion(rs.getString("descripcion"));
+		cr.setTipo(rs.getString("tipo"));
 		cr.setFecha_requisicion(rs.getDate("fecha_requisicion"));
 		cr.setFecha_cotizacion(rs.getDate("fecha_cotizacion"));
 		cr.setDias_fecha_cot(rs.getInt("dias_fecha_cot"));
@@ -42,6 +43,10 @@ public class ConsultaRequisicionesRM  implements RowMapper<ConsultaRequisiciones
 		cr.setFecha_salida_almacen(rs.getDate("fecha_salida_almacen"));
 		cr.setDias_fecha_salidalm(rs.getInt("dias_fecha_salidalm"));
 		cr.setAlerta_fecha_salidalm(rs.getInt("alerta_fecha_salidalm"));
+		cr.setFecha_liberacion_am_im(rs.getDate("fecha_liberacion_am_im"));
+		cr.setDias_fechaliberacion_am(rs.getInt("dias_fechaliberacion_am"));
+		cr.setDias_fechaliberacion_im(rs.getInt("dias_fechaliberacion_im"));
+		cr.setAlerta_fechaliberacion_am_im(rs.getInt("dias_fechaliberacion_im"));
 		cr.setOrdenes_requisiciones_id(rs.getInt("ORDENES_REQUISICIONES_id"));
 		cr.setParcial_entradalm(rs.getString("parcial_entradalm"));
 		cr.setParcial_libcuarentena(rs.getString("parcial_libcuarentena"));
