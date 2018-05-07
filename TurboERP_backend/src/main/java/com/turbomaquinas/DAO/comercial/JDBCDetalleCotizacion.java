@@ -275,9 +275,19 @@ public class JDBCDetalleCotizacion implements DetalleCotizacionDAO {
 
 	@Override
 	public List<DetalleCotizacionVista> consultarSinAutorizar(int id) {
-		List<DetalleCotizacionVista> dcv = jdbcTemplate.query("SELECT * FROM DETALLE_COTIZACIONES_V WHERE cotizaciones_id = ? AND "
-				+ " NOT EXISTS (SELECT * FROM ACTIVIDADES_AUTORIZADAS WHERE DETALLES_COTIZACIONES_id = DETALLE_COTIZACIONES_V.id) "
-				+ " ORDER BY lugarEncabezado, lugar", new DetalleCotizacionVistaRM(), id);
+		String sql="SELECT d.id,d.descripcion,d.tipo_actividad,d.lugar,d.suministro,d.planta, "
+				+ "d.importe,d.clase_actividad,d.activo,d.DETALLE_DIAGNOSTICO_id AS detalle_diagnostico_id, "
+				+ "e.id AS encabezados_cotizaciones_id, e.descripcion AS descripcionEncabezado, "
+				+ "e.lugar AS lugarEncabezado,c.id AS cotizaciones_id, c.numero AS numerocotizacion, c.anio AS aniocotizacion, "
+				+ "(SELECT COALESCE(COUNT(0), 0) FROM SUBINDICES_COTIZACIONES WHERE((SUBINDICES_COTIZACIONES.DETALLE_COTIZACIONES_id = d.id) AND (SUBINDICES_COTIZACIONES.activo = 1))) AS cant_subindices, "
+				+ "(SELECT (CASE WHEN EXISTS( SELECT  1  FROM ACTIVIDADES_AUTORIZADAS WHERE (ACTIVIDADES_AUTORIZADAS.DETALLES_COTIZACIONES_id = d.id)) THEN 1 ELSE 0 END)) AS autorizado "
+				+ "FROM DETALLE_COTIZACIONES d "
+				+ "JOIN ENCABEZADOS_COTIZACIONES e ON e.id=d.ENCABEZADOS_COTIZACIONES_id "
+				+ "JOIN COTIZACIONES c on c.id=e.COTIZACIONES_id "
+				+ "WHERE d.activo=1 AND cotizaciones_id = ? AND "
+				+ "NOT EXISTS (SELECT * FROM ACTIVIDADES_AUTORIZADAS WHERE DETALLES_COTIZACIONES_id = d.id) "
+				+ "ORDER BY lugarEncabezado, lugar";
+		List<DetalleCotizacionVista> dcv = jdbcTemplate.query(sql, new DetalleCotizacionVistaRM(), id);
 		return dcv;
 	}
 
