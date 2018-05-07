@@ -240,9 +240,9 @@ public class JDBCActividadAutorizada implements ActividadAutorizadaDAO{
 	@Override
 	public List<ActividadAutorizadaFactura> consultarAAPorOrdenPendienteFacturar (int id) throws DataAccessException{
 		String sql="SELECT aa.id,(SELECT d.descripcion FROM DETALLE_COTIZACIONES d WHERE d.id=aa.DETALLES_COTIZACIONES_id) as descripcion, "
-				+ "aa.tipo_actividad, e.id as encabezados_cotizaciones_id,e.descripcion as encabezados_cotizaciones_descripcion,"
-				+ "(SELECT IF ((JSON_EXTRACT(JSON_CONSULTA_ULT_CAMBIO(?, 'MONEDA'),'$.tipo_cambio') IS NULL),importe_pendiente,(importe_pendiente*JSON_EXTRACT(JSON_CONSULTA_ULT_CAMBIO(?, 'MONEDA'),'$.tipo_cambio')))) AS importe_pendiente_facturar, "
-				+ "(SELECT IF ((JSON_EXTRACT(JSON_CONSULTA_ULT_CAMBIO(?, 'MONEDA'),'$.tipo_cambio') IS NULL),descuento,(descuento*JSON_EXTRACT(JSON_CONSULTA_ULT_CAMBIO(?, 'MONEDA'),'$.tipo_cambio')))) AS descuento_facturar "
+				+ "aa.tipo_actividad, e.id as encabezados_cotizaciones_id,e.descripcion as encabezados_cotizaciones_descripcion, "
+				+ "(SELECT IF ((JSON_EXTRACT(JSON_CONSULTA_ULT_CAMBIO(?, 'MONEDA'),'$.tipo_cambio_calculado') IS NULL),importe_a_facturar,(importe_a_facturar*JSON_EXTRACT(JSON_CONSULTA_ULT_CAMBIO(?, 'MONEDA'),'$.tipo_cambio_calculado')))) AS importe_a_facturar, "
+				+ "(SELECT IF ((JSON_EXTRACT(JSON_CONSULTA_ULT_CAMBIO(?, 'MONEDA'),'$.tipo_cambio_calculado') IS NULL),descuento_disponible,(descuento_disponible*JSON_EXTRACT(JSON_CONSULTA_ULT_CAMBIO(?, 'MONEDA'),'$.tipo_cambio_calculado')))) AS descuento_disponible "
 				+ "FROM ACTIVIDADES_AUTORIZADAS aa "
 				+ "JOIN DETALLE_COTIZACIONES d on aa.DETALLES_COTIZACIONES_id=d.id "
 				+ "JOIN ENCABEZADOS_COTIZACIONES e on e.id=d.ENCABEZADOS_COTIZACIONES_id "

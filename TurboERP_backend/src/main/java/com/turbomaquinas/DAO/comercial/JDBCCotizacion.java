@@ -216,11 +216,23 @@ public class JDBCCotizacion implements CotizacionDAO {
 
 	@Override
 	public List<CotizacionVista> buscarCotizacionPorOrdenSinAutorizar(int id) {
-		List<CotizacionVista> bcosa = jdbcTemplate.query("SELECT * FROM COTIZACIONES_V c WHERE c.ORDENES_id = ? "
-				+ " AND c.id IN (SELECT COTIZACIONES_id FROM ENCABEZADOS_COTIZACIONES WHERE id IN "
-				+ " (SELECT ENCABEZADOS_COTIZACIONES_id FROM DETALLE_COTIZACIONES dc "
-				+ " WHERE NOT EXISTS (SELECT * FROM ACTIVIDADES_AUTORIZADAS WHERE DETALLES_COTIZACIONES_id = dc.id))) ",
-				new CotizacionVistaRM(), id);
+		String sql="SELECT c.id,c.numero,c.anio,CONCAT(c.numero, '/', c.anio) AS numero_cotizacion, "
+				+ "c.revision,c.encabezado,c.descripcion_general,c.pie_pagina,c.pie_pagina_usuario, "
+				+ "c.fecha_cot,c.hora_cot,c.subtotal,c.descuento,c.descripcion_descto, "
+				+ "c.iva,c.iva_retenido,c.total,c.moneda,c.activo,c.AREAS_id AS areas_id, "
+				+ "c.COTIZACIONES_id_original AS cotizaciones_id_original, "
+				+ "(SELECT AREAS.numero FROM AREAS WHERE (AREAS.id = c.AREAS_id)) AS narea, "
+				+ "c.PERSONAL_id AS personal_id, "
+				+ "(SELECT CONCAT(PERSONAL.nombre,' ',PERSONAL.paterno,' ',PERSONAL.materno) FROM PERSONAL WHERE (PERSONAL.id = c.PERSONAL_id)) AS personal, "
+				+ "c.ORDENES_id AS ordenes_id, (SELECT ORDENES.numero FROM ORDENES  WHERE (ORDENES.id = c.ORDENES_id)) AS orden, "
+				+ "c.PRECOTIZACIONES_id AS precotizaciones_id, "
+				+ "(SELECT PRECOTIZACIONES.numero FROM PRECOTIZACIONES WHERE (PRECOTIZACIONES.id = c.PRECOTIZACIONES_id)) AS precotizacion, "
+				+ "c.CONTACTOS_id,(SELECT CONTACTOS.nombre_contacto FROM CONTACTOS WHERE (CONTACTOS.id = c.CONTACTOS_id)) AS contactos "
+				+ "FROM COTIZACIONES c WHERE c.activo=1 "
+				+ "AND c.ORDENES_id = ? AND c.id IN (SELECT COTIZACIONES_id FROM ENCABEZADOS_COTIZACIONES WHERE id IN "
+				+ "(SELECT ENCABEZADOS_COTIZACIONES_id FROM DETALLE_COTIZACIONES dc "
+				+ "WHERE NOT EXISTS (SELECT * FROM ACTIVIDADES_AUTORIZADAS WHERE DETALLES_COTIZACIONES_id = dc.id)))";
+		List<CotizacionVista> bcosa = jdbcTemplate.query(sql,new CotizacionVistaRM(), id);
 		return bcosa;
 	}
 

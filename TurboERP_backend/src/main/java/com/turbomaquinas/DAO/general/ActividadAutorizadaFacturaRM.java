@@ -14,8 +14,8 @@ public class ActividadAutorizadaFacturaRM implements RowMapper<ActividadAutoriza
 		ac.setId(rs.getInt("id"));
 		ac.setDescripcion(rs.getString("descripcion"));
 		ac.setTipo_actividad(rs.getString("tipo_actividad"));
-		ac.setImporte_pendiente_facturar(rs.getBigDecimal("importe_pendiente_facturar"));
-		ac.setDescuento_facturar(rs.getBigDecimal("descuento_facturar"));
+		ac.setImporte_a_facturar(rs.getBigDecimal("importe_a_facturar"));
+		ac.setDescuento_disponible(rs.getBigDecimal("descuento_disponible"));
 		ac.setEncabezados_cotizaciones_id(rs.getInt("encabezados_cotizaciones_id"));
 		ac.setEncabezados_cotizaciones_descripcion(rs.getString("encabezados_cotizaciones_descripcion"));
 		return ac;
