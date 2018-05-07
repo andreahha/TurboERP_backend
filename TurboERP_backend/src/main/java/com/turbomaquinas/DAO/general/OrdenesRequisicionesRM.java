@@ -16,6 +16,7 @@ public class OrdenesRequisicionesRM implements RowMapper<OrdenesRequisiciones>{
 		or.setNumero_orden(rs.getString("numero_orden"));
 		or.setFecha_autorizacion(rs.getDate("fecha_autorizacion"));
 		or.setFecha_compromiso(rs.getDate("fecha_compromiso"));
+		or.setNombre_cliente(rs.getString("nombre_cliente"));
 		
 		return or;
 	}
