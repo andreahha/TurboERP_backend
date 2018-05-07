@@ -8,6 +8,7 @@ public class ConsultaRequisiciones {
 	private String departamento;
 	private int numero_requisicion;
 	private String descripcion;
+	private String tipo;
 	private Date fecha_requisicion;
 	private Date fecha_cotizacion;
 	private int dias_fecha_cot;
@@ -36,6 +37,10 @@ public class ConsultaRequisiciones {
 	private Date fecha_salida_almacen;
 	private int dias_fecha_salidalm;
 	private int alerta_fecha_salidalm;
+	private Date fecha_liberacion_am_im;
+	private int dias_fechaliberacion_am;
+	private int dias_fechaliberacion_im;
+	private int alerta_fechaliberacion_am_im;
 	private String parcial_ordenc;
 	private String parcial_recepcion;
 	private String parcial_libcuarentena;
@@ -46,7 +51,7 @@ public class ConsultaRequisiciones {
 		super();
 	}
 
-	public ConsultaRequisiciones(int id, String departamento, int numero_requisicion, String descripcion,
+	public ConsultaRequisiciones(int id, String departamento, int numero_requisicion, String descripcion, String tipo,
 			Date fecha_requisicion, Date fecha_cotizacion, int dias_fecha_cot, int alerta_fecha_cot,
 			Date fecha_orden_compra, int ordenes_requisiciones_id, int dias_fecha_ordenc, int alerta_fecha_ordenc,
 			Date fecha_requiere_prod, int dias_fecha_reqprod, int alerta_fecha_reqprod, Date fecha_estimada_entrega,
@@ -54,13 +59,16 @@ public class ConsultaRequisiciones {
 			int dias_fecha_recepcion, int alerta_fecha_recepcion, Date fecha_lib_cuarentena,
 			int estado_liberacion_cuarentena, int dias_fecha_libcuarentena, int alerta_fecha_libcuarentena,
 			Date fecha_entrada_almacen, int dias_fecha_entradalm, int alerta_fecha_entradalm, Date fecha_salida_almacen,
-			int dias_fecha_salidalm, int alerta_fecha_salidalm, String parcial_ordenc, String parcial_recepcion,
-			String parcial_libcuarentena, String parcial_entradalm, String parcial_salidalm) {
+			int dias_fecha_salidalm, int alerta_fecha_salidalm, Date fecha_liberacion_am_im,
+			int dias_fechaliberacion_am, int dias_fechaliberacion_im, int alerta_fechaliberacion_am_im,
+			String parcial_ordenc, String parcial_recepcion, String parcial_libcuarentena, String parcial_entradalm,
+			String parcial_salidalm) {
 		super();
 		this.id = id;
 		this.departamento = departamento;
 		this.numero_requisicion = numero_requisicion;
 		this.descripcion = descripcion;
+		this.tipo = tipo;
 		this.fecha_requisicion = fecha_requisicion;
 		this.fecha_cotizacion = fecha_cotizacion;
 		this.dias_fecha_cot = dias_fecha_cot;
@@ -89,12 +97,17 @@ public class ConsultaRequisiciones {
 		this.fecha_salida_almacen = fecha_salida_almacen;
 		this.dias_fecha_salidalm = dias_fecha_salidalm;
 		this.alerta_fecha_salidalm = alerta_fecha_salidalm;
+		this.fecha_liberacion_am_im = fecha_liberacion_am_im;
+		this.dias_fechaliberacion_am = dias_fechaliberacion_am;
+		this.dias_fechaliberacion_im = dias_fechaliberacion_im;
+		this.alerta_fechaliberacion_am_im = alerta_fechaliberacion_am_im;
 		this.parcial_ordenc = parcial_ordenc;
 		this.parcial_recepcion = parcial_recepcion;
 		this.parcial_libcuarentena = parcial_libcuarentena;
 		this.parcial_entradalm = parcial_entradalm;
 		this.parcial_salidalm = parcial_salidalm;
 	}
+
 
 	public int getId() {
 		return id;
@@ -126,6 +139,14 @@ public class ConsultaRequisiciones {
 
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
+	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
 	}
 
 	public Date getFecha_requisicion() {
@@ -391,5 +412,39 @@ public class ConsultaRequisiciones {
 	public void setParcial_salidalm(String parcial_salidalm) {
 		this.parcial_salidalm = parcial_salidalm;
 	}
+
+	public Date getFecha_liberacion_am_im() {
+		return fecha_liberacion_am_im;
+	}
+
+	public void setFecha_liberacion_am_im(Date fecha_liberacion_am_im) {
+		this.fecha_liberacion_am_im = fecha_liberacion_am_im;
+	}
+
+	public int getDias_fechaliberacion_am() {
+		return dias_fechaliberacion_am;
+	}
+
+	public void setDias_fechaliberacion_am(int dias_fechaliberacion_am) {
+		this.dias_fechaliberacion_am = dias_fechaliberacion_am;
+	}
+
+	public int getDias_fechaliberacion_im() {
+		return dias_fechaliberacion_im;
+	}
+
+	public void setDias_fechaliberacion_im(int dias_fechaliberacion_im) {
+		this.dias_fechaliberacion_im = dias_fechaliberacion_im;
+	}
+
+	public int getAlerta_fechaliberacion_am_im() {
+		return alerta_fechaliberacion_am_im;
+	}
+
+	public void setAlerta_fechaliberacion_am_im(int alerta_fechaliberacion_am_im) {
+		this.alerta_fechaliberacion_am_im = alerta_fechaliberacion_am_im;
+	}
+	
+	
 
 }

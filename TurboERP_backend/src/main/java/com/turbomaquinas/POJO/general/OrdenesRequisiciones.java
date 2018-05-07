@@ -8,18 +8,23 @@ public class OrdenesRequisiciones {
 	private String numero_orden;
 	private Date fecha_autorizacion;
 	private Date fecha_compromiso;
+	private String nombre_cliente;
 
 	public OrdenesRequisiciones() {
 		super();
 	}
 
-	public OrdenesRequisiciones(int id, String numero_orden, Date fecha_autorizacion, Date fecha_compromiso) {
+	public OrdenesRequisiciones(int id, String numero_orden, Date fecha_autorizacion, Date fecha_compromiso,
+			String nombre_cliente) {
 		super();
 		this.id = id;
 		this.numero_orden = numero_orden;
 		this.fecha_autorizacion = fecha_autorizacion;
 		this.fecha_compromiso = fecha_compromiso;
+		this.nombre_cliente = nombre_cliente;
 	}
+
+
 
 	public int getId() {
 		return id;
@@ -52,5 +57,15 @@ public class OrdenesRequisiciones {
 	public void setFecha_compromiso(Date fecha_compromiso) {
 		this.fecha_compromiso = fecha_compromiso;
 	}
+
+	public String getNombre_cliente() {
+		return nombre_cliente;
+	}
+
+	public void setNombre_cliente(String nombre_cliente) {
+		this.nombre_cliente = nombre_cliente;
+	}
+	
+	
 
 }
