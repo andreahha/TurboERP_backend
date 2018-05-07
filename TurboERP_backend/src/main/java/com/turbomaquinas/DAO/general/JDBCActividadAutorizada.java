@@ -311,5 +311,15 @@ public class JDBCActividadAutorizada implements ActividadAutorizadaDAO{
 		return jdbcTemplate.query(sql,new ActividadAutorizadaFacturaRM());
 	}
 
+	@Override
+	public void actualizarImporteBaja(int idSolicitud) {
+		jdbcTemplate.update("UPDATE ACTIVIDADES_AUTORIZADAS SET importe_baja= importe_autorizado WHERE SOLICITUD_BAJAS_ACTIVIDADES_id = ?",idSolicitud);
+	}
+
+	@Override
+	public void desactivarAAPorSolicitud(int idSolicitud) {
+		jdbcTemplate.update("UPDATE ACTIVIDADES_AUTORIZADAS SET activo=0 WHERE SOLICITUD_BAJAS_ACTIVIDADES_id = ?",idSolicitud);
+	}
+
 
 }

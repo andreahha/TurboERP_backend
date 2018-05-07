@@ -1,5 +1,6 @@
 package com.turbomaquinas.DAO.general;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -85,5 +86,11 @@ public class JDBCSolicitudDesautorizacionAA implements SolicitudDesautorizacionA
 		List<SolicitudDesautorizacionAA> sol = jdbcTemplate.query("SELECT * FROM SOLICITUD_BAJAS_ACTIVIDADES WHERE ORDENES_id = ? AND estado = ?", 
 				new SolicitudDesautorizacionAARM(), id, estado);
 		return sol;
+	}
+
+	@Override
+	public BigDecimal consultarImporteAutorizado(int idSolicitud) {
+		String sql="SELECT SUM(importe_autorizado) FROM ACTIVIDADES_AUTORIZADAS WHERE solicitud_bajas_actividades_id = ?";
+		return jdbcTemplate.queryForObject(sql, BigDecimal.class, idSolicitud);
 	}
 }

@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
+import com.turbomaquinas.DAO.general.ActividadAutorizadaDAO;
+import com.turbomaquinas.DAO.general.OrdenDAO;
 import com.turbomaquinas.DAO.general.SolicitudDesautorizacionAADAO;
 import com.turbomaquinas.POJO.general.ActividadAutorizadaVista;
 import com.turbomaquinas.POJO.general.SolicitudDesautorizacionAA;
@@ -15,6 +17,12 @@ public class LogicaSolicitudBajaAA implements SolicitudBajaAAService {
 
 	@Autowired
 	SolicitudDesautorizacionAADAO repositorio;
+	
+	@Autowired
+	ActividadAutorizadaDAO repoAA;
+	
+	@Autowired
+	OrdenDAO repoOrden;
 	
 	@Override
 	public void actualizarAlfresco(int id, String alfresco_id) throws DataAccessException{
@@ -39,6 +47,17 @@ public class LogicaSolicitudBajaAA implements SolicitudBajaAAService {
 	@Override
 	public void actualizarEstado(int id, String estado) throws DataAccessException{
 		repositorio.actualizarEstado(id, estado);
+		SolicitudDesautorizacionAA solicitud=repositorio.buscar(id);
+		//Baja
+		if(solicitud.getTipo().equalsIgnoreCase("B") && solicitud.getEstado().equalsIgnoreCase("A")){
+			repoAA.actualizarImporteBaja(id);
+			repoOrden.sumarImporteBaja(solicitud.getOrdenes_id(),repositorio.consultarImporteAutorizado(id));
+		}
+		//Desautorización
+		if(solicitud.getTipo().equalsIgnoreCase("D") && solicitud.getEstado().equalsIgnoreCase("A")){
+			repoOrden.restarImporteAutorizado(solicitud.getOrdenes_id(), repositorio.consultarImporteAutorizado(id));
+			repoAA.desactivarAAPorSolicitud(id);
+		}
 	}
 
 	@Override

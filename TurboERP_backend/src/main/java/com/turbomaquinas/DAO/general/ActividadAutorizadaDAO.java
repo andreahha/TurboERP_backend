@@ -28,5 +28,7 @@ public interface ActividadAutorizadaDAO {
 	public int buscarOrdenPorAAOTI(Integer idAA);
 	public int buscarOrdenPorAA(int id_actividad_autorizada);
 	public List<ActividadAutorizadaFactura> consultarAAPorIds(List<Integer> actividadesIds);
+	public void actualizarImporteBaja(int id);
+	public void desactivarAAPorSolicitud(int idSolicitud);
 
 }

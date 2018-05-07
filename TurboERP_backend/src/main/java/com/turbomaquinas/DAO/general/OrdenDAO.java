@@ -1,6 +1,7 @@
 package com.turbomaquinas.DAO.general;
 
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import com.turbomaquinas.DAO.general.JDBCOrden.FoliosOrdenes;
@@ -34,4 +35,6 @@ public interface OrdenDAO {
 	public List<Integer> consultarOrdenAAPendientesFacturar(int idCliente); 
 	public OrdenFactura buscarDatosFacturacion(int orden_id,String moneda,String idClienteFacturar);
 	public OrdenFactura buscarDatosFacturacion(int orden_id,int idFactura);
+	public void sumarImporteBaja(int orden_id, BigDecimal importe_baja);
+	public void restarImporteAutorizado(int orden_id, BigDecimal importe_autorizado);
 }
