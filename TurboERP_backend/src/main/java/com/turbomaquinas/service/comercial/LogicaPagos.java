@@ -7,6 +7,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.turbomaquinas.DAO.comercial.PagosDAO;
+import com.turbomaquinas.POJO.comercial.DocumentoAplicarPago;
 import com.turbomaquinas.POJO.comercial.Pagos;
 import com.turbomaquinas.POJO.comercial.PagosVista;
 
@@ -35,6 +36,14 @@ public class LogicaPagos implements PagosService {
 	@Override
 	public List<PagosVista> consultar() throws DataAccessException {
 		return resPago.consultar();
+	}
+
+	@Override
+	public void aplicarPagos(DocumentoAplicarPago doc) throws DataAccessException{
+		
+		resPago.AplicarPagos(doc.toString());
+		
+		
 	}
 	
 	

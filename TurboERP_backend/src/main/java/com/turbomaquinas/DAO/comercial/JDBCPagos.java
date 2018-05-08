@@ -8,6 +8,9 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
@@ -70,6 +73,20 @@ public class JDBCPagos implements PagosDAO {
 	public List<PagosVista> consultar() throws DataAccessException {
 		List<PagosVista> pvl = jdbcTemplate.query("SELECT * FROM PAGOS_V ", new PagosVistaRM());
 		return pvl;
+	}
+
+	@Override
+	public void AplicarPagos(String doc) throws DataAccessException{
+		
+		SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
+				.withProcedureName("APLICAR_PAGO");
+		
+		Map<String, Object> inParamMap = new HashMap<String, Object>();
+		
+		inParamMap.put("doc", doc);
+		SqlParameterSource in = new MapSqlParameterSource(inParamMap);
+		simpleJdbcCall.execute(in);
+		
 	}
 
 }
