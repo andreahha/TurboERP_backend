@@ -409,6 +409,18 @@ public class JDBCOrden implements OrdenDAO {
 			return datos;
 		}catch(Exception e){return null;}
 	}
+
+	@Override
+	public void sumarImporteBaja(int orden_id, BigDecimal importe_bajas) {
+		String sql="UPDATE ORDENES set importe_bajas = (importe_bajas+?) WHERE id=?";
+		jdbcTemplate.update(sql,importe_bajas,orden_id);
+	}
+
+	@Override
+	public void restarImporteAutorizado(int orden_id, BigDecimal importe_autorizado) {
+		String sql="UPDATE ORDENES set importe_autorizado = (importe_autorizado-?) WHERE id=?";
+		jdbcTemplate.update(sql,importe_autorizado,orden_id);
+	}
 	
 	
 	

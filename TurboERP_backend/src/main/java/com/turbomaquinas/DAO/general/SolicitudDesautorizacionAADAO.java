@@ -1,5 +1,6 @@
 package com.turbomaquinas.DAO.general;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import com.turbomaquinas.POJO.general.ActividadAutorizadaVista;
@@ -14,4 +15,5 @@ public interface SolicitudDesautorizacionAADAO {
 	public void actualizarEstado(int id, String estado);
 	public List<SolicitudDesautorizacionAA> consultarPorOrden(int id);
 	public List<SolicitudDesautorizacionAA> consultarPorOrdenEstado(int id, String estado);
+	public BigDecimal consultarImporteSolicitudAutorizada(int idSolicitud);
 }

@@ -246,7 +246,7 @@ public class JDBCActividadAutorizada implements ActividadAutorizadaDAO{
 				+ "FROM ACTIVIDADES_AUTORIZADAS aa "
 				+ "JOIN DETALLE_COTIZACIONES d on aa.DETALLES_COTIZACIONES_id=d.id "
 				+ "JOIN ENCABEZADOS_COTIZACIONES e on e.id=d.ENCABEZADOS_COTIZACIONES_id "
-				+ "WHERE EXISTS (SELECT * FROM AUTORIZACIONES A WHERE A.id = aa.AUTORIZACIONES_id AND ORDENES_id=?) AND importe_pendiente <> 0";
+				+ "WHERE EXISTS (SELECT * FROM AUTORIZACIONES A WHERE A.id = aa.AUTORIZACIONES_id AND ORDENES_id=?) AND importe_pendiente <> 0 AND importe_baja=0";
 		return jdbcTemplate.query(sql,new ActividadAutorizadaFacturaRM(), id,id,id,id,id);
 	}
 
@@ -309,6 +309,16 @@ public class JDBCActividadAutorizada implements ActividadAutorizadaDAO{
 				+ "JOIN ENCABEZADOS_COTIZACIONES e on e.id=d.ENCABEZADOS_COTIZACIONES_id "
 				+ "WHERE aa.id IN ("+lista;
 		return jdbcTemplate.query(sql,new ActividadAutorizadaFacturaRM());
+	}
+
+	@Override
+	public void actualizarImporteBaja(int idSolicitud) {
+		jdbcTemplate.update("UPDATE ACTIVIDADES_AUTORIZADAS SET importe_baja= importe_autorizado WHERE SOLICITUD_BAJAS_ACTIVIDADES_id = ?",idSolicitud);
+	}
+
+	@Override
+	public void desactivarAAPorSolicitud(int idSolicitud) {
+		jdbcTemplate.update("UPDATE ACTIVIDADES_AUTORIZADAS SET activo=0 WHERE SOLICITUD_BAJAS_ACTIVIDADES_id = ?",idSolicitud);
 	}
 
 

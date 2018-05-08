@@ -14,4 +14,5 @@ public interface SolicitudBajaAAService {
 	public void actualizarEstado(int id, String estado);
 	public List<SolicitudDesautorizacionAA> consultarPorOrden(int id);
 	public List<SolicitudDesautorizacionAA> consultarPorOrdenEstado(int id, String estado);
+	
 }
