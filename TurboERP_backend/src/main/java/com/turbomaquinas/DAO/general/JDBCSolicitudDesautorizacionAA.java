@@ -89,7 +89,7 @@ public class JDBCSolicitudDesautorizacionAA implements SolicitudDesautorizacionA
 	}
 
 	@Override
-	public BigDecimal consultarImporteAutorizado(int idSolicitud) {
+	public BigDecimal consultarImporteSolicitudAutorizada(int idSolicitud) {
 		String sql="SELECT SUM(importe_autorizado) FROM ACTIVIDADES_AUTORIZADAS WHERE solicitud_bajas_actividades_id = ?";
 		return jdbcTemplate.queryForObject(sql, BigDecimal.class, idSolicitud);
 	}

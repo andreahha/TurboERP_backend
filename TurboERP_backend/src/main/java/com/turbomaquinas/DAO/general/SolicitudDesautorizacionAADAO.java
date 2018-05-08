@@ -15,5 +15,5 @@ public interface SolicitudDesautorizacionAADAO {
 	public void actualizarEstado(int id, String estado);
 	public List<SolicitudDesautorizacionAA> consultarPorOrden(int id);
 	public List<SolicitudDesautorizacionAA> consultarPorOrdenEstado(int id, String estado);
-	public BigDecimal consultarImporteAutorizado(int idSolicitud);
+	public BigDecimal consultarImporteSolicitudAutorizada(int idSolicitud);
 }

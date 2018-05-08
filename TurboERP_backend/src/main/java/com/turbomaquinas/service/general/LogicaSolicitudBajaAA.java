@@ -48,16 +48,19 @@ public class LogicaSolicitudBajaAA implements SolicitudBajaAAService {
 	public void actualizarEstado(int id, String estado) throws DataAccessException{
 		repositorio.actualizarEstado(id, estado);
 		SolicitudDesautorizacionAA solicitud=repositorio.buscar(id);
-		//Baja
-		if(solicitud.getTipo().equalsIgnoreCase("B") && solicitud.getEstado().equalsIgnoreCase("A")){
-			repoAA.actualizarImporteBaja(id);
-			repoOrden.sumarImporteBaja(solicitud.getOrdenes_id(),repositorio.consultarImporteAutorizado(id));
+		if(solicitud.getEstado().equalsIgnoreCase("A")){
+			//Baja
+			if(solicitud.getTipo().equalsIgnoreCase("B")){
+				repoAA.actualizarImporteBaja(id);
+				repoOrden.sumarImporteBaja(solicitud.getOrdenes_id(),repositorio.consultarImporteSolicitudAutorizada(id));
+			}
+			//Desautorización
+			if(solicitud.getTipo().equalsIgnoreCase("D")){
+				repoOrden.restarImporteAutorizado(solicitud.getOrdenes_id(), repositorio.consultarImporteSolicitudAutorizada(id));
+				repoAA.desactivarAAPorSolicitud(id);
+			}
 		}
-		//Desautorización
-		if(solicitud.getTipo().equalsIgnoreCase("D") && solicitud.getEstado().equalsIgnoreCase("A")){
-			repoOrden.restarImporteAutorizado(solicitud.getOrdenes_id(), repositorio.consultarImporteAutorizado(id));
-			repoAA.desactivarAAPorSolicitud(id);
-		}
+		
 	}
 
 	@Override
