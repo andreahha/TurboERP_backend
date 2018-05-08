@@ -11,5 +11,7 @@ public interface PagosDAO {
 	public Pagos actualizar(Pagos p);
 	public PagosVista buscar(int id);
 	public List<PagosVista> consultar();
+	
+	public void AplicarPagos(String doc);
 
 }

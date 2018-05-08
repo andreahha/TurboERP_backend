@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.turbomaquinas.POJO.comercial.DocumentoAplicarPago;
 import com.turbomaquinas.POJO.comercial.Pagos;
 import com.turbomaquinas.POJO.comercial.PagosVista;
 import com.turbomaquinas.service.comercial.PagosService;
@@ -74,5 +76,19 @@ public class WSPagos {
 		if ( pl == null)
 			return new ResponseEntity<List<PagosVista>>(HttpStatus.NO_CONTENT);
 		return new ResponseEntity<List<PagosVista>>(pl, HttpStatus.OK);
+	}
+	
+	@PostMapping("/aplicarpagos")
+	public ResponseEntity<Void> aplicar(@RequestBody DocumentoAplicarPago doc){
+		
+		
+		try{
+			s.aplicarPagos(doc);
+			
+			return new ResponseEntity<Void>(HttpStatus.OK);
+		}catch(DataAccessException e){
+			bitacora.error(e.getMessage());
+			return new ResponseEntity<Void>(HttpStatus.CONFLICT);
+		}
 	}
 }
