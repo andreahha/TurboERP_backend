@@ -7,6 +7,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.turbomaquinas.DAO.comercial.NotaCreditoDAO;
+import com.turbomaquinas.POJO.comercial.DocumentoAplicarNotasCredito;
 import com.turbomaquinas.POJO.comercial.NotaCredito;
 import com.turbomaquinas.POJO.comercial.NotaCreditoVista;
 
@@ -36,6 +37,11 @@ public class LogicaNotaCredito implements NotaCreditoService {
 	@Override
 	public List<NotaCreditoVista> consultar() throws DataAccessException {
 		return repNc.consultar();
+	}
+
+	@Override
+	public void aplicarNotasCredito(DocumentoAplicarNotasCredito doc) {
+		repNc.aplicarNotasCredito(doc.toString());
 	}
 
 }
