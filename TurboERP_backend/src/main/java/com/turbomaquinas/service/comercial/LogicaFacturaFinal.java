@@ -7,6 +7,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.turbomaquinas.DAO.comercial.FacturaFinalDAO;
+import com.turbomaquinas.POJO.comercial.DocumentoFacturaFinal;
 import com.turbomaquinas.POJO.comercial.FacturaFinal;
 import com.turbomaquinas.POJO.comercial.FacturaFinalVista;
 import com.turbomaquinas.POJO.general.OrdenFactura;
@@ -70,6 +71,11 @@ public class LogicaFacturaFinal implements FacturaFinalService {
 	@Override
 	public FacturaFinalVista buscarFacturaFolio(String folio,String estado) {
 		return repFF.buscarFacturaFolio(folio,estado);
+	}
+
+	@Override
+	public void creardoc(DocumentoFacturaFinal doc) throws DataAccessException {
+		repFF.creardoc(doc.toString());
 	}
 
 }

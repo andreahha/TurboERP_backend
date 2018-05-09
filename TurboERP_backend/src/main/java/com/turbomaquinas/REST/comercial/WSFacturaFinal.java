@@ -37,18 +37,18 @@ public class WSFacturaFinal {
 	DocFacturaFinalService ds;
 	
 	
-	@PostMapping
-	public ResponseEntity<FacturaFinalVista> crear(@RequestBody DocumentoFacturaFinal documento){
-		FacturaFinalVista respuesta = null;
-		bitacora.info(documento);
-		try {
-			 respuesta = ds.crear(documento);
-		} catch (Exception e) {
-			bitacora.error(e.getMessage());
-			return new ResponseEntity<FacturaFinalVista>(HttpStatus.CONFLICT);
-		}
-		return new ResponseEntity<FacturaFinalVista>(respuesta, HttpStatus.CREATED);
-	}
+//	@PostMapping
+//	public ResponseEntity<FacturaFinalVista> crear(@RequestBody DocumentoFacturaFinal documento){
+//		FacturaFinalVista respuesta = null;
+//		bitacora.info(documento);
+//		try {
+//			 respuesta = ds.crear(documento);
+//		} catch (Exception e) {
+//			bitacora.error(e.getMessage());
+//			return new ResponseEntity<FacturaFinalVista>(HttpStatus.CONFLICT);
+//		}
+//		return new ResponseEntity<FacturaFinalVista>(respuesta, HttpStatus.CREATED);
+//	}
 
 	@PutMapping
 	public ResponseEntity<Void> actualizar(@RequestBody FacturaFinal ff){
@@ -161,4 +161,16 @@ public class WSFacturaFinal {
 		
 	}
 
+	@PostMapping
+	public ResponseEntity<Void> creardoc(@RequestBody DocumentoFacturaFinal doc){
+		bitacora.info(doc);
+		try {
+			s.creardoc(doc);
+		} catch (Exception e) {
+			bitacora.error(e.getMessage());
+			return new ResponseEntity<Void>(HttpStatus.CONFLICT);
+		}
+		return new ResponseEntity<Void>(HttpStatus.CREATED);
+	}
+	
 }
