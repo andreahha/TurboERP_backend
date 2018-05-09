@@ -7,6 +7,7 @@ public class DocumentoAplicarPago {
 	
 	private int depositos_recibidos_id;
 	private String fecha_pago;
+	private String observaciones;
 	private BigDecimal importe_total;
 	private int creado_por;
 	private BigDecimal tipo_cambio_pago;
@@ -23,6 +24,12 @@ public class DocumentoAplicarPago {
 	}
 	public void setFecha_pago(String fecha_pago) {
 		this.fecha_pago = fecha_pago;
+	}
+	public String getObservaciones() {
+		return observaciones;
+	}
+	public void setObservaciones(String observaciones) {
+		this.observaciones = observaciones;
 	}
 	public BigDecimal getImporte_total() {
 		return importe_total;
