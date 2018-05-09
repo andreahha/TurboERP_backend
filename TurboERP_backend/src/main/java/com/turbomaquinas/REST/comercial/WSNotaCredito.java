@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.turbomaquinas.POJO.comercial.DocumentoAplicarNotasCredito;
 import com.turbomaquinas.POJO.comercial.NotaCredito;
 import com.turbomaquinas.POJO.comercial.NotaCreditoVista;
 import com.turbomaquinas.service.comercial.NotaCreditoService;
@@ -72,6 +74,19 @@ public class WSNotaCredito {
 		if (lnc == null )
 			return new ResponseEntity<List<NotaCreditoVista>> (HttpStatus.NO_CONTENT);
 		return new ResponseEntity<List<NotaCreditoVista>> (lnc, HttpStatus.OK);
+	}
+	
+	@PostMapping("/aplicar-notaCredito")
+	public ResponseEntity<Void> aplicarNotaCredito(@RequestBody DocumentoAplicarNotasCredito doc){
+		
+		try{
+			s.aplicarNotasCredito(doc);
+			
+			return new ResponseEntity<Void>(HttpStatus.OK);
+		}catch(DataAccessException e){
+			bitacora.error(e.getMessage());
+			return new ResponseEntity<Void>(HttpStatus.CONFLICT);
+		}
 	}
 
 }
