@@ -22,7 +22,7 @@ public class LogicaDocFacturaFinal implements DocFacturaFinalService {
 	@Override
 	@Transactional
 	public FacturaFinalVista crear(DocumentoFacturaFinal dff) throws DataAccessException{
-		System.out.println("dff");
+		/*System.out.println("dff");
 		
 		int creado_por = dff.getCreado_por();
 		dff.getFactura().setCreado_por(creado_por);
@@ -35,7 +35,8 @@ public class LogicaDocFacturaFinal implements DocFacturaFinalService {
 			actividad.setCreado_por(creado_por);;
 			actividades.add(as.crear(actividad));
 		}
-		return factura;
+		return factura;*/
+		return null;
 	}
 
 	@Override
