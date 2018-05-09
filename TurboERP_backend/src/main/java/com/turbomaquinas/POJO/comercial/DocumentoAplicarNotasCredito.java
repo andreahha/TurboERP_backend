@@ -13,7 +13,7 @@ public class DocumentoAplicarNotasCredito {
 	private int datos_timbrado_id;
 	private int conceptos_notas_credito_id;
 	private int notas_credito_id_sust;
-	private List<FacturasJSON> facturas;
+	private List<DocumentoAplicarNotasCredito.Facturas> facturas;
 	
 	public Float getSubtotal() {
 		return subtotal;
@@ -69,13 +69,12 @@ public class DocumentoAplicarNotasCredito {
 	public void setNotas_credito_id_sust(int notas_credito_id_sust) {
 		this.notas_credito_id_sust = notas_credito_id_sust;
 	}
-	public List<FacturasJSON> getFacturas() {
+	public List<DocumentoAplicarNotasCredito.Facturas> getFacturas() {
 		return facturas;
 	}
-	public void setFacturas(List<FacturasJSON> facturas) {
+	public void setFacturas(List<DocumentoAplicarNotasCredito.Facturas> facturas) {
 		this.facturas = facturas;
 	}
-	
 	@Override
 	public String toString() {
 		try {
@@ -85,5 +84,48 @@ public class DocumentoAplicarNotasCredito {
 	    }
 	    return null;
 	}
+	
+			public static class Facturas {
+				
+				private int idFactura;
+				private String tipoFactura;
+				private Float importe;
+				public Facturas() {
+					super();
+				}
+				public Facturas(int idFactura, String tipoFactura, Float importe) {
+					super();
+					this.idFactura = idFactura;
+					this.tipoFactura = tipoFactura;
+					this.importe = importe;
+				}
+				public int getIdFactura() {
+					return idFactura;
+				}
+				public void setIdFactura(int idFactura) {
+					this.idFactura = idFactura;
+				}
+				public String getTipoFactura() {
+					return tipoFactura;
+				}
+				public void setTipoFactura(String tipoFactura) {
+					this.tipoFactura = tipoFactura;
+				}
+				public Float getImporte() {
+					return importe;
+				}
+				public void setImporte(Float importe) {
+					this.importe = importe;
+				}
+				@Override
+				public String toString() {
+					try {
+				        return new com.fasterxml.jackson.databind.ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(this);
+				    } catch (com.fasterxml.jackson.core.JsonProcessingException e) {
+				        e.printStackTrace();
+				    }
+				    return null;
+				}
+			}
 
 }

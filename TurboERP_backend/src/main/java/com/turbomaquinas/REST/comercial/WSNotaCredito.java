@@ -31,15 +31,15 @@ public class WSNotaCredito {
 	NotaCreditoService s;
 	
 	@PostMapping
-	public ResponseEntity<NotaCreditoVista> crear(@RequestBody NotaCredito nc){
-		NotaCreditoVista respuesta = null;
+	public ResponseEntity<NotaCredito> crear(@RequestBody NotaCredito nc){
+		NotaCredito respuesta = null;
 		bitacora.info(nc);
 		try {
 			respuesta = s.crear(nc);
-			return new ResponseEntity<NotaCreditoVista>(respuesta, HttpStatus.CREATED);
+			return new ResponseEntity<NotaCredito>(respuesta, HttpStatus.CREATED);
 		} catch (Exception e) {
 			bitacora.error(e.getMessage());
-			return new ResponseEntity<NotaCreditoVista> (HttpStatus.CONFLICT);
+			return new ResponseEntity<NotaCredito> (HttpStatus.CONFLICT);
 		}
 	}
 
@@ -56,15 +56,15 @@ public class WSNotaCredito {
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<NotaCreditoVista> buscar(@PathVariable int id){
-		NotaCreditoVista nc = null;
+	public ResponseEntity<NotaCredito> buscar(@PathVariable int id){
+		NotaCredito nc = null;
 		try {
 			nc = s.buscar(id);
 		} catch (Exception e) {
 			bitacora.error(e.getMessage());
-			return new ResponseEntity<NotaCreditoVista> (HttpStatus.NOT_FOUND);
+			return new ResponseEntity<NotaCredito> (HttpStatus.NOT_FOUND);
 		}
-		return new ResponseEntity<NotaCreditoVista> (nc, HttpStatus.OK);
+		return new ResponseEntity<NotaCredito> (nc, HttpStatus.OK);
 	}
 
 	@GetMapping
@@ -77,16 +77,17 @@ public class WSNotaCredito {
 	}
 	
 	@PostMapping("/aplicar-notaCredito")
-	public ResponseEntity<Void> aplicarNotaCredito(@RequestBody DocumentoAplicarNotasCredito doc){
-		
+	public ResponseEntity<NotaCredito> aplicarNotaCredito(@RequestBody DocumentoAplicarNotasCredito doc){
+		NotaCredito nc = null;
 		try{
-			s.aplicarNotasCredito(doc);
+			nc = s.aplicarNotasCredito(doc);
 			
-			return new ResponseEntity<Void>(HttpStatus.OK);
+			return new ResponseEntity<NotaCredito>(nc, HttpStatus.OK);
 		}catch(DataAccessException e){
 			bitacora.error(e.getMessage());
-			return new ResponseEntity<Void>(HttpStatus.CONFLICT);
+			return new ResponseEntity<NotaCredito>(HttpStatus.CONFLICT);
 		}
+		
 	}
 
 }

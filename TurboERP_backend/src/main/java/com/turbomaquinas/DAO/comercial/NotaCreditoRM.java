@@ -9,7 +9,7 @@ import org.springframework.jdbc.core.RowMapper;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.turbomaquinas.POJO.comercial.FacturasJSON;
+import com.turbomaquinas.POJO.comercial.DocumentoAplicarNotasCredito;
 import com.turbomaquinas.POJO.comercial.NotaCredito;
 
 public class NotaCreditoRM implements RowMapper<NotaCredito> {
@@ -36,9 +36,9 @@ public class NotaCreditoRM implements RowMapper<NotaCredito> {
 		String json=rs.getString("facturas");
 		
 		ObjectMapper mapper = new ObjectMapper();
-		List<FacturasJSON> fact=null;
+		List<DocumentoAplicarNotasCredito.Facturas> fact=null;
 		try {
-			fact = mapper.readValue(json, new TypeReference<List<FacturasJSON>>(){});
+			fact = mapper.readValue(json, new TypeReference<List<DocumentoAplicarNotasCredito.Facturas>>(){});
 		} catch (IOException e) {}
 		nc.setFacturas(fact);
 		return nc;

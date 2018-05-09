@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -70,10 +71,10 @@ public class JDBCNotaCredito implements NotaCreditoDAO {
 	}
 
 	@Override
-	public NotaCreditoVista buscar(int id) throws DataAccessException {
-		NotaCreditoVista ncv = jdbcTemplate.queryForObject("SELECT * FROM NOTAS_CREDITO_V WHERE id = ?", 
-				new NotaCreditoVistaRM(), id);
-		return ncv;
+	public NotaCredito buscar(int id) throws DataAccessException {
+		NotaCredito nc = jdbcTemplate.queryForObject("SELECT * FROM NOTAS_CREDITO WHERE id = ?", 
+				new NotaCreditoRM(), id);
+		return nc;
 	}
 
 	@Override
@@ -83,15 +84,24 @@ public class JDBCNotaCredito implements NotaCreditoDAO {
 	}
 
 	@Override
-	public void aplicarNotasCredito(String doc) {
+	public int aplicarNotasCredito(String doc) {
 		SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
 				.withProcedureName("APLICAR_NOTAS_CREDITO");
 		
 		Map<String, Object> inParamMap = new HashMap<String, Object>();
-		
+		inParamMap.put("p_nota_credito_id", 0);
 		inParamMap.put("doc", doc);
 		SqlParameterSource in = new MapSqlParameterSource(inParamMap);
-		simpleJdbcCall.execute(in);
+		
+		Map<String, Object> simpleJdbcCallResult = simpleJdbcCall.execute(in);
+		
+		for (Entry<String, Object> entry : simpleJdbcCallResult.entrySet()) {
+	        if (entry.getKey().compareTo("p_nota_credito_id") == 0) {
+	            return (Integer) entry.getValue();
+	        }
+	    }		
+		return 0;
 	}
 
+	
 }
