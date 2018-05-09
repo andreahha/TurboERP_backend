@@ -2,6 +2,7 @@ package com.turbomaquinas.service.comercial;
 
 import java.util.List;
 
+import com.turbomaquinas.POJO.comercial.DocumentoFacturaFinal;
 import com.turbomaquinas.POJO.comercial.FacturaFinal;
 import com.turbomaquinas.POJO.comercial.FacturaFinalVista;
 import com.turbomaquinas.POJO.general.OrdenFactura;
@@ -18,5 +19,6 @@ public interface FacturaFinalService {
 	public List<FacturaFinalVista> consultarFacturasPendientesPorCliente(int id,String moneda);
 	public List<OrdenFactura> consultarOrdenes(int id);
 	public FacturaFinalVista buscarFacturaFolio(String folio,String estado);
+	public void creardoc(DocumentoFacturaFinal doc);
 
 }

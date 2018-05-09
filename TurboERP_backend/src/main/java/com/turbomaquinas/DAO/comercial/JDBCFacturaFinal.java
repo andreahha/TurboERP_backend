@@ -9,6 +9,9 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
@@ -197,6 +200,18 @@ public class JDBCFacturaFinal implements FacturaFinalDAO {
 	public FacturaFinalVista buscarFacturaFolio(String folio,String estado) {
 		FacturaFinalVista factura = jdbcTemplate.queryForObject("SELECT * FROM FACTURA_FINAL_V ff WHERE folio_fiscal=? AND estado_factura=?",new FacturaFinalVistaRM(), folio,estado);
 		return factura;
+	}
+
+	@Override
+	public void creardoc(String doc) throws DataAccessException {
+		SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
+				.withProcedureName("FACTURA_FINAL");
+
+		Map<String, Object> inParamMap = new HashMap<String, Object>();
+		inParamMap.put("doc", doc);
+		SqlParameterSource in = new MapSqlParameterSource(inParamMap);
+	
+		Map<String, Object> simpleJdbcCallResult = simpleJdbcCall.execute(in);
 	}
 
 }
