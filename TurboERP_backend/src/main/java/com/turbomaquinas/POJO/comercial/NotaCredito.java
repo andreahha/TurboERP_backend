@@ -24,7 +24,7 @@ public class NotaCredito {
 	private int datos_timbrado_id;
 	private int conceptos_notas_credito_id;
 	private int notas_credito_id_sust;
-	private List<FacturasJSON> facturas;
+	private List<DocumentoAplicarNotasCredito.Facturas> facturas;
 	
 	public NotaCredito() {
 		super();
@@ -33,7 +33,7 @@ public class NotaCredito {
 	public NotaCredito(int id, String tipo, int numero, Date fecha, Float subtotal, Float iva, Float tipo_cambio,
 			Date fecha_baja, int mes_baja, int anio_baja, String descripcion, int activo, int creado_por, Date creado,
 			int modificado_por, Date modificado, int datos_timbrado_id, int conceptos_notas_credito_id,
-			int notas_credito_id_sust, List<FacturasJSON> facturas) {
+			int notas_credito_id_sust, List<DocumentoAplicarNotasCredito.Facturas> facturas) {
 		super();
 		this.id = id;
 		this.tipo = tipo;
@@ -209,12 +209,21 @@ public class NotaCredito {
 		this.notas_credito_id_sust = notas_credito_id_sust;
 	}
 
-	public List<FacturasJSON> getFacturas() {
+	public List<DocumentoAplicarNotasCredito.Facturas> getFacturas() {
 		return facturas;
 	}
 
-	public void setFacturas(List<FacturasJSON> facturas) {
+	public void setFacturas(List<DocumentoAplicarNotasCredito.Facturas> facturas) {
 		this.facturas = facturas;
 	}
 
+	@Override
+	public String toString() {
+		try {
+	        return new com.fasterxml.jackson.databind.ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(this);
+	    } catch (com.fasterxml.jackson.core.JsonProcessingException e) {
+	        e.printStackTrace();
+	    }
+	    return null;
+	}
 }

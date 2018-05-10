@@ -8,11 +8,11 @@ import com.turbomaquinas.POJO.comercial.NotaCreditoVista;
 
 public interface NotaCreditoService {
 
-	public NotaCreditoVista crear(NotaCredito  nc);
+	public NotaCredito crear(NotaCredito  nc);
 	public void actualizar(NotaCredito nc);
-	public NotaCreditoVista buscar(int id);
+	public NotaCredito buscar(int id);
 	public List<NotaCreditoVista> consultar();
 	
-	public void aplicarNotasCredito(DocumentoAplicarNotasCredito doc);
+	public NotaCredito aplicarNotasCredito(DocumentoAplicarNotasCredito doc);
 
 }

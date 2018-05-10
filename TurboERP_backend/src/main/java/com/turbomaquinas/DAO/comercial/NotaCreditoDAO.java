@@ -9,9 +9,9 @@ public interface NotaCreditoDAO {
 
 	public int crear(NotaCredito nc);
 	public void actualizar(NotaCredito nc);
-	public NotaCreditoVista buscar(int id);
+	public NotaCredito buscar(int id);
 	public List<NotaCreditoVista> consultar();
 	
-	public void aplicarNotasCredito(String doc);
+	public int aplicarNotasCredito(String doc);
 	
 }
