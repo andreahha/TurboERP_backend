@@ -49,11 +49,6 @@ public class LogicaFacturaFinal implements FacturaFinalService {
 	}
 
 	@Override
-	public FacturaFinalVista facturaaSustituir(int numero) throws DataAccessException {
-		return repFF.facturaaSustituir(numero);
-	}
-
-	@Override
 	public FacturaFinalVista buscarPorTipoNumero(int numero, String tipo,String estado) throws DataAccessException {
 		return repFF.buscarPorTipoNumero(numero, tipo,estado);
 	}

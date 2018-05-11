@@ -94,20 +94,8 @@ public class WSFacturaFinal {
 			return new ResponseEntity<Void>(HttpStatus.OK);		
 	}
 
-	@GetMapping("/facturaasustituir/{numero}")
-	public ResponseEntity<FacturaFinalVista> facturaaSustituir(@PathVariable int numero){
-		FacturaFinalVista ffs = null;
-		try {
-			ffs = s.facturaaSustituir(numero);
-		} catch (Exception e) {
-			bitacora.error(e.getMessage());
-			return new ResponseEntity<FacturaFinalVista>(HttpStatus.NOT_FOUND);
-		}
-		return new ResponseEntity<FacturaFinalVista>(ffs, HttpStatus.OK);
-	}
-
-	@GetMapping("factura/{tipo}/{numero}")
-	public ResponseEntity<FacturaFinalVista> buscarPorNumero(@PathVariable String tipo, @PathVariable int numero,@RequestParam String estado){
+	@GetMapping("factura/{tipo}/{numero}/{estado}")
+	public ResponseEntity<FacturaFinalVista> buscarPorNumero(@PathVariable String tipo, @PathVariable int numero, @PathVariable String estado){
 		FacturaFinalVista ffv = null;
 		try{
 			ffv = s.buscarPorTipoNumero(numero, tipo,estado);
