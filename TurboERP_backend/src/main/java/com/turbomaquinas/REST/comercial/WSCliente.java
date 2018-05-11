@@ -110,4 +110,18 @@ public class WSCliente {
 		return new ResponseEntity<ClienteVista>(c, HttpStatus.OK);	
 	}
 	
+	@GetMapping("/{id}/tipo")
+	public ResponseEntity<String> buscarTipoCliente(@PathVariable int id){
+		String tipo = null;
+		try {
+			tipo =  s.buscarTipoCliente(id);
+		} catch(DataAccessException e){
+			bitacora.error(e.getMessage());
+			return new ResponseEntity<String>(HttpStatus.NOT_FOUND);
+		}
+		if(tipo == null) {
+			return new ResponseEntity<String>(tipo, HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<String>(tipo, HttpStatus.OK);
+	}
 }

@@ -146,7 +146,6 @@ public class WSFacturaFinal {
 			return new ResponseEntity<FacturaFinalVista>(HttpStatus.NO_CONTENT);
 		}
 		return new ResponseEntity<FacturaFinalVista>(factura, HttpStatus.OK);
-		
 	}
 
 	@PostMapping
