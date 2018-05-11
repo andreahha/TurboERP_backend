@@ -7,11 +7,9 @@ import com.turbomaquinas.POJO.comercial.NotaCreditoVista;
 
 public interface NotaCreditoDAO {
 
-	public int crear(NotaCredito nc);
+	public int crearNotasCredito(String doc);
 	public void actualizar(NotaCredito nc);
 	public NotaCredito buscar(int id);
 	public List<NotaCreditoVista> consultar();
-	
-	public int aplicarNotasCredito(String doc);
 	
 }

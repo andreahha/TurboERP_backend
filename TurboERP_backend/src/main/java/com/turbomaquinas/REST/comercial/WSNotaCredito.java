@@ -29,19 +29,6 @@ public class WSNotaCredito {
 	
 	@Autowired
 	NotaCreditoService s;
-	
-	@PostMapping
-	public ResponseEntity<NotaCredito> crear(@RequestBody NotaCredito nc){
-		NotaCredito respuesta = null;
-		bitacora.info(nc);
-		try {
-			respuesta = s.crear(nc);
-			return new ResponseEntity<NotaCredito>(respuesta, HttpStatus.CREATED);
-		} catch (Exception e) {
-			bitacora.error(e.getMessage());
-			return new ResponseEntity<NotaCredito> (HttpStatus.CONFLICT);
-		}
-	}
 
 	@PutMapping
 	public ResponseEntity<Void> actualizar(NotaCredito nc){
@@ -76,11 +63,11 @@ public class WSNotaCredito {
 		return new ResponseEntity<List<NotaCreditoVista>> (lnc, HttpStatus.OK);
 	}
 	
-	@PostMapping("/aplicar-notaCredito")
-	public ResponseEntity<NotaCredito> aplicarNotaCredito(@RequestBody DocumentoAplicarNotasCredito doc){
+	@PostMapping
+	public ResponseEntity<NotaCredito> crear(@RequestBody DocumentoAplicarNotasCredito doc){
 		NotaCredito nc = null;
 		try{
-			nc = s.aplicarNotasCredito(doc);
+			nc = s.crearNotasCredito(doc);
 			
 			return new ResponseEntity<NotaCredito>(nc, HttpStatus.OK);
 		}catch(DataAccessException e){

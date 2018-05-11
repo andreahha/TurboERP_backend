@@ -17,13 +17,7 @@ public class LogicaNotaCredito implements NotaCreditoService {
 	@Autowired
 	NotaCreditoDAO repNc;
 	
-	@Override
-	public NotaCredito crear(NotaCredito nc) throws DataAccessException {
-		int id = repNc.crear(nc);
-		return repNc.buscar(id);
-	}
-
-	@Override
+		@Override
 	public void actualizar(NotaCredito nc) throws DataAccessException {
 		repNc.actualizar(nc);
 		
@@ -40,8 +34,8 @@ public class LogicaNotaCredito implements NotaCreditoService {
 	}
 
 	@Override
-	public NotaCredito aplicarNotasCredito(DocumentoAplicarNotasCredito doc) {
-		int id = repNc.aplicarNotasCredito(doc.toString());
+	public NotaCredito crearNotasCredito(DocumentoAplicarNotasCredito doc) {
+		int id = repNc.crearNotasCredito(doc.toString());
 		return repNc.buscar(id);
 	}
 
