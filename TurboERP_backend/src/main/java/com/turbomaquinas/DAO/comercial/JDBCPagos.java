@@ -1,6 +1,5 @@
 package com.turbomaquinas.DAO.comercial;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,7 +10,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcCall;
-import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
 import com.turbomaquinas.POJO.comercial.Pagos;
@@ -23,37 +21,6 @@ public class JDBCPagos implements PagosDAO {
 	@Autowired
 	JdbcTemplate jdbcTemplate;
 
-	@Override
-	public int crear(Pagos p) throws DataAccessException {
-		
-		SimpleJdbcInsert insert = new SimpleJdbcInsert(jdbcTemplate);
-		List<String> columnas = new ArrayList<>();
-		
-//		columnas.add("folio");
-		columnas.add("fecha_pago");
-		columnas.add("importe");
-		columnas.add("tipo_cambio_cliente");
-		columnas.add("observaciones");
-		columnas.add("creado_por");
-		columnas.add("DEPOSITOS_RECIBIDOS_id");
-		
-		insert.setTableName("PAGOS");
-		insert.setColumnNames(columnas);
-		
-		Map<String, Object> datos = new HashMap<>();
-//		datos.put("folio", p.getFolio());
-		datos.put("fecha_pago", p.getFecha_pago());
-		datos.put("importe", p.getImporte());
-		datos.put("tipo_cambio_cliente", p.getTipo_cambio_cliente());
-		datos.put("observaciones", p.getObservaciones());
-		datos.put("creado_por", p.getCreado_por());
-		datos.put("DEPOSITOS_RECIBIDOS_id", p.getDepositos_recibidos_id());
-		
-		insert.setGeneratedKeyName("id");
-		Number id = insert.executeAndReturnKey(datos);
-		
-		return id.intValue();
-	}
 
 	@Override
 	public Pagos actualizar(Pagos p) throws DataAccessException {
