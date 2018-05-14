@@ -22,7 +22,6 @@ import com.turbomaquinas.POJO.comercial.DocumentoFacturaFinal;
 import com.turbomaquinas.POJO.comercial.FacturaFinal;
 import com.turbomaquinas.POJO.comercial.FacturaFinalVista;
 import com.turbomaquinas.POJO.general.OrdenFactura;
-import com.turbomaquinas.service.comercial.DocFacturaFinalService;
 import com.turbomaquinas.service.comercial.FacturaFinalService;
 
 @RestController
@@ -33,8 +32,6 @@ public class WSFacturaFinal {
 	
 	@Autowired
 	FacturaFinalService s;
-	@Autowired
-	DocFacturaFinalService ds;
 	
 	
 //	@PostMapping
