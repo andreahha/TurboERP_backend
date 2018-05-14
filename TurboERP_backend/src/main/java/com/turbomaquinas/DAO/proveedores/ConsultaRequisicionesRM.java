@@ -53,6 +53,7 @@ public class ConsultaRequisicionesRM  implements RowMapper<ConsultaRequisiciones
 		cr.setParcial_ordenc(rs.getString("parcial_ordenc"));
 		cr.setParcial_recepcion(rs.getString("parcial_recepcion"));
 		cr.setParcial_salidalm(rs.getString("parcial_salidalm"));
+		cr.setNo_aplica_cuarentena(rs.getString("no_aplica_cuarentena"));
 		return cr;
 	}
 
