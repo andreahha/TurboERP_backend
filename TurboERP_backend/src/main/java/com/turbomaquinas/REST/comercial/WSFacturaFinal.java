@@ -143,7 +143,7 @@ public class WSFacturaFinal {
 			factura = s.buscarFacturaFolio(folio,estado);
 		}catch(DataAccessException e){
 			bitacora.error(e.getMessage());
-			return new ResponseEntity<FacturaFinalVista>(HttpStatus.NO_CONTENT);
+			return new ResponseEntity<FacturaFinalVista>(HttpStatus.NOT_FOUND);
 		}
 		return new ResponseEntity<FacturaFinalVista>(factura, HttpStatus.OK);
 	}
