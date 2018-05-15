@@ -53,5 +53,10 @@ public class LogicaCliente implements ClienteService {
 		return repCliente.buscarClientePorOrden(id);
 	}
 
+	@Override
+	public String buscarTipoCliente(int id) {
+		return repCliente.buscarTipoCliente(id);
+	}
+
 	
 }

@@ -145,14 +145,6 @@ public class JDBCFacturaFinal implements FacturaFinalDAO {
 	}
 
 	@Override
-	public FacturaFinalVista facturaaSustituir(int numero) throws DataAccessException {
-		FacturaFinalVista ffs = jdbcTemplate.queryForObject("SELECT * FROM FACTURA_FINAL_V "
-				+ "WHERE numero = ? AND factura_final_id_sust = 0  AND  activo = 0", 
-				new FacturaFinalVistaRM(), numero);
-		return ffs;
-	}
-
-	@Override
 	public FacturaFinalVista buscarPorTipoNumero(int numero, String tipo,String estado) {
 		FacturaFinalVista ffv = jdbcTemplate.queryForObject("SELECT * FROM FACTURA_FINAL_V WHERE numero = ? and tipo = ? and estado_factura=?",
 				new FacturaFinalVistaRM(), numero, tipo,estado);
