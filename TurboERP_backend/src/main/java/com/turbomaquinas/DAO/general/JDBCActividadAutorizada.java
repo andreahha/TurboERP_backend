@@ -24,7 +24,7 @@ public class JDBCActividadAutorizada implements ActividadAutorizadaDAO{
 	
 	public class Facts {
 
-		private int id;
+		private int id; 
 		private int numero;
 		
 		public Facts() {
