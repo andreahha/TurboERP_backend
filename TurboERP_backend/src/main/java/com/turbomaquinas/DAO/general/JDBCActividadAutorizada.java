@@ -298,7 +298,7 @@ public class JDBCActividadAutorizada implements ActividadAutorizadaDAO{
 				lista = lista+","+id;
 			}				
 		}		
-		lista+=")";
+		lista+=")"; 
 		String sql="SELECT aa.id,(SELECT d.descripcion FROM DETALLE_COTIZACIONES d WHERE d.id=aa.DETALLES_COTIZACIONES_id) as descripcion,  "
 				+ "aa.tipo_actividad, e.id as encabezados_cotizaciones_id,e.descripcion as encabezados_cotizaciones_descripcion, "
 				+ "(SELECT IF ((JSON_EXTRACT(JSON_CONSULTA_ULT_CAMBIO(a.ORDENES_id, 'MONEDA'),'$.tipo_cambio_calculado') IS NULL),importe_a_facturar,(importe_a_facturar*JSON_EXTRACT(JSON_CONSULTA_ULT_CAMBIO(a.ORDENES_id, 'MONEDA'),'$.tipo_cambio_calculado')))) AS importe_a_facturar,  "
