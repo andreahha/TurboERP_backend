@@ -300,9 +300,9 @@ public class JDBCActividadAutorizada implements ActividadAutorizadaDAO{
 		}		
 		lista+=")";
 		String sql="SELECT aa.id,(SELECT d.descripcion FROM DETALLE_COTIZACIONES d WHERE d.id=aa.DETALLES_COTIZACIONES_id) as descripcion,  "
-				+ "aa.importe_a_facturar,aa.descuento_disponible,aa.tipo_actividad, e.id as encabezados_cotizaciones_id,e.descripcion as encabezados_cotizaciones_descripcion, "
-				+ "(SELECT IF ((JSON_EXTRACT(JSON_CONSULTA_ULT_CAMBIO(a.ORDENES_id, 'MONEDA'),'$.tipo_cambio_calculado') IS NULL),importe_a_facturar,(importe_a_facturar*JSON_EXTRACT(JSON_CONSULTA_ULT_CAMBIO(a.ORDENES_id, 'MONEDA'),'$.tipo_cambio')))) AS importe_a_facturar,  "
-				+ "(SELECT IF ((JSON_EXTRACT(JSON_CONSULTA_ULT_CAMBIO(a.ORDENES_id, 'MONEDA'),'$.tipo_cambio_calculado') IS NULL),descuento_disponible,(descuento_disponible*JSON_EXTRACT(JSON_CONSULTA_ULT_CAMBIO(a.ORDENES_id, 'MONEDA'),'$.tipo_cambio')))) AS descuento_disponible  "
+				+ "aa.tipo_actividad, e.id as encabezados_cotizaciones_id,e.descripcion as encabezados_cotizaciones_descripcion, "
+				+ "(SELECT IF ((JSON_EXTRACT(JSON_CONSULTA_ULT_CAMBIO(a.ORDENES_id, 'MONEDA'),'$.tipo_cambio_calculado') IS NULL),importe_a_facturar,(importe_a_facturar*JSON_EXTRACT(JSON_CONSULTA_ULT_CAMBIO(a.ORDENES_id, 'MONEDA'),'$.tipo_cambio_calculado')))) AS importe_a_facturar,  "
+				+ "(SELECT IF ((JSON_EXTRACT(JSON_CONSULTA_ULT_CAMBIO(a.ORDENES_id, 'MONEDA'),'$.tipo_cambio_calculado') IS NULL),descuento_disponible,(descuento_disponible*JSON_EXTRACT(JSON_CONSULTA_ULT_CAMBIO(a.ORDENES_id, 'MONEDA'),'$.tipo_cambio_calculado')))) AS descuento_disponible  "
 				+ "FROM ACTIVIDADES_AUTORIZADAS aa "
 				+ "JOIN AUTORIZACIONES a ON a.id=aa.AUTORIZACIONES_id "
 				+ "JOIN DETALLE_COTIZACIONES d on aa.DETALLES_COTIZACIONES_id=d.id "
