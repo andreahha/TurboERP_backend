@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.turbomaquinas.DAO.comercial.ConceptosNotasCreditoDAO;
 import com.turbomaquinas.POJO.comercial.ConceptosNotasCredito;
+import com.turbomaquinas.POJO.comercial.ConceptosNotasCreditoVista;
 
 @Service
 public class LogicaConceptosNotasCredito implements ConceptosNotasCreditoService {
@@ -15,8 +16,14 @@ public class LogicaConceptosNotasCredito implements ConceptosNotasCreditoService
 	ConceptosNotasCreditoDAO repCNC;
 	
 	@Override
+	public ConceptosNotasCreditoVista buscar(int id) {
+		return repCNC.buscar(id);
+	}
+	
+	@Override
 	public List<ConceptosNotasCredito> consultar() {
 		return repCNC.consultar();
 	}
+
 
 }
