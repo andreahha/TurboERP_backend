@@ -1,11 +1,14 @@
 package com.turbomaquinas.DAO.comercial;
 
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.turbomaquinas.POJO.comercial.FacturaFinalVista;
+import com.turbomaquinas.POJO.comercial.FacturaFinalVista.ComprobantesRelacionados;
 
 public class FacturaFinalVistaRM implements RowMapper<FacturaFinalVista>{
 
@@ -45,6 +48,13 @@ public class FacturaFinalVistaRM implements RowMapper<FacturaFinalVista>{
 		ffv.setActivo(rs.getInt("activo"));
 		ffv.setCLIENTES_id(rs.getInt("CLIENTES_id"));
 		ffv.setEstado_factura(rs.getString("estado_factura"));
+		ObjectMapper mapper = new ObjectMapper();
+		try {
+			ffv.setComprobantes_relacionados(mapper.readValue(rs.getString("comprobantes_relacionados"), ComprobantesRelacionados.class));
+		} catch (Exception e) {
+			ffv.setComprobantes_relacionados(null);
+		}
+		
 		return ffv;
 	}
 

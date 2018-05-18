@@ -36,6 +36,7 @@ public class FacturaFinalVista {
 	public String pais;
 	public int activo;
 	private int CLIENTES_id;
+	public ComprobantesRelacionados comprobantes_relacionados;
 	
 
 	public FacturaFinalVista() {
@@ -47,8 +48,7 @@ public class FacturaFinalVista {
 			float tipo_cambio, String condiciones_pago, float saldo, String folio_fiscal, String estado_factura,
 			String cve_formap, String des_formap, String cve_metodop, String des_metodop, String cve_uso,
 			String des_uso, int numero_cliente, String nombre, String direccion, String colonia, String codigo_postal,
-			String ciudad, String estado, String pais, int activo, int factura_final_id_sust, String folio_fiscal_sust,
-			int cLIENTES_id) {
+			String ciudad, String estado, String pais, int activo, int CLIENTES_id, ComprobantesRelacionados comprobantes_relacionados) {
 		super();
 		this.id = id;
 		this.tipo = tipo;
@@ -81,9 +81,9 @@ public class FacturaFinalVista {
 		this.estado = estado;
 		this.pais = pais;
 		this.activo = activo;
-		CLIENTES_id = cLIENTES_id;
+		this.CLIENTES_id = CLIENTES_id;
+		this.comprobantes_relacionados = comprobantes_relacionados;
 	}
-
 
 
 	public int getId() {
@@ -339,8 +339,53 @@ public class FacturaFinalVista {
 		return CLIENTES_id;
 	}
 
-	public void setCLIENTES_id(int cLIENTES_id) {
-		CLIENTES_id = cLIENTES_id;
+	public void setCLIENTES_id(int CLIENTES_id) {
+		this.CLIENTES_id = CLIENTES_id;
+	}
+	
+	public ComprobantesRelacionados getComprobantes_relacionados() {
+		return comprobantes_relacionados;
+	}
+
+	public void setComprobantes_relacionados(ComprobantesRelacionados comprobantes_relacionados) {
+		this.comprobantes_relacionados = comprobantes_relacionados;
+	}
+
+
+
+
+
+	public static class ComprobantesRelacionados{
+		private String tipo_relacion;
+		private int comprobantes [];
+		
+		public ComprobantesRelacionados() {
+			super();
+		}
+
+		public ComprobantesRelacionados(String tipo_relacion, int[] comprobantes) {
+			super();
+			this.tipo_relacion = tipo_relacion;
+			this.comprobantes = comprobantes;
+		}
+
+		public String getTipo_relacion() {
+			return tipo_relacion;
+		}
+
+		public void setTipo_relacion(String tipo_relacion) {
+			this.tipo_relacion = tipo_relacion;
+		}
+
+		public int[] getComprobantes() {
+			return comprobantes;
+		}
+
+		public void setComprobantes(int[] comprobantes) {
+			this.comprobantes = comprobantes;
+		}
+		
+			
 	}
 		
 	
