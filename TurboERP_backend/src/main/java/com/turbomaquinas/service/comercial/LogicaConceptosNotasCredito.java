@@ -21,9 +21,18 @@ public class LogicaConceptosNotasCredito implements ConceptosNotasCreditoService
 	}
 	
 	@Override
-	public List<ConceptosNotasCredito> consultar() {
+	public List<ConceptosNotasCreditoVista> consultar() {
 		return repCNC.consultar();
 	}
+
+	@Override
+	public ConceptosNotasCreditoVista crear(ConceptosNotasCredito cnc) {
+		int id = repCNC.crear(cnc);
+		return repCNC.buscar(id);
+	}
+
+
+	
 
 
 }

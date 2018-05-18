@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -40,13 +42,28 @@ public class WSConceptosNotasCredito {
 	}
 	
 	@GetMapping()
-	public ResponseEntity<List<ConceptosNotasCredito>> consultar(){
-		List<ConceptosNotasCredito> cnc = s.consultar();
-		if( cnc.isEmpty())
-			return new ResponseEntity<List<ConceptosNotasCredito>>(HttpStatus.NO_CONTENT);
-		return new ResponseEntity<List<ConceptosNotasCredito>>(cnc, HttpStatus.OK);
+	public ResponseEntity<List<ConceptosNotasCreditoVista>> consultar(){
+		List<ConceptosNotasCreditoVista> cncv = s.consultar();
+		if( cncv.isEmpty())
+			return new ResponseEntity<List<ConceptosNotasCreditoVista>>(HttpStatus.NO_CONTENT);
+		return new ResponseEntity<List<ConceptosNotasCreditoVista>>(cncv, HttpStatus.OK);
 		
 	}
+	
+	@PostMapping
+	public ResponseEntity<ConceptosNotasCreditoVista> crear(@RequestBody ConceptosNotasCredito cnc){
+		
+		ConceptosNotasCreditoVista respuesta = null;
+		bitacora.info(cnc);
+		try {
+			respuesta = s.crear(cnc);
+			return new ResponseEntity<ConceptosNotasCreditoVista>(respuesta, HttpStatus.CREATED);
+		} catch (Exception e) {
+			bitacora.error(e.getMessage());
+			return new ResponseEntity<ConceptosNotasCreditoVista>(HttpStatus.CONFLICT);
+		}
+	}
+
 
 
 }
