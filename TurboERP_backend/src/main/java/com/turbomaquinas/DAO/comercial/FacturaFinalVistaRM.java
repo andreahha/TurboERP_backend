@@ -52,7 +52,7 @@ public class FacturaFinalVistaRM implements RowMapper<FacturaFinalVista>{
 		try {
 			ffv.setComprobantes_relacionados(mapper.readValue(rs.getString("comprobantes_relacionados"), ComprobantesRelacionados.class));
 		} catch (Exception e) {
-			ffv.setComprobantes_relacionados(null);
+			ffv.setComprobantes_relacionados(null); 
 		}
 		
 		return ffv;
