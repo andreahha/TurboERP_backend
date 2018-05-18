@@ -35,8 +35,6 @@ public class FacturaFinalVista {
 	public String estado;
 	public String pais;
 	public int activo;
-	public int factura_final_id_sust;
-	public String folio_fiscal_sust;
 	private int CLIENTES_id;
 	
 
@@ -83,8 +81,6 @@ public class FacturaFinalVista {
 		this.estado = estado;
 		this.pais = pais;
 		this.activo = activo;
-		this.factura_final_id_sust = factura_final_id_sust;
-		this.folio_fiscal_sust = folio_fiscal_sust;
 		CLIENTES_id = cLIENTES_id;
 	}
 
@@ -330,22 +326,7 @@ public class FacturaFinalVista {
 		this.activo = activo;
 	}
 
-	public int getFactura_final_id_sust() {
-		return factura_final_id_sust;
-	}
-
-	public void setFactura_final_id_sust(int factura_final_id_sust) {
-		this.factura_final_id_sust = factura_final_id_sust;
-	}
-
-	public String getFolio_fiscal_sust() {
-		return folio_fiscal_sust;
-	}
-
-	public void setFolio_fiscal_sust(String folio_fiscal_sust) {
-		this.folio_fiscal_sust = folio_fiscal_sust;
-	}
-
+	
 	public String getEstado_factura() {
 		return estado_factura;
 	}
