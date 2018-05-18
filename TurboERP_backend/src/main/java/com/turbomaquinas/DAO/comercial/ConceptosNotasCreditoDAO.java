@@ -8,6 +8,7 @@ import com.turbomaquinas.POJO.comercial.ConceptosNotasCreditoVista;
 public interface ConceptosNotasCreditoDAO {
 	
 	public ConceptosNotasCreditoVista buscar(int id);
-	public List<ConceptosNotasCredito> consultar();
+	public List<ConceptosNotasCreditoVista> consultar();
+	public int crear(ConceptosNotasCredito cnc);
 
 }
