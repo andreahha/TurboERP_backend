@@ -2,22 +2,42 @@ package com.turbomaquinas.REST.comercial;
 
 import java.util.List;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.turbomaquinas.POJO.comercial.ConceptosNotasCredito;
+import com.turbomaquinas.POJO.comercial.ConceptosNotasCreditoVista;
 import com.turbomaquinas.service.comercial.ConceptosNotasCreditoService;
 
 @RestController
 @RequestMapping("comercial/conceptosnotascredito")
 public class WSConceptosNotasCredito {
 	
+	private static final Log bitacora = LogFactory.getLog(WSConceptosFacturacion.class);
+	
 	@Autowired
 	ConceptosNotasCreditoService s;
+    
+	
+	@GetMapping("/{id}")
+	public ResponseEntity<ConceptosNotasCreditoVista> buscar (@PathVariable int id){
+		
+		ConceptosNotasCreditoVista cncv = null;
+		try {
+			cncv = s.buscar(id);
+		} catch (Exception e) {
+			bitacora.error(e.getMessage());
+			return new ResponseEntity<ConceptosNotasCreditoVista>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<ConceptosNotasCreditoVista>(cncv, HttpStatus.OK);
+	}
 	
 	@GetMapping()
 	public ResponseEntity<List<ConceptosNotasCredito>> consultar(){
