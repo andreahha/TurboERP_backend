@@ -10,5 +10,4 @@ public interface GiroDAO {
 	public Giro Buscar(int id);
 	public List<Giro> Consultar();
 	public void actualizar(Giro giro);
-	
 }
