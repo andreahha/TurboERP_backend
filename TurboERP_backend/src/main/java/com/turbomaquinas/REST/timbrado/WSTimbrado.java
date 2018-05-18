@@ -42,17 +42,22 @@ public class WSTimbrado {
 	private String headerValue = "Basic " + new String(Base64.getEncoder().encode(userpass.getBytes()));	
 	
 	
+	public HttpHeaders configurarPeticionAPIEnlaceFiscal(){
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.add("Authorization", headerValue);
+        headers.add("x-api-key", "7aa16d2e055554fcf3d182758db23c91");
+        return headers;
+	}
+	
 	
 	
 	@PostMapping("/facturafinal/{id}")
 	public ResponseEntity<String> crear(@PathVariable int id) throws JsonParseException, JsonMappingException, IOException{
-		//Encabezados 
-		HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.add("Authorization", headerValue);
-        headers.add("x-api-key", "7aa16d2e055554fcf3d182758db23c91"); 
-        
-        //Recuperar JSON PA		
+		//Configurar petición Headers de las API enlace fiscal
+		HttpHeaders headers=configurarPeticionAPIEnlaceFiscal();
+		
+        //Recuperar JSON del PA TIMBRADO_FACTURA		
 		String json=null;
 		try{
 			 json=ts.timbrarFactura(id);
@@ -61,9 +66,9 @@ public class WSTimbrado {
 			return new ResponseEntity<String>(HttpStatus.CONFLICT);
 		}
 		
+		//PETICIÓN A LA API
+		RestTemplate restTemplate = new RestTemplate();
         HttpEntity<?> httpEntity = new HttpEntity<Object>(json, headers);
-        RestTemplate restTemplate = new RestTemplate();
-        
         try{
 	        ResponseEntity<String> response = restTemplate.exchange(urlGenerarCfdi, HttpMethod.POST, httpEntity, String.class);
 	        JSONObject jsonRespuesta = new JSONObject(response.getBody());
