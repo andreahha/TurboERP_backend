@@ -17,7 +17,7 @@ public interface FacturaFinalService {
 	public FacturaFinalVista buscarPorTipoNumero (int numero, String tipo,String estado);
 	public List<FacturaFinalVista> consultarFacturasPendientesPorCliente(int id,String moneda);
 	public List<OrdenFactura> consultarOrdenes(int id);
-	public FacturaFinalVista buscarFacturaFolio(String folio,String estado);
+	public FacturaFinalVista buscarFacturaFolio(String folio, String estado, String tipo);
 	public FacturaFinalVista creardoc(DocumentoFacturaFinal doc);
 
 }

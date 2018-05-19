@@ -64,8 +64,8 @@ public class LogicaFacturaFinal implements FacturaFinalService {
 	}
 
 	@Override
-	public FacturaFinalVista buscarFacturaFolio(String folio,String estado) {
-		return repFF.buscarFacturaFolio(folio,estado);
+	public FacturaFinalVista buscarFacturaFolio(String folio, String estado, String tipo) {
+		return repFF.buscarFacturaFolio(folio, estado, tipo);
 	}
 
 	@Override

@@ -133,11 +133,11 @@ public class WSFacturaFinal {
 		
 	}
 	
-	@GetMapping("/folio")
-	public ResponseEntity<FacturaFinalVista> buscarFacturaFolio(@RequestParam String folio,@RequestParam String estado){
+	@GetMapping("/folio/{estado}/{tipo}")
+	public ResponseEntity<FacturaFinalVista> buscarFacturaFolio(@RequestParam String folio, @PathVariable String estado, @PathVariable String tipo){
 		FacturaFinalVista factura = null;
 		try{
-			factura = s.buscarFacturaFolio(folio,estado);
+			factura = s.buscarFacturaFolio(folio, estado, tipo);
 		}catch(DataAccessException e){
 			bitacora.error(e.getMessage());
 			return new ResponseEntity<FacturaFinalVista>(HttpStatus.NOT_FOUND);
