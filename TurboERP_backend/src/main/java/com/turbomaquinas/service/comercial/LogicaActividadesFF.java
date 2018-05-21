@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import com.turbomaquinas.DAO.comercial.ActividadesFFDAO;
 import com.turbomaquinas.DAO.comercial.ConceptosFacturacionDAO;
 import com.turbomaquinas.POJO.comercial.ActividadesFF;
-import com.turbomaquinas.POJO.comercial.ConceptosFacturacionVista;
 
 @Service
 public class LogicaActividadesFF implements ActividadesFFService {
@@ -22,9 +21,6 @@ public class LogicaActividadesFF implements ActividadesFFService {
 
 	@Override
 	public ActividadesFF crear(ActividadesFF aff) throws DataAccessException {
-		ConceptosFacturacionVista cfv = repCF.buscar(aff.getConceptos_facturacion_id());
-		aff.setMedidas_sat_id(cfv.getMedidas_sat_id());
-		aff.setProductos_sat_id(cfv.getProductos_sat_id());
 		int id = repAFF.crear(aff);
 		return repAFF.buscar(id);
 	}
