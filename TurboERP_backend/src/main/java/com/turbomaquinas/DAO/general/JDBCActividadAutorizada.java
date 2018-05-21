@@ -160,8 +160,11 @@ public class JDBCActividadAutorizada implements ActividadAutorizadaDAO{
 	
 	@Override
 	public void regularizarPedidoPrepedido(int ordenId, int pedidosid, int prepedidosid, int modificadopor, String fecharegularizacion, int id) throws DataAccessException{
-		jdbcTemplate.update("UPDATE ACTIVIDADES_AUTORIZADAS SET PEDIDOS_id=?, PRE_PEDIDOS_id=?, modificado_por=?, fecha_regularizacion=?, numero_referencia = ULTIMA_REF_OT(?) + 1 WHERE id=?", 
-				pedidosid, prepedidosid, modificadopor, fecharegularizacion,ordenId, id);
+		jdbcTemplate.update("UPDATE ACTIVIDADES_AUTORIZADAS SET PEDIDOS_id=?, PRE_PEDIDOS_id=?, modificado_por=?, fecha_regularizacion=? WHERE id=?", 
+				pedidosid, prepedidosid, modificadopor, fecharegularizacion, id);
+		
+		jdbcTemplate.update("UPDATE ACTIVIDADES_AUTORIZADAS SET numero_referencia = ULTIMA_REF_OT(?) + 1 WHERE id=? AND numero_referencia=0", 
+				ordenId,id);
 	}
 
 	@Override
