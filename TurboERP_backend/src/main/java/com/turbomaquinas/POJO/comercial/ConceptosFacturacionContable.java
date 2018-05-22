@@ -2,7 +2,7 @@ package com.turbomaquinas.POJO.comercial;
 
 import java.util.Date;
 
-public class ConceptosNotasCredito {
+public class ConceptosFacturacionContable {
 
 	public int id;
 	public String descripcion;
@@ -14,14 +14,15 @@ public class ConceptosNotasCredito {
 	public int catalogo_cuentas_id_nac;
 	public int catalogo_cuentas_id_ext;
 	public int aplica_iva;
+	public String tipo;
 
-	public ConceptosNotasCredito() {
+	public ConceptosFacturacionContable() {
 		super();
 	}
 
-	public ConceptosNotasCredito(int id, String descripcion, int activo, int creado_por, Date creado,
+	public ConceptosFacturacionContable(int id, String descripcion, int activo, int creado_por, Date creado,
 			int modificado_por, Date modificado, int catalogo_cuentas_id_nac, int catalogo_cuentas_id_ext,
-			int aplica_iva) {
+			int aplica_iva, String tipo) {
 		super();
 		this.id = id;
 		this.descripcion = descripcion;
@@ -33,6 +34,7 @@ public class ConceptosNotasCredito {
 		this.catalogo_cuentas_id_nac = catalogo_cuentas_id_nac;
 		this.catalogo_cuentas_id_ext = catalogo_cuentas_id_ext;
 		this.aplica_iva = aplica_iva;
+		this.tipo = tipo;
 	}
 
 	public int getId() {
@@ -114,5 +116,14 @@ public class ConceptosNotasCredito {
 	public void setAplica_iva(int aplica_iva) {
 		this.aplica_iva = aplica_iva;
 	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+	
 
 }

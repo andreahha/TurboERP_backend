@@ -5,13 +5,13 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import com.turbomaquinas.POJO.comercial.ConceptosNotasCredito;
+import com.turbomaquinas.POJO.comercial.ConceptosFacturacionContable;
 
-public class ConceptosNotasCreditoRM implements RowMapper<ConceptosNotasCredito> {
+public class ConceptosFacturacionContableRM implements RowMapper<ConceptosFacturacionContable> {
 
 	@Override
-	public ConceptosNotasCredito mapRow(ResultSet rs, int i) throws SQLException {
-		ConceptosNotasCredito cnc = new ConceptosNotasCredito();
+	public ConceptosFacturacionContable mapRow(ResultSet rs, int i) throws SQLException {
+		ConceptosFacturacionContable cnc = new ConceptosFacturacionContable();
 		cnc.setId(rs.getInt("id"));
 		cnc.setDescripcion(rs.getString("descripcion"));
 		cnc.setActivo(rs.getInt("activo"));
@@ -22,6 +22,7 @@ public class ConceptosNotasCreditoRM implements RowMapper<ConceptosNotasCredito>
 		cnc.setCatalogo_cuentas_id_nac(rs.getInt("catalogo_cuentas_id_nac"));
 		cnc.setCatalogo_cuentas_id_ext(rs.getInt("catalogo_cuentas_id_ext"));
 		cnc.setAplica_iva(rs.getInt("aplica_iva"));
+		cnc.setTipo(rs.getString("tipo"));
 		return cnc;
 	}
 }

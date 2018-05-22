@@ -5,14 +5,14 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import com.turbomaquinas.POJO.comercial.ConceptosNotasCreditoVista;
+import com.turbomaquinas.POJO.comercial.ConceptosFacturacionContableVista;
 
-public class ConceptosNotasCreditoVistaRM implements RowMapper<ConceptosNotasCreditoVista>{
+public class ConceptosFacturacionContableVistaRM implements RowMapper<ConceptosFacturacionContableVista>{
 
 	@Override
-	public ConceptosNotasCreditoVista mapRow(ResultSet rs, int i) throws SQLException {
+	public ConceptosFacturacionContableVista mapRow(ResultSet rs, int i) throws SQLException {
 		
-		ConceptosNotasCreditoVista cncv = new ConceptosNotasCreditoVista();
+		ConceptosFacturacionContableVista cncv = new ConceptosFacturacionContableVista();
 		cncv.setId(rs.getInt("id"));
 		cncv.setDescripcion(rs.getString("descripcion"));
 		cncv.setActivo(rs.getInt("activo"));
@@ -21,6 +21,7 @@ public class ConceptosNotasCreditoVistaRM implements RowMapper<ConceptosNotasCre
 		cncv.setCatalogo_cuentas_id_nac(rs.getInt("catalogo_cuentas_id_nac"));
 		cncv.setCatalogo_cuentas_id_ext(rs.getInt("catalogo_cuentas_id_ext"));
 		cncv.setAplica_iva(rs.getInt("aplica_iva"));
+		cncv.setTipo(rs.getString("tipo"));
 		cncv.setCuenta_nac(rs.getString("cuenta_nac"));
 		cncv.setNombre_cuenta_nac(rs.getString("nombre_cuenta_nac"));
 		cncv.setId_sat_nac(rs.getString("id_sat_nac"));
