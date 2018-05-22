@@ -6,6 +6,7 @@ import com.turbomaquinas.POJO.comercial.ActividadesFA;
 
 public interface ActividadesFADAO {
 	
+	
 	public int crear(ActividadesFA afa);
 	public ActividadesFA actualizar(ActividadesFA afa);
 	public ActividadesFA buscar(int id);
