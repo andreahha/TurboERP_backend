@@ -1,7 +1,7 @@
 package com.turbomaquinas.POJO.comercial;
 
 
-public class ConceptosNotasCreditoVista {
+public class ConceptosFacturacionContableVista {
 	
 	public int id;
 	public String descripcion;
@@ -11,6 +11,7 @@ public class ConceptosNotasCreditoVista {
 	public int catalogo_cuentas_id_nac;
 	public int catalogo_cuentas_id_ext;
 	public int aplica_iva;
+	public String tipo;
 	public String cuenta_nac;
 	public String nombre_cuenta_nac;
 	public String id_sat_nac;
@@ -18,12 +19,12 @@ public class ConceptosNotasCreditoVista {
 	public String nombre_cuenta_ext;
 	public String id_sat_ext;
 	
-	public ConceptosNotasCreditoVista() {
+	public ConceptosFacturacionContableVista() {
 		super();
 	}
 
-	public ConceptosNotasCreditoVista(int id, String descripcion, int activo, int creado_por, int modificado_por,
-			int catalogo_cuentas_id_nac, int catalogo_cuentas_id_ext, int aplica_iva, String cuenta_nac,
+	public ConceptosFacturacionContableVista(int id, String descripcion, int activo, int creado_por, int modificado_por,
+			int catalogo_cuentas_id_nac, int catalogo_cuentas_id_ext, int aplica_iva, String tipo, String cuenta_nac,
 			String nombre_cuenta_nac, String id_sat_nac, String cuenta_ext, String nombre_cuenta_ext,
 			String id_sat_ext) {
 		super();
@@ -35,6 +36,7 @@ public class ConceptosNotasCreditoVista {
 		this.catalogo_cuentas_id_nac = catalogo_cuentas_id_nac;
 		this.catalogo_cuentas_id_ext = catalogo_cuentas_id_ext;
 		this.aplica_iva = aplica_iva;
+		this.tipo = tipo;
 		this.cuenta_nac = cuenta_nac;
 		this.nombre_cuenta_nac = nombre_cuenta_nac;
 		this.id_sat_nac = id_sat_nac;
@@ -105,6 +107,14 @@ public class ConceptosNotasCreditoVista {
 
 	public void setAplica_iva(int aplica_iva) {
 		this.aplica_iva = aplica_iva;
+	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
 	}
 
 	public String getCuenta_nac() {
