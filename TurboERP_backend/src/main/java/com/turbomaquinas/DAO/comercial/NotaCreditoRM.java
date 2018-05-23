@@ -41,7 +41,6 @@ public class NotaCreditoRM implements RowMapper<NotaCredito> {
 			fact = mapper.readValue(json, new TypeReference<List<DocumentoAplicarNotasCredito.Facturas>>(){});
 		} catch (IOException e) {}
 		nc.setFacturas(fact);
-		System.out.println(nc);
 		return nc;
 	
 	}
