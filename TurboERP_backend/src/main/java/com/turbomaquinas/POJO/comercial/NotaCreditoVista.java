@@ -24,7 +24,7 @@ public class NotaCreditoVista {
 	private String num_factura_final;
 	private int facturas_anticipo_id;
 	private String num_factura_anticipo;
-	private int conceptos_notas_credito_id;
+	private int conceptos_facturacion_contable_id;
 	private String concepto;
 	private int notas_credito_id_sust;
 
@@ -36,7 +36,7 @@ public class NotaCreditoVista {
 			Date fecha_baja, int mes_baja, int anio_baja, String descripcion, int activo, int factura_varios_id,
 			String num_factura_varios, int datos_timbrado_id, String uuid, int factura_final_id,
 			String num_factura_final, int facturas_anticipo_id, String num_factura_anticipo,
-			int conceptos_notas_credito_id, String concepto, int notas_credito_id_sust) {
+			int conceptos_facturacion_contable_id, String concepto, int notas_credito_id_sust) {
 		this.id = id;
 		this.tipo = tipo;
 		this.numero = numero;
@@ -57,7 +57,7 @@ public class NotaCreditoVista {
 		this.num_factura_final = num_factura_final;
 		this.facturas_anticipo_id = facturas_anticipo_id;
 		this.num_factura_anticipo = num_factura_anticipo;
-		this.conceptos_notas_credito_id = conceptos_notas_credito_id;
+		this.conceptos_facturacion_contable_id = conceptos_facturacion_contable_id;
 		this.concepto = concepto;
 		this.notas_credito_id_sust = notas_credito_id_sust;
 	}
@@ -222,12 +222,12 @@ public class NotaCreditoVista {
 		this.num_factura_anticipo = num_factura_anticipo;
 	}
 
-	public int getConceptos_notas_credito_id() {
-		return conceptos_notas_credito_id;
+	public int getConceptos_facturacion_contable_id() {
+		return conceptos_facturacion_contable_id;
 	}
 
-	public void setConceptos_notas_credito_id(int conceptos_notas_credito_id) {
-		this.conceptos_notas_credito_id = conceptos_notas_credito_id;
+	public void setConceptos_facturacion_contable_id(int conceptos_facturacion_contable_id) {
+		this.conceptos_facturacion_contable_id = conceptos_facturacion_contable_id;
 	}
 
 	public String getConcepto() {
