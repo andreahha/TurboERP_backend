@@ -27,6 +27,7 @@ public class FacturaFinalVista {
 	public String cve_uso;
 	public String des_uso;
 	public int numero_cliente;
+	public int numero_giro;
 	public String nombre;
 	public String direccion;
 	public String colonia;
@@ -37,6 +38,7 @@ public class FacturaFinalVista {
 	public int activo;
 	private int CLIENTES_id;
 	public ComprobantesRelacionados comprobantes_relacionados;
+	public String comentario;
 	
 
 	public FacturaFinalVista() {
@@ -47,8 +49,9 @@ public class FacturaFinalVista {
 			float subtotal, float descuento, float iva, float iva_retenido, float total, String moneda,
 			float tipo_cambio, String condiciones_pago, float saldo, String folio_fiscal, String estado_factura,
 			String cve_formap, String des_formap, String cve_metodop, String des_metodop, String cve_uso,
-			String des_uso, int numero_cliente, String nombre, String direccion, String colonia, String codigo_postal,
-			String ciudad, String estado, String pais, int activo, int CLIENTES_id, ComprobantesRelacionados comprobantes_relacionados) {
+			String des_uso, int numero_cliente, int numero_giro,String nombre, String direccion, String colonia, String codigo_postal,
+			String ciudad, String estado, String pais, int activo, int CLIENTES_id,
+			ComprobantesRelacionados comprobantes_relacionados, String comentario) {
 		super();
 		this.id = id;
 		this.tipo = tipo;
@@ -73,6 +76,7 @@ public class FacturaFinalVista {
 		this.cve_uso = cve_uso;
 		this.des_uso = des_uso;
 		this.numero_cliente = numero_cliente;
+		this.numero_giro=numero_giro;
 		this.nombre = nombre;
 		this.direccion = direccion;
 		this.colonia = colonia;
@@ -83,8 +87,8 @@ public class FacturaFinalVista {
 		this.activo = activo;
 		this.CLIENTES_id = CLIENTES_id;
 		this.comprobantes_relacionados = comprobantes_relacionados;
+		this.comentario = comentario;
 	}
-
 
 	public int getId() {
 		return id;
@@ -261,6 +265,14 @@ public class FacturaFinalVista {
 	public void setNumero_cliente(int numero_cliente) {
 		this.numero_cliente = numero_cliente;
 	}
+	
+	public int getNumero_giro() {
+		return numero_giro;
+	}
+
+	public void setNumero_giro(int numero_giro) {
+		this.numero_giro = numero_giro;
+	}
 
 	public String getNombre() {
 		return nombre;
@@ -350,6 +362,16 @@ public class FacturaFinalVista {
 	public void setComprobantes_relacionados(ComprobantesRelacionados comprobantes_relacionados) {
 		this.comprobantes_relacionados = comprobantes_relacionados;
 	}
+	
+	public String getComentario() {
+		return comentario;
+	}
+
+	public void setComentario(String comentario) {
+		this.comentario = comentario;
+	}
+
+
 
 
 

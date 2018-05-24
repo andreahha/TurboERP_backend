@@ -1,6 +1,5 @@
 package com.turbomaquinas.DAO.comercial;
 
-import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -38,6 +37,7 @@ public class FacturaFinalVistaRM implements RowMapper<FacturaFinalVista>{
 		ffv.setCve_uso(rs.getString("cve_uso"));
 		ffv.setDes_uso(rs.getString("des_uso"));
 		ffv.setNumero_cliente(rs.getInt("numero_cliente"));
+		ffv.setNumero_giro(rs.getInt("num_giro"));
 		ffv.setNombre(rs.getString("nombre"));
 		ffv.setDireccion(rs.getString("direccion"));
 		ffv.setColonia(rs.getString("colonia"));
@@ -54,6 +54,7 @@ public class FacturaFinalVistaRM implements RowMapper<FacturaFinalVista>{
 		} catch (Exception e) {
 			ffv.setComprobantes_relacionados(null); 
 		}
+		ffv.setComentario(rs.getString("comentario"));
 		
 		return ffv;
 	}
