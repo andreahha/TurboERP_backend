@@ -12,6 +12,7 @@ import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
 import com.turbomaquinas.POJO.comercial.ActividadesFF;
+import com.turbomaquinas.POJO.comercial.ActividadesFFVista;
 
 @Repository
 public class JDBCActividadesFF implements ActividadesFFDAO {
@@ -73,6 +74,12 @@ public class JDBCActividadesFF implements ActividadesFFDAO {
 		List<ActividadesFF> affl = jdbcTemplate.query("SELECT * FROM ACTIVIDADES_FACTURA_FINAL", 
 				new ActividadesFFRM());
 		return affl;
+	}
+
+	@Override
+	public List<ActividadesFFVista> consultarPorFactura(int idFactura) {
+		List<ActividadesFFVista> affv = jdbcTemplate.query("SELECT * FROM turbomaquinas.ACTIVIDADES_FACTURA_FINAL_V WHERE FACTURA_FINAL_id=?",new ActividadesFFVistaRM(), idFactura);
+		return affv;
 	}
 	
 

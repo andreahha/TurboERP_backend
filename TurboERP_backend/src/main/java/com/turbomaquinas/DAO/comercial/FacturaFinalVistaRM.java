@@ -46,7 +46,7 @@ public class FacturaFinalVistaRM implements RowMapper<FacturaFinalVista>{
 		ffv.setEstado(rs.getString("estado"));
 		ffv.setPais(rs.getString("pais"));
 		ffv.setActivo(rs.getInt("activo"));
-		ffv.setCLIENTES_id(rs.getInt("CLIENTES_id"));
+		ffv.setClientes_id(rs.getInt("CLIENTES_id"));
 		ffv.setEstado_factura(rs.getString("estado_factura"));
 		ObjectMapper mapper = new ObjectMapper();
 		try {
