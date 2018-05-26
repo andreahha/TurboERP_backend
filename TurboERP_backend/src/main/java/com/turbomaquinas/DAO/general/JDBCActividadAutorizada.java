@@ -178,7 +178,7 @@ public class JDBCActividadAutorizada implements ActividadAutorizadaDAO{
 	@Override
 	public List<ActividadAutorizadaVista> consultarPorOrdenFiltradaPorClase(int id, String clase) throws DataAccessException {
 		List<ActividadAutorizadaVista> apo= jdbcTemplate.query("SELECT * FROM ACTIVIDADES_AUTORIZADAS_V aa "
-				+ " JOIN AUTORIZACIONES a ON (a.id = aa.AUTORIZACIONES_id) WHERE a.ORDENES_ID = ? AND aa.clase_actividad= ?", 
+				+ " JOIN AUTORIZACIONES a ON (a.id = aa.AUTORIZACIONES_id) WHERE a.ORDENES_ID = ? AND aa.clase_actividad= ? AND aa.importe_factura=0", 
 				new ActividadAutorizadaVistaRM(), id, clase);
 		return apo;
 	}

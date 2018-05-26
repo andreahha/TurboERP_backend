@@ -28,6 +28,7 @@ import com.turbomaquinas.POJO.general.AtributoEspecialConsulta;
 import com.turbomaquinas.POJO.general.OT;
 import com.turbomaquinas.POJO.general.Orden;
 import com.turbomaquinas.POJO.general.OrdenFactura;
+import com.turbomaquinas.POJO.general.OrdenFactura.Facturas;
 import com.turbomaquinas.POJO.general.OrdenFechasVista;
 import com.turbomaquinas.POJO.general.OrdenVista;
 
@@ -404,6 +405,13 @@ public class JDBCOrden implements OrdenDAO {
 		            datos.setTipo_cambio_calculado((BigDecimal) entry.getValue());
 		        }else if (entry.getKey().compareTo("p_importe_pendiente_pago_facturar") == 0) {
 		            datos.setImporte_pendiente_pago_facturar((BigDecimal) entry.getValue());
+		        }else if (entry.getKey().compareTo("p_facturas") == 0) {
+		        	ObjectMapper mapper = new ObjectMapper();
+		    		try {
+		    			datos.setFacturas(mapper.readValue((String)entry.getValue(),Facturas[].class));
+		    		} catch (Exception e) {
+		    			datos.setFacturas(null); 
+		    		}
 		        }
 		    }
 			return datos;

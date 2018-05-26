@@ -23,6 +23,7 @@ public class OrdenFactura {
 	public BigDecimal tipo_cambio;
 	public BigDecimal tipo_cambio_calculado;
 	public BigDecimal importe_pendiente_pago_facturar;
+	public Facturas facturas[];
 	
 	public OrdenFactura() {
 		super();
@@ -35,7 +36,7 @@ public class OrdenFactura {
 			BigDecimal importe_facturado_facturar, BigDecimal importe_descuento_facturar,
 			BigDecimal importe_pagado_facturar, BigDecimal importe_pedido_facturar,
 			BigDecimal importe_pendiente_facturar, BigDecimal tipo_cambio, BigDecimal tipo_cambio_calculado,
-			BigDecimal importe_pendiente_pago_facturar) {
+			BigDecimal importe_pendiente_pago_facturar, Facturas[] facturas) {
 		super();
 		this.id_orden = id_orden;
 		this.numero_orden = numero_orden;
@@ -57,7 +58,9 @@ public class OrdenFactura {
 		this.tipo_cambio = tipo_cambio;
 		this.tipo_cambio_calculado = tipo_cambio_calculado;
 		this.importe_pendiente_pago_facturar = importe_pendiente_pago_facturar;
+		this.facturas = facturas;
 	}
+
 
 	public int getId_orden() {
 		return id_orden;
@@ -217,6 +220,49 @@ public class OrdenFactura {
 
 	public void setImporte_pendiente_pago_facturar(BigDecimal importe_pendiente_pago_facturar) {
 		this.importe_pendiente_pago_facturar = importe_pendiente_pago_facturar;
+	}
+	
+	public Facturas[] getFacturas() {
+		return facturas;
+	}
+
+	public void setFacturas(Facturas[] facturas) {
+		this.facturas = facturas;
+	}
+
+
+
+
+	public static class Facturas{
+		private int id;
+		private BigDecimal importe;
+		
+		public Facturas() {
+			super();
+		}
+
+		public Facturas(int id, BigDecimal importe) {
+			super();
+			this.id = id;
+			this.importe = importe;
+		}
+
+		public int getId() {
+			return id;
+		}
+
+		public void setId(int id) {
+			this.id = id;
+		}
+
+		public BigDecimal getImporte() {
+			return importe;
+		}
+
+		public void setImporte(BigDecimal importe) {
+			this.importe = importe;
+		}
+		
 	}
 		
 }
