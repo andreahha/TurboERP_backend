@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.turbomaquinas.POJO.comercial.ActividadesFFVista;
 import com.turbomaquinas.POJO.comercial.DocumentoFacturaFinal;
 import com.turbomaquinas.POJO.comercial.FacturaFinal;
 import com.turbomaquinas.POJO.comercial.FacturaFinalVista;
@@ -156,5 +157,18 @@ public class WSFacturaFinal {
 		}
 		return new ResponseEntity<FacturaFinalVista>(factura, HttpStatus.CREATED);
 	}
+	
+	@GetMapping("/{id}/actividades")
+   	public ResponseEntity<List<ActividadesFFVista>> buscarActividades(@PathVariable int id){
+		List<ActividadesFFVista> actividades = null;
+		try{
+			actividades = s.consultarActividadesPorFactura(id);
+		}catch(DataAccessException e){
+			bitacora.error(e.getMessage());
+			return new ResponseEntity<List<ActividadesFFVista>>(HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<List<ActividadesFFVista>>(actividades, HttpStatus.OK);
+       	
+   	}
 	
 }

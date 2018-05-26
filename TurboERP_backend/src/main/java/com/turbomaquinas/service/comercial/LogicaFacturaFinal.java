@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
+import com.turbomaquinas.DAO.comercial.ActividadesFFDAO;
 import com.turbomaquinas.DAO.comercial.FacturaFinalDAO;
+import com.turbomaquinas.POJO.comercial.ActividadesFFVista;
 import com.turbomaquinas.POJO.comercial.DocumentoFacturaFinal;
 import com.turbomaquinas.POJO.comercial.FacturaFinal;
 import com.turbomaquinas.POJO.comercial.FacturaFinalVista;
@@ -21,6 +23,9 @@ public class LogicaFacturaFinal implements FacturaFinalService {
 	
 	@Autowired
 	OrdenService serviceOrden;
+	
+	@Autowired
+	ActividadesFFDAO repActividadesFF;
 
 	@Override
 	public FacturaFinalVista crear(FacturaFinal ff) throws DataAccessException {
@@ -72,6 +77,11 @@ public class LogicaFacturaFinal implements FacturaFinalService {
 	public FacturaFinalVista creardoc(DocumentoFacturaFinal doc) throws DataAccessException {
 		int id = repFF.creardoc(doc.toString());
 		return repFF.buscar(id);
+	}
+
+	@Override
+	public List<ActividadesFFVista> consultarActividadesPorFactura(int id) {
+		return repActividadesFF.consultarPorFactura(id);
 	}
 
 }

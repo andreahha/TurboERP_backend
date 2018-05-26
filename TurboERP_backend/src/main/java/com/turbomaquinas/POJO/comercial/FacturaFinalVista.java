@@ -36,7 +36,7 @@ public class FacturaFinalVista {
 	public String estado;
 	public String pais;
 	public int activo;
-	private int CLIENTES_id;
+	private int clientes_id;
 	public ComprobantesRelacionados comprobantes_relacionados;
 	public String comentario;
 	
@@ -50,7 +50,7 @@ public class FacturaFinalVista {
 			float tipo_cambio, String condiciones_pago, float saldo, String folio_fiscal, String estado_factura,
 			String cve_formap, String des_formap, String cve_metodop, String des_metodop, String cve_uso,
 			String des_uso, int numero_cliente, int numero_giro,String nombre, String direccion, String colonia, String codigo_postal,
-			String ciudad, String estado, String pais, int activo, int CLIENTES_id,
+			String ciudad, String estado, String pais, int activo, int clientes_id,
 			ComprobantesRelacionados comprobantes_relacionados, String comentario) {
 		super();
 		this.id = id;
@@ -85,7 +85,7 @@ public class FacturaFinalVista {
 		this.estado = estado;
 		this.pais = pais;
 		this.activo = activo;
-		this.CLIENTES_id = CLIENTES_id;
+		this.clientes_id = clientes_id;
 		this.comprobantes_relacionados = comprobantes_relacionados;
 		this.comentario = comentario;
 	}
@@ -347,12 +347,12 @@ public class FacturaFinalVista {
 		this.estado_factura = estado_factura;
 	}
 
-	public int getCLIENTES_id() {
-		return CLIENTES_id;
+	public int getClientes_id() {
+		return clientes_id;
 	}
 
-	public void setCLIENTES_id(int CLIENTES_id) {
-		this.CLIENTES_id = CLIENTES_id;
+	public void setClientes_id(int clientes_id) {
+		this.clientes_id = clientes_id;
 	}
 	
 	public ComprobantesRelacionados getComprobantes_relacionados() {
