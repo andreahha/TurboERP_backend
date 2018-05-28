@@ -37,4 +37,5 @@ public interface OrdenDAO {
 	public OrdenFactura buscarDatosFacturacion(int orden_id,int idFactura);
 	public void sumarImporteBaja(int orden_id, BigDecimal importe_baja);
 	public void restarImporteAutorizado(int orden_id, BigDecimal importe_autorizado);
+	public List<Integer> consultarIdsFacturas(int orden_id);
 }

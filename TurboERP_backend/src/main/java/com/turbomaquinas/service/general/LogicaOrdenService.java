@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.turbomaquinas.DAO.comercial.ClienteDAO;
+import com.turbomaquinas.DAO.comercial.FacturaFinalDAO;
 import com.turbomaquinas.DAO.general.ActividadAutorizadaDAO;
 import com.turbomaquinas.DAO.general.AutorizacionDAO;
 import com.turbomaquinas.DAO.general.DTOrdenesDAO;
@@ -17,6 +18,7 @@ import com.turbomaquinas.DAO.general.OrdenDAO;
 import com.turbomaquinas.DAO.general.SolicitudDesautorizacionAADAO;
 import com.turbomaquinas.DAO.produccion.AreasVistaDAO;
 import com.turbomaquinas.POJO.comercial.ClienteVista;
+import com.turbomaquinas.POJO.comercial.FacturaFinalVista;
 import com.turbomaquinas.POJO.general.AtributoEspecialConsulta;
 import com.turbomaquinas.POJO.general.Autorizacion;
 import com.turbomaquinas.POJO.general.DTOrdenes;
@@ -47,6 +49,8 @@ public class LogicaOrdenService implements OrdenService{
 	AutorizacionDAO repoAutoriza;
 	@Autowired
 	ClienteDAO repoCliente;
+	@Autowired
+	FacturaFinalDAO repoFacturaFinal;
 	
 	@Override
 	public OrdenVista crear(Orden o) throws DataAccessException{
@@ -222,6 +226,11 @@ public class LogicaOrdenService implements OrdenService{
 			}			
 		}
 		return o;
+	}
+
+	@Override
+	public List<FacturaFinalVista> consultarFacturas(int id) {
+		return repoFacturaFinal.consultarFacturasPorIds(repositorio.consultarIdsFacturas(id));
 	}
 	
 }

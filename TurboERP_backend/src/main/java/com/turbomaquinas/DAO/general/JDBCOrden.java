@@ -429,6 +429,19 @@ public class JDBCOrden implements OrdenDAO {
 		String sql="UPDATE ORDENES set importe_autorizado = (importe_autorizado-?) WHERE id=?";
 		jdbcTemplate.update(sql,importe_autorizado,orden_id);
 	}
+
+	@Override
+	public List<Integer> consultarIdsFacturas(int orden_id) {
+		String sql="SELECT REPLACE(REPLACE(REPLACE(JSON_EXTRACT(facturas,'$[*].id'),'\"\',''),'[',''),']','') FROM ORDENES o WHERE o.id=?";
+		String ids= jdbcTemplate.queryForObject(sql, String.class,orden_id);
+		String[] idsF = ids.split(", ");
+		
+		List<Integer> idsFactura=new ArrayList<Integer>();
+		for (String id : idsF ) {
+			idsFactura.add(Integer.parseInt(id));
+		}
+		return idsFactura;
+	}
 	
 	
 	
