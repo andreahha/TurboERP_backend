@@ -20,6 +20,7 @@ public class FacturaFinalVista {
 	public float saldo;
 	public String folio_fiscal;
 	public String estado_factura;
+	public String desc_estado_fact;
 	public String cve_formap;
 	public String des_formap;
 	public String cve_metodop;
@@ -40,6 +41,7 @@ public class FacturaFinalVista {
 	public ComprobantesRelacionados comprobantes_relacionados;
 	public String comentario;
 	
+	
 
 	public FacturaFinalVista() {
 		super();
@@ -47,7 +49,7 @@ public class FacturaFinalVista {
 
 	public FacturaFinalVista(int id, String tipo, int numero, Date fecha_factura, Date fecha_vencimiento,
 			float subtotal, float descuento, float iva, float iva_retenido, float total, String moneda,
-			float tipo_cambio, String condiciones_pago, float saldo, String folio_fiscal, String estado_factura,
+			float tipo_cambio, String condiciones_pago, float saldo, String folio_fiscal, String estado_factura, String desc_estado_fact,
 			String cve_formap, String des_formap, String cve_metodop, String des_metodop, String cve_uso,
 			String des_uso, int numero_cliente, int numero_giro,String nombre, String direccion, String colonia, String codigo_postal,
 			String ciudad, String estado, String pais, int activo, int clientes_id,
@@ -69,6 +71,7 @@ public class FacturaFinalVista {
 		this.saldo = saldo;
 		this.folio_fiscal = folio_fiscal;
 		this.estado_factura = estado_factura;
+		this.desc_estado_fact=desc_estado_fact;
 		this.cve_formap = cve_formap;
 		this.des_formap = des_formap;
 		this.cve_metodop = cve_metodop;
@@ -345,6 +348,14 @@ public class FacturaFinalVista {
 
 	public void setEstado_factura(String estado_factura) {
 		this.estado_factura = estado_factura;
+	}
+
+	public String getDesc_estado_fact() {
+		return desc_estado_fact;
+	}
+
+	public void setDesc_estado_fact(String desc_estado_fact) {
+		this.desc_estado_fact = desc_estado_fact;
 	}
 
 	public int getClientes_id() {
