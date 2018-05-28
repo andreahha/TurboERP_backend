@@ -17,6 +17,7 @@ public interface FacturaFinalDAO {
 	public List<Integer> consultarIdsOrdenesFactura(int id);
 	public FacturaFinalVista buscarFacturaFolio(String folio, String estado, String tipo);
 	public int creardoc(String doc);
+	public List<FacturaFinalVista> consultarFacturasPorIds(List<Integer> ids);
 	
 	
 }

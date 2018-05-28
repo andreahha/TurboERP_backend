@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.turbomaquinas.DAO.general.JDBCOrden.FoliosOrdenes;
 import com.turbomaquinas.POJO.comercial.ClienteVista;
+import com.turbomaquinas.POJO.comercial.FacturaFinalVista;
 import com.turbomaquinas.POJO.general.AtributoEspecialConsulta;
 import com.turbomaquinas.POJO.general.Autorizacion;
 import com.turbomaquinas.POJO.general.DTOrdenes;
@@ -46,4 +47,5 @@ public interface OrdenService {
 	public OrdenFactura buscarOrdenFacturar(int id,String moneda,String idCliente);
 	public List<OrdenFactura> consultarOrdenesPorIds(List<Integer> ids, String moneda, String idCliente);
 	public List<OrdenFactura> consultarOrdenesPorIdsFactura(List<Integer> ids,int idFactura);
+	public List<FacturaFinalVista> consultarFacturas(int id);
 }

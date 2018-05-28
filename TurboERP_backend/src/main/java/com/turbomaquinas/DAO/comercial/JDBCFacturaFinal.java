@@ -214,4 +214,19 @@ public class JDBCFacturaFinal implements FacturaFinalDAO {
 		return 0;
 	}
 
+	@Override
+	public List<FacturaFinalVista> consultarFacturasPorIds(List<Integer> ids) {
+		String lista = null;
+		for (int id: ids) {
+			if(lista == null){
+				lista = ""+id;
+			}else{
+				lista = lista+","+id;
+			}
+				
+		}
+		List<FacturaFinalVista> facturas = jdbcTemplate.query("SELECT * FROM FACTURA_FINAL_V WHERE id IN("+lista+")", new FacturaFinalVistaRM());
+		return facturas;
+	}
+
 }
