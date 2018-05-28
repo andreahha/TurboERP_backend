@@ -93,9 +93,10 @@ public class JDBCPedido implements PedidoDAO{
 
 	@Override
 	public List<Pedido> pedidosAAPorOrden(int id) throws DataAccessException{
-		List<Pedido> p = jdbcTemplate.query("SELECT * FROM PEDIDOS P JOIN ACTIVIDADES_AUTORIZADAS AA ON P.id=AA.PEDIDOS_id "
-				+ "JOIN ENCABEZADOS_ACTIVIDADES_AUTORIZADAS EAA ON AA.ENCABEZADOS_ACTIVIDADES_AUTORIZADAS_id=EAA.id AND EAA.ORDENES_id=?", 
-				new PedidoRM(), id);
+		String sql = "SELECT * FROM PEDIDOS P WHERE P.id IN "
+				+ "(SELECT PEDIDOS_id FROM ACTIVIDADES_AUTORIZADAS AA WHERE (AA.AUTORIZACIONES_id IN "
+				+ "(SELECT id FROM AUTORIZACIONES WHERE ORDENES_id=?)) AND (AA.PEDIDOS_id>0))";
+		List<Pedido> p = jdbcTemplate.query(sql, new PedidoRM(), id);
 		return p;
 	}
 

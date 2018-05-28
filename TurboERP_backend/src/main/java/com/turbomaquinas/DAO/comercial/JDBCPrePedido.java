@@ -90,9 +90,10 @@ public class JDBCPrePedido implements PrePedidoDAO{
 
 	@Override
 	public List<PrePedido> prePedidosAAPorOrden(int id) throws DataAccessException{
-		List<PrePedido> p = jdbcTemplate.query("SELECT * FROM PREPEDIDOS P JOIN ACTIVIDADES_AUTORIZADAS AA ON P.id=AA.PRE_PEDIDOS_id "
-				+ "JOIN ENCABEZADOS_ACTIVIDADES_AUTORIZADAS EAA ON AA.ENCABEZADOS_ACTIVIDADES_AUTORIZADAS_id=EAA.id AND EAA.ORDENES_id=?", 
-				new PrePedidoRM(), id);
+		String sql = "SELECT * FROM PREPEDIDOS P WHERE P.id IN "
+				+ "(SELECT PRE_PEDIDOS_id FROM ACTIVIDADES_AUTORIZADAS AA WHERE (AA.AUTORIZACIONES_id IN "
+				+ "(SELECT id FROM AUTORIZACIONES WHERE ORDENES_id=?)) AND (AA.PRE_PEDIDOS_id>0))";
+		List<PrePedido> p = jdbcTemplate.query(sql, new PrePedidoRM(), id);
 		return p;
 	}
 }
