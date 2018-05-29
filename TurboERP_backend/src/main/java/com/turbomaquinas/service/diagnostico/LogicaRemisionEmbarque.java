@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.turbomaquinas.DAO.diagnostico.RemisionEmbarqueDAO;
 import com.turbomaquinas.POJO.diagnostico.DocumentoRemisionEmbarque;
+import com.turbomaquinas.POJO.diagnostico.RemisionesEmbarqueVista;
 
 @Service
 public class LogicaRemisionEmbarque implements RemisionEmbarqueService{
@@ -18,6 +19,11 @@ public class LogicaRemisionEmbarque implements RemisionEmbarqueService{
 		
 		resRemision.RemisionEmbarque(doc.toString());
 		
+	}
+
+	@Override
+	public RemisionesEmbarqueVista buscar(int id) {
+		return resRemision.buscar(id);
 	}
 
 }
