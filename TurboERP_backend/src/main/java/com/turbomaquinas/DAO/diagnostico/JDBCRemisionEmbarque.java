@@ -11,6 +11,9 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 import org.springframework.stereotype.Repository;
 
+import com.turbomaquinas.POJO.diagnostico.RemisionesEmbarqueVista;
+import com.turbomaquinas.POJO.diagnostico.SubindiceDiagnosticoVista;
+
 @Repository
 public class JDBCRemisionEmbarque implements RemisionEmbarqueDAO{
 
@@ -30,6 +33,13 @@ public class JDBCRemisionEmbarque implements RemisionEmbarqueDAO{
 		SqlParameterSource in = new MapSqlParameterSource(inParamMap);
 		simpleJdbcCall.execute(in);
 		
+	}
+
+	@Override
+	public RemisionesEmbarqueVista buscar(int id) {
+		RemisionesEmbarqueVista rev = jdbcTemplate.queryForObject("SELECT * FROM turbomaquinas.REMISIONES_EMBARQUE_V WHERE id = ?", 
+				new RemisionesEmbarqueVistaRM(), id);
+		return rev;
 	}
 
 }
