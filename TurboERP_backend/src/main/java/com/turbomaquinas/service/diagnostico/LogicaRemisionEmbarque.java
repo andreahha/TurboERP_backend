@@ -1,5 +1,7 @@
 package com.turbomaquinas.service.diagnostico;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -24,6 +26,11 @@ public class LogicaRemisionEmbarque implements RemisionEmbarqueService{
 	@Override
 	public RemisionesEmbarqueVista buscar(int id) {
 		return resRemision.buscar(id);
+	}
+
+	@Override
+	public List<RemisionesEmbarqueVista> consultarREPorOrden(int idOrden) {
+		return resRemision.buscarRemisionOrden(idOrden);
 	}
 
 }

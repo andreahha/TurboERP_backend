@@ -31,6 +31,7 @@ public class RemisionesEmbarqueVistaRM implements RowMapper<RemisionesEmbarqueVi
 		rev.setDepartamentos_id(rs.getInt("DEPARTAMENTOS_id"));
 		rev.setClave_depto(rs.getString("clave_depto"));
 		rev.setDescripcion_depto(rs.getString("descripcion_depto"));
+		rev.setNumero_orden(rs.getString("numero_orden"));
 		
 		return rev;
 	}

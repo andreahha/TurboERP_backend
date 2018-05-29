@@ -1,5 +1,7 @@
 package com.turbomaquinas.REST.diagnostico;
 
+import java.util.List;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.turbomaquinas.POJO.diagnostico.DocumentoRemisionEmbarque;
-import com.turbomaquinas.POJO.diagnostico.InspeccionEquipoVista;
 import com.turbomaquinas.POJO.diagnostico.RemisionesEmbarqueVista;
 import com.turbomaquinas.REST.comercial.WSPagos;
 import com.turbomaquinas.service.diagnostico.RemisionEmbarqueService;
@@ -51,6 +52,18 @@ public class WSRemisionEmbarque {
 			return new ResponseEntity<RemisionesEmbarqueVista>(HttpStatus.NOT_FOUND);
 		}
 		return new ResponseEntity<RemisionesEmbarqueVista>(rev, HttpStatus.OK);
+	}
+	
+	@GetMapping("/orden/{id}")
+	public ResponseEntity<List<RemisionesEmbarqueVista>> consultarPorOrden(@PathVariable int id) {
+		List<RemisionesEmbarqueVista> rev = null;
+		try{
+			rev = re.consultarREPorOrden(id);
+		}catch(DataAccessException e){
+			bitacora.error(e.getMessage());
+			return new ResponseEntity<List<RemisionesEmbarqueVista>>(HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<List<RemisionesEmbarqueVista>>(rev, HttpStatus.OK);
 	}
 
 }
