@@ -1,6 +1,7 @@
 package com.turbomaquinas.DAO.diagnostico;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,6 @@ import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 import org.springframework.stereotype.Repository;
 
 import com.turbomaquinas.POJO.diagnostico.RemisionesEmbarqueVista;
-import com.turbomaquinas.POJO.diagnostico.SubindiceDiagnosticoVista;
 
 @Repository
 public class JDBCRemisionEmbarque implements RemisionEmbarqueDAO{
@@ -39,6 +39,13 @@ public class JDBCRemisionEmbarque implements RemisionEmbarqueDAO{
 	public RemisionesEmbarqueVista buscar(int id) {
 		RemisionesEmbarqueVista rev = jdbcTemplate.queryForObject("SELECT * FROM turbomaquinas.REMISIONES_EMBARQUE_V WHERE id = ?", 
 				new RemisionesEmbarqueVistaRM(), id);
+		return rev;
+	}
+
+	@Override
+	public List<RemisionesEmbarqueVista> buscarRemisionOrden(int idOrden) {
+		List<RemisionesEmbarqueVista> rev = jdbcTemplate.query("SELECT * FROM REMISIONES_EMBARQUE_V WHERE ORDENES_id=?", 
+				new RemisionesEmbarqueVistaRM(), idOrden);
 		return rev;
 	}
 
