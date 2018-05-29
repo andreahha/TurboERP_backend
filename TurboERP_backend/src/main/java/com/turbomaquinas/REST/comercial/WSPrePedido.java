@@ -97,7 +97,7 @@ public class WSPrePedido {
 			return new ResponseEntity<List<PrePedido>>(p, HttpStatus.OK);
 		}
 		
-		@GetMapping("/orden/{id}/")
+		@GetMapping("/orden/{id}")
 		public ResponseEntity<List<PrePedido>> prePedidosAAOrden(@PathVariable int id){
 			List<PrePedido> prePedido = s.prePedidosAAPorOrden(id);
 			if (prePedido.isEmpty())

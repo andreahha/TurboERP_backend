@@ -91,7 +91,7 @@ public class WSPedido {
 		return new ResponseEntity<List<Pedido>>(p, HttpStatus.OK);
 	}
 	
-	@GetMapping("/orden/{id}/")
+	@GetMapping("/orden/{id}")
 	public ResponseEntity<List<Pedido>> pedidosAAOrden(@PathVariable int id){
 		List<Pedido> pedido = s.pedidosAAPorOrden(id);
 		if (pedido.isEmpty())
