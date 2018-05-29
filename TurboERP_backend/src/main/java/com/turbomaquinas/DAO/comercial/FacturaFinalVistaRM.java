@@ -48,6 +48,7 @@ public class FacturaFinalVistaRM implements RowMapper<FacturaFinalVista>{
 		ffv.setActivo(rs.getInt("activo"));
 		ffv.setClientes_id(rs.getInt("CLIENTES_id"));
 		ffv.setEstado_factura(rs.getString("estado_factura"));
+		ffv.setDesc_estado_fact(rs.getString("desc_estado_fact"));
 		ObjectMapper mapper = new ObjectMapper();
 		try {
 			ffv.setComprobantes_relacionados(mapper.readValue(rs.getString("comprobantes_relacionados"), ComprobantesRelacionados.class));
