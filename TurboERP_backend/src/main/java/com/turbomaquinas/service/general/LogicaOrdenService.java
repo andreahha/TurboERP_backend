@@ -230,7 +230,13 @@ public class LogicaOrdenService implements OrdenService{
 
 	@Override
 	public List<FacturaFinalVista> consultarFacturas(int id) {
-		return repoFacturaFinal.consultarFacturasPorIds(repositorio.consultarIdsFacturas(id));
+		List<Integer> ids=repositorio.consultarIdsFacturas(id);
+		if(ids!=null){
+			return repoFacturaFinal.consultarFacturasPorIds(ids);
+		}else{
+			return null;
+		}
+		
 	}
 	
 }
