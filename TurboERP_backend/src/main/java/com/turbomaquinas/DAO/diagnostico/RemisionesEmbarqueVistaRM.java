@@ -20,8 +20,8 @@ public class RemisionesEmbarqueVistaRM implements RowMapper<RemisionesEmbarqueVi
 		rev.setMarca(rs.getString("marca"));
 		rev.setPlacas(rs.getString("placas"));
 		rev.setChofer(rs.getString("chofer"));
-		rev.setAtencion("atencion");
-		rev.setFlete("flete");
+		rev.setAtencion(rs.getString("atencion"));
+		rev.setFlete(rs.getString("flete"));
 		rev.setActivo(rs.getInt("activo"));
 		rev.setCreado_por(rs.getInt("creado_por"));
 		rev.setCreado(rs.getDate("creado"));
