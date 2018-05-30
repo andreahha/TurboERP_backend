@@ -33,4 +33,10 @@ public class LogicaRemisionEmbarque implements RemisionEmbarqueService{
 		return resRemision.buscarRemisionOrden(idOrden);
 	}
 
+	@Override
+	public List<RemisionesEmbarqueVista> remisionEmbarqueFecha(String fechainicio, String fechafin) {
+		
+		return resRemision.remisionEmbarqueRangoFecha(fechainicio, fechafin);
+	}
+
 }

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.turbomaquinas.POJO.diagnostico.DocumentoRemisionEmbarque;
@@ -64,6 +65,14 @@ public class WSRemisionEmbarque {
 			return new ResponseEntity<List<RemisionesEmbarqueVista>>(HttpStatus.NO_CONTENT);
 		}
 		return new ResponseEntity<List<RemisionesEmbarqueVista>>(rev, HttpStatus.OK);
+	}
+	
+	@GetMapping("/fechas")
+	public ResponseEntity<List<RemisionesEmbarqueVista>> consultarPorFechas(@RequestParam String fechainicio,@RequestParam String fechafin){
+		List<RemisionesEmbarqueVista> p = re.remisionEmbarqueFecha(fechainicio,fechafin);
+		if (p.isEmpty())
+			return new ResponseEntity<List<RemisionesEmbarqueVista>> (HttpStatus.NOT_FOUND);
+		return new ResponseEntity<List<RemisionesEmbarqueVista>>(p, HttpStatus.OK);
 	}
 
 }
