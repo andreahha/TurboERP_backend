@@ -338,8 +338,10 @@ public class WSOrden {
 			bitacora.error(e.getMessage());
 			return new ResponseEntity<List<FacturaFinalVista>>(HttpStatus.NO_CONTENT);
 		}
-		return new ResponseEntity<List<FacturaFinalVista>>(facturas, HttpStatus.OK);
-		
+		if(facturas!=null)
+			return new ResponseEntity<List<FacturaFinalVista>>(facturas, HttpStatus.OK);
+		else
+			return new ResponseEntity<List<FacturaFinalVista>>(HttpStatus.NO_CONTENT);
 	}
 	
 }
