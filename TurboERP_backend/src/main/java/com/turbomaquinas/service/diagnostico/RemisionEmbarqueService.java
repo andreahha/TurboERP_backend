@@ -10,5 +10,6 @@ public interface RemisionEmbarqueService {
 	public void aplicarRemisionEmbarque(DocumentoRemisionEmbarque doc);
 	public RemisionesEmbarqueVista buscar(int id);
 	public List<RemisionesEmbarqueVista> consultarREPorOrden(int idOrden);
+	public List<RemisionesEmbarqueVista> remisionEmbarqueFecha(String fechainicio, String fechafin);
 
 }

@@ -49,4 +49,16 @@ public class JDBCRemisionEmbarque implements RemisionEmbarqueDAO{
 		return rev;
 	}
 
+	@Override
+	public List<RemisionesEmbarqueVista> remisionEmbarqueRangoFecha(String fecha_remisionInicio,String fecha_remisionFin) {
+		
+		String sql = "select *"
+				+ " from REMISIONES_EMBARQUE_V r"
+				+ " where fecha between ? and ? and activo=1 ";
+		
+		List<RemisionesEmbarqueVista> dv = jdbcTemplate.query(sql, new RemisionesEmbarqueVistaRM(),fecha_remisionInicio,fecha_remisionFin);			
+		
+		return dv;
+	}
+
 }

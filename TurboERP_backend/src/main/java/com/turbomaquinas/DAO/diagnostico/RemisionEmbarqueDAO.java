@@ -9,5 +9,6 @@ public interface RemisionEmbarqueDAO {
 	public void RemisionEmbarque(String doc);
 	public RemisionesEmbarqueVista buscar(int id);
 	public List<RemisionesEmbarqueVista> buscarRemisionOrden(int idOrden);
+	public List<RemisionesEmbarqueVista> remisionEmbarqueRangoFecha(String fecha_remisionInicio,String fecha_remisionFin);
 
 }
