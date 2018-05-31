@@ -1,26 +1,30 @@
 package com.turbomaquinas.POJO.comercial;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
-public class FacturaFinalVista {
-	
+public class FacturaVariosVista {
+
 	private int id;
 	private String tipo;
 	private int numero;
 	private Date fecha_factura;
 	private Date fecha_vencimiento;
-	private float subtotal;
-	private float descuento;
-	private float iva;
-	private float iva_retenido;
-	private float total;
+	private BigDecimal subtotal;
+	private BigDecimal iva;
+	private BigDecimal total;
+	private BigDecimal importe_pagado;
+	private BigDecimal saldo;
 	private String moneda;
 	private float tipo_cambio;
 	private String condiciones_pago;
-	private float saldo;
-	private String folio_fiscal;
+	private String observaciones;
+	private String predial;
 	private String estado_factura;
 	private String desc_estado_fact;
+	private int factura_varios_id_sust;
+	private int clientes_id;
+	private String folio_fiscal;
 	private String cve_formap;
 	private String des_formap;
 	private String cve_metodop;
@@ -34,24 +38,25 @@ public class FacturaFinalVista {
 	private String colonia;
 	private String codigo_postal;
 	private String ciudad;
+	private int estado_id;
 	private String estado;
+	private int pais_id;
 	private String pais;
 	private int activo;
-	private int clientes_id;
-	private ComprobantesRelacionados comprobantes_relacionados;
-	private String comentario;
 	
-	public FacturaFinalVista() {
+	public FacturaVariosVista() {
 		super();
-	}	
+		// TODO Auto-generated constructor stub
+	}
 
-	public FacturaFinalVista(int id, String tipo, int numero, Date fecha_factura, Date fecha_vencimiento,
-			float subtotal, float descuento, float iva, float iva_retenido, float total, String moneda,
-			float tipo_cambio, String condiciones_pago, float saldo, String folio_fiscal, String estado_factura, String desc_estado_fact,
-			String cve_formap, String des_formap, String cve_metodop, String des_metodop, String cve_uso,
-			String des_uso, int numero_cliente, int numero_giro,String nombre, String direccion, String colonia, String codigo_postal,
-			String ciudad, String estado, String pais, int activo, int clientes_id,
-			ComprobantesRelacionados comprobantes_relacionados, String comentario) {
+	public FacturaVariosVista(int id, String tipo, int numero, Date fecha_factura, Date fecha_vencimiento,
+			BigDecimal subtotal, BigDecimal iva, BigDecimal total, BigDecimal importe_pagado, BigDecimal saldo,
+			String moneda, float tipo_cambio, String condiciones_pago, String observaciones, String predial,
+			String estado_factura, String desc_estado_fact, int factura_varios_id_sust, int clientes_id,
+			String folio_fiscal, String cve_formap, String des_formap, String cve_metodop, String des_metodop,
+			String cve_uso, String des_uso, int numero_cliente, int numero_giro, String nombre, String direccion,
+			String colonia, String codigo_postal, String ciudad, int estado_id, String estado, int pais_id, String pais,
+			int activo) {
 		super();
 		this.id = id;
 		this.tipo = tipo;
@@ -59,17 +64,20 @@ public class FacturaFinalVista {
 		this.fecha_factura = fecha_factura;
 		this.fecha_vencimiento = fecha_vencimiento;
 		this.subtotal = subtotal;
-		this.descuento = descuento;
 		this.iva = iva;
-		this.iva_retenido = iva_retenido;
 		this.total = total;
+		this.importe_pagado = importe_pagado;
+		this.saldo = saldo;
 		this.moneda = moneda;
 		this.tipo_cambio = tipo_cambio;
 		this.condiciones_pago = condiciones_pago;
-		this.saldo = saldo;
-		this.folio_fiscal = folio_fiscal;
+		this.observaciones = observaciones;
+		this.predial = predial;
 		this.estado_factura = estado_factura;
-		this.desc_estado_fact=desc_estado_fact;
+		this.desc_estado_fact = desc_estado_fact;
+		this.factura_varios_id_sust = factura_varios_id_sust;
+		this.clientes_id = clientes_id;
+		this.folio_fiscal = folio_fiscal;
 		this.cve_formap = cve_formap;
 		this.des_formap = des_formap;
 		this.cve_metodop = cve_metodop;
@@ -77,18 +85,17 @@ public class FacturaFinalVista {
 		this.cve_uso = cve_uso;
 		this.des_uso = des_uso;
 		this.numero_cliente = numero_cliente;
-		this.numero_giro=numero_giro;
+		this.numero_giro = numero_giro;
 		this.nombre = nombre;
 		this.direccion = direccion;
 		this.colonia = colonia;
 		this.codigo_postal = codigo_postal;
 		this.ciudad = ciudad;
+		this.estado_id = estado_id;
 		this.estado = estado;
+		this.pais_id = pais_id;
 		this.pais = pais;
 		this.activo = activo;
-		this.clientes_id = clientes_id;
-		this.comprobantes_relacionados = comprobantes_relacionados;
-		this.comentario = comentario;
 	}
 
 	public int getId() {
@@ -131,44 +138,44 @@ public class FacturaFinalVista {
 		this.fecha_vencimiento = fecha_vencimiento;
 	}
 
-	public float getSubtotal() {
+	public BigDecimal getSubtotal() {
 		return subtotal;
 	}
 
-	public void setSubtotal(float subtotal) {
+	public void setSubtotal(BigDecimal subtotal) {
 		this.subtotal = subtotal;
 	}
 
-	public float getDescuento() {
-		return descuento;
-	}
-
-	public void setDescuento(float descuento) {
-		this.descuento = descuento;
-	}
-
-	public float getIva() {
+	public BigDecimal getIva() {
 		return iva;
 	}
 
-	public void setIva(float iva) {
+	public void setIva(BigDecimal iva) {
 		this.iva = iva;
 	}
 
-	public float getIva_retenido() {
-		return iva_retenido;
-	}
-
-	public void setIva_retenido(float iva_retenido) {
-		this.iva_retenido = iva_retenido;
-	}
-
-	public float getTotal() {
+	public BigDecimal getTotal() {
 		return total;
 	}
 
-	public void setTotal(float total) {
+	public void setTotal(BigDecimal total) {
 		this.total = total;
+	}
+
+	public BigDecimal getImporte_pagado() {
+		return importe_pagado;
+	}
+
+	public void setImporte_pagado(BigDecimal importe_pagado) {
+		this.importe_pagado = importe_pagado;
+	}
+
+	public BigDecimal getSaldo() {
+		return saldo;
+	}
+
+	public void setSaldo(BigDecimal saldo) {
+		this.saldo = saldo;
 	}
 
 	public String getMoneda() {
@@ -195,12 +202,52 @@ public class FacturaFinalVista {
 		this.condiciones_pago = condiciones_pago;
 	}
 
-	public float getSaldo() {
-		return saldo;
+	public String getObservaciones() {
+		return observaciones;
 	}
 
-	public void setSaldo(float saldo) {
-		this.saldo = saldo;
+	public void setObservaciones(String observaciones) {
+		this.observaciones = observaciones;
+	}
+
+	public String getPredial() {
+		return predial;
+	}
+
+	public void setPredial(String predial) {
+		this.predial = predial;
+	}
+
+	public String getEstado_factura() {
+		return estado_factura;
+	}
+
+	public void setEstado_factura(String estado_factura) {
+		this.estado_factura = estado_factura;
+	}
+
+	public String getDesc_estado_fact() {
+		return desc_estado_fact;
+	}
+
+	public void setDesc_estado_fact(String desc_estado_fact) {
+		this.desc_estado_fact = desc_estado_fact;
+	}
+
+	public int getFactura_varios_id_sust() {
+		return factura_varios_id_sust;
+	}
+
+	public void setFactura_varios_id_sust(int factura_varios_id_sust) {
+		this.factura_varios_id_sust = factura_varios_id_sust;
+	}
+
+	public int getClientes_id() {
+		return clientes_id;
+	}
+
+	public void setClientes_id(int clientes_id) {
+		this.clientes_id = clientes_id;
 	}
 
 	public String getFolio_fiscal() {
@@ -266,7 +313,7 @@ public class FacturaFinalVista {
 	public void setNumero_cliente(int numero_cliente) {
 		this.numero_cliente = numero_cliente;
 	}
-	
+
 	public int getNumero_giro() {
 		return numero_giro;
 	}
@@ -315,12 +362,28 @@ public class FacturaFinalVista {
 		this.ciudad = ciudad;
 	}
 
+	public int getEstado_id() {
+		return estado_id;
+	}
+
+	public void setEstado_id(int estado_id) {
+		this.estado_id = estado_id;
+	}
+
 	public String getEstado() {
 		return estado;
 	}
 
 	public void setEstado(String estado) {
 		this.estado = estado;
+	}
+
+	public int getPais_id() {
+		return pais_id;
+	}
+
+	public void setPais_id(int pais_id) {
+		this.pais_id = pais_id;
 	}
 
 	public String getPais() {
@@ -339,80 +402,20 @@ public class FacturaFinalVista {
 		this.activo = activo;
 	}
 
-	
-	public String getEstado_factura() {
-		return estado_factura;
+	@Override
+	public String toString() {
+		return "FacturaVariosVista [id=" + id + ", tipo=" + tipo + ", numero=" + numero + ", fecha_factura="
+				+ fecha_factura + ", fecha_vencimiento=" + fecha_vencimiento + ", subtotal=" + subtotal + ", iva=" + iva
+				+ ", total=" + total + ", importe_pagado=" + importe_pagado + ", saldo=" + saldo + ", moneda=" + moneda
+				+ ", tipo_cambio=" + tipo_cambio + ", condiciones_pago=" + condiciones_pago + ", observaciones="
+				+ observaciones + ", predial=" + predial + ", estado_factura=" + estado_factura + ", desc_estado_fact="
+				+ desc_estado_fact + ", factura_varios_id_sust=" + factura_varios_id_sust + ", clientes_id="
+				+ clientes_id + ", folio_fiscal=" + folio_fiscal + ", cve_formap=" + cve_formap + ", des_formap="
+				+ des_formap + ", cve_metodop=" + cve_metodop + ", des_metodop=" + des_metodop + ", cve_uso=" + cve_uso
+				+ ", des_uso=" + des_uso + ", numero_cliente=" + numero_cliente + ", numero_giro=" + numero_giro
+				+ ", nombre=" + nombre + ", direccion=" + direccion + ", colonia=" + colonia + ", codigo_postal="
+				+ codigo_postal + ", ciudad=" + ciudad + ", estado_id=" + estado_id + ", estado=" + estado
+				+ ", pais_id=" + pais_id + ", pais=" + pais + ", activo=" + activo + "]";
 	}
-
-	public void setEstado_factura(String estado_factura) {
-		this.estado_factura = estado_factura;
-	}
-
-	public String getDesc_estado_fact() {
-		return desc_estado_fact;
-	}
-
-	public void setDesc_estado_fact(String desc_estado_fact) {
-		this.desc_estado_fact = desc_estado_fact;
-	}
-
-	public int getClientes_id() {
-		return clientes_id;
-	}
-
-	public void setClientes_id(int clientes_id) {
-		this.clientes_id = clientes_id;
-	}
-	
-	public ComprobantesRelacionados getComprobantes_relacionados() {
-		return comprobantes_relacionados;
-	}
-
-	public void setComprobantes_relacionados(ComprobantesRelacionados comprobantes_relacionados) {
-		this.comprobantes_relacionados = comprobantes_relacionados;
-	}
-	
-	public String getComentario() {
-		return comentario;
-	}
-
-	public void setComentario(String comentario) {
-		this.comentario = comentario;
-	}
-
-
-	public static class ComprobantesRelacionados{
-		private String tipo_relacion;
-		private int comprobantes [];
-		
-		public ComprobantesRelacionados() {
-			super();
-		}
-
-		public ComprobantesRelacionados(String tipo_relacion, int[] comprobantes) {
-			super();
-			this.tipo_relacion = tipo_relacion;
-			this.comprobantes = comprobantes;
-		}
-
-		public String getTipo_relacion() {
-			return tipo_relacion;
-		}
-
-		public void setTipo_relacion(String tipo_relacion) {
-			this.tipo_relacion = tipo_relacion;
-		}
-
-		public int[] getComprobantes() {
-			return comprobantes;
-		}
-
-		public void setComprobantes(int[] comprobantes) {
-			this.comprobantes = comprobantes;
-		}
-		
-			
-	}
-		
 	
 }

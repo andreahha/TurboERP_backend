@@ -1,21 +1,18 @@
 package com.turbomaquinas.POJO.comercial;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class FacturaVarios {
-	
+
 	private int id;
 	private String tipo;
 	private int numero;
 	private Date fecha_factura;
 	private Date fecha_vencimiento;
-	private float subtotal;
-	private float descuento;
-	private float iva;
-	private float iva_retenido;
-	private float total;
-	private float importe_pagado;
-	private float saldo;
+	private BigDecimal subtotal;
+	private BigDecimal iva;
+	private BigDecimal importe_pagado;
 	private String moneda;
 	private float tipo_cambio;
 	private String condiciones_pago;
@@ -35,17 +32,22 @@ public class FacturaVarios {
 	private int uso_cfdi_id;
 	private int clientes_id;
 	private String estado;
+	private BigDecimal total;
+	private BigDecimal saldo;
+	private String predial;
+	private int conceptos_facturacion_contable_id;
 	
 	public FacturaVarios() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
 
-	public FacturaVarios(int id, String tipo, int numero, Date fecha_factura, Date fecha_vencimiento, float subtotal,
-			float descuento, float iva, float iva_retenido, float total, float importe_pagado, float saldo,
-			String moneda, float tipo_cambio, String condiciones_pago, Date fecha_baja, int mes_baja, int anio_baja,
-			String observaciones, int activo, int creado_por, Date creado, int modificado_por, Date modificado,
-			int factura_varios_id_sust, int datos_timbrado_id, int formas_pago_id, int metodos_pago_id, int uso_cfdi_id,
-			int clientes_id, String estado) {
+	public FacturaVarios(int id, String tipo, int numero, Date fecha_factura, Date fecha_vencimiento,
+			BigDecimal subtotal, BigDecimal iva, BigDecimal importe_pagado, String moneda, float tipo_cambio,
+			String condiciones_pago, Date fecha_baja, int mes_baja, int anio_baja, String observaciones, int activo,
+			int creado_por, Date creado, int modificado_por, Date modificado, int factura_varios_id_sust,
+			int datos_timbrado_id, int formas_pago_id, int metodos_pago_id, int uso_cfdi_id, int clientes_id,
+			String estado, BigDecimal total, BigDecimal saldo, String predial, int conceptos_facturacion_contable_id) {
 		super();
 		this.id = id;
 		this.tipo = tipo;
@@ -53,12 +55,8 @@ public class FacturaVarios {
 		this.fecha_factura = fecha_factura;
 		this.fecha_vencimiento = fecha_vencimiento;
 		this.subtotal = subtotal;
-		this.descuento = descuento;
 		this.iva = iva;
-		this.iva_retenido = iva_retenido;
-		this.total = total;
 		this.importe_pagado = importe_pagado;
-		this.saldo = saldo;
 		this.moneda = moneda;
 		this.tipo_cambio = tipo_cambio;
 		this.condiciones_pago = condiciones_pago;
@@ -78,7 +76,12 @@ public class FacturaVarios {
 		this.uso_cfdi_id = uso_cfdi_id;
 		this.clientes_id = clientes_id;
 		this.estado = estado;
+		this.total = total;
+		this.saldo = saldo;
+		this.predial = predial;
+		this.conceptos_facturacion_contable_id = conceptos_facturacion_contable_id;
 	}
+
 
 	public int getId() {
 		return id;
@@ -120,60 +123,28 @@ public class FacturaVarios {
 		this.fecha_vencimiento = fecha_vencimiento;
 	}
 
-	public float getSubtotal() {
+	public BigDecimal getSubtotal() {
 		return subtotal;
 	}
 
-	public void setSubtotal(float subtotal) {
+	public void setSubtotal(BigDecimal subtotal) {
 		this.subtotal = subtotal;
 	}
 
-	public float getDescuento() {
-		return descuento;
-	}
-
-	public void setDescuento(float descuento) {
-		this.descuento = descuento;
-	}
-
-	public float getIva() {
+	public BigDecimal getIva() {
 		return iva;
 	}
 
-	public void setIva(float iva) {
+	public void setIva(BigDecimal iva) {
 		this.iva = iva;
 	}
 
-	public float getIva_retenido() {
-		return iva_retenido;
-	}
-
-	public void setIva_retenido(float iva_retenido) {
-		this.iva_retenido = iva_retenido;
-	}
-
-	public float getTotal() {
-		return total;
-	}
-
-	public void setTotal(float total) {
-		this.total = total;
-	}
-
-	public float getImporte_pagado() {
+	public BigDecimal getImporte_pagado() {
 		return importe_pagado;
 	}
 
-	public void setImporte_pagado(float importe_pagado) {
+	public void setImporte_pagado(BigDecimal importe_pagado) {
 		this.importe_pagado = importe_pagado;
-	}
-
-	public float getSaldo() {
-		return saldo;
-	}
-
-	public void setSaldo(float saldo) {
-		this.saldo = saldo;
 	}
 
 	public String getMoneda() {
@@ -328,4 +299,51 @@ public class FacturaVarios {
 		this.estado = estado;
 	}
 
+	public BigDecimal getTotal() {
+		return total;
+	}
+
+	public void setTotal(BigDecimal total) {
+		this.total = total;
+	}
+
+	public BigDecimal getSaldo() {
+		return saldo;
+	}
+
+	public void setSaldo(BigDecimal saldo) {
+		this.saldo = saldo;
+	}
+
+	public String getPredial() {
+		return predial;
+	}
+
+	public void setPredial(String predial) {
+		this.predial = predial;
+	}
+
+	public int getConceptos_facturacion_contable_id() {
+		return conceptos_facturacion_contable_id;
+	}
+
+	public void setConceptos_facturacion_contable_id(int conceptos_facturacion_contable_id) {
+		this.conceptos_facturacion_contable_id = conceptos_facturacion_contable_id;
+	}
+
+	@Override
+	public String toString() {
+		return "FacturaVarios [id=" + id + ", tipo=" + tipo + ", numero=" + numero + ", fecha_factura=" + fecha_factura
+				+ ", fecha_vencimiento=" + fecha_vencimiento + ", subtotal=" + subtotal + ", iva=" + iva
+				+ ", importe_pagado=" + importe_pagado + ", moneda=" + moneda + ", tipo_cambio=" + tipo_cambio
+				+ ", condiciones_pago=" + condiciones_pago + ", fecha_baja=" + fecha_baja + ", mes_baja=" + mes_baja
+				+ ", anio_baja=" + anio_baja + ", observaciones=" + observaciones + ", activo=" + activo
+				+ ", creado_por=" + creado_por + ", creado=" + creado + ", modificado_por=" + modificado_por
+				+ ", modificado=" + modificado + ", factura_varios_id_sust=" + factura_varios_id_sust
+				+ ", datos_timbrado_id=" + datos_timbrado_id + ", formas_pago_id=" + formas_pago_id
+				+ ", metodos_pago_id=" + metodos_pago_id + ", uso_cfdi_id=" + uso_cfdi_id + ", clientes_id="
+				+ clientes_id + ", estado=" + estado + ", total=" + total + ", saldo=" + saldo + ", predial=" + predial
+				+ ", conceptos_facturacion_contable_id=" + conceptos_facturacion_contable_id + "]";
+	}
+	
 }
