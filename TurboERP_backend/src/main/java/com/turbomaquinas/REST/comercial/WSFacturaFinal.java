@@ -32,8 +32,7 @@ public class WSFacturaFinal {
 	private static final Log bitacora = LogFactory.getLog(WSFacturaFinal.class);
 	
 	@Autowired
-	FacturaFinalService s;
-	
+	FacturaFinalService s;	
 	
 //	@PostMapping
 //	public ResponseEntity<FacturaFinalVista> crear(@RequestBody DocumentoFacturaFinal documento){
@@ -170,5 +169,30 @@ public class WSFacturaFinal {
 		return new ResponseEntity<List<ActividadesFFVista>>(actividades, HttpStatus.OK);
        	
    	}
+	
+	@GetMapping("/estado/{estado}")
+	public ResponseEntity<List<FacturaFinalVista>> consultarPorEstado(@PathVariable String estado){
+		List<FacturaFinalVista> ffv = null;
+		try{
+			ffv = s.consultarPorEstado(estado);
+		}catch(DataAccessException e){
+			bitacora.error(e.getMessage());
+			return new ResponseEntity<List<FacturaFinalVista>>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<List<FacturaFinalVista>>(ffv, HttpStatus.OK);		
+	}
+	
+	@GetMapping("/ids")
+	public ResponseEntity<List<FacturaFinalVista>> consultarPorIds(@RequestParam List<Integer> lista){
+		List<FacturaFinalVista> ffv = null;
+		try{
+			ffv = s.consultarPorIds(lista);
+			System.out.println("a");
+		}catch(DataAccessException e){
+			bitacora.error(e.getMessage());
+			return new ResponseEntity<List<FacturaFinalVista>>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<List<FacturaFinalVista>>(ffv, HttpStatus.OK);		
+	}
 	
 }
