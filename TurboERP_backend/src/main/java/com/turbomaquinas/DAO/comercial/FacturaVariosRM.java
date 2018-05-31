@@ -18,13 +18,11 @@ public class FacturaVariosRM implements RowMapper<FacturaVarios> {
 		fv.setNumero(rs.getInt("numero"));
 		fv.setFecha_factura(rs.getDate("fecha_factura"));
 		fv.setFecha_vencimiento(rs.getDate("fecha_vencimiento"));
-		fv.setSubtotal(rs.getFloat("subtotal"));
-		fv.setDescuento(rs.getFloat("descuento"));
-		fv.setIva(rs.getFloat("iva"));
-		fv.setIva_retenido(rs.getFloat("iva_retenido"));
-		fv.setTotal(rs.getFloat("total"));
-		fv.setImporte_pagado(rs.getFloat("importe_pagado"));
-		fv.setSaldo(rs.getFloat("saldo"));
+		fv.setSubtotal(rs.getBigDecimal("subtotal"));
+		fv.setIva(rs.getBigDecimal("iva"));
+		fv.setTotal(rs.getBigDecimal("total"));
+		fv.setImporte_pagado(rs.getBigDecimal("importe_pagado"));
+		fv.setSaldo(rs.getBigDecimal("saldo"));
 		fv.setMoneda(rs.getString("moneda"));
 		fv.setTipo_cambio(rs.getFloat("tipo_cambio"));
 		fv.setCondiciones_pago(rs.getString("condiciones_pago"));
@@ -32,6 +30,7 @@ public class FacturaVariosRM implements RowMapper<FacturaVarios> {
 		fv.setMes_baja(rs.getInt("mes_baja"));
 		fv.setAnio_baja(rs.getInt("anio_baja"));
 		fv.setObservaciones(rs.getString("observaciones"));
+		fv.setPredial(rs.getString("predial"));
 		fv.setActivo(rs.getInt("activo"));
 		fv.setCreado_por(rs.getInt("creado_por"));
 		fv.setCreado(rs.getDate("creado"));
