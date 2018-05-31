@@ -32,8 +32,7 @@ public class WSFacturaFinal {
 	private static final Log bitacora = LogFactory.getLog(WSFacturaFinal.class);
 	
 	@Autowired
-	FacturaFinalService s;
-	
+	FacturaFinalService s;	
 	
 //	@PostMapping
 //	public ResponseEntity<FacturaFinalVista> crear(@RequestBody DocumentoFacturaFinal documento){
