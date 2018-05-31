@@ -35,7 +35,7 @@ public class FacturaVarios {
 	private BigDecimal total;
 	private BigDecimal saldo;
 	private String predial;
-	private int conceptos_facturacion_contable;
+	private int conceptos_facturacion_contable_id;
 	
 	public FacturaVarios() {
 		super();
@@ -47,7 +47,7 @@ public class FacturaVarios {
 			String condiciones_pago, Date fecha_baja, int mes_baja, int anio_baja, String observaciones, int activo,
 			int creado_por, Date creado, int modificado_por, Date modificado, int factura_varios_id_sust,
 			int datos_timbrado_id, int formas_pago_id, int metodos_pago_id, int uso_cfdi_id, int clientes_id,
-			String estado, BigDecimal total, BigDecimal saldo, String predial, int conceptos_facturacion_contable) {
+			String estado, BigDecimal total, BigDecimal saldo, String predial, int conceptos_facturacion_contable_id) {
 		super();
 		this.id = id;
 		this.tipo = tipo;
@@ -79,8 +79,9 @@ public class FacturaVarios {
 		this.total = total;
 		this.saldo = saldo;
 		this.predial = predial;
-		this.conceptos_facturacion_contable = conceptos_facturacion_contable;
+		this.conceptos_facturacion_contable_id = conceptos_facturacion_contable_id;
 	}
+
 
 	public int getId() {
 		return id;
@@ -322,12 +323,12 @@ public class FacturaVarios {
 		this.predial = predial;
 	}
 
-	public int getConceptos_facturacion_contable() {
-		return conceptos_facturacion_contable;
+	public int getConceptos_facturacion_contable_id() {
+		return conceptos_facturacion_contable_id;
 	}
 
-	public void setConceptos_facturacion_contable(int conceptos_facturacion_contable) {
-		this.conceptos_facturacion_contable = conceptos_facturacion_contable;
+	public void setConceptos_facturacion_contable_id(int conceptos_facturacion_contable_id) {
+		this.conceptos_facturacion_contable_id = conceptos_facturacion_contable_id;
 	}
 
 	@Override
@@ -342,7 +343,7 @@ public class FacturaVarios {
 				+ ", datos_timbrado_id=" + datos_timbrado_id + ", formas_pago_id=" + formas_pago_id
 				+ ", metodos_pago_id=" + metodos_pago_id + ", uso_cfdi_id=" + uso_cfdi_id + ", clientes_id="
 				+ clientes_id + ", estado=" + estado + ", total=" + total + ", saldo=" + saldo + ", predial=" + predial
-				+ ", conceptos_facturacion_contable=" + conceptos_facturacion_contable + "]";
+				+ ", conceptos_facturacion_contable_id=" + conceptos_facturacion_contable_id + "]";
 	}
 	
 }

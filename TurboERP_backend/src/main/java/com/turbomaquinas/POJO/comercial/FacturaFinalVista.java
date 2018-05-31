@@ -4,45 +4,43 @@ import java.util.Date;
 
 public class FacturaFinalVista {
 	
-	public int id;
-	public String tipo;
-	public int numero;
-	public Date fecha_factura;
-	public Date fecha_vencimiento;
-	public float subtotal;
-	public float descuento;
-	public float iva;
-	public float iva_retenido;
-	public float total;
-	public String moneda;
-	public float tipo_cambio;
-	public String condiciones_pago;
-	public float saldo;
-	public String folio_fiscal;
-	public String estado_factura;
-	public String desc_estado_fact;
-	public String cve_formap;
-	public String des_formap;
-	public String cve_metodop;
-	public String des_metodop;
-	public String cve_uso;
-	public String des_uso;
-	public int numero_cliente;
-	public int numero_giro;
-	public String nombre;
-	public String direccion;
-	public String colonia;
-	public String codigo_postal;
-	public String ciudad;
-	public String estado;
-	public String pais;
-	public int activo;
+	private int id;
+	private String tipo;
+	private int numero;
+	private Date fecha_factura;
+	private Date fecha_vencimiento;
+	private float subtotal;
+	private float descuento;
+	private float iva;
+	private float iva_retenido;
+	private float total;
+	private String moneda;
+	private float tipo_cambio;
+	private String condiciones_pago;
+	private float saldo;
+	private String folio_fiscal;
+	private String estado_factura;
+	private String desc_estado_fact;
+	private String cve_formap;
+	private String des_formap;
+	private String cve_metodop;
+	private String des_metodop;
+	private String cve_uso;
+	private String des_uso;
+	private int numero_cliente;
+	private int numero_giro;
+	private String nombre;
+	private String direccion;
+	private String colonia;
+	private String codigo_postal;
+	private String ciudad;
+	private String estado;
+	private String pais;
+	private int activo;
 	private int clientes_id;
-	public ComprobantesRelacionados comprobantes_relacionados;
-	public String comentario;
+	private ComprobantesRelacionados comprobantes_relacionados;
+	private String comentario;
 	
-	
-
 	public FacturaFinalVista() {
 		super();
 	}	
@@ -381,11 +379,6 @@ public class FacturaFinalVista {
 	public void setComentario(String comentario) {
 		this.comentario = comentario;
 	}
-
-
-
-
-
 
 
 	public static class ComprobantesRelacionados{
