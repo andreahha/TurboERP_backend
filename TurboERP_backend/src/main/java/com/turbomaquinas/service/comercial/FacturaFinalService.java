@@ -21,5 +21,7 @@ public interface FacturaFinalService {
 	public FacturaFinalVista buscarFacturaFolio(String folio, String estado, String tipo);
 	public FacturaFinalVista creardoc(DocumentoFacturaFinal doc);
 	public List<ActividadesFFVista> consultarActividadesPorFactura(int id);
+	public List<FacturaFinalVista> consultarPorEstado(String estado);
+	public List<FacturaFinalVista> consultarPorIds(List<Integer> lista);
 
 }

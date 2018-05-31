@@ -229,4 +229,9 @@ public class JDBCFacturaFinal implements FacturaFinalDAO {
 		return facturas;
 	}
 
+	@Override
+	public List<FacturaFinalVista> consultarPorEstado(String estado) {
+		return jdbcTemplate.query("SELECT * FROM FACTURA_FINAL_V WHERE estado_factura = ?", new FacturaFinalVistaRM(), estado);
+	}
+
 }
