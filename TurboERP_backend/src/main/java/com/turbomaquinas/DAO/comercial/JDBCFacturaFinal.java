@@ -232,4 +232,10 @@ public class JDBCFacturaFinal implements FacturaFinalDAO {
 		return jdbcTemplate.query("SELECT * FROM FACTURA_FINAL_V WHERE estado_factura = ?", new FacturaFinalVistaRM(), estado);
 	}
 
+	@Override
+	public void actualizarEstado(int id, String estado) {
+		String sql="UPDATE FACTURA_FINAL SET estado = ? WHERE id = ?";
+		jdbcTemplate.update(sql,estado,id);
+	}
+
 }
