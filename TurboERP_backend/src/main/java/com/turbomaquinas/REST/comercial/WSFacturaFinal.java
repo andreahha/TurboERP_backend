@@ -196,7 +196,7 @@ public class WSFacturaFinal {
 	}
 	
 	@PutMapping("/{id}/estado")
-	public ResponseEntity<Void> actualizarEstado(@PathVariable int id,@RequestBody String estado){
+	public ResponseEntity<Void> actualizarEstado(@PathVariable int id,@RequestParam String estado){
 		try {
 			s.actualizarEstado(id,estado);
 		} catch (Exception e) {
