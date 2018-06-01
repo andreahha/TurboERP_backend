@@ -40,6 +40,7 @@ public class FacturaFinalVista {
 	private int clientes_id;
 	private ComprobantesRelacionados comprobantes_relacionados;
 	private String comentario;
+	private int creado_por;
 	
 	public FacturaFinalVista() {
 		super();
@@ -51,7 +52,7 @@ public class FacturaFinalVista {
 			String cve_formap, String des_formap, String cve_metodop, String des_metodop, String cve_uso,
 			String des_uso, int numero_cliente, int numero_giro,String nombre, String direccion, String colonia, String codigo_postal,
 			String ciudad, String estado, String pais, int activo, int clientes_id,
-			ComprobantesRelacionados comprobantes_relacionados, String comentario) {
+			ComprobantesRelacionados comprobantes_relacionados, String comentario, int creado_por) {
 		super();
 		this.id = id;
 		this.tipo = tipo;
@@ -89,6 +90,7 @@ public class FacturaFinalVista {
 		this.clientes_id = clientes_id;
 		this.comprobantes_relacionados = comprobantes_relacionados;
 		this.comentario = comentario;
+		this.creado_por = creado_por;
 	}
 
 	public int getId() {
@@ -378,6 +380,14 @@ public class FacturaFinalVista {
 
 	public void setComentario(String comentario) {
 		this.comentario = comentario;
+	}
+
+	public int getCreado_por() {
+		return creado_por;
+	}
+
+	public void setCreado_por(int creado_por) {
+		this.creado_por = creado_por;
 	}
 
 
