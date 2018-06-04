@@ -20,7 +20,7 @@ public class JDBCTimbrado implements TimbradoDAO{
 	
 	
 	@Override
-	public String timbrarFactura(int idFactura) throws DataAccessException {
+	public String obtenerJSONFacturaFinal(int idFactura) throws DataAccessException {
 		SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
 				.withProcedureName("TIMBRADO_FACTURA");
 

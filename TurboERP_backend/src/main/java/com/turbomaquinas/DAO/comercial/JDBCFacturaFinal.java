@@ -83,7 +83,6 @@ public class JDBCFacturaFinal implements FacturaFinalDAO {
 		columnas.add("tipo_cambio");
 		columnas.add("condiciones_pago");
 		columnas.add("creado_por");
-		columnas.add("factura_final_id_sust");
 		columnas.add("formas_pago_id");
 		columnas.add("metodos_pago_id");
 		columnas.add("uso_cfdi_id");
@@ -102,7 +101,6 @@ public class JDBCFacturaFinal implements FacturaFinalDAO {
 		datos.put("tipo_cambio", ff.getTipo_cambio());
 		datos.put("condiciones_pago", ff.getCondiciones_pago());
 		datos.put("creado_por", ff.getCreado_por());
-		datos.put("factura_final_id_sust", ff.getFactura_final_id_sust());
 		datos.put("formas_pago_id", ff.getFormas_pago_id());
 		datos.put("metodos_pago_id", ff.getMetodos_pago_id());
 		datos.put("uso_cfdi_id", ff.getUso_cfdi_id());
@@ -227,6 +225,17 @@ public class JDBCFacturaFinal implements FacturaFinalDAO {
 		}
 		List<FacturaFinalVista> facturas = jdbcTemplate.query("SELECT * FROM FACTURA_FINAL_V WHERE id IN("+lista+")", new FacturaFinalVistaRM());
 		return facturas;
+	}
+
+	@Override
+	public List<FacturaFinalVista> consultarPorEstado(String estado) {
+		return jdbcTemplate.query("SELECT * FROM FACTURA_FINAL_V WHERE estado_factura = ?", new FacturaFinalVistaRM(), estado);
+	}
+
+	@Override
+	public void actualizarEstado(int id, String estado) {
+		String sql="UPDATE FACTURA_FINAL SET estado = ? WHERE id = ?";
+		jdbcTemplate.update(sql,estado,id);
 	}
 
 }

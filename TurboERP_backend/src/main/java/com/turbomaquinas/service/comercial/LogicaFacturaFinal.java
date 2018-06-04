@@ -84,4 +84,19 @@ public class LogicaFacturaFinal implements FacturaFinalService {
 		return repActividadesFF.consultarPorFactura(id);
 	}
 
+	@Override
+	public List<FacturaFinalVista> consultarPorEstado(String estado) {
+		return repFF.consultarPorEstado(estado);
+	}
+
+	@Override
+	public List<FacturaFinalVista> consultarPorIds(List<Integer> lista) {
+		return repFF.consultarFacturasPorIds(lista);
+	}
+
+	@Override
+	public void actualizarEstado(int id, String estado) {
+		repFF.actualizarEstado(id,estado);
+	}
+
 }

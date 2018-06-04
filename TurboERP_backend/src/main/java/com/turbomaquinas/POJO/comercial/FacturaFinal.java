@@ -1,50 +1,57 @@
 package com.turbomaquinas.POJO.comercial;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class FacturaFinal {
 
-	public int id;
-	public String tipo;
-	public int numero;
-	public Date fecha_factura;
-	public Date fecha_vencimiento;
-	public float subtotal;
-	public float descuento;
-	public float iva;
-	public float importe_anticipo;
-	public float iva_retenido;
-	public float total;
-	public float importe_pagado;
-	public float saldo;
-	public String moneda;
-	public float tipo_cambio;
-	public String condiciones_pago;
-	public Date fecha_baja;
-	public int mes_baja;
-	public int anio_baja;
-	public int activo;
-	public int creado_por;
-	public Date creado;
-	public int modificado_por;
-	public Date modificado;
-	public int factura_final_id_sust;
-	public int datos_timbrado_id;
-	public int formas_pago_id;
-	public int metodos_pago_id;
-	public int uso_cfdi_id;
+	private int id;
+	private String tipo;
+	private int numero;
+	private Date fecha_factura;
+	private Date fecha_vencimiento;
+	private BigDecimal subtotal;
+	private BigDecimal descuento;
+	private BigDecimal iva;
+	private BigDecimal importe_anticipo;
+	private BigDecimal iva_retenido;
+	private BigDecimal total;
+	private BigDecimal importe_pagado;
+	private BigDecimal saldo;
+	private String comentario;
+	private String moneda;
+	private float tipo_cambio;
+	private String condiciones_pago;
+	private Date fecha_baja;
+	private int mes_baja;
+	private int anio_baja;
+	private int activo;
+	private int creado_por;
+	private Date creado;
+	private int modificado_por;
+	private Date modificado;
+	private ComprobanteRelacionado comprobantes_relacionados;
+	private int datos_timbrado_id;
+	private int formas_pago_id;
+	private int metodos_pago_id;
+	private int uso_cfdi_id;
 	private int clientes_id;
-	
+	private Orden ordenes;
+	private String estado;
+	private int descuento_neto;
+
 	public FacturaFinal() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
-
-	public FacturaFinal(int id, String tipo, int numero, Date fecha_factura, Date fecha_vencimiento, float subtotal,
-			float descuento, float iva, float importe_anticipo, float iva_retenido, float total, float importe_pagado,
-			float saldo, String moneda, float tipo_cambio, String condiciones_pago, Date fecha_baja, int mes_baja,
-			int anio_baja, int activo, int creado_por, Date creado, int modificado_por, Date modificado,
-			int factura_final_id_sust, int datos_timbrado_id, int formas_pago_id, int metodos_pago_id, int uso_cfdi_id,
-			int clientes_id) {
+	
+	public FacturaFinal(int id, String tipo, int numero, Date fecha_factura, Date fecha_vencimiento,
+			BigDecimal subtotal, BigDecimal descuento, BigDecimal iva, BigDecimal importe_anticipo,
+			BigDecimal iva_retenido, BigDecimal total, BigDecimal importe_pagado, BigDecimal saldo, String comentario,
+			String moneda, float tipo_cambio, String condiciones_pago, Date fecha_baja, int mes_baja, int anio_baja,
+			int activo, int creado_por, Date creado, int modificado_por, Date modificado,
+			ComprobanteRelacionado comprobantes_relacionados, int datos_timbrado_id, int formas_pago_id,
+			int metodos_pago_id, int uso_cfdi_id, int clientes_id, Orden ordenes, String estado, int descuento_neto) {
 		super();
 		this.id = id;
 		this.tipo = tipo;
@@ -59,6 +66,7 @@ public class FacturaFinal {
 		this.total = total;
 		this.importe_pagado = importe_pagado;
 		this.saldo = saldo;
+		this.comentario = comentario;
 		this.moneda = moneda;
 		this.tipo_cambio = tipo_cambio;
 		this.condiciones_pago = condiciones_pago;
@@ -70,13 +78,18 @@ public class FacturaFinal {
 		this.creado = creado;
 		this.modificado_por = modificado_por;
 		this.modificado = modificado;
-		this.factura_final_id_sust = factura_final_id_sust;
+		this.comprobantes_relacionados = comprobantes_relacionados;
 		this.datos_timbrado_id = datos_timbrado_id;
 		this.formas_pago_id = formas_pago_id;
 		this.metodos_pago_id = metodos_pago_id;
 		this.uso_cfdi_id = uso_cfdi_id;
 		this.clientes_id = clientes_id;
+		this.ordenes = ordenes;
+		this.estado = estado;
+		this.descuento_neto = descuento_neto;
 	}
+
+
 
 	public int getId() {
 		return id;
@@ -118,68 +131,76 @@ public class FacturaFinal {
 		this.fecha_vencimiento = fecha_vencimiento;
 	}
 
-	public float getSubtotal() {
+	public BigDecimal getSubtotal() {
 		return subtotal;
 	}
 
-	public void setSubtotal(float subtotal) {
+	public void setSubtotal(BigDecimal subtotal) {
 		this.subtotal = subtotal;
 	}
 
-	public float getDescuento() {
+	public BigDecimal getDescuento() {
 		return descuento;
 	}
 
-	public void setDescuento(float descuento) {
+	public void setDescuento(BigDecimal descuento) {
 		this.descuento = descuento;
 	}
 
-	public float getIva() {
+	public BigDecimal getIva() {
 		return iva;
 	}
 
-	public void setIva(float iva) {
+	public void setIva(BigDecimal iva) {
 		this.iva = iva;
 	}
 
-	public float getImporte_anticipo() {
+	public BigDecimal getImporte_anticipo() {
 		return importe_anticipo;
 	}
 
-	public void setImporte_anticipo(float importe_anticipo) {
+	public void setImporte_anticipo(BigDecimal importe_anticipo) {
 		this.importe_anticipo = importe_anticipo;
 	}
 
-	public float getIva_retenido() {
+	public BigDecimal getIva_retenido() {
 		return iva_retenido;
 	}
 
-	public void setIva_retenido(float iva_retenido) {
+	public void setIva_retenido(BigDecimal iva_retenido) {
 		this.iva_retenido = iva_retenido;
 	}
 
-	public float getTotal() {
+	public BigDecimal getTotal() {
 		return total;
 	}
 
-	public void setTotal(float total) {
+	public void setTotal(BigDecimal total) {
 		this.total = total;
 	}
 
-	public float getImporte_pagado() {
+	public BigDecimal getImporte_pagado() {
 		return importe_pagado;
 	}
 
-	public void setImporte_pagado(float importe_pagado) {
+	public void setImporte_pagado(BigDecimal importe_pagado) {
 		this.importe_pagado = importe_pagado;
 	}
 
-	public float getSaldo() {
+	public BigDecimal getSaldo() {
 		return saldo;
 	}
 
-	public void setSaldo(float saldo) {
+	public void setSaldo(BigDecimal saldo) {
 		this.saldo = saldo;
+	}
+
+	public String getComentario() {
+		return comentario;
+	}
+
+	public void setComentario(String comentario) {
+		this.comentario = comentario;
 	}
 
 	public String getMoneda() {
@@ -270,12 +291,12 @@ public class FacturaFinal {
 		this.modificado = modificado;
 	}
 
-	public int getFactura_final_id_sust() {
-		return factura_final_id_sust;
+	public ComprobanteRelacionado getComprobantes_relacionados() {
+		return comprobantes_relacionados;
 	}
 
-	public void setFactura_final_id_sust(int factura_final_id_sust) {
-		this.factura_final_id_sust = factura_final_id_sust;
+	public void setComprobantes_relacionados(ComprobanteRelacionado comprobantes_relacionados) {
+		this.comprobantes_relacionados = comprobantes_relacionados;
 	}
 
 	public int getDatos_timbrado_id() {
@@ -317,4 +338,105 @@ public class FacturaFinal {
 	public void setClientes_id(int clientes_id) {
 		this.clientes_id = clientes_id;
 	}
+
+	public Orden getOrdenes() {
+		return ordenes;
+	}
+
+	public void setOrdenes(Orden ordenes) {
+		this.ordenes = ordenes;
+	}
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+
+	public int getDescuento_neto() {
+		return descuento_neto;
+	}
+
+	public void setDescuento_neto(int descuento_neto) {
+		this.descuento_neto = descuento_neto;
+	}
+
+	public static class ComprobanteRelacionado {
+		private String tipo_relacion;
+		private int comprobantes [];
+		
+		public ComprobanteRelacionado() {
+			super();
+			// TODO Auto-generated constructor stub
+		}
+
+		public ComprobanteRelacionado(String tipo_relacion, int[] comprobantes) {
+			super();
+			this.tipo_relacion = tipo_relacion;
+			this.comprobantes = comprobantes;
+		}
+
+		public String getTipo_relacion() {
+			return tipo_relacion;
+		}
+
+		public void setTipo_relacion(String tipo_relacion) {
+			this.tipo_relacion = tipo_relacion;
+		}
+
+		public int[] getComprobantes() {
+			return comprobantes;
+		}
+
+		public void setComprobantes(int[] comprobantes) {
+			this.comprobantes = comprobantes;
+		}
+	
+	}
+	
+	public static class Orden {
+		private int id;
+		private float tipo_cambio;
+		private float tipo_cambio_calculado;
+	
+		public Orden() {
+			super();
+			// TODO Auto-generated constructor stub
+		}
+
+		public Orden(int id, float tipo_cambio, float tipo_cambio_calculado) {
+			super();
+			this.id = id;
+			this.tipo_cambio = tipo_cambio;
+			this.tipo_cambio_calculado = tipo_cambio_calculado;
+		}
+
+		public int getId() {
+			return id;
+		}
+
+		public void setId(int id) {
+			this.id = id;
+		}
+
+		public float getTipo_cambio() {
+			return tipo_cambio;
+		}
+
+		public void setTipo_cambio(float tipo_cambio) {
+			this.tipo_cambio = tipo_cambio;
+		}
+
+		public float getTipo_cambio_calculado() {
+			return tipo_cambio_calculado;
+		}
+
+		public void setTipo_cambio_calculado(float tipo_cambio_calculado) {
+			this.tipo_cambio_calculado = tipo_cambio_calculado;
+		}
+		
+	}
+		
 }

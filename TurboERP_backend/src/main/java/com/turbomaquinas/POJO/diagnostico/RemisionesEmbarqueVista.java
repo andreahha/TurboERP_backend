@@ -23,15 +23,16 @@ public class RemisionesEmbarqueVista {
 	private int departamentos_id;
 	private String clave_depto;
 	private String descripcion_depto;
+	private String numero_orden;
 	
 	public RemisionesEmbarqueVista() {
 		super();
 	}
-	
+
 	public RemisionesEmbarqueVista(int id, int numero, int anio, Date fecha, String vehiculo, String marca,
 			String placas, String chofer, String atencion, String flete, int activo, int creado_por, Date creado,
 			int modificado_por, Date modificado, int ordenes_id, int departamentos_id, String clave_depto,
-			String descripcion_depto) {
+			String descripcion_depto, String numero_orden) {
 		super();
 		this.id = id;
 		this.numero = numero;
@@ -52,6 +53,7 @@ public class RemisionesEmbarqueVista {
 		this.departamentos_id = departamentos_id;
 		this.clave_depto = clave_depto;
 		this.descripcion_depto = descripcion_depto;
+		this.numero_orden = numero_orden;
 	}
 
 	public int getId() {
@@ -204,6 +206,14 @@ public class RemisionesEmbarqueVista {
 
 	public void setDescripcion_depto(String descripcion_depto) {
 		this.descripcion_depto = descripcion_depto;
+	}
+
+	public String getNumero_orden() {
+		return numero_orden;
+	}
+
+	public void setNumero_orden(String numero_orden) {
+		this.numero_orden = numero_orden;
 	}
 	
 	
