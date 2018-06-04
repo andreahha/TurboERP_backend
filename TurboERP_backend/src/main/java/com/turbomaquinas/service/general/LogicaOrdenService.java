@@ -18,6 +18,7 @@ import com.turbomaquinas.DAO.general.OrdenDAO;
 import com.turbomaquinas.DAO.general.SolicitudDesautorizacionAADAO;
 import com.turbomaquinas.DAO.produccion.AreasVistaDAO;
 import com.turbomaquinas.POJO.comercial.ClienteVista;
+import com.turbomaquinas.POJO.comercial.CotizacionVista;
 import com.turbomaquinas.POJO.comercial.FacturaFinalVista;
 import com.turbomaquinas.POJO.general.AtributoEspecialConsulta;
 import com.turbomaquinas.POJO.general.Autorizacion;
@@ -237,6 +238,11 @@ public class LogicaOrdenService implements OrdenService{
 			return null;
 		}
 		
+	}
+
+	@Override
+	public List<CotizacionVista> consultarCotizacionesAutorizadas(int id) {
+		return repositorio.consultarCotizacionesAutorizadas(id);
 	}
 	
 }
