@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.turbomaquinas.POJO.comercial.DocumentoAplicarPago;
@@ -77,5 +78,13 @@ public class WSPagos {
 			bitacora.error(e.getMessage());
 			return new ResponseEntity<Void>(HttpStatus.CONFLICT);
 		}
+	}
+	
+	@GetMapping("/fechas")
+	public ResponseEntity<List<Pagos>> consultarPorFechas(@RequestParam String fechainicio,@RequestParam String fechafin){
+		List<Pagos> p = s.pagosFecha(fechainicio,fechafin);
+		if (p.isEmpty())
+			return new ResponseEntity<List<Pagos>> (HttpStatus.NOT_FOUND);
+		return new ResponseEntity<List<Pagos>>(p, HttpStatus.OK);
 	}
 }
