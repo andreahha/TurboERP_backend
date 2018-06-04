@@ -23,6 +23,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.turbomaquinas.JsonViewSerializeUtils;
 import com.turbomaquinas.DAO.general.JDBCOrden.FoliosOrdenes;
 import com.turbomaquinas.POJO.comercial.ClienteVista;
+import com.turbomaquinas.POJO.comercial.CotizacionVista;
 import com.turbomaquinas.POJO.comercial.FacturaFinalVista;
 import com.turbomaquinas.POJO.general.AtributoEspecialConsulta;
 import com.turbomaquinas.POJO.general.AtributoEspecialConsultaVistaJSON;
@@ -342,6 +343,21 @@ public class WSOrden {
 			return new ResponseEntity<List<FacturaFinalVista>>(facturas, HttpStatus.OK);
 		else
 			return new ResponseEntity<List<FacturaFinalVista>>(HttpStatus.NO_CONTENT);
+	}
+	
+	@GetMapping("/{id}/cotizacionesautorizadas")
+	public ResponseEntity<List<CotizacionVista>> consultarCotizacionesAutorizadas(@PathVariable int id){
+		List<CotizacionVista> cotizaciones = null;
+		try{
+			cotizaciones = os.consultarCotizacionesAutorizadas(id);
+		}catch(DataAccessException e){
+			bitacora.error(e.getMessage());
+			return new ResponseEntity<List<CotizacionVista>>(HttpStatus.NO_CONTENT);
+		}
+		if(cotizaciones.isEmpty()){
+			return new ResponseEntity<List<CotizacionVista>>(HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<List<CotizacionVista>>(cotizaciones, HttpStatus.OK);
 	}
 	
 }
