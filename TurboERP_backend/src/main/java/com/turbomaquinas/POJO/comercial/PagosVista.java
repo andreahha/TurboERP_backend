@@ -20,13 +20,7 @@ public class PagosVista {
 	public Date modificado;
 	public int depositos_recibidos_id;
 	public String comentarios;
-	public int metodos_pago_id;
-	public String mp_clave;
-	public String metodos_pago_descripcion;
-	public int bancos_id;
-	public String bancos_clave;
-	public String bancos_descripcion;
-
+	
 	public PagosVista() {
 		super();
 	}
@@ -52,12 +46,6 @@ public class PagosVista {
 		this.modificado = modificado;
 		this.depositos_recibidos_id = depositos_recibidos_id;
 		this.comentarios = comentarios;
-		this.metodos_pago_id = metodos_pago_id;
-		this.mp_clave = mp_clave;
-		this.metodos_pago_descripcion = metodos_pago_descripcion;
-		this.bancos_id = bancos_id;
-		this.bancos_clave = bancos_clave;
-		this.bancos_descripcion = bancos_descripcion;
 	}
 
 	public int getId() {
@@ -186,54 +174,6 @@ public class PagosVista {
 
 	public void setComentarios(String comentarios) {
 		this.comentarios = comentarios;
-	}
-
-	public int getMetodos_pago_id() {
-		return metodos_pago_id;
-	}
-
-	public void setMetodos_pago_id(int metodos_pago_id) {
-		this.metodos_pago_id = metodos_pago_id;
-	}
-
-	public String getMp_clave() {
-		return mp_clave;
-	}
-
-	public void setMp_clave(String mp_clave) {
-		this.mp_clave = mp_clave;
-	}
-
-	public String getMetodos_pago_descripcion() {
-		return metodos_pago_descripcion;
-	}
-
-	public void setMetodos_pago_descripcion(String metodos_pago_descripcion) {
-		this.metodos_pago_descripcion = metodos_pago_descripcion;
-	}
-
-	public int getBancos_id() {
-		return bancos_id;
-	}
-
-	public void setBancos_id(int bancos_id) {
-		this.bancos_id = bancos_id;
-	}
-
-	public String getBancos_clave() {
-		return bancos_clave;
-	}
-
-	public void setBancos_clave(String bancos_clave) {
-		this.bancos_clave = bancos_clave;
-	}
-
-	public String getBancos_descripcion() {
-		return bancos_descripcion;
-	}
-
-	public void setBancos_descripcion(String bancos_descripcion) {
-		this.bancos_descripcion = bancos_descripcion;
 	}
 
 }
