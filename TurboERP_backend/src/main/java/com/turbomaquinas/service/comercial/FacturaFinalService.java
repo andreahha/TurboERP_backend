@@ -23,5 +23,6 @@ public interface FacturaFinalService {
 	public List<ActividadesFFVista> consultarActividadesPorFactura(int id);
 	public List<FacturaFinalVista> consultarPorEstado(String estado);
 	public List<FacturaFinalVista> consultarPorIds(List<Integer> lista);
+	public void actualizarEstado(int id,String estado);
 
 }

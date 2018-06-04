@@ -195,4 +195,15 @@ public class WSFacturaFinal {
 		return new ResponseEntity<List<FacturaFinalVista>>(ffv, HttpStatus.OK);		
 	}
 	
+	@PutMapping("/{id}/estado")
+	public ResponseEntity<Void> actualizarEstado(@PathVariable int id,@RequestParam String estado){
+		try {
+			s.actualizarEstado(id,estado);
+		} catch (Exception e) {
+			bitacora.error(e.getMessage());
+			return new ResponseEntity<Void>(HttpStatus.CONFLICT);
+		}
+		return new ResponseEntity<Void>(HttpStatus.OK);
+	}
+	
 }
