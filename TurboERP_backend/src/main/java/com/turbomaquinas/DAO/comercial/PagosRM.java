@@ -28,6 +28,7 @@ public class PagosRM implements RowMapper<Pagos> {
 		p.setModificado(rs.getDate("modificado"));
 		p.setDepositos_recibidos_id(rs.getInt("depositos_recibidos_id"));
 		return p;
+		
 	}
 	
 
