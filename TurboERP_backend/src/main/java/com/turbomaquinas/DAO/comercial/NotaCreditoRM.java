@@ -32,6 +32,7 @@ public class NotaCreditoRM implements RowMapper<NotaCredito> {
 		nc.setDatos_timbrado_id(rs.getInt("DATOS_TIMBRADO_id"));
 		nc.setConceptos_facturacion_contable_id(rs.getInt("CONCEPTOS_FACTURACION_CONTABLE_id"));
 		nc.setNotas_credito_id_sust(rs.getInt("NOTAS_CREDITO_id_sust"));
+		nc.setImporte_total(rs.getFloat("importe_total"));
 		
 		String json=rs.getString("facturas");
 		

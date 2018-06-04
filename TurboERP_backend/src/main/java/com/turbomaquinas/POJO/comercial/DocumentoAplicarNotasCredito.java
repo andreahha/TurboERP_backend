@@ -5,6 +5,7 @@ import java.util.List;
 public class DocumentoAplicarNotasCredito {
 	
 	private Float subtotal;
+	private String fecha;
 	private Float iva;
 	private Float tipo_cambio;
 	private String descripcion;
@@ -74,6 +75,12 @@ public class DocumentoAplicarNotasCredito {
 	}
 	public void setFacturas(List<DocumentoAplicarNotasCredito.Facturas> facturas) {
 		this.facturas = facturas;
+	}
+	public String getFecha() {
+		return fecha;
+	}
+	public void setFecha(String fecha) {
+		this.fecha = fecha;
 	}
 	@Override
 	public String toString() {
