@@ -345,7 +345,7 @@ public class WSOrden {
 			return new ResponseEntity<List<FacturaFinalVista>>(HttpStatus.NO_CONTENT);
 	}
 	
-	@GetMapping("/{id}/cotizacionesautorizadas")
+	@GetMapping("/{id}/cotizaciones/autorizadas")
 	public ResponseEntity<List<CotizacionVista>> consultarCotizacionesAutorizadas(@PathVariable int id){
 		List<CotizacionVista> cotizaciones = null;
 		try{
