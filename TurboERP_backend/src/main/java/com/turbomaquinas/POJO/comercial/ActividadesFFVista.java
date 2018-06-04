@@ -21,7 +21,9 @@ public class ActividadesFFVista {
 	private int factura_final_id;
 	private int conceptos_facturacion_id;
 	private String um_sat;
+	private String desc_um_sat;
 	private String codigo_sat;
+	private String desc_codigo_sat;
 	private BigDecimal iva;
 	private BigDecimal iva_retenido;
 	
@@ -32,7 +34,8 @@ public class ActividadesFFVista {
 	public ActividadesFFVista(int id, String descripcion, int cantidad, BigDecimal precio_unitario, BigDecimal importe,
 			BigDecimal descuento, float cuota_iva, float cuota_iva_retenido, String tipo_actividad, int activo,
 			int creado_por, Date creado, int modificado_por, Date modificado, int factura_final_id,
-			int conceptos_facturacion_id, String um_sat, String codigo_sat, BigDecimal iva, BigDecimal iva_retenido) {
+			int conceptos_facturacion_id, String um_sat, String desc_um_sat, String codigo_sat, String desc_codigo_sat,
+			BigDecimal iva, BigDecimal iva_retenido) {
 		super();
 		this.id = id;
 		this.descripcion = descripcion;
@@ -51,7 +54,9 @@ public class ActividadesFFVista {
 		this.factura_final_id = factura_final_id;
 		this.conceptos_facturacion_id = conceptos_facturacion_id;
 		this.um_sat = um_sat;
+		this.desc_um_sat = desc_um_sat;
 		this.codigo_sat = codigo_sat;
+		this.desc_codigo_sat = desc_codigo_sat;
 		this.iva = iva;
 		this.iva_retenido = iva_retenido;
 	}
@@ -214,6 +219,22 @@ public class ActividadesFFVista {
 
 	public void setIva_retenido(BigDecimal iva_retenido) {
 		this.iva_retenido = iva_retenido;
+	}
+
+	public String getDesc_um_sat() {
+		return desc_um_sat;
+	}
+
+	public void setDesc_um_sat(String desc_um_sat) {
+		this.desc_um_sat = desc_um_sat;
+	}
+
+	public String getDesc_codigo_sat() {
+		return desc_codigo_sat;
+	}
+
+	public void setDesc_codigo_sat(String desc_codigo_sat) {
+		this.desc_codigo_sat = desc_codigo_sat;
 	}
 	
 	
