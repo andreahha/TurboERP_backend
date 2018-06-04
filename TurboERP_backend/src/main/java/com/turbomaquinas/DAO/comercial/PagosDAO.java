@@ -12,5 +12,6 @@ public interface PagosDAO {
 	public List<PagosVista> consultar();
 	
 	public void AplicarPagos(String doc);
+	public List<Pagos> pagoRangoFecha(String fecha_pagoInicio,String fecha_pagoFin);
 
 }

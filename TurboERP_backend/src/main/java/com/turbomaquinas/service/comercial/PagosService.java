@@ -12,5 +12,6 @@ public interface PagosService {
 	public PagosVista buscar(int id);
 	public List<PagosVista> consultar();
 	public void aplicarPagos(DocumentoAplicarPago doc);
+	public List<Pagos> pagosFecha(String fechainicio, String fechafin);
 
 }
