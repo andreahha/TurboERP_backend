@@ -14,6 +14,7 @@ public class PagosRM implements RowMapper<Pagos> {
 
 		Pagos p = new Pagos();
 		p.setId(rs.getInt("id"));
+		p.setFolio(rs.getInt("folio"));
 		p.setFecha_pago(rs.getDate("fecha_pago"));
 		p.setImporte(rs.getFloat("importe"));
 		p.setTipo_cambio_cliente(rs.getFloat("tipo_cambio_cliente"));
@@ -27,6 +28,7 @@ public class PagosRM implements RowMapper<Pagos> {
 		p.setModificado(rs.getDate("modificado"));
 		p.setDepositos_recibidos_id(rs.getInt("depositos_recibidos_id"));
 		return p;
+		
 	}
 	
 
