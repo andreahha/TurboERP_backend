@@ -30,7 +30,9 @@ public class ActividadesFFVistaRM implements RowMapper<ActividadesFFVista>{
 		aff.setFactura_final_id(rs.getInt("FACTURA_FINAL_id"));
 		aff.setConceptos_facturacion_id(rs.getInt("CONCEPTOS_FACTURACION_id"));
 		aff.setUm_sat(rs.getString("um_sat"));
+		aff.setDesc_um_sat(rs.getString("desc_um_sat"));
 		aff.setCodigo_sat(rs.getString("codigo_sat"));
+		aff.setDesc_codigo_sat(rs.getString("desc_codigo_sat"));
 		aff.setIva(rs.getBigDecimal("iva"));
 		aff.setIva_retenido(rs.getBigDecimal("iva_retenido"));
 		return aff;
