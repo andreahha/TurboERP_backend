@@ -3,6 +3,7 @@ package com.turbomaquinas.DAO.comercial;
 import java.util.List;
 
 import com.turbomaquinas.POJO.comercial.Pagos;
+import com.turbomaquinas.POJO.comercial.PagosFacturas;
 import com.turbomaquinas.POJO.comercial.PagosVista;
 
 public interface PagosDAO {
@@ -13,5 +14,6 @@ public interface PagosDAO {
 	
 	public void AplicarPagos(String doc);
 	public List<Pagos> pagoRangoFecha(String fecha_pagoInicio,String fecha_pagoFin);
+	public List<PagosFacturas> facturasPagadas(int idPago);
 
 }

@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.turbomaquinas.POJO.comercial.DocumentoAplicarPago;
 import com.turbomaquinas.POJO.comercial.Pagos;
+import com.turbomaquinas.POJO.comercial.PagosFacturas;
 import com.turbomaquinas.POJO.comercial.PagosVista;
 import com.turbomaquinas.service.comercial.PagosService;
 
@@ -86,5 +87,13 @@ public class WSPagos {
 		if (p.isEmpty())
 			return new ResponseEntity<List<Pagos>> (HttpStatus.NOT_FOUND);
 		return new ResponseEntity<List<Pagos>>(p, HttpStatus.OK);
+	}
+	
+	@GetMapping("/{id}/facturas")
+	public ResponseEntity<List<PagosFacturas>> facturasPagadas(@PathVariable int id){
+		List<PagosFacturas> pf = s.facturasPorPago(id);
+		if ( pf == null)
+			return new ResponseEntity<List<PagosFacturas>>(HttpStatus.NO_CONTENT);
+		return new ResponseEntity<List<PagosFacturas>>(pf, HttpStatus.OK);
 	}
 }

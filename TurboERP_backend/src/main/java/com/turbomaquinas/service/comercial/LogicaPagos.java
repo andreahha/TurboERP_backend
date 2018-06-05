@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.turbomaquinas.DAO.comercial.PagosDAO;
 import com.turbomaquinas.POJO.comercial.DocumentoAplicarPago;
 import com.turbomaquinas.POJO.comercial.Pagos;
+import com.turbomaquinas.POJO.comercial.PagosFacturas;
 import com.turbomaquinas.POJO.comercial.PagosVista;
 
 @Service
@@ -45,6 +46,12 @@ public class LogicaPagos implements PagosService {
 	public List<Pagos> pagosFecha(String fechainicio, String fechafin) throws DataAccessException {
 		
 		return resPago.pagoRangoFecha(fechainicio, fechafin);
+	}
+
+	@Override
+	public List<PagosFacturas> facturasPorPago(int id) throws DataAccessException{
+		
+		return resPago.facturasPagadas(id);
 	}
 	
 	
