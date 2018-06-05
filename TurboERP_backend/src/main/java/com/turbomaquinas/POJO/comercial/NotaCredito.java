@@ -1,5 +1,6 @@
 package com.turbomaquinas.POJO.comercial;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -9,9 +10,9 @@ public class NotaCredito {
 	private String tipo;
 	private int numero;
 	private Date fecha;
-	private Float subtotal;
-	private Float iva;
-	private Float tipo_cambio;
+	private BigDecimal subtotal;
+	private BigDecimal iva;
+	private BigDecimal tipo_cambio;
 	private Date fecha_baja;
 	private int mes_baja;
 	private int anio_baja;
@@ -25,15 +26,16 @@ public class NotaCredito {
 	private int conceptos_facturacion_contable_id;
 	private int notas_credito_id_sust;
 	private List<DocumentoAplicarNotasCredito.Facturas> facturas;
+	private BigDecimal importe_total;
 	
 	public NotaCredito() {
 		super();
 	}
 
-	public NotaCredito(int id, String tipo, int numero, Date fecha, Float subtotal, Float iva, Float tipo_cambio,
+	public NotaCredito(int id, String tipo, int numero, Date fecha, BigDecimal subtotal, BigDecimal iva, BigDecimal tipo_cambio,
 			Date fecha_baja, int mes_baja, int anio_baja, String descripcion, int activo, int creado_por, Date creado,
 			int modificado_por, Date modificado, int datos_timbrado_id, int conceptos_facturacion_contable_id,
-			int notas_credito_id_sust, List<DocumentoAplicarNotasCredito.Facturas> facturas) {
+			int notas_credito_id_sust, List<DocumentoAplicarNotasCredito.Facturas> facturas, BigDecimal importe_total) {
 		super();
 		this.id = id;
 		this.tipo = tipo;
@@ -55,6 +57,7 @@ public class NotaCredito {
 		this.conceptos_facturacion_contable_id = conceptos_facturacion_contable_id;
 		this.notas_credito_id_sust = notas_credito_id_sust;
 		this.facturas = facturas;
+		this.importe_total = importe_total;
 	}
 
 	public int getId() {
@@ -89,27 +92,27 @@ public class NotaCredito {
 		this.fecha = fecha;
 	}
 
-	public Float getSubtotal() {
+	public BigDecimal getSubtotal() {
 		return subtotal;
 	}
 
-	public void setSubtotal(Float subtotal) {
+	public void setSubtotal(BigDecimal subtotal) {
 		this.subtotal = subtotal;
 	}
 
-	public Float getIva() {
+	public BigDecimal getIva() {
 		return iva;
 	}
 
-	public void setIva(Float iva) {
+	public void setIva(BigDecimal iva) {
 		this.iva = iva;
 	}
 
-	public Float getTipo_cambio() {
+	public BigDecimal getTipo_cambio() {
 		return tipo_cambio;
 	}
 
-	public void setTipo_cambio(Float tipo_cambio) {
+	public void setTipo_cambio(BigDecimal tipo_cambio) {
 		this.tipo_cambio = tipo_cambio;
 	}
 
@@ -215,6 +218,14 @@ public class NotaCredito {
 
 	public void setFacturas(List<DocumentoAplicarNotasCredito.Facturas> facturas) {
 		this.facturas = facturas;
+	}
+
+	public BigDecimal getImporte_total() {
+		return importe_total;
+	}
+
+	public void setImporte_total(BigDecimal importe_total) {
+		this.importe_total = importe_total;
 	}
 
 	@Override

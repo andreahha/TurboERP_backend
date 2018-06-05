@@ -17,9 +17,9 @@ public class NotaCreditoVistaRM implements RowMapper<NotaCreditoVista> {
 		nc.setTipo(rs.getString("tipo"));
 		nc.setNumero(rs.getInt("numero"));
 		nc.setFecha(rs.getDate("fecha"));
-		nc.setSubtotal(rs.getFloat("subtotal"));
-		nc.setIva(rs.getFloat("iva"));
-		nc.setTipo_cambio(rs.getFloat("tipo_cambio"));
+		nc.setSubtotal(rs.getBigDecimal("subtotal"));
+		nc.setIva(rs.getBigDecimal("iva"));
+		nc.setTipo_cambio(rs.getBigDecimal("tipo_cambio"));
 		nc.setFecha_baja(rs.getDate("fecha_baja"));
 		nc.setMes_baja(rs.getInt("mes_baja"));
 		nc.setAnio_baja(rs.getInt("anio_baja"));

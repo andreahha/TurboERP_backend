@@ -21,9 +21,9 @@ public class NotaCreditoRM implements RowMapper<NotaCredito> {
 		nc.setTipo(rs.getString("tipo"));
 		nc.setNumero(rs.getInt("numero"));
 		nc.setFecha(rs.getDate("fecha"));
-		nc.setSubtotal(rs.getFloat("subtotal"));
-		nc.setIva(rs.getFloat("iva"));
-		nc.setTipo_cambio(rs.getFloat("tipo_cambio"));
+		nc.setSubtotal(rs.getBigDecimal("subtotal"));
+		nc.setIva(rs.getBigDecimal("iva"));
+		nc.setTipo_cambio(rs.getBigDecimal("tipo_cambio"));
 		nc.setFecha_baja(rs.getDate("fecha_baja"));
 		nc.setMes_baja(rs.getInt("mes_baja"));
 		nc.setAnio_baja(rs.getInt("anio_baja"));
@@ -32,6 +32,7 @@ public class NotaCreditoRM implements RowMapper<NotaCredito> {
 		nc.setDatos_timbrado_id(rs.getInt("DATOS_TIMBRADO_id"));
 		nc.setConceptos_facturacion_contable_id(rs.getInt("CONCEPTOS_FACTURACION_CONTABLE_id"));
 		nc.setNotas_credito_id_sust(rs.getInt("NOTAS_CREDITO_id_sust"));
+		nc.setImporte_total(rs.getBigDecimal("importe_total"));
 		
 		String json=rs.getString("facturas");
 		
