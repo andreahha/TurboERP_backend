@@ -60,7 +60,7 @@ public class DocumentoFacturaVarios {
 		private int formas_pago_id;
 		private int metodos_pago_id;
 		private int uso_cfdi_id;
-		private int conceptos_facturacion_contable_id;
+		private int concepto_facturacion_contable_id;
 		private String condiciones_pago;
 		private String observaciones;
 		private String moneda;
@@ -73,14 +73,14 @@ public class DocumentoFacturaVarios {
 		}
 
 		public Factura(int clientes_id, int formas_pago_id, int metodos_pago_id, int uso_cfdi_id,
-				int conceptos_facturacion_contable_id, String condiciones_pago, String observaciones, String moneda,
+				int concepto_facturacion_contable_id, String condiciones_pago, String observaciones, String moneda,
 				String predial, int factura_varios_id_sust) {
 			super();
 			this.clientes_id = clientes_id;
 			this.formas_pago_id = formas_pago_id;
 			this.metodos_pago_id = metodos_pago_id;
 			this.uso_cfdi_id = uso_cfdi_id;
-			this.conceptos_facturacion_contable_id = conceptos_facturacion_contable_id;
+			this.concepto_facturacion_contable_id = concepto_facturacion_contable_id;
 			this.condiciones_pago = condiciones_pago;
 			this.observaciones = observaciones;
 			this.moneda = moneda;
@@ -120,12 +120,12 @@ public class DocumentoFacturaVarios {
 			this.uso_cfdi_id = uso_cfdi_id;
 		}
 
-		public int getConceptos_facturacion_contable_id() {
-			return conceptos_facturacion_contable_id;
+		public int getConcepto_facturacion_contable_id() {
+			return concepto_facturacion_contable_id;
 		}
 
-		public void setConceptos_facturacion_contable_id(int conceptos_facturacion_contable_id) {
-			this.conceptos_facturacion_contable_id = conceptos_facturacion_contable_id;
+		public void setConcepto_facturacion_contable_id(int concepto_facturacion_contable_id) {
+			this.concepto_facturacion_contable_id = concepto_facturacion_contable_id;
 		}
 
 		public String getCondiciones_pago() {
@@ -175,7 +175,6 @@ public class DocumentoFacturaVarios {
 		private String descripcion;
 		private int cantidad;
 		private BigDecimal precio_unitario;
-		private BigDecimal importe;
 		private int concepto_facturacion_id;
 		
 		public Partida() {
@@ -183,13 +182,11 @@ public class DocumentoFacturaVarios {
 			// TODO Auto-generated constructor stub
 		}
 
-		public Partida(String descripcion, int cantidad, BigDecimal precio_unitario, BigDecimal importe,
-				int concepto_facturacion_id) {
+		public Partida(String descripcion, int cantidad, BigDecimal precio_unitario, int concepto_facturacion_id) {
 			super();
 			this.descripcion = descripcion;
 			this.cantidad = cantidad;
 			this.precio_unitario = precio_unitario;
-			this.importe = importe;
 			this.concepto_facturacion_id = concepto_facturacion_id;
 		}
 
@@ -217,14 +214,6 @@ public class DocumentoFacturaVarios {
 			this.precio_unitario = precio_unitario;
 		}
 
-		public BigDecimal getImporte() {
-			return importe;
-		}
-
-		public void setImporte(BigDecimal importe) {
-			this.importe = importe;
-		}
-
 		public int getConcepto_facturacion_id() {
 			return concepto_facturacion_id;
 		}
@@ -234,6 +223,5 @@ public class DocumentoFacturaVarios {
 		}
 		
 	}
-
 	
 }
