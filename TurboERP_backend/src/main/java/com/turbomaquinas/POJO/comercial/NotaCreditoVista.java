@@ -1,5 +1,6 @@
 package com.turbomaquinas.POJO.comercial;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class NotaCreditoVista {
@@ -8,9 +9,9 @@ public class NotaCreditoVista {
 	private String tipo;
 	private int numero;
 	private Date fecha;
-	private Float subtotal;
-	private Float iva;
-	private Float tipo_cambio;
+	private BigDecimal subtotal;
+	private BigDecimal iva;
+	private BigDecimal tipo_cambio;
 	private Date fecha_baja;
 	private int mes_baja;
 	private int anio_baja;
@@ -32,7 +33,7 @@ public class NotaCreditoVista {
 		super();
 	}
 
-	public NotaCreditoVista(int id, String tipo, int numero, Date fecha, Float subtotal, Float iva, Float tipo_cambio,
+	public NotaCreditoVista(int id, String tipo, int numero, Date fecha, BigDecimal subtotal, BigDecimal iva, BigDecimal tipo_cambio,
 			Date fecha_baja, int mes_baja, int anio_baja, String descripcion, int activo, int factura_varios_id,
 			String num_factura_varios, int datos_timbrado_id, String uuid, int factura_final_id,
 			String num_factura_final, int facturas_anticipo_id, String num_factura_anticipo,
@@ -94,27 +95,27 @@ public class NotaCreditoVista {
 		this.fecha = fecha;
 	}
 
-	public Float getSubtotal() {
+	public BigDecimal getSubtotal() {
 		return subtotal;
 	}
 
-	public void setSubtotal(Float subtotal) {
+	public void setSubtotal(BigDecimal subtotal) {
 		this.subtotal = subtotal;
 	}
 
-	public Float getIva() {
+	public BigDecimal getIva() {
 		return iva;
 	}
 
-	public void setIva(Float iva) {
+	public void setIva(BigDecimal iva) {
 		this.iva = iva;
 	}
 
-	public Float getTipo_cambio() {
+	public BigDecimal getTipo_cambio() {
 		return tipo_cambio;
 	}
 
-	public void setTipo_cambio(Float tipo_cambio) {
+	public void setTipo_cambio(BigDecimal tipo_cambio) {
 		this.tipo_cambio = tipo_cambio;
 	}
 

@@ -1,13 +1,14 @@
 package com.turbomaquinas.POJO.comercial;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public class DocumentoAplicarNotasCredito {
 	
-	private Float subtotal;
+	private BigDecimal subtotal;
 	private String fecha;
-	private Float iva;
-	private Float tipo_cambio;
+	private BigDecimal iva;
+	private BigDecimal tipo_cambio;
 	private String descripcion;
 	private int activo;
 	private int creado_por;
@@ -16,22 +17,22 @@ public class DocumentoAplicarNotasCredito {
 	private int notas_credito_id_sust;
 	private List<DocumentoAplicarNotasCredito.Facturas> facturas;
 	
-	public Float getSubtotal() {
+	public BigDecimal getSubtotal() {
 		return subtotal;
 	}
-	public void setSubtotal(Float subtotal) {
+	public void setSubtotal(BigDecimal subtotal) {
 		this.subtotal = subtotal;
 	}
-	public Float getIva() {
+	public BigDecimal getIva() {
 		return iva;
 	}
-	public void setIva(Float iva) {
+	public void setIva(BigDecimal iva) {
 		this.iva = iva;
 	}
-	public Float getTipo_cambio() {
+	public BigDecimal getTipo_cambio() {
 		return tipo_cambio;
 	}
-	public void setTipo_cambio(Float tipo_cambio) {
+	public void setTipo_cambio(BigDecimal tipo_cambio) {
 		this.tipo_cambio = tipo_cambio;
 	}
 	public String getDescripcion() {
@@ -96,11 +97,11 @@ public class DocumentoAplicarNotasCredito {
 				
 				private int idFactura;
 				private String tipoFactura;
-				private Float importe;
+				private BigDecimal importe;
 				public Facturas() {
 					super();
 				}
-				public Facturas(int idFactura, String tipoFactura, Float importe) {
+				public Facturas(int idFactura, String tipoFactura, BigDecimal importe) {
 					super();
 					this.idFactura = idFactura;
 					this.tipoFactura = tipoFactura;
@@ -118,10 +119,10 @@ public class DocumentoAplicarNotasCredito {
 				public void setTipoFactura(String tipoFactura) {
 					this.tipoFactura = tipoFactura;
 				}
-				public Float getImporte() {
+				public BigDecimal getImporte() {
 					return importe;
 				}
-				public void setImporte(Float importe) {
+				public void setImporte(BigDecimal importe) {
 					this.importe = importe;
 				}
 				@Override
