@@ -13,6 +13,7 @@ import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 import org.springframework.stereotype.Repository;
 
 import com.turbomaquinas.POJO.comercial.Pagos;
+import com.turbomaquinas.POJO.comercial.PagosFacturas;
 import com.turbomaquinas.POJO.comercial.PagosVista;
 
 @Repository
@@ -66,6 +67,26 @@ public class JDBCPagos implements PagosDAO {
 		List<Pagos> dv = jdbcTemplate.query(sql, new PagosRM(),fecha_pagoInicio,fecha_pagoFin);			
 		
 		return dv;
+	}
+
+	@Override
+	public List<PagosFacturas> facturasPagadas(int idPago) {
+		String sql = "select p.id as pago_id, p.folio as folio,"
+				+ " (select ff.id from FACTURA_FINAL ff where ff.id=pd.FACTURA_FINAL_id union select fv.id from FACTURA_VARIOS fv where fv.id=pd.FACTURA_VARIOS_id) as factura_id,"
+				+ " (select ff.total from FACTURA_FINAL ff where ff.id=pd.FACTURA_FINAL_id union select fv.total from FACTURA_VARIOS fv where fv.id=pd.FACTURA_VARIOS_id) as total,"
+				+ " (select ff.tipo from FACTURA_FINAL ff where ff.id=pd.FACTURA_FINAL_id union select fv.tipo from FACTURA_VARIOS fv where fv.id=pd.FACTURA_VARIOS_id) as tipo,"
+				+ " (select ff.numero from FACTURA_FINAL ff where ff.id=pd.FACTURA_FINAL_id union select fv.numero from FACTURA_VARIOS fv where fv.id=pd.FACTURA_VARIOS_id) as numero,"
+				+ " (select ff.moneda from FACTURA_FINAL ff where ff.id=pd.FACTURA_FINAL_id union select fv.moneda from FACTURA_VARIOS fv where fv.id=pd.FACTURA_VARIOS_id) as moneda,"
+				+ " (select ff.importe_pagado from FACTURA_FINAL ff where ff.id=pd.FACTURA_FINAL_id union select fv.importe_pagado from FACTURA_VARIOS fv where fv.id=pd.FACTURA_VARIOS_id) as importe_pagado,"
+				+ " (select ff.saldo from FACTURA_FINAL ff where ff.id=pd.FACTURA_FINAL_id union select fv.saldo from FACTURA_VARIOS fv where fv.id=pd.FACTURA_VARIOS_id) as saldo,"
+				+ " (select ff.CLIENTES_id from FACTURA_FINAL ff where ff.id=pd.FACTURA_FINAL_id union select fv.CLIENTES_id from FACTURA_VARIOS fv where fv.id=pd.FACTURA_VARIOS_id) as cliente_id"
+				+ " from PAGOS_DETALLE pd"
+				+ " join PAGOS p on p.id=pd.PAGOS_id"
+				+ " where p.id=? and p.activo=1";
+		
+		List<PagosFacturas> pf = jdbcTemplate.query(sql, new PagosFacturasRM(),idPago);			
+		
+		return pf;
 	}
 
 }
