@@ -57,7 +57,9 @@ public class FacturaFinalVistaRM implements RowMapper<FacturaFinalVista>{
 			ffv.setComprobantes_relacionados(null); 
 		}
 		ffv.setComentario(rs.getString("comentario"));
-		
+		ffv.setAlfresco_id_previa(rs.getString("alfresco_id_previa"));
+		ffv.setAlfresco_id_timbrado_pdf(rs.getString("alfresco_id_timbrado_pdf"));
+		ffv.setAlfresco_id_timbrado_xml(rs.getString("alfresco_id_timbrado_xml"));
 		return ffv;
 	}
 

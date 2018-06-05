@@ -16,6 +16,8 @@ public class DatosTimbrados {
 	private Date creado;
 	private int modificado_por;
 	private Date modificado;
+	private String alfresco_id_pdf;
+	private String alfresco_id_xml;
 	
 	public DatosTimbrados() {
 		super();
@@ -23,7 +25,8 @@ public class DatosTimbrados {
 
 	public DatosTimbrados(int id, String folio_fiscal, String fecha, String cadena_original, String sello_emisor,
 			String sello_sat, String leyenda, int activo, int creado_por, Date creado, int modificado_por,
-			Date modificado) {
+			Date modificado, String alfresco_id_pdf, String alfresco_id_xml) {
+		super();
 		this.id = id;
 		this.folio_fiscal = folio_fiscal;
 		this.fecha = fecha;
@@ -36,7 +39,11 @@ public class DatosTimbrados {
 		this.creado = creado;
 		this.modificado_por = modificado_por;
 		this.modificado = modificado;
+		this.alfresco_id_pdf = alfresco_id_pdf;
+		this.alfresco_id_xml = alfresco_id_xml;
 	}
+
+
 
 	public int getId() {
 		return id;
@@ -133,4 +140,21 @@ public class DatosTimbrados {
 	public void setModificado(Date modificado) {
 		this.modificado = modificado;
 	}
+
+	public String getAlfresco_id_pdf() {
+		return alfresco_id_pdf;
+	}
+
+	public void setAlfresco_id_pdf(String alfresco_id_pdf) {
+		this.alfresco_id_pdf = alfresco_id_pdf;
+	}
+
+	public String getAlfresco_id_xml() {
+		return alfresco_id_xml;
+	}
+
+	public void setAlfresco_id_xml(String alfresco_id_xml) {
+		this.alfresco_id_xml = alfresco_id_xml;
+	}
+	
 }

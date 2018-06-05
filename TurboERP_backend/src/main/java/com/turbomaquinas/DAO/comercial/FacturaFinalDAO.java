@@ -7,7 +7,6 @@ import com.turbomaquinas.POJO.comercial.FacturaFinalVista;
 
 public interface FacturaFinalDAO {
 
-	public int crear(FacturaFinal ff);
 	public FacturaFinal actualizar(FacturaFinal ff);
 	public FacturaFinalVista buscar(int id);
 	public List<FacturaFinalVista> consultar();
@@ -20,6 +19,6 @@ public interface FacturaFinalDAO {
 	public List<FacturaFinalVista> consultarFacturasPorIds(List<Integer> ids);
 	public List<FacturaFinalVista> consultarPorEstado(String estado);
 	public void actualizarEstado(int id, String estado);
-	
-	
+	public void actualizarTipoCambio(int id, float tipoCambio);
+	public void actualizarIdDatosTimbrados(int id, int idDatosTimbrados);
 }

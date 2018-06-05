@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.core.JsonParseException;
@@ -30,17 +31,17 @@ public class WSTimbrado {
 	TimbradoService ts;
 	
 	@PostMapping("/facturafinal/{id}")
-	public ResponseEntity<String> timbrarFacturaFinal(@PathVariable int id) throws JsonParseException, JsonMappingException, IOException{
+	public ResponseEntity<String> timbrarFacturaFinal(@PathVariable int id,@RequestParam int numEmpleado) throws JsonParseException, JsonMappingException, IOException{
 		//Recuperar JSON del PA TIMBRADO_FACTURA		
-		String json=null;
+		String cfdi=null;
 		try{
-			 json=ts.obtenerJSONFacturaFinal(id);
+			cfdi=ts.obtenerJSONFacturaFinal(id);
 		}catch(DataAccessException e){
 			bitacora.error(e.getMessage());
 			return new ResponseEntity<String>(HttpStatus.CONFLICT);
 		}
         try{
-        	ResponseEntity<String> response=ts.timbrarFactura(json);
+        	ResponseEntity<String> response=ts.timbrarFactura(cfdi,id,numEmpleado);
 	        JSONObject jsonRespuesta = new JSONObject(response.getBody());
 	        String AckEnlaceFiscal=(String) jsonRespuesta.getString("AckEnlaceFiscal");
 		    JSONObject json_AckEnlaceFiscal = new JSONObject(AckEnlaceFiscal);

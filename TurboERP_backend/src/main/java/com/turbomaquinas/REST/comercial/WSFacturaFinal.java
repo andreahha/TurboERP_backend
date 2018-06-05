@@ -33,19 +33,6 @@ public class WSFacturaFinal {
 	
 	@Autowired
 	FacturaFinalService s;	
-	
-//	@PostMapping
-//	public ResponseEntity<FacturaFinalVista> crear(@RequestBody DocumentoFacturaFinal documento){
-//		FacturaFinalVista respuesta = null;
-//		bitacora.info(documento);
-//		try {
-//			 respuesta = ds.crear(documento);
-//		} catch (Exception e) {
-//			bitacora.error(e.getMessage());
-//			return new ResponseEntity<FacturaFinalVista>(HttpStatus.CONFLICT);
-//		}
-//		return new ResponseEntity<FacturaFinalVista>(respuesta, HttpStatus.CREATED);
-//	}
 
 	@PutMapping
 	public ResponseEntity<Void> actualizar(@RequestBody FacturaFinal ff){

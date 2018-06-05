@@ -32,6 +32,8 @@ public class JDBCDatosTimbrados implements DatosTimbradosDAO {
 		columnas.add("sello_sat");
 		columnas.add("leyenda");
 		columnas.add("creado_por");
+		columnas.add("alfresco_id_pdf");
+		columnas.add("alfresco_id_xml");
 
 		insert.setTableName("DATOS_TIMBRADO");
 		insert.setColumnNames(columnas);
@@ -45,6 +47,8 @@ public class JDBCDatosTimbrados implements DatosTimbradosDAO {
 		datos.put("sello_sat", dt.getSello_sat());
 		datos.put("leyenda", dt.getLeyenda());
 		datos.put("creado_por", dt.getCreado_por());
+		datos.put("alfresco_id_pdf", dt.getAlfresco_id_pdf());
+		datos.put("alfresco_id_xml", dt.getAlfresco_id_xml());
 		
 		insert.setGeneratedKeyName("id");
 		Number id = insert.executeAndReturnKey(datos);
@@ -72,6 +76,11 @@ public class JDBCDatosTimbrados implements DatosTimbradosDAO {
 	public List<DatosTimbrados> consultar() throws DataAccessException {
 		List<DatosTimbrados> dtl = jdbcTemplate.query("SELECT * FROM DATOS_TIMBRADO", new DatosTimbradosRM());
 		return dtl;
+	}
+
+	@Override
+	public void actualizarIdsAlfresco(int id, String alfresco_id_pdf, String alfresco_id_xml) {
+		jdbcTemplate.update("UPDATE DATOS_TIMBRADO SET alfresco_id_pdf = ?, alfresco_id_xml = ? WHERE id = ?", alfresco_id_pdf,alfresco_id_xml,id);
 	}
 
 }
