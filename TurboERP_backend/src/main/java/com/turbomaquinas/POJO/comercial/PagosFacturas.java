@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 public class PagosFacturas {
 	
 	private int pago_id;
+	private BigDecimal tipo_cambio;
 	private int folio;
 	private int factura_id;
 	private BigDecimal total;
@@ -19,10 +20,11 @@ public class PagosFacturas {
 		super();
 	}
 
-	public PagosFacturas(int pago_id, int folio, int factura_id, BigDecimal total, String tipo, int numero,
-			String moneda, BigDecimal importe_pagado, BigDecimal saldo, int cliente_id) {
+	public PagosFacturas(int pago_id, BigDecimal tipo_cambio, int folio, int factura_id, BigDecimal total, String tipo,
+			int numero, String moneda, BigDecimal importe_pagado, BigDecimal saldo, int cliente_id) {
 		super();
 		this.pago_id = pago_id;
+		this.tipo_cambio = tipo_cambio;
 		this.folio = folio;
 		this.factura_id = factura_id;
 		this.total = total;
@@ -40,6 +42,14 @@ public class PagosFacturas {
 
 	public void setPago_id(int pago_id) {
 		this.pago_id = pago_id;
+	}
+
+	public BigDecimal getTipo_cambio() {
+		return tipo_cambio;
+	}
+
+	public void setTipo_cambio(BigDecimal tipo_cambio) {
+		this.tipo_cambio = tipo_cambio;
 	}
 
 	public int getFolio() {
@@ -113,5 +123,7 @@ public class PagosFacturas {
 	public void setCliente_id(int cliente_id) {
 		this.cliente_id = cliente_id;
 	}
+
+	
 	
 }
