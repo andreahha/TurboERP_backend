@@ -5,7 +5,9 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.turbomaquinas.POJO.comercial.FacturaFinalVista;
+import com.turbomaquinas.POJO.comercial.FacturaFinalVista.ComprobantesRelacionados;
 
 public class FacturaFinalVistaRM implements RowMapper<FacturaFinalVista>{
 
@@ -35,6 +37,7 @@ public class FacturaFinalVistaRM implements RowMapper<FacturaFinalVista>{
 		ffv.setCve_uso(rs.getString("cve_uso"));
 		ffv.setDes_uso(rs.getString("des_uso"));
 		ffv.setNumero_cliente(rs.getInt("numero_cliente"));
+		ffv.setNumero_giro(rs.getInt("num_giro"));
 		ffv.setNombre(rs.getString("nombre"));
 		ffv.setDireccion(rs.getString("direccion"));
 		ffv.setColonia(rs.getString("colonia"));
@@ -43,10 +46,18 @@ public class FacturaFinalVistaRM implements RowMapper<FacturaFinalVista>{
 		ffv.setEstado(rs.getString("estado"));
 		ffv.setPais(rs.getString("pais"));
 		ffv.setActivo(rs.getInt("activo"));
-		ffv.setFactura_final_id_sust(rs.getInt("factura_final_id_sust"));
-		ffv.setFolio_fiscal_sust(rs.getString("folio_fiscal_sust"));
-		ffv.setCLIENTES_id(rs.getInt("CLIENTES_id"));
+		ffv.setClientes_id(rs.getInt("CLIENTES_id"));
 		ffv.setEstado_factura(rs.getString("estado_factura"));
+		ffv.setDesc_estado_fact(rs.getString("desc_estado_fact"));
+		ffv.setCreado_por(rs.getInt("creado_por"));
+		ObjectMapper mapper = new ObjectMapper();
+		try {
+			ffv.setComprobantes_relacionados(mapper.readValue(rs.getString("comprobantes_relacionados"), ComprobantesRelacionados.class));
+		} catch (Exception e) {
+			ffv.setComprobantes_relacionados(null); 
+		}
+		ffv.setComentario(rs.getString("comentario"));
+		
 		return ffv;
 	}
 

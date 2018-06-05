@@ -22,9 +22,10 @@ public class NotaCredito {
 	private int modificado_por;
 	private Date modificado;
 	private int datos_timbrado_id;
-	private int conceptos_notas_credito_id;
+	private int conceptos_facturacion_contable_id;
 	private int notas_credito_id_sust;
 	private List<DocumentoAplicarNotasCredito.Facturas> facturas;
+	private Float importe_total;
 	
 	public NotaCredito() {
 		super();
@@ -32,8 +33,8 @@ public class NotaCredito {
 
 	public NotaCredito(int id, String tipo, int numero, Date fecha, Float subtotal, Float iva, Float tipo_cambio,
 			Date fecha_baja, int mes_baja, int anio_baja, String descripcion, int activo, int creado_por, Date creado,
-			int modificado_por, Date modificado, int datos_timbrado_id, int conceptos_notas_credito_id,
-			int notas_credito_id_sust, List<DocumentoAplicarNotasCredito.Facturas> facturas) {
+			int modificado_por, Date modificado, int datos_timbrado_id, int conceptos_facturacion_contable_id,
+			int notas_credito_id_sust, List<DocumentoAplicarNotasCredito.Facturas> facturas, Float importe_total) {
 		super();
 		this.id = id;
 		this.tipo = tipo;
@@ -52,9 +53,10 @@ public class NotaCredito {
 		this.modificado_por = modificado_por;
 		this.modificado = modificado;
 		this.datos_timbrado_id = datos_timbrado_id;
-		this.conceptos_notas_credito_id = conceptos_notas_credito_id;
+		this.conceptos_facturacion_contable_id = conceptos_facturacion_contable_id;
 		this.notas_credito_id_sust = notas_credito_id_sust;
 		this.facturas = facturas;
+		this.importe_total = importe_total;
 	}
 
 	public int getId() {
@@ -193,12 +195,12 @@ public class NotaCredito {
 		this.datos_timbrado_id = datos_timbrado_id;
 	}
 
-	public int getConceptos_notas_credito_id() {
-		return conceptos_notas_credito_id;
+	public int getConceptos_facturacion_contable_id() {
+		return conceptos_facturacion_contable_id;
 	}
 
-	public void setConceptos_notas_credito_id(int conceptos_notas_credito_id) {
-		this.conceptos_notas_credito_id = conceptos_notas_credito_id;
+	public void setConceptos_facturacion_contable_id(int conceptos_facturacion_contable_id) {
+		this.conceptos_facturacion_contable_id = conceptos_facturacion_contable_id;
 	}
 
 	public int getNotas_credito_id_sust() {
@@ -215,6 +217,14 @@ public class NotaCredito {
 
 	public void setFacturas(List<DocumentoAplicarNotasCredito.Facturas> facturas) {
 		this.facturas = facturas;
+	}
+
+	public Float getImporte_total() {
+		return importe_total;
+	}
+
+	public void setImporte_total(Float importe_total) {
+		this.importe_total = importe_total;
 	}
 
 	@Override

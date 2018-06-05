@@ -18,11 +18,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.turbomaquinas.POJO.comercial.ActividadesFFVista;
 import com.turbomaquinas.POJO.comercial.DocumentoFacturaFinal;
 import com.turbomaquinas.POJO.comercial.FacturaFinal;
 import com.turbomaquinas.POJO.comercial.FacturaFinalVista;
 import com.turbomaquinas.POJO.general.OrdenFactura;
-import com.turbomaquinas.service.comercial.DocFacturaFinalService;
 import com.turbomaquinas.service.comercial.FacturaFinalService;
 
 @RestController
@@ -32,10 +32,7 @@ public class WSFacturaFinal {
 	private static final Log bitacora = LogFactory.getLog(WSFacturaFinal.class);
 	
 	@Autowired
-	FacturaFinalService s;
-	@Autowired
-	DocFacturaFinalService ds;
-	
+	FacturaFinalService s;	
 	
 //	@PostMapping
 //	public ResponseEntity<FacturaFinalVista> crear(@RequestBody DocumentoFacturaFinal documento){
@@ -94,20 +91,8 @@ public class WSFacturaFinal {
 			return new ResponseEntity<Void>(HttpStatus.OK);		
 	}
 
-	@GetMapping("/facturaasustituir/{numero}")
-	public ResponseEntity<FacturaFinalVista> facturaaSustituir(@PathVariable int numero){
-		FacturaFinalVista ffs = null;
-		try {
-			ffs = s.facturaaSustituir(numero);
-		} catch (Exception e) {
-			bitacora.error(e.getMessage());
-			return new ResponseEntity<FacturaFinalVista>(HttpStatus.NOT_FOUND);
-		}
-		return new ResponseEntity<FacturaFinalVista>(ffs, HttpStatus.OK);
-	}
-
-	@GetMapping("factura/{tipo}/{numero}")
-	public ResponseEntity<FacturaFinalVista> buscarPorNumero(@PathVariable String tipo, @PathVariable int numero,@RequestParam String estado){
+	@GetMapping("factura/{tipo}/{numero}/{estado}")
+	public ResponseEntity<FacturaFinalVista> buscarPorNumero(@PathVariable String tipo, @PathVariable int numero, @PathVariable String estado){
 		FacturaFinalVista ffv = null;
 		try{
 			ffv = s.buscarPorTipoNumero(numero, tipo,estado);
@@ -148,29 +133,77 @@ public class WSFacturaFinal {
 		
 	}
 	
-	@GetMapping("/folio")
-	public ResponseEntity<FacturaFinalVista> buscarFacturaFolio(@RequestParam String folio,@RequestParam String estado){
+	@GetMapping("/folio/{estado}/{tipo}")
+	public ResponseEntity<FacturaFinalVista> buscarFacturaFolio(@RequestParam String folio, @PathVariable String estado, @PathVariable String tipo){
 		FacturaFinalVista factura = null;
 		try{
-			factura = s.buscarFacturaFolio(folio,estado);
+			factura = s.buscarFacturaFolio(folio, estado, tipo);
 		}catch(DataAccessException e){
 			bitacora.error(e.getMessage());
-			return new ResponseEntity<FacturaFinalVista>(HttpStatus.NO_CONTENT);
+			return new ResponseEntity<FacturaFinalVista>(HttpStatus.NOT_FOUND);
 		}
 		return new ResponseEntity<FacturaFinalVista>(factura, HttpStatus.OK);
-		
 	}
 
 	@PostMapping
-	public ResponseEntity<Void> creardoc(@RequestBody DocumentoFacturaFinal doc){
-		bitacora.info(doc);
+	public ResponseEntity<FacturaFinalVista> creardoc(@RequestBody DocumentoFacturaFinal doc){
+		FacturaFinalVista factura = null;
 		try {
-			s.creardoc(doc);
+			factura = s.creardoc(doc);
+		} catch (Exception e) {
+			bitacora.error(e.getMessage());
+			return new ResponseEntity<FacturaFinalVista>(HttpStatus.CONFLICT);
+		}
+		return new ResponseEntity<FacturaFinalVista>(factura, HttpStatus.CREATED);
+	}
+	
+	@GetMapping("/{id}/actividades")
+   	public ResponseEntity<List<ActividadesFFVista>> buscarActividades(@PathVariable int id){
+		List<ActividadesFFVista> actividades = null;
+		try{
+			actividades = s.consultarActividadesPorFactura(id);
+		}catch(DataAccessException e){
+			bitacora.error(e.getMessage());
+			return new ResponseEntity<List<ActividadesFFVista>>(HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<List<ActividadesFFVista>>(actividades, HttpStatus.OK);
+       	
+   	}
+	
+	@GetMapping("/estado/{estado}")
+	public ResponseEntity<List<FacturaFinalVista>> consultarPorEstado(@PathVariable String estado){
+		List<FacturaFinalVista> ffv = null;
+		try{
+			ffv = s.consultarPorEstado(estado);
+		}catch(DataAccessException e){
+			bitacora.error(e.getMessage());
+			return new ResponseEntity<List<FacturaFinalVista>>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<List<FacturaFinalVista>>(ffv, HttpStatus.OK);		
+	}
+	
+	@GetMapping("/ids")
+	public ResponseEntity<List<FacturaFinalVista>> consultarPorIds(@RequestParam List<Integer> lista){
+		List<FacturaFinalVista> ffv = null;
+		try{
+			ffv = s.consultarPorIds(lista);
+			System.out.println("a");
+		}catch(DataAccessException e){
+			bitacora.error(e.getMessage());
+			return new ResponseEntity<List<FacturaFinalVista>>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<List<FacturaFinalVista>>(ffv, HttpStatus.OK);		
+	}
+	
+	@PutMapping("/{id}/estado")
+	public ResponseEntity<Void> actualizarEstado(@PathVariable int id,@RequestParam String estado){
+		try {
+			s.actualizarEstado(id,estado);
 		} catch (Exception e) {
 			bitacora.error(e.getMessage());
 			return new ResponseEntity<Void>(HttpStatus.CONFLICT);
 		}
-		return new ResponseEntity<Void>(HttpStatus.CREATED);
+		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 	
 }

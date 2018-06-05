@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -82,7 +83,6 @@ public class JDBCFacturaFinal implements FacturaFinalDAO {
 		columnas.add("tipo_cambio");
 		columnas.add("condiciones_pago");
 		columnas.add("creado_por");
-		columnas.add("factura_final_id_sust");
 		columnas.add("formas_pago_id");
 		columnas.add("metodos_pago_id");
 		columnas.add("uso_cfdi_id");
@@ -101,7 +101,6 @@ public class JDBCFacturaFinal implements FacturaFinalDAO {
 		datos.put("tipo_cambio", ff.getTipo_cambio());
 		datos.put("condiciones_pago", ff.getCondiciones_pago());
 		datos.put("creado_por", ff.getCreado_por());
-		datos.put("factura_final_id_sust", ff.getFactura_final_id_sust());
 		datos.put("formas_pago_id", ff.getFormas_pago_id());
 		datos.put("metodos_pago_id", ff.getMetodos_pago_id());
 		datos.put("uso_cfdi_id", ff.getUso_cfdi_id());
@@ -142,14 +141,6 @@ public class JDBCFacturaFinal implements FacturaFinalDAO {
 				+ " anio_baja = ?, activo = ?, modificado_por = ? WHERE id = ?",
 				ff.getFecha_baja(), ff.getMes_baja(), ff.getAnio_baja(), ff.getActivo(),
 				ff.getModificado_por(), ff.getId());
-	}
-
-	@Override
-	public FacturaFinalVista facturaaSustituir(int numero) throws DataAccessException {
-		FacturaFinalVista ffs = jdbcTemplate.queryForObject("SELECT * FROM FACTURA_FINAL_V "
-				+ "WHERE numero = ? AND factura_final_id_sust = 0  AND  activo = 0", 
-				new FacturaFinalVistaRM(), numero);
-		return ffs;
 	}
 
 	@Override
@@ -197,13 +188,13 @@ public class JDBCFacturaFinal implements FacturaFinalDAO {
 	}
 
 	@Override
-	public FacturaFinalVista buscarFacturaFolio(String folio,String estado) {
-		FacturaFinalVista factura = jdbcTemplate.queryForObject("SELECT * FROM FACTURA_FINAL_V ff WHERE folio_fiscal=? AND estado_factura=?",new FacturaFinalVistaRM(), folio,estado);
+	public FacturaFinalVista buscarFacturaFolio(String folio, String estado, String tipo) {
+		FacturaFinalVista factura = jdbcTemplate.queryForObject("SELECT * FROM FACTURA_FINAL_V ff WHERE folio_fiscal=? AND estado_factura=? AND tipo=?",new FacturaFinalVistaRM(), folio, estado, tipo);
 		return factura;
 	}
 
 	@Override
-	public void creardoc(String doc) throws DataAccessException {
+	public int creardoc(String doc) throws DataAccessException {
 		SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
 				.withProcedureName("FACTURA_FINAL");
 
@@ -212,6 +203,39 @@ public class JDBCFacturaFinal implements FacturaFinalDAO {
 		SqlParameterSource in = new MapSqlParameterSource(inParamMap);
 	
 		Map<String, Object> simpleJdbcCallResult = simpleJdbcCall.execute(in);
+		
+		for (Entry<String, Object> entry : simpleJdbcCallResult.entrySet()) {
+	        if (entry.getKey().compareTo("p_factura_final_id") == 0) {
+	            return (Integer) entry.getValue();
+	        }
+	    }		
+		return 0;
+	}
+
+	@Override
+	public List<FacturaFinalVista> consultarFacturasPorIds(List<Integer> ids) {
+		String lista = null;
+		for (int id: ids) {
+			if(lista == null){
+				lista = ""+id;
+			}else{
+				lista = lista+","+id;
+			}
+				
+		}
+		List<FacturaFinalVista> facturas = jdbcTemplate.query("SELECT * FROM FACTURA_FINAL_V WHERE id IN("+lista+")", new FacturaFinalVistaRM());
+		return facturas;
+	}
+
+	@Override
+	public List<FacturaFinalVista> consultarPorEstado(String estado) {
+		return jdbcTemplate.query("SELECT * FROM FACTURA_FINAL_V WHERE estado_factura = ?", new FacturaFinalVistaRM(), estado);
+	}
+
+	@Override
+	public void actualizarEstado(int id, String estado) {
+		String sql="UPDATE FACTURA_FINAL SET estado = ? WHERE id = ?";
+		jdbcTemplate.update(sql,estado,id);
 	}
 
 }

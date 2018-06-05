@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.turbomaquinas.DAO.comercial.FacturaVariosDAO;
 import com.turbomaquinas.POJO.comercial.FacturaVarios;
+import com.turbomaquinas.POJO.comercial.FacturaVariosVista;
 
 @Service
 public class LogicaFacturaVarios implements FacturaVariosService {
@@ -16,23 +17,23 @@ public class LogicaFacturaVarios implements FacturaVariosService {
 	FacturaVariosDAO repFV;
 	
 	@Override
-	public FacturaVarios crear(FacturaVarios fv) throws DataAccessException {
+	public FacturaVariosVista crear(FacturaVarios fv) throws DataAccessException {
 		int id = repFV.crear(fv);
 		return repFV.buscar(id);
 	}
 
 	@Override
-	public FacturaVarios actualizar(FacturaVarios fv) throws DataAccessException {
-		return repFV.actualizar(fv);
+	public void actualizar(FacturaVarios fv) throws DataAccessException {
+		repFV.actualizar(fv);
 	}
 
 	@Override
-	public FacturaVarios buscar(int id) throws DataAccessException {
+	public FacturaVariosVista buscar(int id) throws DataAccessException {
 		return repFV.buscar(id);
 	}
 
 	@Override
-	public List<FacturaVarios> consultar() throws DataAccessException {
+	public List<FacturaVariosVista> consultar() throws DataAccessException {
 		return repFV.consultar();
 	}
 
@@ -42,8 +43,18 @@ public class LogicaFacturaVarios implements FacturaVariosService {
 	}
 
 	@Override
-	public List<FacturaVarios> consultarFacturasVariosPendientesPorCliente(int id, String moneda) {
+	public List<FacturaVariosVista> consultarFacturasVariosPendientesPorCliente(int id, String moneda) {
 		return repFV.consultarFacturasVariosPendientesPorCliente(id,moneda);
+	}
+
+	@Override
+	public FacturaVariosVista buscarFacturaFolio(String folio, String estado, String tipo) {
+		return repFV.buscarFacturaFolio(folio, estado, tipo);
+	}
+
+	@Override
+	public FacturaVariosVista buscarPorTipoNumero(int numero, String tipo, String estado) {
+		return repFV.buscarPorTipoNumero(numero, tipo,estado);
 	}
 
 }

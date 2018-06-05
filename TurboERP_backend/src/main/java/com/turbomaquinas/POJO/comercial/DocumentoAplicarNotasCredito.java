@@ -5,13 +5,14 @@ import java.util.List;
 public class DocumentoAplicarNotasCredito {
 	
 	private Float subtotal;
+	private String fecha;
 	private Float iva;
 	private Float tipo_cambio;
 	private String descripcion;
 	private int activo;
 	private int creado_por;
 	private int datos_timbrado_id;
-	private int conceptos_notas_credito_id;
+	private int conceptos_facturacion_contable_id;
 	private int notas_credito_id_sust;
 	private List<DocumentoAplicarNotasCredito.Facturas> facturas;
 	
@@ -57,11 +58,11 @@ public class DocumentoAplicarNotasCredito {
 	public void setDatos_timbrado_id(int datos_timbrado_id) {
 		this.datos_timbrado_id = datos_timbrado_id;
 	}
-	public int getConceptos_notas_credito_id() {
-		return conceptos_notas_credito_id;
+	public int getConceptos_facturacion_contable_id() {
+		return conceptos_facturacion_contable_id;
 	}
-	public void setConceptos_notas_credito_id(int conceptos_notas_credito_id) {
-		this.conceptos_notas_credito_id = conceptos_notas_credito_id;
+	public void setConceptos_facturacion_contable_id(int conceptos_facturacion_contable_id) {
+		this.conceptos_facturacion_contable_id = conceptos_facturacion_contable_id;
 	}
 	public int getNotas_credito_id_sust() {
 		return notas_credito_id_sust;
@@ -74,6 +75,12 @@ public class DocumentoAplicarNotasCredito {
 	}
 	public void setFacturas(List<DocumentoAplicarNotasCredito.Facturas> facturas) {
 		this.facturas = facturas;
+	}
+	public String getFecha() {
+		return fecha;
+	}
+	public void setFecha(String fecha) {
+		this.fecha = fecha;
 	}
 	@Override
 	public String toString() {

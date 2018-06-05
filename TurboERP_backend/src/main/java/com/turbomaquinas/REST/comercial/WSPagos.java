@@ -30,19 +30,6 @@ public class WSPagos {
 	@Autowired
 	PagosService s;
 	
-	@PostMapping
-	public ResponseEntity<PagosVista> crear(@RequestBody Pagos p){
-		
-		PagosVista respuesta = null;
-		bitacora.info(p);
-		try {
-			respuesta = s.crear(p);
-		} catch (Exception e) {
-			bitacora.error(e.getMessage());
-			return new ResponseEntity<PagosVista>(HttpStatus.CONFLICT);
-		}
-		return new ResponseEntity<PagosVista>(respuesta, HttpStatus.CREATED);
-	}
 
 	@PutMapping
 	public ResponseEntity<Void> actualizar(@RequestBody Pagos p){
@@ -78,7 +65,7 @@ public class WSPagos {
 		return new ResponseEntity<List<PagosVista>>(pl, HttpStatus.OK);
 	}
 	
-	@PostMapping("/aplicarpagos")
+	@PostMapping
 	public ResponseEntity<Void> aplicar(@RequestBody DocumentoAplicarPago doc){
 		
 		

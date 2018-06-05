@@ -46,6 +46,7 @@ public class ConsultaRequisiciones {
 	private String parcial_libcuarentena;
 	private String parcial_entradalm;
 	private String parcial_salidalm;
+	private String no_aplica_cuarentena;
 
 	public ConsultaRequisiciones() {
 		super();
@@ -62,7 +63,7 @@ public class ConsultaRequisiciones {
 			int dias_fecha_salidalm, int alerta_fecha_salidalm, Date fecha_liberacion_am_im,
 			int dias_fechaliberacion_am, int dias_fechaliberacion_im, int alerta_fechaliberacion_am_im,
 			String parcial_ordenc, String parcial_recepcion, String parcial_libcuarentena, String parcial_entradalm,
-			String parcial_salidalm) {
+			String parcial_salidalm, String no_aplica_cuarentena) {
 		super();
 		this.id = id;
 		this.departamento = departamento;
@@ -106,7 +107,9 @@ public class ConsultaRequisiciones {
 		this.parcial_libcuarentena = parcial_libcuarentena;
 		this.parcial_entradalm = parcial_entradalm;
 		this.parcial_salidalm = parcial_salidalm;
+		this.no_aplica_cuarentena = no_aplica_cuarentena;
 	}
+
 
 
 	public int getId() {
@@ -443,6 +446,14 @@ public class ConsultaRequisiciones {
 
 	public void setAlerta_fechaliberacion_am_im(int alerta_fechaliberacion_am_im) {
 		this.alerta_fechaliberacion_am_im = alerta_fechaliberacion_am_im;
+	}
+
+	public String getNo_aplica_cuarentena() {
+		return no_aplica_cuarentena;
+	}
+
+	public void setNo_aplica_cuarentena(String no_aplica_cuarentena) {
+		this.no_aplica_cuarentena = no_aplica_cuarentena;
 	}
 	
 	

@@ -24,7 +24,7 @@ public class JDBCActividadAutorizada implements ActividadAutorizadaDAO{
 	
 	public class Facts {
 
-		private int id;
+		private int id;  
 		private int numero;
 		
 		public Facts() {
@@ -160,8 +160,11 @@ public class JDBCActividadAutorizada implements ActividadAutorizadaDAO{
 	
 	@Override
 	public void regularizarPedidoPrepedido(int ordenId, int pedidosid, int prepedidosid, int modificadopor, String fecharegularizacion, int id) throws DataAccessException{
-		jdbcTemplate.update("UPDATE ACTIVIDADES_AUTORIZADAS SET PEDIDOS_id=?, PRE_PEDIDOS_id=?, modificado_por=?, fecha_regularizacion=?, numero_referencia = ULTIMA_REF_OT(?) + 1 WHERE id=?", 
-				pedidosid, prepedidosid, modificadopor, fecharegularizacion,ordenId, id);
+		jdbcTemplate.update("UPDATE ACTIVIDADES_AUTORIZADAS SET PEDIDOS_id=?, PRE_PEDIDOS_id=?, modificado_por=?, fecha_regularizacion=? WHERE id=?", 
+				pedidosid, prepedidosid, modificadopor, fecharegularizacion, id);
+		
+		jdbcTemplate.update("UPDATE ACTIVIDADES_AUTORIZADAS SET numero_referencia = ULTIMA_REF_OT(?) + 1 WHERE id=? AND numero_referencia=0", 
+				ordenId,id);
 	}
 
 	@Override
@@ -175,7 +178,7 @@ public class JDBCActividadAutorizada implements ActividadAutorizadaDAO{
 	@Override
 	public List<ActividadAutorizadaVista> consultarPorOrdenFiltradaPorClase(int id, String clase) throws DataAccessException {
 		List<ActividadAutorizadaVista> apo= jdbcTemplate.query("SELECT * FROM ACTIVIDADES_AUTORIZADAS_V aa "
-				+ " JOIN AUTORIZACIONES a ON (a.id = aa.AUTORIZACIONES_id) WHERE a.ORDENES_ID = ? AND aa.clase_actividad= ?", 
+				+ " JOIN AUTORIZACIONES a ON (a.id = aa.AUTORIZACIONES_id) WHERE a.ORDENES_ID = ? AND aa.clase_actividad= ? AND aa.importe_factura=0", 
 				new ActividadAutorizadaVistaRM(), id, clase);
 		return apo;
 	}
@@ -246,7 +249,7 @@ public class JDBCActividadAutorizada implements ActividadAutorizadaDAO{
 				+ "FROM ACTIVIDADES_AUTORIZADAS aa "
 				+ "JOIN DETALLE_COTIZACIONES d on aa.DETALLES_COTIZACIONES_id=d.id "
 				+ "JOIN ENCABEZADOS_COTIZACIONES e on e.id=d.ENCABEZADOS_COTIZACIONES_id "
-				+ "WHERE EXISTS (SELECT * FROM AUTORIZACIONES A WHERE A.id = aa.AUTORIZACIONES_id AND ORDENES_id=?) AND importe_pendiente <> 0 AND importe_baja=0";
+				+ "WHERE EXISTS (SELECT * FROM AUTORIZACIONES A WHERE A.id = aa.AUTORIZACIONES_id AND ORDENES_id=?) AND importe_a_facturar > 0 AND importe_baja=0";
 		return jdbcTemplate.query(sql,new ActividadAutorizadaFacturaRM(), id,id,id,id,id);
 	}
 
@@ -298,11 +301,11 @@ public class JDBCActividadAutorizada implements ActividadAutorizadaDAO{
 				lista = lista+","+id;
 			}				
 		}		
-		lista+=")";
+		lista+=")"; 
 		String sql="SELECT aa.id,(SELECT d.descripcion FROM DETALLE_COTIZACIONES d WHERE d.id=aa.DETALLES_COTIZACIONES_id) as descripcion,  "
-				+ "aa.importe_a_facturar,aa.descuento_disponible,aa.tipo_actividad, e.id as encabezados_cotizaciones_id,e.descripcion as encabezados_cotizaciones_descripcion, "
-				+ "(SELECT IF ((JSON_EXTRACT(JSON_CONSULTA_ULT_CAMBIO(a.ORDENES_id, 'MONEDA'),'$.tipo_cambio_calculado') IS NULL),importe_a_facturar,(importe_a_facturar*JSON_EXTRACT(JSON_CONSULTA_ULT_CAMBIO(a.ORDENES_id, 'MONEDA'),'$.tipo_cambio')))) AS importe_a_facturar,  "
-				+ "(SELECT IF ((JSON_EXTRACT(JSON_CONSULTA_ULT_CAMBIO(a.ORDENES_id, 'MONEDA'),'$.tipo_cambio_calculado') IS NULL),descuento_disponible,(descuento_disponible*JSON_EXTRACT(JSON_CONSULTA_ULT_CAMBIO(a.ORDENES_id, 'MONEDA'),'$.tipo_cambio')))) AS descuento_disponible  "
+				+ "aa.tipo_actividad, e.id as encabezados_cotizaciones_id,e.descripcion as encabezados_cotizaciones_descripcion, "
+				+ "(SELECT IF ((JSON_EXTRACT(JSON_CONSULTA_ULT_CAMBIO(a.ORDENES_id, 'MONEDA'),'$.tipo_cambio_calculado') IS NULL),importe_a_facturar,(importe_a_facturar*JSON_EXTRACT(JSON_CONSULTA_ULT_CAMBIO(a.ORDENES_id, 'MONEDA'),'$.tipo_cambio_calculado')))) AS importe_a_facturar,  "
+				+ "(SELECT IF ((JSON_EXTRACT(JSON_CONSULTA_ULT_CAMBIO(a.ORDENES_id, 'MONEDA'),'$.tipo_cambio_calculado') IS NULL),descuento_disponible,(descuento_disponible*JSON_EXTRACT(JSON_CONSULTA_ULT_CAMBIO(a.ORDENES_id, 'MONEDA'),'$.tipo_cambio_calculado')))) AS descuento_disponible  "
 				+ "FROM ACTIVIDADES_AUTORIZADAS aa "
 				+ "JOIN AUTORIZACIONES a ON a.id=aa.AUTORIZACIONES_id "
 				+ "JOIN DETALLE_COTIZACIONES d on aa.DETALLES_COTIZACIONES_id=d.id "

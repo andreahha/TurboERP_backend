@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
+import com.turbomaquinas.DAO.comercial.ActividadesFFDAO;
 import com.turbomaquinas.DAO.comercial.FacturaFinalDAO;
+import com.turbomaquinas.POJO.comercial.ActividadesFFVista;
 import com.turbomaquinas.POJO.comercial.DocumentoFacturaFinal;
 import com.turbomaquinas.POJO.comercial.FacturaFinal;
 import com.turbomaquinas.POJO.comercial.FacturaFinalVista;
@@ -21,6 +23,9 @@ public class LogicaFacturaFinal implements FacturaFinalService {
 	
 	@Autowired
 	OrdenService serviceOrden;
+	
+	@Autowired
+	ActividadesFFDAO repActividadesFF;
 
 	@Override
 	public FacturaFinalVista crear(FacturaFinal ff) throws DataAccessException {
@@ -49,11 +54,6 @@ public class LogicaFacturaFinal implements FacturaFinalService {
 	}
 
 	@Override
-	public FacturaFinalVista facturaaSustituir(int numero) throws DataAccessException {
-		return repFF.facturaaSustituir(numero);
-	}
-
-	@Override
 	public FacturaFinalVista buscarPorTipoNumero(int numero, String tipo,String estado) throws DataAccessException {
 		return repFF.buscarPorTipoNumero(numero, tipo,estado);
 	}
@@ -69,13 +69,34 @@ public class LogicaFacturaFinal implements FacturaFinalService {
 	}
 
 	@Override
-	public FacturaFinalVista buscarFacturaFolio(String folio,String estado) {
-		return repFF.buscarFacturaFolio(folio,estado);
+	public FacturaFinalVista buscarFacturaFolio(String folio, String estado, String tipo) {
+		return repFF.buscarFacturaFolio(folio, estado, tipo);
 	}
 
 	@Override
-	public void creardoc(DocumentoFacturaFinal doc) throws DataAccessException {
-		repFF.creardoc(doc.toString());
+	public FacturaFinalVista creardoc(DocumentoFacturaFinal doc) throws DataAccessException {
+		int id = repFF.creardoc(doc.toString());
+		return repFF.buscar(id);
+	}
+
+	@Override
+	public List<ActividadesFFVista> consultarActividadesPorFactura(int id) {
+		return repActividadesFF.consultarPorFactura(id);
+	}
+
+	@Override
+	public List<FacturaFinalVista> consultarPorEstado(String estado) {
+		return repFF.consultarPorEstado(estado);
+	}
+
+	@Override
+	public List<FacturaFinalVista> consultarPorIds(List<Integer> lista) {
+		return repFF.consultarFacturasPorIds(lista);
+	}
+
+	@Override
+	public void actualizarEstado(int id, String estado) {
+		repFF.actualizarEstado(id,estado);
 	}
 
 }

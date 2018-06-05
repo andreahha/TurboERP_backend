@@ -17,11 +17,6 @@ public class LogicaPagos implements PagosService {
 	@Autowired
 	PagosDAO resPago;
 	
-	@Override
-	public PagosVista crear(Pagos p) throws DataAccessException {
-		int id = resPago.crear(p);
-		return resPago.buscar(id);
-	}
 
 	@Override
 	public Pagos actualizar(Pagos p) throws DataAccessException {

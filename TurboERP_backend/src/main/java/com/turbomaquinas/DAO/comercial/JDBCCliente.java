@@ -91,7 +91,7 @@ public class JDBCCliente implements ClienteDAO{
 	}
 
 	@Override
-	public ClienteVista buscar(int numero_giro, int numero) {
+	public ClienteVista buscar(int numero_giro, int numero) throws DataAccessException {
 		ClienteVista c = jdbcTemplate.queryForObject("SELECT * FROM CLIENTES_V WHERE num_giro = ? AND numero = ?",
 				new ClienteVistaRM(), numero_giro, numero);
 		return c;
@@ -105,9 +105,15 @@ public class JDBCCliente implements ClienteDAO{
 	}
 
 	@Override
-	public ClienteVista buscarClientePorOrden(int id) throws DataAccessException{
+	public ClienteVista buscarClientePorOrden(int id) throws DataAccessException {
 		ClienteVista cv = jdbcTemplate.queryForObject("SELECT * FROM CLIENTES_V WHERE id = (SELECT CLIENTES_id FROM ORDENES WHERE id = "
 				+ "(SELECT ORDENES_id FROM COTIZACIONES WHERE id = ?))", new ClienteVistaRM(), id);
 		return cv;
+	}
+
+	@Override
+	public String buscarTipoCliente(int id) throws DataAccessException {
+		String tipo = jdbcTemplate.queryForObject("SELECT TIPOFACTURA_CLIENTE(?)", String.class, id);
+		return tipo;
 	}
 }

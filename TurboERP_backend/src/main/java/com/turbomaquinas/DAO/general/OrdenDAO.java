@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import com.turbomaquinas.DAO.general.JDBCOrden.FoliosOrdenes;
+import com.turbomaquinas.POJO.comercial.CotizacionVista;
 import com.turbomaquinas.POJO.general.AtributoEspecialConsulta;
 import com.turbomaquinas.POJO.general.OT;
 import com.turbomaquinas.POJO.general.Orden;
@@ -37,4 +38,6 @@ public interface OrdenDAO {
 	public OrdenFactura buscarDatosFacturacion(int orden_id,int idFactura);
 	public void sumarImporteBaja(int orden_id, BigDecimal importe_baja);
 	public void restarImporteAutorizado(int orden_id, BigDecimal importe_autorizado);
+	public List<Integer> consultarIdsFacturas(int orden_id);
+	public List<CotizacionVista> consultarCotizacionesAutorizadas(int id);
 }

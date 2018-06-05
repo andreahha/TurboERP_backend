@@ -12,6 +12,7 @@ import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
 import com.turbomaquinas.POJO.comercial.FacturaVarios;
+import com.turbomaquinas.POJO.comercial.FacturaVariosVista;
 
 @Repository
 public class JDBCFacturaVarios implements FacturaVariosDAO {
@@ -30,13 +31,12 @@ public class JDBCFacturaVarios implements FacturaVariosDAO {
 		columnas.add("fecha_factura");
 		columnas.add("fecha_vencimiento");
 		columnas.add("subtotal");
-		columnas.add("descuento");
 		columnas.add("iva");
-		columnas.add("iva_retenido");
 		columnas.add("moneda");
 		columnas.add("tipo_cambio");
 		columnas.add("condiciones_pago");
 		columnas.add("observaciones");
+		columnas.add("predial");
 		columnas.add("creado_por");
 		columnas.add("FACTURA_VARIOS_id_sust");
 		columnas.add("DATOS_TIMBRADO_id");
@@ -54,13 +54,12 @@ public class JDBCFacturaVarios implements FacturaVariosDAO {
 		datos.put("fecha_factura", fv.getFecha_factura());
 		datos.put("fecha_vencimiento", fv.getFecha_vencimiento());
 		datos.put("subtotal", fv.getSubtotal());
-		datos.put("descuento", fv.getDescuento());
 		datos.put("iva", fv.getIva());
-		datos.put("iva_retenido", fv.getIva_retenido());
 		datos.put("moneda", fv.getMoneda());
 		datos.put("tipo_cambio", fv.getTipo_cambio());
 		datos.put("condiciones_pago", fv.getCondiciones_pago());
 		datos.put("observaciones", fv.getObservaciones());
+		datos.put("predial", fv.getPredial());
 		datos.put("creado_por", fv.getCreado_por());
 		datos.put("FACTURA_VARIOS_id_sust", fv.getFactura_varios_id_sust());
 		datos.put("DATOS_TIMBRADO_id", fv.getDatos_timbrado_id());
@@ -76,23 +75,22 @@ public class JDBCFacturaVarios implements FacturaVariosDAO {
 	}
 
 	@Override
-	public FacturaVarios actualizar(FacturaVarios fv) throws DataAccessException {
+	public void actualizar(FacturaVarios fv) throws DataAccessException {
 		jdbcTemplate.update("UPDATE FACTURA_VARIOS SET fecha_baja = ?, mes_baja = ?, "
 				+ " anio_baja = ?, activo = ?, modificado_por = ?, DATOS_TIMBRADO_id = ? WHERE id = ?",
 				fv.getFecha_baja(), fv.getMes_baja(), fv.getAnio_baja(), fv.getActivo(),
 				fv.getModificado_por(),	fv.getDatos_timbrado_id(), fv.getId());
-		return fv;	
 	}
 
 	@Override
-	public FacturaVarios buscar(int id) throws DataAccessException {
-		FacturaVarios fvb = jdbcTemplate.queryForObject("SELECT * FROM FACTURA_VARIOS WHERE id = ?", 
-				new FacturaVariosRM(), id);
+	public FacturaVariosVista buscar(int id) throws DataAccessException {
+		FacturaVariosVista fvb = jdbcTemplate.queryForObject("SELECT * FROM FACTURA_VARIOS WHERE id = ?", 
+				new FacturaVariosVistaRM(), id);
 		return fvb;	}
 
 	@Override
-	public List<FacturaVarios> consultar() throws DataAccessException {
-		List<FacturaVarios> fvl = jdbcTemplate.query("SELECT * FROM FACTURA_VARIOS", new FacturaVariosRM());
+	public List<FacturaVariosVista> consultar() throws DataAccessException {
+		List<FacturaVariosVista> fvl = jdbcTemplate.query("SELECT * FROM FACTURA_VARIOS", new FacturaVariosVistaRM());
 		return fvl;	}
 
 	@Override
@@ -105,7 +103,7 @@ public class JDBCFacturaVarios implements FacturaVariosDAO {
 	}
 
 	@Override
-	public List<FacturaVarios> consultarFacturasVariosPendientesPorCliente(int id, String moneda) throws DataAccessException {
+	public List<FacturaVariosVista> consultarFacturasVariosPendientesPorCliente(int id, String moneda) throws DataAccessException {
 		String filtradoMoneda = "";		
 	   	if(!moneda.equals("*")){
 			filtradoMoneda = "and moneda = ?";
@@ -113,15 +111,28 @@ public class JDBCFacturaVarios implements FacturaVariosDAO {
 		String sql = "SELECT * "
 				+ "FROM FACTURA_VARIOS fv "
 				+ "WHERE saldo > 0 AND estado='T' AND CLIENTES_id=? "+filtradoMoneda;
-		List<FacturaVarios> fv = null;
+		List<FacturaVariosVista> fvv = null;
 	    
 	    if(moneda.equals("*")){
-	    	 fv = jdbcTemplate.query(sql,new FacturaVariosRM(), id);
+	    	 fvv = jdbcTemplate.query(sql,new FacturaVariosVistaRM(), id);
 		}
 	    else{
-			fv = jdbcTemplate.query(sql,new FacturaVariosRM(), id, moneda);
+			fvv = jdbcTemplate.query(sql,new FacturaVariosVistaRM(), id, moneda);
 	    }			
-		return fv;
+		return fvv;
+	}
+
+	@Override
+	public FacturaVariosVista buscarFacturaFolio(String folio, String estado, String tipo) {
+		FacturaVariosVista factura = jdbcTemplate.queryForObject("SELECT * FROM FACTURA_VARIOS_V WHERE folio_fiscal=? AND estado_factura=? AND tipo=?",new FacturaVariosVistaRM(), folio, estado, tipo);
+		return factura;
+	}
+
+	@Override
+	public FacturaVariosVista buscarPorTipoNumero(int numero, String tipo, String estado) {
+		FacturaVariosVista ffv = jdbcTemplate.queryForObject("SELECT * FROM FACTURA_VARIOS_V WHERE numero = ? and tipo = ? and estado_factura=?",
+				new FacturaVariosVistaRM(), numero, tipo,estado);
+		return ffv;
 	}
 	
 }

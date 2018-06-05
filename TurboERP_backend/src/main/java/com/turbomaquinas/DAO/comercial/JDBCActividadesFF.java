@@ -12,6 +12,7 @@ import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
 import com.turbomaquinas.POJO.comercial.ActividadesFF;
+import com.turbomaquinas.POJO.comercial.ActividadesFFVista;
 
 @Repository
 public class JDBCActividadesFF implements ActividadesFFDAO {
@@ -26,13 +27,11 @@ public class JDBCActividadesFF implements ActividadesFFDAO {
 		List<String> columnas = new ArrayList<>();
 		
 		columnas.add("descripcion");
-		columnas.add("subtotal");
+		columnas.add("importe");
 		columnas.add("descuento");
 		columnas.add("tipo_actividad");
 		columnas.add("creado_por");
 		columnas.add("FACTURA_FINAL_id");
-		columnas.add("PRODUCTOS_SAT_id");
-		columnas.add("MEDIDAS_SAT_id");
 		columnas.add("CONCEPTOS_FACTURACION_id");
 
 		insert.setTableName("ACTIVIDADES_FACTURA_FINAL");
@@ -40,13 +39,11 @@ public class JDBCActividadesFF implements ActividadesFFDAO {
 		
 		Map<String, Object> datos = new HashMap<>();
 		datos.put("descripcion", aff.getDescripcion());
-		datos.put("subtotal", aff.getSubtotal());
+		datos.put("importe", aff.getImporte());
 		datos.put("descuento", aff.getDescuento());
 		datos.put("tipo_actividad", aff.getTipo_actividad());
 		datos.put("creado_por", aff.getCreado_por());
 		datos.put("FACTURA_FINAL_id", aff.getFactura_final_id());
-		datos.put("PRODUCTOS_SAT_id", aff.getProductos_sat_id());
-		datos.put("MEDIDAS_SAT_id", aff.getMedidas_sat_id());
 		datos.put("CONCEPTOS_FACTURACION_id", aff.getConceptos_facturacion_id());
 		
 		insert.setGeneratedKeyName("id");
@@ -57,10 +54,10 @@ public class JDBCActividadesFF implements ActividadesFFDAO {
 
 	@Override
 	public ActividadesFF actualizar(ActividadesFF aff) throws DataAccessException {
-		jdbcTemplate.update("UPDATE ACTIVIDADES_FACTURA_FINAL SET subtotal = ?, descuento = ?, "
-				+ "modificado_por = ?, activo = ?, FACTURA_FINAL_id = ?, PRODUCTOS_SAT_id = ?, "
-				+ "WHERE id = ? ", aff.getSubtotal(), aff.getDescuento(),
-				aff.getModificado_por(), aff.getActivo(), aff.getFactura_final_id(), aff.getProductos_sat_id(), 
+		jdbcTemplate.update("UPDATE ACTIVIDADES_FACTURA_FINAL SET importe = ?, descuento = ?, "
+				+ "modificado_por = ?, activo = ?, FACTURA_FINAL_id = ?, "
+				+ "WHERE id = ? ", aff.getImporte(), aff.getDescuento(),
+				aff.getModificado_por(), aff.getActivo(), aff.getFactura_final_id(),  
 				aff.getId());
 		return aff;
 	}
@@ -77,6 +74,12 @@ public class JDBCActividadesFF implements ActividadesFFDAO {
 		List<ActividadesFF> affl = jdbcTemplate.query("SELECT * FROM ACTIVIDADES_FACTURA_FINAL", 
 				new ActividadesFFRM());
 		return affl;
+	}
+
+	@Override
+	public List<ActividadesFFVista> consultarPorFactura(int idFactura) {
+		List<ActividadesFFVista> affv = jdbcTemplate.query("SELECT * FROM turbomaquinas.ACTIVIDADES_FACTURA_FINAL_V WHERE FACTURA_FINAL_id=?",new ActividadesFFVistaRM(), idFactura);
+		return affv;
 	}
 	
 

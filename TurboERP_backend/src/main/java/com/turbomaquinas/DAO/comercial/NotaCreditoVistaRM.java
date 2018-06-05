@@ -33,7 +33,7 @@ public class NotaCreditoVistaRM implements RowMapper<NotaCreditoVista> {
 		nc.setNum_factura_final(rs.getString("num_factura_final"));
 		nc.setFacturas_anticipo_id(rs.getInt("facturas_anticipo_id"));
 		nc.setNum_factura_anticipo(rs.getString("num_factura_anticipo"));
-		nc.setConceptos_notas_credito_id(rs.getInt("conceptos_notas_credito_id"));
+		nc.setConceptos_facturacion_contable_id(rs.getInt("conceptos_facturacion_contable_id"));
 		nc.setConcepto(rs.getString("concepto"));
 		nc.setNotas_credito_id_sust(rs.getInt("notas_credito_id_sust"));
 		
