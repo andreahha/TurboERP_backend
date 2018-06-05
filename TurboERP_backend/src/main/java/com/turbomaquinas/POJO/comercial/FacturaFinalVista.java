@@ -41,6 +41,9 @@ public class FacturaFinalVista {
 	private ComprobantesRelacionados comprobantes_relacionados;
 	private String comentario;
 	private int creado_por;
+	private String alfresco_id_previa;
+	private String alfresco_id_timbrado_pdf;
+	private String alfresco_id_timbrado_xml;
 	
 	public FacturaFinalVista() {
 		super();
@@ -48,11 +51,12 @@ public class FacturaFinalVista {
 
 	public FacturaFinalVista(int id, String tipo, int numero, Date fecha_factura, Date fecha_vencimiento,
 			float subtotal, float descuento, float iva, float iva_retenido, float total, String moneda,
-			float tipo_cambio, String condiciones_pago, float saldo, String folio_fiscal, String estado_factura, String desc_estado_fact,
-			String cve_formap, String des_formap, String cve_metodop, String des_metodop, String cve_uso,
-			String des_uso, int numero_cliente, int numero_giro,String nombre, String direccion, String colonia, String codigo_postal,
-			String ciudad, String estado, String pais, int activo, int clientes_id,
-			ComprobantesRelacionados comprobantes_relacionados, String comentario, int creado_por) {
+			float tipo_cambio, String condiciones_pago, float saldo, String folio_fiscal, String estado_factura,
+			String desc_estado_fact, String cve_formap, String des_formap, String cve_metodop, String des_metodop,
+			String cve_uso, String des_uso, int numero_cliente, int numero_giro, String nombre, String direccion,
+			String colonia, String codigo_postal, String ciudad, String estado, String pais, int activo,
+			int clientes_id, ComprobantesRelacionados comprobantes_relacionados, String comentario, int creado_por,
+			String alfresco_id_previa, String alfresco_id_timbrado_pdf, String alfresco_id_timbrado_xml) {
 		super();
 		this.id = id;
 		this.tipo = tipo;
@@ -70,7 +74,7 @@ public class FacturaFinalVista {
 		this.saldo = saldo;
 		this.folio_fiscal = folio_fiscal;
 		this.estado_factura = estado_factura;
-		this.desc_estado_fact=desc_estado_fact;
+		this.desc_estado_fact = desc_estado_fact;
 		this.cve_formap = cve_formap;
 		this.des_formap = des_formap;
 		this.cve_metodop = cve_metodop;
@@ -78,7 +82,7 @@ public class FacturaFinalVista {
 		this.cve_uso = cve_uso;
 		this.des_uso = des_uso;
 		this.numero_cliente = numero_cliente;
-		this.numero_giro=numero_giro;
+		this.numero_giro = numero_giro;
 		this.nombre = nombre;
 		this.direccion = direccion;
 		this.colonia = colonia;
@@ -91,7 +95,12 @@ public class FacturaFinalVista {
 		this.comprobantes_relacionados = comprobantes_relacionados;
 		this.comentario = comentario;
 		this.creado_por = creado_por;
+		this.alfresco_id_previa = alfresco_id_previa;
+		this.alfresco_id_timbrado_pdf = alfresco_id_timbrado_pdf;
+		this.alfresco_id_timbrado_xml = alfresco_id_timbrado_xml;
 	}
+
+
 
 	public int getId() {
 		return id;
@@ -389,6 +398,32 @@ public class FacturaFinalVista {
 	public void setCreado_por(int creado_por) {
 		this.creado_por = creado_por;
 	}
+	
+	public String getAlfresco_id_previa() {
+		return alfresco_id_previa;
+	}
+
+	public void setAlfresco_id_previa(String alfresco_id_previa) {
+		this.alfresco_id_previa = alfresco_id_previa;
+	}
+
+	public String getAlfresco_id_timbrado_pdf() {
+		return alfresco_id_timbrado_pdf;
+	}
+
+	public void setAlfresco_id_timbrado_pdf(String alfresco_id_timbrado_pdf) {
+		this.alfresco_id_timbrado_pdf = alfresco_id_timbrado_pdf;
+	}
+
+	public String getAlfresco_id_timbrado_xml() {
+		return alfresco_id_timbrado_xml;
+	}
+
+	public void setAlfresco_id_timbrado_xml(String alfresco_id_timbrado_xml) {
+		this.alfresco_id_timbrado_xml = alfresco_id_timbrado_xml;
+	}
+
+
 
 
 	public static class ComprobantesRelacionados{

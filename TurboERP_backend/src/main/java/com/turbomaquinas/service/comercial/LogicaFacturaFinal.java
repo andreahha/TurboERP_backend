@@ -27,12 +27,7 @@ public class LogicaFacturaFinal implements FacturaFinalService {
 	@Autowired
 	ActividadesFFDAO repActividadesFF;
 
-	@Override
-	public FacturaFinalVista crear(FacturaFinal ff) throws DataAccessException {
-		int id = repFF.crear(ff);
-		return repFF.buscar(id);
-	}
-
+	
 	@Override
 	public FacturaFinal actualizar(FacturaFinal ff) throws DataAccessException {
 		return repFF.actualizar(ff);

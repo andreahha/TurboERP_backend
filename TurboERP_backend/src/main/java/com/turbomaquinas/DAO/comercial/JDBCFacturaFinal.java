@@ -13,7 +13,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcCall;
-import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -68,49 +67,6 @@ public class JDBCFacturaFinal implements FacturaFinalDAO {
 	
 	@Autowired
 	JdbcTemplate jdbcTemplate;
-
-	@Override
-	public int crear(FacturaFinal ff) throws DataAccessException {
-		SimpleJdbcInsert insert = new SimpleJdbcInsert(jdbcTemplate);
-		List<String> columnas = new ArrayList<>();
-		
-		columnas.add("subtotal");
-		columnas.add("descuento");
-		columnas.add("iva");
-		columnas.add("importe_anticipo");
-		columnas.add("iva_retenido");
-		columnas.add("moneda");
-		columnas.add("tipo_cambio");
-		columnas.add("condiciones_pago");
-		columnas.add("creado_por");
-		columnas.add("formas_pago_id");
-		columnas.add("metodos_pago_id");
-		columnas.add("uso_cfdi_id");
-		columnas.add("clientes_id");
-		
-		insert.setTableName("FACTURA_FINAL");
-		insert.setColumnNames(columnas);
-		Map<String, Object> datos = new HashMap<>();
-		
-		datos.put("subtotal", ff.getSubtotal());
-		datos.put("descuento", ff.getDescuento());
-		datos.put("iva", ff.getIva());
-		datos.put("importe_anticipo", ff.getImporte_anticipo());
-		datos.put("iva_retenido", ff.getIva_retenido());
-		datos.put("moneda", ff.getMoneda());
-		datos.put("tipo_cambio", ff.getTipo_cambio());
-		datos.put("condiciones_pago", ff.getCondiciones_pago());
-		datos.put("creado_por", ff.getCreado_por());
-		datos.put("formas_pago_id", ff.getFormas_pago_id());
-		datos.put("metodos_pago_id", ff.getMetodos_pago_id());
-		datos.put("uso_cfdi_id", ff.getUso_cfdi_id());
-		datos.put("clientes_id", ff.getClientes_id());
-		
-		insert.setGeneratedKeyName("id");
-		Number id = insert.executeAndReturnKey(datos);
-		
-		return id.intValue();
-	}
 
 	@Override
 	public FacturaFinal actualizar(FacturaFinal ff) throws DataAccessException {
@@ -236,6 +192,18 @@ public class JDBCFacturaFinal implements FacturaFinalDAO {
 	public void actualizarEstado(int id, String estado) {
 		String sql="UPDATE FACTURA_FINAL SET estado = ? WHERE id = ?";
 		jdbcTemplate.update(sql,estado,id);
+	}
+
+	@Override
+	public void actualizarTipoCambio(int id, float tipoCambio) {
+		String sql="UPDATE FACTURA_FINAL SET tipo_cambio = ? WHERE id = ?";
+		jdbcTemplate.update(sql,tipoCambio,id);
+	}
+	
+	@Override
+	public void actualizarIdDatosTimbrados(int id, int idDatosTimbrados) {
+		String sql="UPDATE FACTURA_FINAL SET DATOS_TIMBRADO_id = ? WHERE id = ?";
+		jdbcTemplate.update(sql,idDatosTimbrados,id);
 	}
 
 }

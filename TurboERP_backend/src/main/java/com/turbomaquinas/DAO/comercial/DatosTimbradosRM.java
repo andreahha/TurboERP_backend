@@ -25,6 +25,8 @@ public class DatosTimbradosRM implements RowMapper<DatosTimbrados>{
 		dt.setCreado(rs.getDate("creado"));
 		dt.setModificado_por(rs.getInt("modificado_por"));
 		dt.setModificado(rs.getDate("modificado"));
+		dt.setAlfresco_id_pdf(rs.getString("alfresco_id_pdf"));
+		dt.setAlfresco_id_xml(rs.getString("alfresco_id_xml"));
 		return dt;
 	}
 

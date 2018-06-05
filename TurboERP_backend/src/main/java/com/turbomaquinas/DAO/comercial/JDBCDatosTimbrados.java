@@ -32,6 +32,8 @@ public class JDBCDatosTimbrados implements DatosTimbradosDAO {
 		columnas.add("sello_sat");
 		columnas.add("leyenda");
 		columnas.add("creado_por");
+		columnas.add("alfresco_id_pdf");
+		columnas.add("alfresco_id_xml");
 
 		insert.setTableName("DATOS_TIMBRADO");
 		insert.setColumnNames(columnas);
@@ -45,6 +47,8 @@ public class JDBCDatosTimbrados implements DatosTimbradosDAO {
 		datos.put("sello_sat", dt.getSello_sat());
 		datos.put("leyenda", dt.getLeyenda());
 		datos.put("creado_por", dt.getCreado_por());
+		datos.put("alfresco_id_pdf", dt.getAlfresco_id_pdf());
+		datos.put("alfresco_id_xml", dt.getAlfresco_id_xml());
 		
 		insert.setGeneratedKeyName("id");
 		Number id = insert.executeAndReturnKey(datos);

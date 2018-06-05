@@ -10,7 +10,6 @@ import com.turbomaquinas.POJO.general.OrdenFactura;
 
 public interface FacturaFinalService {
 
-	public FacturaFinalVista crear(FacturaFinal ff);
 	public FacturaFinal actualizar(FacturaFinal ff);
 	public FacturaFinalVista buscar(int id);
 	public List<FacturaFinalVista> consultar();
