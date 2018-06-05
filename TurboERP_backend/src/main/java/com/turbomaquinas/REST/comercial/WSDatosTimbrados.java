@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.turbomaquinas.POJO.comercial.DatosTimbrados;
@@ -73,5 +74,16 @@ public class WSDatosTimbrados {
 		return new ResponseEntity<List<DatosTimbrados>>(dtl, HttpStatus.OK);
 	}
 	
+	
+	@PutMapping("/{id}/alfresco")
+	public ResponseEntity<Void> actualizarIdsAlfresco(@PathVariable int id,@RequestParam String alfresco_id_pdf,@RequestParam String alfresco_id_xml){
+		try {
+			s.actualizarIdsAlfresco(id,alfresco_id_pdf,alfresco_id_xml);
+		} catch (Exception e) {
+			bitacora.error(e.getMessage());
+			return new ResponseEntity<Void> (HttpStatus.CONFLICT);
+		}
+		return new ResponseEntity<Void>(HttpStatus.OK);
+	}
 	
 }

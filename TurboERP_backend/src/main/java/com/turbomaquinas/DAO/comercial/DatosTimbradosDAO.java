@@ -10,4 +10,5 @@ public interface DatosTimbradosDAO {
 	public DatosTimbrados actualizar(DatosTimbrados dt);
 	public DatosTimbrados buscar(int id);
 	public List<DatosTimbrados> consultar();
+	public void actualizarIdsAlfresco(int id, String alfresco_id_pdf, String alfresco_id_xml);
 }

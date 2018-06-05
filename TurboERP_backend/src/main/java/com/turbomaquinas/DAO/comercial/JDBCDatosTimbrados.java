@@ -78,4 +78,9 @@ public class JDBCDatosTimbrados implements DatosTimbradosDAO {
 		return dtl;
 	}
 
+	@Override
+	public void actualizarIdsAlfresco(int id, String alfresco_id_pdf, String alfresco_id_xml) {
+		jdbcTemplate.update("UPDATE DATOS_TIMBRADO SET alfresco_id_pdf = ?, alfresco_id_xml = ? WHERE id = ?", alfresco_id_pdf,alfresco_id_xml,id);
+	}
+
 }
