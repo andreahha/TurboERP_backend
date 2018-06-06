@@ -152,7 +152,7 @@ public class JDBCFacturaFinal implements FacturaFinalDAO {
 	@Override
 	public int creardoc(String doc) throws DataAccessException {
 		SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
-				.withProcedureName("FACTURA_FINAL");
+				.withProcedureName("CREAR_FACTURA_FINAL");
 
 		Map<String, Object> inParamMap = new HashMap<String, Object>();
 		inParamMap.put("doc", doc);
