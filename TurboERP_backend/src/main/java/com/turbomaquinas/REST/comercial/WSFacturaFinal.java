@@ -174,7 +174,6 @@ public class WSFacturaFinal {
 		List<FacturaFinalVista> ffv = null;
 		try{
 			ffv = s.consultarPorIds(lista);
-			System.out.println("a");
 		}catch(DataAccessException e){
 			bitacora.error(e.getMessage());
 			return new ResponseEntity<List<FacturaFinalVista>>(HttpStatus.NOT_FOUND);
@@ -191,6 +190,18 @@ public class WSFacturaFinal {
 			return new ResponseEntity<Void>(HttpStatus.CONFLICT);
 		}
 		return new ResponseEntity<Void>(HttpStatus.OK);
+	}
+	
+	@GetMapping("/{tipo}/ultima")
+	public ResponseEntity<FacturaFinalVista> buscarUltimaFacturaPorTipo(@PathVariable String tipo){
+		FacturaFinalVista factura = null;
+		try{
+			factura = s.buscarUltimaFacturaPorTipo(tipo);
+		}catch(DataAccessException e){
+			bitacora.error(e.getMessage());
+			return new ResponseEntity<FacturaFinalVista>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<FacturaFinalVista>(factura, HttpStatus.OK);		
 	}
 	
 }

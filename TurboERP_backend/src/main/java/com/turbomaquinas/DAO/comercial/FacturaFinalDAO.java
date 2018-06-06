@@ -21,4 +21,5 @@ public interface FacturaFinalDAO {
 	public void actualizarEstado(int id, String estado);
 	public void actualizarTipoCambio(int id, float tipoCambio);
 	public void actualizarIdDatosTimbrados(int id, int idDatosTimbrados);
+	public FacturaFinalVista buscarUltimaFacturaPorTipo(String tipo);
 }
