@@ -7,6 +7,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.turbomaquinas.DAO.comercial.FacturaVariosDAO;
+import com.turbomaquinas.POJO.comercial.DocumentoFacturaVarios;
 import com.turbomaquinas.POJO.comercial.FacturaVarios;
 import com.turbomaquinas.POJO.comercial.FacturaVariosVista;
 
@@ -15,12 +16,6 @@ public class LogicaFacturaVarios implements FacturaVariosService {
 	
 	@Autowired
 	FacturaVariosDAO repFV;
-	
-	@Override
-	public FacturaVariosVista crear(FacturaVarios fv) throws DataAccessException {
-		int id = repFV.crear(fv);
-		return repFV.buscar(id);
-	}
 
 	@Override
 	public void actualizar(FacturaVarios fv) throws DataAccessException {
@@ -55,6 +50,12 @@ public class LogicaFacturaVarios implements FacturaVariosService {
 	@Override
 	public FacturaVariosVista buscarPorTipoNumero(int numero, String tipo, String estado) {
 		return repFV.buscarPorTipoNumero(numero, tipo,estado);
+	}
+
+	@Override
+	public FacturaVariosVista crearDoc(DocumentoFacturaVarios doc) {
+		int id = repFV.crearDoc(doc.toString());
+		return repFV.buscar(id);
 	}
 
 }

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.turbomaquinas.POJO.comercial.DocumentoFacturaVarios;
 import com.turbomaquinas.POJO.comercial.FacturaVarios;
 import com.turbomaquinas.POJO.comercial.FacturaVariosVista;
 import com.turbomaquinas.service.comercial.FacturaVariosService;
@@ -32,17 +33,15 @@ public class WSFacturaVarios {
 	FacturaVariosService s;
 	
 	@PostMapping
-	public ResponseEntity<FacturaVariosVista> crear(@RequestBody FacturaVarios fv){
-		
-		FacturaVariosVista respuesta = null;
-		bitacora.info(fv);
+	public ResponseEntity<FacturaVariosVista> crearDoc(@RequestBody DocumentoFacturaVarios doc){
+		FacturaVariosVista factura = null;
 		try {
-			respuesta = s.crear(fv);
+			factura = s.crearDoc(doc);
 		} catch (Exception e) {
 			bitacora.error(e.getMessage());
 			return new ResponseEntity<FacturaVariosVista>(HttpStatus.CONFLICT);
 		}
-		return new ResponseEntity<FacturaVariosVista>(respuesta, HttpStatus.CREATED);
+		return new ResponseEntity<FacturaVariosVista>(factura, HttpStatus.CREATED);
 	}
 
 	@PutMapping
