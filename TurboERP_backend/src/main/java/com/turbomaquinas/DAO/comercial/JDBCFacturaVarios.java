@@ -39,7 +39,7 @@ public class JDBCFacturaVarios implements FacturaVariosDAO {
 
 	@Override
 	public List<FacturaVariosVista> consultar() throws DataAccessException {
-		List<FacturaVariosVista> fvl = jdbcTemplate.query("SELECT * FROM FACTURA_VARIOS", new FacturaVariosVistaRM());
+		List<FacturaVariosVista> fvl = jdbcTemplate.query("SELECT * FROM FACTURA_VARIOS_V", new FacturaVariosVistaRM());
 		return fvl;	}
 
 	@Override
@@ -58,8 +58,8 @@ public class JDBCFacturaVarios implements FacturaVariosDAO {
 			filtradoMoneda = "and moneda = ?";
 		}	   	
 		String sql = "SELECT * "
-				+ "FROM FACTURA_VARIOS fv "
-				+ "WHERE saldo > 0 AND estado='T' AND CLIENTES_id=? "+filtradoMoneda;
+				+ "FROM FACTURA_VARIOS_V fv "
+				+ "WHERE saldo > 0 AND estado_factura='T' AND CLIENTES_id=? "+filtradoMoneda;
 		List<FacturaVariosVista> fvv = null;
 	    
 	    if(moneda.equals("*")){
