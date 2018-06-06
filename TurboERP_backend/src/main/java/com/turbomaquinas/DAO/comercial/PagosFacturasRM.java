@@ -14,6 +14,7 @@ public class PagosFacturasRM implements RowMapper<PagosFacturas>{
 
 		PagosFacturas pf = new PagosFacturas();
 		pf.setPago_id(rs.getInt("pago_id"));
+		pf.setTipo_cambio(rs.getBigDecimal("tipo_cambio"));
 		pf.setFolio(rs.getInt("folio"));
 		pf.setFactura_id(rs.getInt("factura_id"));
 		pf.setTotal(rs.getBigDecimal("total"));

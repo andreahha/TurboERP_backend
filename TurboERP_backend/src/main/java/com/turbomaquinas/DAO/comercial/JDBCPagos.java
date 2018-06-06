@@ -71,7 +71,7 @@ public class JDBCPagos implements PagosDAO {
 
 	@Override
 	public List<PagosFacturas> facturasPagadas(int idPago) {
-		String sql = "select p.id as pago_id, p.folio as folio,"
+		String sql = "select p.id as pago_id, pd.tipo_cambio, p.folio as folio,"
 				+ " (select ff.id from FACTURA_FINAL ff where ff.id=pd.FACTURA_FINAL_id union select fv.id from FACTURA_VARIOS fv where fv.id=pd.FACTURA_VARIOS_id) as factura_id,"
 				+ " (select ff.total from FACTURA_FINAL ff where ff.id=pd.FACTURA_FINAL_id union select fv.total from FACTURA_VARIOS fv where fv.id=pd.FACTURA_VARIOS_id) as total,"
 				+ " (select ff.tipo from FACTURA_FINAL ff where ff.id=pd.FACTURA_FINAL_id union select fv.tipo from FACTURA_VARIOS fv where fv.id=pd.FACTURA_VARIOS_id) as tipo,"
