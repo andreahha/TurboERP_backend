@@ -39,6 +39,11 @@ public class LogicaNotaCredito implements NotaCreditoService {
 		return repNc.buscar(id);
 	}
 
+	@Override
+	public void desactivar(int id, int modificado_por) {
+		repNc.desactivar(id, modificado_por);
+	}
+
 	
 
 }

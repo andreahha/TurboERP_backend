@@ -11,5 +11,5 @@ public interface NotaCreditoDAO {
 	public void actualizar(NotaCredito nc);
 	public NotaCreditoVista buscar(int id);
 	public List<NotaCreditoVista> consultar();
-	
+	public void desactivar(int id, int modificado_por);
 }

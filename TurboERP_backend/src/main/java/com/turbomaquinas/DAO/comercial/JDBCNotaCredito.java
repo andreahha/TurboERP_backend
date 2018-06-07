@@ -64,5 +64,12 @@ public class JDBCNotaCredito implements NotaCreditoDAO {
 		return 0;
 	}
 
+	@Override
+	public void desactivar(int id, int modificado_por) throws DataAccessException{
+		String sql = "UPDATE NOTAS_CREDITO SET activo=0, modificado_por=? WHERE id=?";
+		jdbcTemplate.update(sql,modificado_por,id);
+		
+	}
+
 	
 }
