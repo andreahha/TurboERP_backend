@@ -32,9 +32,9 @@ public class JDBCNotaCredito implements NotaCreditoDAO {
 	}
 
 	@Override
-	public NotaCredito buscar(int id) throws DataAccessException {
-		NotaCredito nc = jdbcTemplate.queryForObject("SELECT * FROM NOTAS_CREDITO WHERE id = ?", 
-				new NotaCreditoRM(), id);
+	public NotaCreditoVista buscar(int id) throws DataAccessException {
+		NotaCreditoVista nc = jdbcTemplate.queryForObject("SELECT * FROM NOTAS_CREDITO_V WHERE id = ?", 
+				new NotaCreditoVistaRM(), id);
 		return nc;
 	}
 

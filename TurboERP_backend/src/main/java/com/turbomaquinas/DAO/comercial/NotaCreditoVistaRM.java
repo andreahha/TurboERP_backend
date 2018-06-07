@@ -1,10 +1,15 @@
 package com.turbomaquinas.DAO.comercial;
 
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import org.springframework.jdbc.core.RowMapper;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.turbomaquinas.POJO.comercial.DocumentoAplicarNotasCredito;
 import com.turbomaquinas.POJO.comercial.NotaCreditoVista;
 
 public class NotaCreditoVistaRM implements RowMapper<NotaCreditoVista> {
@@ -25,18 +30,23 @@ public class NotaCreditoVistaRM implements RowMapper<NotaCreditoVista> {
 		nc.setAnio_baja(rs.getInt("anio_baja"));
 		nc.setDescripcion(rs.getString("descripcion"));
 		nc.setActivo(rs.getInt("activo"));
-		nc.setFactura_varios_id(rs.getInt("factura_varios_id"));
-		nc.setNum_factura_varios(rs.getString("num_factura_varios"));
-		nc.setDatos_timbrado_id(rs.getInt("datos_timbrado_id"));
-		nc.setUuid(rs.getString("uuid"));
-		nc.setFactura_final_id(rs.getInt("factura_final_id"));
-		nc.setNum_factura_final(rs.getString("num_factura_final"));
-		nc.setFacturas_anticipo_id(rs.getInt("facturas_anticipo_id"));
-		nc.setNum_factura_anticipo(rs.getString("num_factura_anticipo"));
-		nc.setConceptos_facturacion_contable_id(rs.getInt("conceptos_facturacion_contable_id"));
-		nc.setConcepto(rs.getString("concepto"));
-		nc.setNotas_credito_id_sust(rs.getInt("notas_credito_id_sust"));
+		nc.setCreado_por(rs.getInt("creado_por"));
+		nc.setCreado(rs.getDate("creado"));
+		nc.setDatos_timbrado_id(rs.getInt("DATOS_TIMBRADO_id"));
+		nc.setUuid(rs.getString("UUID"));
+		nc.setConceptos_facturacion_contable_id(rs.getInt("CONCEPTOS_FACTURACION_CONTABLE_id"));
+		nc.setDescripcion_conceptos_facturacion_contable(rs.getString("descripcion_conceptos_facturacion_contable"));
+		nc.setNotas_credito_id_sust(rs.getInt("NOTAS_CREDITO_id_sust"));
+		nc.setImporte_total(rs.getBigDecimal("importe_total"));
 		
+		String json=rs.getString("facturas");
+		
+		ObjectMapper mapper = new ObjectMapper();
+		List<DocumentoAplicarNotasCredito.Facturas> fact=null;
+		try {
+			fact = mapper.readValue(json, new TypeReference<List<DocumentoAplicarNotasCredito.Facturas>>(){});
+		} catch (IOException e) {}
+		nc.setFacturas(fact);
 		return nc;
 	}
 
