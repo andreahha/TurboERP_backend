@@ -78,7 +78,7 @@ public class JDBCActividadesFF implements ActividadesFFDAO {
 
 	@Override
 	public List<ActividadesFFVista> consultarPorFactura(int idFactura) {
-		List<ActividadesFFVista> affv = jdbcTemplate.query("SELECT * FROM turbomaquinas.ACTIVIDADES_FACTURA_FINAL_V WHERE FACTURA_FINAL_id=?",new ActividadesFFVistaRM(), idFactura);
+		List<ActividadesFFVista> affv = jdbcTemplate.query("SELECT * FROM ACTIVIDADES_FACTURA_FINAL_V WHERE FACTURA_FINAL_id=? and activo=1",new ActividadesFFVistaRM(), idFactura);
 		return affv;
 	}
 	
