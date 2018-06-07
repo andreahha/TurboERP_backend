@@ -24,7 +24,7 @@ public class LogicaNotaCredito implements NotaCreditoService {
 	}
 
 	@Override
-	public NotaCredito buscar(int id) throws DataAccessException {
+	public NotaCreditoVista buscar(int id) throws DataAccessException {
 		return repNc.buscar(id);
 	}
 
@@ -34,7 +34,7 @@ public class LogicaNotaCredito implements NotaCreditoService {
 	}
 
 	@Override
-	public NotaCredito crearNotasCredito(DocumentoAplicarNotasCredito doc) {
+	public NotaCreditoVista crearNotasCredito(DocumentoAplicarNotasCredito doc) {
 		int id = repNc.crearNotasCredito(doc.toString());
 		return repNc.buscar(id);
 	}

@@ -43,15 +43,15 @@ public class WSNotaCredito {
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<NotaCredito> buscar(@PathVariable int id){
-		NotaCredito nc = null;
+	public ResponseEntity<NotaCreditoVista> buscar(@PathVariable int id){
+		NotaCreditoVista nc = null;
 		try {
 			nc = s.buscar(id);
 		} catch (Exception e) {
 			bitacora.error(e.getMessage());
-			return new ResponseEntity<NotaCredito> (HttpStatus.NOT_FOUND);
+			return new ResponseEntity<NotaCreditoVista> (HttpStatus.NOT_FOUND);
 		}
-		return new ResponseEntity<NotaCredito> (nc, HttpStatus.OK);
+		return new ResponseEntity<NotaCreditoVista> (nc, HttpStatus.OK);
 	}
 
 	@GetMapping
@@ -64,15 +64,15 @@ public class WSNotaCredito {
 	}
 	
 	@PostMapping
-	public ResponseEntity<NotaCredito> crear(@RequestBody DocumentoAplicarNotasCredito doc){
-		NotaCredito nc = null;
+	public ResponseEntity<NotaCreditoVista> crear(@RequestBody DocumentoAplicarNotasCredito doc){
+		NotaCreditoVista nc = null;
 		try{
 			nc = s.crearNotasCredito(doc);
 			
-			return new ResponseEntity<NotaCredito>(nc, HttpStatus.OK);
+			return new ResponseEntity<NotaCreditoVista>(nc, HttpStatus.OK);
 		}catch(DataAccessException e){
 			bitacora.error(e.getMessage());
-			return new ResponseEntity<NotaCredito>(HttpStatus.CONFLICT);
+			return new ResponseEntity<NotaCreditoVista>(HttpStatus.CONFLICT);
 		}
 		
 	}

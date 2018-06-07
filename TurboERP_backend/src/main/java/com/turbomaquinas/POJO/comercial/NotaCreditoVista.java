@@ -2,6 +2,9 @@ package com.turbomaquinas.POJO.comercial;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
+
+import com.turbomaquinas.POJO.comercial.DocumentoAplicarNotasCredito.Facturas;
 
 public class NotaCreditoVista {
 	
@@ -17,27 +20,26 @@ public class NotaCreditoVista {
 	private int anio_baja;
 	private String descripcion;
 	private int activo;
-	private int factura_varios_id;
-	private String num_factura_varios;
+	private int creado_por;
+	private Date creado;
 	private int datos_timbrado_id;
 	private String uuid;
-	private int factura_final_id;
-	private String num_factura_final;
-	private int facturas_anticipo_id;
-	private String num_factura_anticipo;
 	private int conceptos_facturacion_contable_id;
-	private String concepto;
+	private String descripcion_conceptos_facturacion_contable;
 	private int notas_credito_id_sust;
+	private List<DocumentoAplicarNotasCredito.Facturas> facturas;
+	private BigDecimal importe_total;
 
 	public NotaCreditoVista() {
 		super();
 	}
-
-	public NotaCreditoVista(int id, String tipo, int numero, Date fecha, BigDecimal subtotal, BigDecimal iva, BigDecimal tipo_cambio,
-			Date fecha_baja, int mes_baja, int anio_baja, String descripcion, int activo, int factura_varios_id,
-			String num_factura_varios, int datos_timbrado_id, String uuid, int factura_final_id,
-			String num_factura_final, int facturas_anticipo_id, String num_factura_anticipo,
-			int conceptos_facturacion_contable_id, String concepto, int notas_credito_id_sust) {
+	
+	public NotaCreditoVista(int id, String tipo, int numero, Date fecha, BigDecimal subtotal, BigDecimal iva,
+			BigDecimal tipo_cambio, Date fecha_baja, int mes_baja, int anio_baja, String descripcion, int activo,
+			int creado_por, Date creado, int datos_timbrado_id, String uuid, int conceptos_facturacion_contable_id,
+			String descripcion_conceptos_facturacion_contable, int notas_credito_id_sust, List<Facturas> facturas,
+			BigDecimal importe_total) {
+		super();
 		this.id = id;
 		this.tipo = tipo;
 		this.numero = numero;
@@ -50,17 +52,15 @@ public class NotaCreditoVista {
 		this.anio_baja = anio_baja;
 		this.descripcion = descripcion;
 		this.activo = activo;
-		this.factura_varios_id = factura_varios_id;
-		this.num_factura_varios = num_factura_varios;
+		this.creado_por = creado_por;
+		this.creado = creado;
 		this.datos_timbrado_id = datos_timbrado_id;
 		this.uuid = uuid;
-		this.factura_final_id = factura_final_id;
-		this.num_factura_final = num_factura_final;
-		this.facturas_anticipo_id = facturas_anticipo_id;
-		this.num_factura_anticipo = num_factura_anticipo;
 		this.conceptos_facturacion_contable_id = conceptos_facturacion_contable_id;
-		this.concepto = concepto;
+		this.descripcion_conceptos_facturacion_contable = descripcion_conceptos_facturacion_contable;
 		this.notas_credito_id_sust = notas_credito_id_sust;
+		this.facturas = facturas;
+		this.importe_total = importe_total;
 	}
 
 	public int getId() {
@@ -159,20 +159,20 @@ public class NotaCreditoVista {
 		this.activo = activo;
 	}
 
-	public int getFactura_varios_id() {
-		return factura_varios_id;
+	public int getCreado_por() {
+		return creado_por;
 	}
 
-	public void setFactura_varios_id(int factura_varios_id) {
-		this.factura_varios_id = factura_varios_id;
+	public void setCreado_por(int creado_por) {
+		this.creado_por = creado_por;
 	}
 
-	public String getNum_factura_varios() {
-		return num_factura_varios;
+	public Date getCreado() {
+		return creado;
 	}
 
-	public void setNum_factura_varios(String num_factura_varios) {
-		this.num_factura_varios = num_factura_varios;
+	public void setCreado(Date creado) {
+		this.creado = creado;
 	}
 
 	public int getDatos_timbrado_id() {
@@ -191,38 +191,6 @@ public class NotaCreditoVista {
 		this.uuid = uuid;
 	}
 
-	public int getFactura_final_id() {
-		return factura_final_id;
-	}
-
-	public void setFactura_final_id(int factura_final_id) {
-		this.factura_final_id = factura_final_id;
-	}
-
-	public String getNum_factura_final() {
-		return num_factura_final;
-	}
-
-	public void setNum_factura_final(String num_factura_final) {
-		this.num_factura_final = num_factura_final;
-	}
-
-	public int getFacturas_anticipo_id() {
-		return facturas_anticipo_id;
-	}
-
-	public void setFacturas_anticipo_id(int facturas_anticipo_id) {
-		this.facturas_anticipo_id = facturas_anticipo_id;
-	}
-
-	public String getNum_factura_anticipo() {
-		return num_factura_anticipo;
-	}
-
-	public void setNum_factura_anticipo(String num_factura_anticipo) {
-		this.num_factura_anticipo = num_factura_anticipo;
-	}
-
 	public int getConceptos_facturacion_contable_id() {
 		return conceptos_facturacion_contable_id;
 	}
@@ -231,12 +199,12 @@ public class NotaCreditoVista {
 		this.conceptos_facturacion_contable_id = conceptos_facturacion_contable_id;
 	}
 
-	public String getConcepto() {
-		return concepto;
+	public String getDescripcion_conceptos_facturacion_contable() {
+		return descripcion_conceptos_facturacion_contable;
 	}
 
-	public void setConcepto(String concepto) {
-		this.concepto = concepto;
+	public void setDescripcion_conceptos_facturacion_contable(String descripcion_conceptos_facturacion_contable) {
+		this.descripcion_conceptos_facturacion_contable = descripcion_conceptos_facturacion_contable;
 	}
 
 	public int getNotas_credito_id_sust() {
@@ -246,5 +214,32 @@ public class NotaCreditoVista {
 	public void setNotas_credito_id_sust(int notas_credito_id_sust) {
 		this.notas_credito_id_sust = notas_credito_id_sust;
 	}
+
+	public List<DocumentoAplicarNotasCredito.Facturas> getFacturas() {
+		return facturas;
+	}
+
+	public void setFacturas(List<DocumentoAplicarNotasCredito.Facturas> facturas) {
+		this.facturas = facturas;
+	}
+
+	public BigDecimal getImporte_total() {
+		return importe_total;
+	}
+
+	public void setImporte_total(BigDecimal importe_total) {
+		this.importe_total = importe_total;
+	}
+
+	@Override
+	public String toString() {
+		try {
+	        return new com.fasterxml.jackson.databind.ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(this);
+	    } catch (com.fasterxml.jackson.core.JsonProcessingException e) {
+	        e.printStackTrace();
+	    }
+	    return null;
+	}
+	
 
 }

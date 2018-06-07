@@ -9,7 +9,7 @@ public interface NotaCreditoDAO {
 
 	public int crearNotasCredito(String doc);
 	public void actualizar(NotaCredito nc);
-	public NotaCredito buscar(int id);
+	public NotaCreditoVista buscar(int id);
 	public List<NotaCreditoVista> consultar();
 	
 }
