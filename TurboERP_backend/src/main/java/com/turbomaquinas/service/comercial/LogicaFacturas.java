@@ -19,4 +19,9 @@ public class LogicaFacturas implements FacturasService {
 		return repF.consultarFacturasPendientesPorCliente(id,moneda);
 	}
 
+	@Override
+	public Facturas buscar(int id, String tipo) {
+		return repF.buscar(id, tipo);
+	}
+
 }

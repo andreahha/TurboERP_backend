@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.turbomaquinas.POJO.comercial.FacturaFinalVista;
 import com.turbomaquinas.POJO.comercial.Facturas;
 
 @Repository
@@ -32,6 +33,13 @@ public class JDBCFacturas implements FacturasDAO{
 			fv = jdbcTemplate.query(sql,new FacturasRM(), id, moneda);
 	    }			
 		return fv;
+	}
+
+	@Override
+	public Facturas buscar(int id, String tipo) {
+		String sql = "SELECT * FROM turbomaquinas.FACTURAS_V where id = ? and tipo = ?;";
+		Facturas fb = jdbcTemplate.queryForObject(sql, new FacturasRM(), id, tipo);
+		return fb;
 	}
 
 }
