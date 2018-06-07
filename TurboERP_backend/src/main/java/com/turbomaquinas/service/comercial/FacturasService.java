@@ -7,5 +7,6 @@ import com.turbomaquinas.POJO.comercial.Facturas;
 public interface FacturasService {
 	
 	public List<Facturas> consultarFacturasPendientesPorCliente(int id, String moneda);
+	public Facturas buscar(int id, String tipo);
 
 }

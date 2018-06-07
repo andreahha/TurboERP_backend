@@ -40,5 +40,17 @@ public class WSFacturas {
 		return new ResponseEntity<List<Facturas>>(f, HttpStatus.OK);
 		
 	}
+	
+	@GetMapping("/{id}/{tipo}")
+	public ResponseEntity<Facturas> buscar(@PathVariable int id,@PathVariable String tipo){
+		Facturas fb = null;
+		try {
+			fb = fs.buscar(id, tipo);
+		} catch (Exception e) {
+			bitacora.error(e.getMessage());
+			return new ResponseEntity<Facturas>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<Facturas>(fb, HttpStatus.OK);
+	}
 
 }
