@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -95,5 +96,19 @@ public class WSPagos {
 		if ( pf == null)
 			return new ResponseEntity<List<PagosFacturas>>(HttpStatus.NO_CONTENT);
 		return new ResponseEntity<List<PagosFacturas>>(pf, HttpStatus.OK);
+	}
+	
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Void> restablecer(@PathVariable int id){
+		
+		
+		try{
+			s.restablecerPago(id);
+			
+			return new ResponseEntity<Void>(HttpStatus.OK);
+		}catch(DataAccessException e){
+			bitacora.error(e.getMessage());
+			return new ResponseEntity<Void>(HttpStatus.CONFLICT);
+		}
 	}
 }

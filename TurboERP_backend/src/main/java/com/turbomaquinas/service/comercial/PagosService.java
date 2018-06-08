@@ -15,5 +15,6 @@ public interface PagosService {
 	public void aplicarPagos(DocumentoAplicarPago doc);
 	public List<Pagos> pagosFecha(String fechainicio, String fechafin);
 	public List<PagosFacturas> facturasPorPago(int id);
+	public void restablecerPago(int id);
 
 }
