@@ -22,4 +22,5 @@ public interface FacturaFinalDAO {
 	public void actualizarTipoCambio(int id, float tipoCambio);
 	public void actualizarIdDatosTimbrados(int id, int idDatosTimbrados);
 	public FacturaFinalVista buscarUltimaFacturaPorTipo(String tipo);
+	public void actualizarIdAlfresco(int id, String alfresco_id);
 }
