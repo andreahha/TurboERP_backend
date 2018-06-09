@@ -20,12 +20,13 @@ public class JDBCTimbrado implements TimbradoDAO{
 	
 	
 	@Override
-	public String obtenerJSONFacturaFinal(int idFactura) throws DataAccessException {
+	public String obtenerJSONFacturaFinal(int idFactura,String modo) throws DataAccessException {
 		SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
 				.withProcedureName("JSON_TIMBRADO_FACTURA_FINAL");
 
 		Map<String, Object> inParamMap = new HashMap<String, Object>();
 		inParamMap.put("p_idFactura", idFactura);
+		inParamMap.put("p_modo", modo);
 		SqlParameterSource in = new MapSqlParameterSource(inParamMap);
 	
 		Map<String, Object> simpleJdbcCallResult = simpleJdbcCall.execute(in);
