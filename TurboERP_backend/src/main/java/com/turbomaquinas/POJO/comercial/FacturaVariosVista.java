@@ -23,6 +23,7 @@ public class FacturaVariosVista {
 	private String estado_factura;
 	private String desc_estado_fact;
 	private int factura_varios_id_sust;
+    private String des_conceptos_facturacion_contable;
 	private int clientes_id;
 	private String folio_fiscal;
 	private String cve_formap;
@@ -52,11 +53,11 @@ public class FacturaVariosVista {
 	public FacturaVariosVista(int id, String tipo, int numero, Date fecha_factura, Date fecha_vencimiento,
 			BigDecimal subtotal, BigDecimal iva, BigDecimal total, BigDecimal importe_pagado, BigDecimal saldo,
 			String moneda, float tipo_cambio, String condiciones_pago, String observaciones, String predial,
-			String estado_factura, String desc_estado_fact, int factura_varios_id_sust, int clientes_id,
-			String folio_fiscal, String cve_formap, String des_formap, String cve_metodop, String des_metodop,
-			String cve_uso, String des_uso, int numero_cliente, int numero_giro, String nombre, String direccion,
-			String colonia, String codigo_postal, String ciudad, int estado_id, String estado, int pais_id, String pais,
-			int activo) {
+			String estado_factura, String desc_estado_fact, int factura_varios_id_sust,
+			String des_conceptos_facturacion_contable, int clientes_id, String folio_fiscal, String cve_formap,
+			String des_formap, String cve_metodop, String des_metodop, String cve_uso, String des_uso,
+			int numero_cliente, int numero_giro, String nombre, String direccion, String colonia, String codigo_postal,
+			String ciudad, int estado_id, String estado, int pais_id, String pais, int activo) {
 		super();
 		this.id = id;
 		this.tipo = tipo;
@@ -76,6 +77,7 @@ public class FacturaVariosVista {
 		this.estado_factura = estado_factura;
 		this.desc_estado_fact = desc_estado_fact;
 		this.factura_varios_id_sust = factura_varios_id_sust;
+		this.des_conceptos_facturacion_contable = des_conceptos_facturacion_contable;
 		this.clientes_id = clientes_id;
 		this.folio_fiscal = folio_fiscal;
 		this.cve_formap = cve_formap;
@@ -240,6 +242,14 @@ public class FacturaVariosVista {
 
 	public void setFactura_varios_id_sust(int factura_varios_id_sust) {
 		this.factura_varios_id_sust = factura_varios_id_sust;
+	}
+
+	public String getDes_conceptos_facturacion_contable() {
+		return des_conceptos_facturacion_contable;
+	}
+
+	public void setDes_conceptos_facturacion_contable(String des_conceptos_facturacion_contable) {
+		this.des_conceptos_facturacion_contable = des_conceptos_facturacion_contable;
 	}
 
 	public int getClientes_id() {
@@ -409,7 +419,8 @@ public class FacturaVariosVista {
 				+ ", total=" + total + ", importe_pagado=" + importe_pagado + ", saldo=" + saldo + ", moneda=" + moneda
 				+ ", tipo_cambio=" + tipo_cambio + ", condiciones_pago=" + condiciones_pago + ", observaciones="
 				+ observaciones + ", predial=" + predial + ", estado_factura=" + estado_factura + ", desc_estado_fact="
-				+ desc_estado_fact + ", factura_varios_id_sust=" + factura_varios_id_sust + ", clientes_id="
+				+ desc_estado_fact + ", factura_varios_id_sust=" + factura_varios_id_sust
+				+ ", des_conceptos_facturacion_contable=" + des_conceptos_facturacion_contable + ", clientes_id="
 				+ clientes_id + ", folio_fiscal=" + folio_fiscal + ", cve_formap=" + cve_formap + ", des_formap="
 				+ des_formap + ", cve_metodop=" + cve_metodop + ", des_metodop=" + des_metodop + ", cve_uso=" + cve_uso
 				+ ", des_uso=" + des_uso + ", numero_cliente=" + numero_cliente + ", numero_giro=" + numero_giro
