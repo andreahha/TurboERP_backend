@@ -59,52 +59,54 @@ public class LogicaTimbrado implements TimbradoService{
 	
 	
 	@Override
-	public String obtenerJSONFacturaFinal(int idFactura) throws DataAccessException {
-		return repositorio.obtenerJSONFacturaFinal(idFactura);
+	public String obtenerJSONFacturaFinal(int idFactura,String modo) throws DataAccessException {
+		return repositorio.obtenerJSONFacturaFinal(idFactura,modo);
 	}
 
 	@Override
 	@Transactional
-	public ResponseEntity<String> timbrarFactura(String cfdi,int id,int numEmpleado) {
+	public ResponseEntity<String> timbrarFactura(String cfdi,int id,int numEmpleado,String modo) {
 		ResponseEntity<String> response= timbrar(cfdi);
-		try{
-			JSONObject jsonRespuesta = new JSONObject(response.getBody());
-	        String AckEnlaceFiscal=(String) jsonRespuesta.getString("AckEnlaceFiscal");
-		    JSONObject json_AckEnlaceFiscal = new JSONObject(AckEnlaceFiscal);
-		    String estatusDocumento=(String) json_AckEnlaceFiscal.getString("estatusDocumento");
-		    if(estatusDocumento.equalsIgnoreCase("aceptado")){
-		    	//Actualizar estado de la factura a Timbrado
-		    	repoFF.actualizarEstado(id, "T");
-		    	
-		    	
-		    	//Actualizar el tipo_cambio de la Factura a cambio del dia que se genera en el JSON del PA
-		    	float tipoCambio=1;
-		    	try{
-			    	JSONObject json = new JSONObject(cfdi);
-			        String cfdi_json=(String) json.getString("CFDi");
-				    JSONObject cfdiObj = new JSONObject(cfdi_json);
-				    tipoCambio=Float.parseFloat(cfdiObj.getString("tipoCambio"));				    
-		    	}catch(Exception e){tipoCambio=1;}
-		    	float tipo_cambio=Float.parseFloat(""+tipoCambio);		    	
-		    	repoFF.actualizarTipoCambio(id,tipo_cambio);
-		    	
-		    	
-		    	//Insertar registro en Datos Timbrados
-		    	DatosTimbrados dt=new DatosTimbrados();
-		    	dt.setFolio_fiscal((String) json_AckEnlaceFiscal.getString("folioFiscalUUID"));
-		    	dt.setFecha((String) json_AckEnlaceFiscal.getString("fechaTFD"));
-		    	dt.setSello_emisor((String) json_AckEnlaceFiscal.getString("selloCFDi"));
-		    	dt.setCadena_original((String) json_AckEnlaceFiscal.getString("cadenaTFD"));
-		    	dt.setSello_sat((String) json_AckEnlaceFiscal.getString("selloSAT"));
-		    	dt.setLeyenda("leyenda");
-		    	dt.setActivo(1);
-		    	dt.setCreado_por(numEmpleado);
-		    	int idDatosTimbrados=repoDT.crear(dt);
-		    	
-		    	//Actualizar DATOS_TIMBRADO_id
-		    	repoFF.actualizarIdDatosTimbrados(id, idDatosTimbrados);
-		    }
-		}catch(Exception e){}	    
+		if(modo.equals("produccion")){
+			try{
+				JSONObject jsonRespuesta = new JSONObject(response.getBody());
+		        String AckEnlaceFiscal=(String) jsonRespuesta.getString("AckEnlaceFiscal");
+			    JSONObject json_AckEnlaceFiscal = new JSONObject(AckEnlaceFiscal);
+			    String estatusDocumento=(String) json_AckEnlaceFiscal.getString("estatusDocumento");
+			    if(estatusDocumento.equalsIgnoreCase("aceptado")){
+			    	//Actualizar estado de la factura a Timbrado
+			    	repoFF.actualizarEstado(id, "T");
+			    	
+			    	
+			    	//Actualizar el tipo_cambio de la Factura a cambio del dia que se genera en el JSON del PA
+			    	float tipoCambio=1;
+			    	try{
+				    	JSONObject json = new JSONObject(cfdi);
+				        String cfdi_json=(String) json.getString("CFDi");
+					    JSONObject cfdiObj = new JSONObject(cfdi_json);
+					    tipoCambio=Float.parseFloat(cfdiObj.getString("tipoCambio"));				    
+			    	}catch(Exception e){tipoCambio=1;}
+			    	float tipo_cambio=Float.parseFloat(""+tipoCambio);		    	
+			    	repoFF.actualizarTipoCambio(id,tipo_cambio);
+			    	
+			    	
+			    	//Insertar registro en Datos Timbrados
+			    	DatosTimbrados dt=new DatosTimbrados();
+			    	dt.setFolio_fiscal((String) json_AckEnlaceFiscal.getString("folioFiscalUUID"));
+			    	dt.setFecha((String) json_AckEnlaceFiscal.getString("fechaTFD"));
+			    	dt.setSello_emisor((String) json_AckEnlaceFiscal.getString("selloCFDi"));
+			    	dt.setCadena_original((String) json_AckEnlaceFiscal.getString("cadenaTFD"));
+			    	dt.setSello_sat((String) json_AckEnlaceFiscal.getString("selloSAT"));
+			    	dt.setLeyenda("leyenda");
+			    	dt.setActivo(1);
+			    	dt.setCreado_por(numEmpleado);
+			    	int idDatosTimbrados=repoDT.crear(dt);
+			    	
+			    	//Actualizar DATOS_TIMBRADO_id
+			    	repoFF.actualizarIdDatosTimbrados(id, idDatosTimbrados);
+			    }
+			}catch(Exception e){}
+		}
 	    return response;
 	}
 	
