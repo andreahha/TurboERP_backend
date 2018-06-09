@@ -214,4 +214,9 @@ public class JDBCFacturaFinal implements FacturaFinalDAO {
 		return jdbcTemplate.queryForObject(sql,new FacturaFinalVistaRM(),tipo);
 	}
 
+	@Override
+	public void actualizarIdAlfresco(int id, String alfresco_id) {
+		jdbcTemplate.update("UPDATE FACTURA_FINAL SET alfresco_id = ? WHERE id = ?", alfresco_id,id);
+	}
+
 }

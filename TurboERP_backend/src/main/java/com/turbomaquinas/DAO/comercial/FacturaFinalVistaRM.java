@@ -60,6 +60,7 @@ public class FacturaFinalVistaRM implements RowMapper<FacturaFinalVista>{
 		ffv.setAlfresco_id_previa(rs.getString("alfresco_id_previa"));
 		ffv.setAlfresco_id_timbrado_pdf(rs.getString("alfresco_id_timbrado_pdf"));
 		ffv.setAlfresco_id_timbrado_xml(rs.getString("alfresco_id_timbrado_xml"));
+		ffv.setDatos_timbrado_id(rs.getInt("datos_timbrado_id"));
 		return ffv;
 	}
 

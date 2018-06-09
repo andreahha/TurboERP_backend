@@ -53,6 +53,12 @@ public class LogicaPagos implements PagosService {
 		
 		return resPago.facturasPagadas(id);
 	}
+
+	@Override
+	public void restablecerPago(int id) {
+		resPago.RestablecerPago(id);
+		
+	}
 	
 	
 

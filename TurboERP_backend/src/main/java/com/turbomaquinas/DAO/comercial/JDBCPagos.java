@@ -89,4 +89,17 @@ public class JDBCPagos implements PagosDAO {
 		return pf;
 	}
 
+	@Override
+	public void RestablecerPago(int id) {
+		SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
+				.withProcedureName("RESTABLECER_PAGO");
+		
+		Map<String, Object> inParamMap = new HashMap<String, Object>();
+		
+		inParamMap.put("id", id);
+		SqlParameterSource in = new MapSqlParameterSource(inParamMap);
+		simpleJdbcCall.execute(in);
+		
+	}
+
 }

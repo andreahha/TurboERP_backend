@@ -99,4 +99,9 @@ public class LogicaFacturaFinal implements FacturaFinalService {
 		return repFF.buscarUltimaFacturaPorTipo(tipo);
 	}
 
+	@Override
+	public void actualizarIdAlfresco(int id, String alfresco_id) {
+		repFF.actualizarIdAlfresco(id,alfresco_id);
+	}
+
 }

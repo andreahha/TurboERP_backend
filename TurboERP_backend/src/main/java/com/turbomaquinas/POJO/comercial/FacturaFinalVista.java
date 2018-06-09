@@ -44,6 +44,7 @@ public class FacturaFinalVista {
 	private String alfresco_id_previa;
 	private String alfresco_id_timbrado_pdf;
 	private String alfresco_id_timbrado_xml;
+	private int datos_timbrado_id;
 	
 	public FacturaFinalVista() {
 		super();
@@ -56,7 +57,7 @@ public class FacturaFinalVista {
 			String cve_uso, String des_uso, int numero_cliente, int numero_giro, String nombre, String direccion,
 			String colonia, String codigo_postal, String ciudad, String estado, String pais, int activo,
 			int clientes_id, ComprobantesRelacionados comprobantes_relacionados, String comentario, int creado_por,
-			String alfresco_id_previa, String alfresco_id_timbrado_pdf, String alfresco_id_timbrado_xml) {
+			String alfresco_id_previa, String alfresco_id_timbrado_pdf, String alfresco_id_timbrado_xml,int datos_timbrado_id) {
 		super();
 		this.id = id;
 		this.tipo = tipo;
@@ -98,6 +99,7 @@ public class FacturaFinalVista {
 		this.alfresco_id_previa = alfresco_id_previa;
 		this.alfresco_id_timbrado_pdf = alfresco_id_timbrado_pdf;
 		this.alfresco_id_timbrado_xml = alfresco_id_timbrado_xml;
+		this.datos_timbrado_id=datos_timbrado_id;
 	}
 
 
@@ -422,6 +424,16 @@ public class FacturaFinalVista {
 	public void setAlfresco_id_timbrado_xml(String alfresco_id_timbrado_xml) {
 		this.alfresco_id_timbrado_xml = alfresco_id_timbrado_xml;
 	}
+	
+	public int getDatos_timbrado_id() {
+		return datos_timbrado_id;
+	}
+
+	public void setDatos_timbrado_id(int datos_timbrado_id) {
+		this.datos_timbrado_id = datos_timbrado_id;
+	}
+
+
 
 
 

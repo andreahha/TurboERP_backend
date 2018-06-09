@@ -24,5 +24,6 @@ public interface FacturaFinalService {
 	public List<FacturaFinalVista> consultarPorIds(List<Integer> lista);
 	public void actualizarEstado(int id,String estado);
 	public FacturaFinalVista buscarUltimaFacturaPorTipo(String tipo);
+	public void actualizarIdAlfresco(int id, String alfresco_id);
 
 }

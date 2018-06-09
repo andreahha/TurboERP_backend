@@ -204,4 +204,15 @@ public class WSFacturaFinal {
 		return new ResponseEntity<FacturaFinalVista>(factura, HttpStatus.OK);		
 	}
 	
+	@PutMapping("/{id}/alfresco")
+	public ResponseEntity<Void> actualizarIdsAlfresco(@PathVariable int id,@RequestParam String alfresco_id){
+		try {
+			s.actualizarIdAlfresco(id,alfresco_id);
+		} catch (Exception e) {
+			bitacora.error(e.getMessage());
+			return new ResponseEntity<Void> (HttpStatus.CONFLICT);
+		}
+		return new ResponseEntity<Void>(HttpStatus.OK);
+	}
+	
 }
