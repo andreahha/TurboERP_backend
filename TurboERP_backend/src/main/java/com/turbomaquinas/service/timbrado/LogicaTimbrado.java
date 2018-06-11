@@ -3,7 +3,6 @@ package com.turbomaquinas.service.timbrado;
 import java.util.Base64;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -15,7 +14,6 @@ import org.springframework.web.client.RestTemplate;
 
 import com.turbomaquinas.DAO.comercial.DatosTimbradosDAO;
 import com.turbomaquinas.DAO.comercial.FacturaFinalDAO;
-import com.turbomaquinas.DAO.timbrado.TimbradoDAO;
 import com.turbomaquinas.POJO.comercial.DatosTimbrados;
 
 import twitter4j.JSONObject;
@@ -25,9 +23,6 @@ import twitter4j.JSONObject;
 public class LogicaTimbrado implements TimbradoService{
 	
 	@Autowired
-	TimbradoDAO repositorio;
-	
-	@Autowired
 	FacturaFinalDAO repoFF;
 	
 	@Autowired
@@ -35,9 +30,12 @@ public class LogicaTimbrado implements TimbradoService{
 	
 	private String user="AAA010101AAA";
 	private String pass="7aa16d2e055554fcf3d182758db23c91";
-	private String urlGenerarCfdi = "https://api.enlacefiscal.com/v6/generarCfdi";	
 	private String userpass = user+":"+pass;
-	private String headerValue = "Basic " + new String(Base64.getEncoder().encode(userpass.getBytes()));		
+	private String headerValue = "Basic " + new String(Base64.getEncoder().encode(userpass.getBytes()));	
+	
+	private String urlGenerarCfdi = "https://api.enlacefiscal.com/v6/generarCfdi";
+	private String urlCancelarCfdi = "https://api.enlacefiscal.com/v6/cancelarCfdi";
+	
 	
 	public HttpHeaders configurarPeticionAPIEnlaceFiscal(){
 		HttpHeaders headers = new HttpHeaders();
@@ -57,15 +55,20 @@ public class LogicaTimbrado implements TimbradoService{
 		return response;
 	}
 	
+	private ResponseEntity<String> cancelarCFDi(String json){
+		//Configurar petición Headers de las API enlace fiscal
+		HttpHeaders headers=configurarPeticionAPIEnlaceFiscal();
+		//PETICIÓN A LA API
+		RestTemplate restTemplate = new RestTemplate();
+		HttpEntity<?> httpEntity = new HttpEntity<Object>(json, headers);
+		ResponseEntity<String> response = restTemplate.exchange(urlCancelarCfdi, HttpMethod.POST, httpEntity, String.class);
+		return response;
+	}
+	
 	
 	@Override
-	public String obtenerJSONFacturaFinal(int idFactura,String modo) throws DataAccessException {
-		return repositorio.obtenerJSONFacturaFinal(idFactura,modo);
-	}
-
-	@Override
 	@Transactional
-	public ResponseEntity<String> timbrarFactura(String cfdi,int id,int numEmpleado,String modo) {
+	public ResponseEntity<String> timbrarFacturaFinal(String cfdi,int id,int numEmpleado,String modo) {
 		ResponseEntity<String> response= timbrar(cfdi);
 		if(modo.equals("produccion")){
 			try{
@@ -108,6 +111,13 @@ public class LogicaTimbrado implements TimbradoService{
 			}catch(Exception e){}
 		}
 	    return response;
+	}
+
+	
+	@Override
+	@Transactional
+	public ResponseEntity<String> cancelarCFDiFacturaFinal(String jsonCancelarfactura, int id, int numEmpleado, String modo) {
+		return cancelarCFDi(jsonCancelarfactura);
 	}
 	
 	

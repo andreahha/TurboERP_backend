@@ -40,5 +40,10 @@ public class LogicaDatosTimbrados implements DatosTimbradosService {
 	public void actualizarIdsAlfresco(int id, String alfresco_id_pdf, String alfresco_id_xml) {
 		repDt.actualizarIdsAlfresco(id,alfresco_id_pdf,alfresco_id_xml);
 	}
+	
+	@Override
+	public void actualizarIdsAlfrescoCancelado(int id, String alfresco_id_pdf_cancelacion, String alfresco_id_xml_cancelacion) {
+		repDt.actualizarIdsAlfrescoCancelado(id,alfresco_id_pdf_cancelacion,alfresco_id_xml_cancelacion);
+	}
 
 }

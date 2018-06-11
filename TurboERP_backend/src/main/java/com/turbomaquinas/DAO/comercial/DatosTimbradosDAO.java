@@ -11,4 +11,5 @@ public interface DatosTimbradosDAO {
 	public DatosTimbrados buscar(int id);
 	public List<DatosTimbrados> consultar();
 	public void actualizarIdsAlfresco(int id, String alfresco_id_pdf, String alfresco_id_xml);
+	public void actualizarIdsAlfrescoCancelado(int id, String alfresco_id_pdf_cancelacion, String alfresco_id_xml_cancelacion);
 }
