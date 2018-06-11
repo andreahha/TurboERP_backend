@@ -31,17 +31,17 @@ public class WSTimbrado {
 	TimbradoService ts;
 	
 	@PostMapping("/facturafinal/{id}")
-	public ResponseEntity<String> timbrarFacturaFinal(@PathVariable int id,@RequestParam int numEmpleado) throws JsonParseException, JsonMappingException, IOException{
+	public ResponseEntity<String> timbrarFacturaFinal(@PathVariable int id,@RequestParam int numEmpleado,@RequestParam String modo) throws JsonParseException, JsonMappingException, IOException{
 		//Recuperar JSON del PA TIMBRADO_FACTURA		
 		String cfdi=null;
 		try{
-			cfdi=ts.obtenerJSONFacturaFinal(id);
+			cfdi=ts.obtenerJSONFacturaFinal(id,modo);//mandar modo
 		}catch(DataAccessException e){
 			bitacora.error(e.getMessage());
 			return new ResponseEntity<String>(HttpStatus.CONFLICT);
 		}
         try{
-        	ResponseEntity<String> response=ts.timbrarFactura(cfdi,id,numEmpleado);
+        	ResponseEntity<String> response=ts.timbrarFactura(cfdi,id,numEmpleado,modo);
 	        JSONObject jsonRespuesta = new JSONObject(response.getBody());
 	        String AckEnlaceFiscal=(String) jsonRespuesta.getString("AckEnlaceFiscal");
 		    JSONObject json_AckEnlaceFiscal = new JSONObject(AckEnlaceFiscal);
