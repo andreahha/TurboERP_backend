@@ -7,10 +7,10 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.turbomaquinas.DAO.comercial.FacturaVariosDAO;
-import com.turbomaquinas.DAO.comercial.FacturaVariosDetalleDAO;
+import com.turbomaquinas.DAO.comercial.DetalleFacturaVariosDAO;
 import com.turbomaquinas.POJO.comercial.DocumentoFacturaVarios;
 import com.turbomaquinas.POJO.comercial.FacturaVarios;
-import com.turbomaquinas.POJO.comercial.FacturaVariosDetalleVista;
+import com.turbomaquinas.POJO.comercial.DetalleFacturaVariosVista;
 import com.turbomaquinas.POJO.comercial.FacturaVariosVista;
 
 @Service
@@ -20,7 +20,7 @@ public class LogicaFacturaVarios implements FacturaVariosService {
 	FacturaVariosDAO repFV;
 	
 	@Autowired
-	FacturaVariosDetalleDAO repoDetalles;
+	DetalleFacturaVariosDAO repoDetalles;
 
 	@Override
 	public void actualizar(FacturaVarios fv) throws DataAccessException {
@@ -64,7 +64,7 @@ public class LogicaFacturaVarios implements FacturaVariosService {
 	}
 
 	@Override
-	public List<FacturaVariosDetalleVista> consultarDetalles(int id) {
+	public List<DetalleFacturaVariosVista> consultarDetalles(int id) {
 		return repoDetalles.consultarPorFacturaVarios(id);
 	}
 

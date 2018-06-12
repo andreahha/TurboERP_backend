@@ -11,17 +11,17 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
-import com.turbomaquinas.POJO.comercial.FacturaVariosDetalle;
-import com.turbomaquinas.POJO.comercial.FacturaVariosDetalleVista;
+import com.turbomaquinas.POJO.comercial.DetalleFacturaVarios;
+import com.turbomaquinas.POJO.comercial.DetalleFacturaVariosVista;
 
 @Repository
-public class JDBCFacturaVariosDetalle implements FacturaVariosDetalleDAO{
+public class JDBCDetalleFacturaVarios implements DetalleFacturaVariosDAO{
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
 	@Override
-	public int crear(FacturaVariosDetalle fvd) throws DataAccessException{
+	public int crear(DetalleFacturaVarios fvd) throws DataAccessException{
 		SimpleJdbcInsert insert = new SimpleJdbcInsert(jdbcTemplate);
 		List<String> columnas = new ArrayList<>();
 		
@@ -33,7 +33,7 @@ public class JDBCFacturaVariosDetalle implements FacturaVariosDetalleDAO{
 		columnas.add("conceptos_facturacion_id");
 		columnas.add("factura_varios_id");
 		
-		insert.setTableName("FACTURA_VARIOS_DETALLE");
+		insert.setTableName("DETALLE_FACTURA_VARIOS");
 		insert.setColumnNames(columnas);
 		Map<String, Object> datos = new HashMap<>();
 		
@@ -52,28 +52,28 @@ public class JDBCFacturaVariosDetalle implements FacturaVariosDetalleDAO{
 	}
 
 	@Override
-	public void actualizar(FacturaVariosDetalle fvd) throws DataAccessException{
-		jdbcTemplate.update("UPDATE FACTURA_VARIOS_DETALLE SET cantidad = ?, descripcion = ?, precio_unitario = ?, conceptos_facturacion_id = ?,"
+	public void actualizar(DetalleFacturaVarios fvd) throws DataAccessException{
+		jdbcTemplate.update("UPDATE DETALLE_FACTURA_VARIOS SET cantidad = ?, descripcion = ?, precio_unitario = ?, conceptos_facturacion_id = ?,"
 				+ "factura_varios_id = ? WHERE id=?",
 				fvd.getCantidad(), fvd.getDescripcion(), fvd.getPrecio_unitario(), fvd.getConceptos_facturacion_id(), fvd.getFactura_varios_id(), fvd.getId());
 	}
 
 	@Override
-	public FacturaVariosDetalleVista buscar(int id) throws DataAccessException{
-		FacturaVariosDetalleVista fdv = jdbcTemplate.queryForObject("SELECT * FROM FACTURA_VARIOS_DETALLE_V WHERE id=?",
-				new FacturaVariosDetalleVistaRM(), id);
+	public DetalleFacturaVariosVista buscar(int id) throws DataAccessException{
+		DetalleFacturaVariosVista fdv = jdbcTemplate.queryForObject("SELECT * FROM DETALLE_FACTURA_VARIOS_V WHERE id=?",
+				new DetalleFacturaVariosVistaRM(), id);
 		return fdv;
 	}
 
 	@Override
-	public List<FacturaVariosDetalleVista> consultar() throws DataAccessException{
-		List<FacturaVariosDetalleVista> fdv = jdbcTemplate.query("SELECT * FROM FACTURA_VARIOS_DETALLE_V", new FacturaVariosDetalleVistaRM());
+	public List<DetalleFacturaVariosVista> consultar() throws DataAccessException{
+		List<DetalleFacturaVariosVista> fdv = jdbcTemplate.query("SELECT * FROM DETALLE_FACTURA_VARIOS_V", new DetalleFacturaVariosVistaRM());
 		return fdv;
 	}
 
 	@Override
-	public List<FacturaVariosDetalleVista> consultarPorFacturaVarios(int id) {
-		List<FacturaVariosDetalleVista> fdv = jdbcTemplate.query("SELECT * FROM FACTURA_VARIOS_DETALLE_V WHERE factura_varios_id = ?", new FacturaVariosDetalleVistaRM(), id);
+	public List<DetalleFacturaVariosVista> consultarPorFacturaVarios(int id) {
+		List<DetalleFacturaVariosVista> fdv = jdbcTemplate.query("SELECT * FROM DETALLE_FACTURA_VARIOS_V WHERE factura_varios_id = ?", new DetalleFacturaVariosVistaRM(), id);
 		return fdv;
 	}
 }

@@ -16,34 +16,34 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.turbomaquinas.POJO.comercial.FacturaVariosDetalle;
-import com.turbomaquinas.POJO.comercial.FacturaVariosDetalleVista;
-import com.turbomaquinas.service.comercial.FacturaVariosDetalleService;
+import com.turbomaquinas.POJO.comercial.DetalleFacturaVarios;
+import com.turbomaquinas.POJO.comercial.DetalleFacturaVariosVista;
+import com.turbomaquinas.service.comercial.DetalleFacturaVariosService;
 
 @RestController
-@RequestMapping("/comercial/facturavariosdetalle")
-public class WSFacturaVariosDetalle {
+@RequestMapping("/comercial/detallefacturavarios")
+public class WSDetalleFacturaVarios {
 	
-	private static final Log bitacora = LogFactory.getLog(WSFacturaVariosDetalle.class); 
+	private static final Log bitacora = LogFactory.getLog(WSDetalleFacturaVarios.class); 
 
 	@Autowired
-	FacturaVariosDetalleService s;
+	DetalleFacturaVariosService s;
 	
 	@PostMapping()
-	public ResponseEntity<FacturaVariosDetalleVista> crear(@RequestBody FacturaVariosDetalle factura){
-		FacturaVariosDetalleVista respuesta = null;
+	public ResponseEntity<DetalleFacturaVariosVista> crear(@RequestBody DetalleFacturaVarios factura){
+		DetalleFacturaVariosVista respuesta = null;
 		bitacora.info(factura);
 		try{
 			respuesta = s.crear(factura);
 		}catch (DataAccessException e) {
 			bitacora.error(e.getMessage());
-			return new ResponseEntity<FacturaVariosDetalleVista>(HttpStatus.CONFLICT);
+			return new ResponseEntity<DetalleFacturaVariosVista>(HttpStatus.CONFLICT);
 		}
-		return new ResponseEntity<FacturaVariosDetalleVista>(respuesta, HttpStatus.CREATED);
+		return new ResponseEntity<DetalleFacturaVariosVista>(respuesta, HttpStatus.CREATED);
 	}
 	
 	@PutMapping()
-	public ResponseEntity<Void> actualizar(@RequestBody FacturaVariosDetalle factura){
+	public ResponseEntity<Void> actualizar(@RequestBody DetalleFacturaVarios factura){
 		bitacora.info(factura);
 		try{
 			s.actualizar(factura);
@@ -55,22 +55,22 @@ public class WSFacturaVariosDetalle {
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<FacturaVariosDetalleVista> buscar(@PathVariable int id){
-		FacturaVariosDetalleVista respuesta = null;
+	public ResponseEntity<DetalleFacturaVariosVista> buscar(@PathVariable int id){
+		DetalleFacturaVariosVista respuesta = null;
 		try {
 			respuesta = s.buscar(id);
 		} catch (DataAccessException e) {
 			bitacora.error(e.getMessage());
-			return new ResponseEntity<FacturaVariosDetalleVista>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<DetalleFacturaVariosVista>(HttpStatus.NOT_FOUND);
 		}
-		return new ResponseEntity<FacturaVariosDetalleVista>(respuesta, HttpStatus.OK);
+		return new ResponseEntity<DetalleFacturaVariosVista>(respuesta, HttpStatus.OK);
 	}
 	
 	@GetMapping
-	public ResponseEntity<List<FacturaVariosDetalleVista>> consultar(){
-		List<FacturaVariosDetalleVista> factura = s.consultar();
+	public ResponseEntity<List<DetalleFacturaVariosVista>> consultar(){
+		List<DetalleFacturaVariosVista> factura = s.consultar();
 		if ( factura == null)
-			return new ResponseEntity<List<FacturaVariosDetalleVista>>(HttpStatus.NO_CONTENT);
-		return new ResponseEntity<List<FacturaVariosDetalleVista>>(factura, HttpStatus.OK);
+			return new ResponseEntity<List<DetalleFacturaVariosVista>>(HttpStatus.NO_CONTENT);
+		return new ResponseEntity<List<DetalleFacturaVariosVista>>(factura, HttpStatus.OK);
 	}
 }

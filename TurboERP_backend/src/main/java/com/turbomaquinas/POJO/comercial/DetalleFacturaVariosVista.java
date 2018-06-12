@@ -2,7 +2,7 @@ package com.turbomaquinas.POJO.comercial;
 
 import java.math.BigDecimal;
 
-public class FacturaVariosDetalleVista {
+public class DetalleFacturaVariosVista {
 	private int id;
 	private int cantidad;
 	private String descripcion;
@@ -18,11 +18,11 @@ public class FacturaVariosDetalleVista {
 	private String des_medida;
 	private int factura_varios_id;
 	
-	public FacturaVariosDetalleVista() {
+	public DetalleFacturaVariosVista() {
 		super();
 	}
 
-	public FacturaVariosDetalleVista(int id, int cantidad, String descripcion, BigDecimal precio_unitario,
+	public DetalleFacturaVariosVista(int id, int cantidad, String descripcion, BigDecimal precio_unitario,
 			BigDecimal importe, float cuota_iva, BigDecimal iva, int conceptos_facturacion_id, int activo,
 			String cve_producto, String des_producto, String cve_medida, String des_medida, int factura_varios_id) {
 		super();

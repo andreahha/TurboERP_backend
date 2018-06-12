@@ -5,13 +5,13 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import com.turbomaquinas.POJO.comercial.FacturaVariosDetalle;
+import com.turbomaquinas.POJO.comercial.DetalleFacturaVarios;
 
-public class FacturaVariosDetalleRM implements RowMapper<FacturaVariosDetalle>{
+public class DetalleFacturaVariosRM implements RowMapper<DetalleFacturaVarios>{
 
 	@Override
-	public FacturaVariosDetalle mapRow(ResultSet rs, int i) throws SQLException {
-		FacturaVariosDetalle f = new FacturaVariosDetalle();
+	public DetalleFacturaVarios mapRow(ResultSet rs, int i) throws SQLException {
+		DetalleFacturaVarios f = new DetalleFacturaVarios();
 		f.setId(rs.getInt("id"));
 		f.setDescripcion(rs.getString("descripcion"));
 		f.setCantidad(rs.getInt("cantidad"));
