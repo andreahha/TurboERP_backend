@@ -86,4 +86,15 @@ public class WSDatosTimbrados {
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 	
+	@PutMapping("/{id}/alfresco/cancelado")
+	public ResponseEntity<Void> actualizarIdsAlfrescoCancelado(@PathVariable int id,@RequestParam String alfresco_id_pdf_cancelacion,@RequestParam String alfresco_id_xml_cancelacion){
+		try {
+			s.actualizarIdsAlfrescoCancelado(id,alfresco_id_pdf_cancelacion,alfresco_id_xml_cancelacion);
+		} catch (Exception e) {
+			bitacora.error(e.getMessage());
+			return new ResponseEntity<Void> (HttpStatus.CONFLICT);
+		}
+		return new ResponseEntity<Void>(HttpStatus.OK);
+	}
+	
 }

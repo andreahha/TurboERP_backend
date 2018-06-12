@@ -103,5 +103,15 @@ public class LogicaFacturaFinal implements FacturaFinalService {
 	public void actualizarIdAlfresco(int id, String alfresco_id) {
 		repFF.actualizarIdAlfresco(id,alfresco_id);
 	}
+	
+	@Override
+	public String obtenerJSONFacturaFinal(int idFactura,String modo) throws DataAccessException {
+		return repFF.obtenerJSONFacturaFinal(idFactura,modo);
+	}
+
+	@Override
+	public String obtenerJSONCancelarFacturaFinal(int idFactura, String modo,String justificacion) {
+		return repFF.obtenerJSONCancelarFacturaFinal(idFactura,modo,justificacion);
+	}
 
 }

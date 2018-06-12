@@ -25,5 +25,6 @@ public interface FacturaFinalService {
 	public void actualizarEstado(int id,String estado);
 	public FacturaFinalVista buscarUltimaFacturaPorTipo(String tipo);
 	public void actualizarIdAlfresco(int id, String alfresco_id);
-
+	public String obtenerJSONFacturaFinal(int idFactura,String modo);
+	public String obtenerJSONCancelarFacturaFinal(int idFactura,String modo,String justificacion);
 }
