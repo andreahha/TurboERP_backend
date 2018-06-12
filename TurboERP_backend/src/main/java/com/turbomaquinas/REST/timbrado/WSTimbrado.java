@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.turbomaquinas.service.comercial.FacturaFinalService;
+import com.turbomaquinas.service.timbrado.LogicaTimbrado;
 import com.turbomaquinas.service.timbrado.TimbradoService;
 
 import twitter4j.JSONObject;
@@ -33,6 +34,9 @@ public class WSTimbrado {
 	
 	@Autowired
 	FacturaFinalService ffs;
+	
+	@Autowired
+	LogicaTimbrado lt;
 	
 	@PostMapping("/facturafinal/{id}")
 	public ResponseEntity<String> timbrarFacturaFinal(@PathVariable int id,@RequestParam int numEmpleado,@RequestParam String modo) throws JsonParseException, JsonMappingException, IOException{
@@ -72,13 +76,13 @@ public class WSTimbrado {
 			return new ResponseEntity<String>(HttpStatus.CONFLICT);
 		}
 		try{
-        	ResponseEntity<String> response=ts.cancelarCFDiFacturaFinal(cfdi,id,numEmpleado,modo);
+        	ResponseEntity<String> response=ts.cancelarCFDiFacturaFinal(cfdi);
 	        JSONObject jsonRespuesta = new JSONObject(response.getBody());
 	        String AckEnlaceFiscal=(String) jsonRespuesta.getString("AckEnlaceFiscal");
 		    JSONObject json_AckEnlaceFiscal = new JSONObject(AckEnlaceFiscal);
 		    String estatusDocumento=(String) json_AckEnlaceFiscal.getString("estatusDocumento");
 		    if(estatusDocumento.equalsIgnoreCase("aceptado")){
-		    	return new ResponseEntity<String>(response.getBody(),HttpStatus.OK);
+		    	return lt.timbrar(ffs.obtenerJSONFacturaFinal(id, modo));
 		    }else if(estatusDocumento.equalsIgnoreCase("rechazado")){
 		    	return new ResponseEntity<String>(response.getBody(),HttpStatus.NOT_ACCEPTABLE);
 		    }else{
