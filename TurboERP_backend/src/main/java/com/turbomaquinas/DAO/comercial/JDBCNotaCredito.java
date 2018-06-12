@@ -64,5 +64,23 @@ public class JDBCNotaCredito implements NotaCreditoDAO {
 		return 0;
 	}
 
+	@Override
+	public void RestablecerNotaCredito(int id, int modificado_por) {
+		SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
+				.withProcedureName("RESTABLECER_NOTA_CREDITO");
+		
+		Map<String, Object> inParamMap = new HashMap<String, Object>();
+		
+		inParamMap.put("id", id);
+		inParamMap.put("modificado_por", modificado_por);
+		SqlParameterSource in = new MapSqlParameterSource(inParamMap);
+		simpleJdbcCall.execute(in);
+		
+	}
+
+
+
+	
+
 	
 }

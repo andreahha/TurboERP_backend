@@ -39,6 +39,16 @@ public class LogicaNotaCredito implements NotaCreditoService {
 		return repNc.buscar(id);
 	}
 
+	@Override
+	public void RestablecerNotaCredito(int id, int modificado_por) {
+		repNc.RestablecerNotaCredito(id, modificado_por);
+		
+	}
+
+	
+
+	
+
 	
 
 }
