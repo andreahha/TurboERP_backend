@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.turbomaquinas.POJO.comercial.DocumentoFacturaVarios;
 import com.turbomaquinas.POJO.comercial.FacturaVarios;
+import com.turbomaquinas.POJO.comercial.DetalleFacturaVariosVista;
 import com.turbomaquinas.POJO.comercial.FacturaVariosVista;
 
 public interface FacturaVariosService {
@@ -15,5 +16,6 @@ public interface FacturaVariosService {
 	public List<FacturaVariosVista> consultarFacturasVariosPendientesPorCliente(int id, String moneda);
 	public FacturaVariosVista buscarFacturaFolio(String folio, String estado, String tipo);
 	public FacturaVariosVista buscarPorTipoNumero(int numero, String tipo, String estado);
-	public FacturaVariosVista crearDoc(DocumentoFacturaVarios doc); 	
+	public FacturaVariosVista crearDoc(DocumentoFacturaVarios doc);
+	public List<DetalleFacturaVariosVista> consultarDetalles(int id); 	
 }
