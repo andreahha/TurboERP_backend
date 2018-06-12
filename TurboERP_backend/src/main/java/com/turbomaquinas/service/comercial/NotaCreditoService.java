@@ -12,7 +12,7 @@ public interface NotaCreditoService {
 	public void actualizar(NotaCredito nc);
 	public NotaCreditoVista buscar(int id);
 	public List<NotaCreditoVista> consultar();
-	public void desactivar(int id, int modificado_por);
+	public void RestablecerNotaCredito(int id, int modificado_por);
 	
 
 }

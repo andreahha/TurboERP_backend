@@ -80,15 +80,15 @@ public class WSNotaCredito {
 	}
 	
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Void> desactivar(@PathVariable("id") int id,@RequestParam int modificado_por){
+	public ResponseEntity<Void> restablecer(@PathVariable int id,@RequestParam int modificado_por){
 		
 		try{
-			s.desactivar(id,modificado_por);
+			s.RestablecerNotaCredito(id,modificado_por);
+			return new ResponseEntity<Void>(HttpStatus.OK);
 		}catch(DataAccessException e){
 			bitacora.error(e.getMessage());
 			return new ResponseEntity<Void>(HttpStatus.CONFLICT);
-		}
-		return new ResponseEntity<Void>(HttpStatus.OK);		
+		}	
 	}
 
 }

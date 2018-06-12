@@ -65,11 +65,22 @@ public class JDBCNotaCredito implements NotaCreditoDAO {
 	}
 
 	@Override
-	public void desactivar(int id, int modificado_por) throws DataAccessException{
-		String sql = "UPDATE NOTAS_CREDITO SET activo=0, modificado_por=? WHERE id=?";
-		jdbcTemplate.update(sql,modificado_por,id);
+	public void RestablecerNotaCredito(int id, int modificado_por) {
+		SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
+				.withProcedureName("RESTABLECER_NOTA_CREDITO");
+		
+		Map<String, Object> inParamMap = new HashMap<String, Object>();
+		
+		inParamMap.put("id", id);
+		inParamMap.put("modificado_por", modificado_por);
+		SqlParameterSource in = new MapSqlParameterSource(inParamMap);
+		simpleJdbcCall.execute(in);
 		
 	}
+
+
+
+	
 
 	
 }

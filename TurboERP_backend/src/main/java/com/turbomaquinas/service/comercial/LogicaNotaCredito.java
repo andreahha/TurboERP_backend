@@ -40,9 +40,14 @@ public class LogicaNotaCredito implements NotaCreditoService {
 	}
 
 	@Override
-	public void desactivar(int id, int modificado_por) {
-		repNc.desactivar(id, modificado_por);
+	public void RestablecerNotaCredito(int id, int modificado_por) {
+		repNc.RestablecerNotaCredito(id, modificado_por);
+		
 	}
+
+	
+
+	
 
 	
 
