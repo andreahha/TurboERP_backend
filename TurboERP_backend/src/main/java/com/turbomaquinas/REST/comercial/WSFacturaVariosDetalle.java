@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.turbomaquinas.POJO.comercial.FacturaVariosDetalle;
+import com.turbomaquinas.POJO.comercial.FacturaVariosDetalleVista;
 import com.turbomaquinas.service.comercial.FacturaVariosDetalleService;
 
 @RestController
@@ -29,16 +30,16 @@ public class WSFacturaVariosDetalle {
 	FacturaVariosDetalleService s;
 	
 	@PostMapping()
-	public ResponseEntity<FacturaVariosDetalle> crear(@RequestBody FacturaVariosDetalle factura){
-		FacturaVariosDetalle respuesta = null;
+	public ResponseEntity<FacturaVariosDetalleVista> crear(@RequestBody FacturaVariosDetalle factura){
+		FacturaVariosDetalleVista respuesta = null;
 		bitacora.info(factura);
 		try{
 			respuesta = s.crear(factura);
 		}catch (DataAccessException e) {
 			bitacora.error(e.getMessage());
-			return new ResponseEntity<FacturaVariosDetalle>(HttpStatus.CONFLICT);
+			return new ResponseEntity<FacturaVariosDetalleVista>(HttpStatus.CONFLICT);
 		}
-		return new ResponseEntity<FacturaVariosDetalle>(respuesta, HttpStatus.CREATED);
+		return new ResponseEntity<FacturaVariosDetalleVista>(respuesta, HttpStatus.CREATED);
 	}
 	
 	@PutMapping()
@@ -54,22 +55,22 @@ public class WSFacturaVariosDetalle {
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<FacturaVariosDetalle> buscar(@PathVariable int id){
-		FacturaVariosDetalle respuesta = null;
+	public ResponseEntity<FacturaVariosDetalleVista> buscar(@PathVariable int id){
+		FacturaVariosDetalleVista respuesta = null;
 		try {
 			respuesta = s.buscar(id);
 		} catch (DataAccessException e) {
 			bitacora.error(e.getMessage());
-			return new ResponseEntity<FacturaVariosDetalle>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<FacturaVariosDetalleVista>(HttpStatus.NOT_FOUND);
 		}
-		return new ResponseEntity<FacturaVariosDetalle>(respuesta, HttpStatus.OK);
+		return new ResponseEntity<FacturaVariosDetalleVista>(respuesta, HttpStatus.OK);
 	}
 	
 	@GetMapping
-	public ResponseEntity<List<FacturaVariosDetalle>> consultar(){
-		List<FacturaVariosDetalle> factura = s.consultar();
+	public ResponseEntity<List<FacturaVariosDetalleVista>> consultar(){
+		List<FacturaVariosDetalleVista> factura = s.consultar();
 		if ( factura == null)
-			return new ResponseEntity<List<FacturaVariosDetalle>>(HttpStatus.NO_CONTENT);
-		return new ResponseEntity<List<FacturaVariosDetalle>>(factura, HttpStatus.OK);
+			return new ResponseEntity<List<FacturaVariosDetalleVista>>(HttpStatus.NO_CONTENT);
+		return new ResponseEntity<List<FacturaVariosDetalleVista>>(factura, HttpStatus.OK);
 	}
 }

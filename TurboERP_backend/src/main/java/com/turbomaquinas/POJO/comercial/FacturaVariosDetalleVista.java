@@ -1,28 +1,44 @@
 package com.turbomaquinas.POJO.comercial;
 
+import java.math.BigDecimal;
+
 public class FacturaVariosDetalleVista {
 	private int id;
+	private int cantidad;
 	private String descripcion;
-	private Float importe;
+	private BigDecimal precio_unitario;
+	private BigDecimal importe;
+	private float cuota_iva;
+	private BigDecimal iva;
+	private int conceptos_facturacion_id;
 	private int activo;
-	private int productos_sat_id;
-	private String codigo;
-	private String productos_descripcion;
+	private String cve_producto;
+	private String des_producto;
+	private String cve_medida;
+	private String des_medida;
 	private int factura_varios_id;
 	
 	public FacturaVariosDetalleVista() {
 		super();
 	}
 
-	public FacturaVariosDetalleVista(int id, String descripcion, Float importe, int activo, int productos_sat_id,
-			String codigo, String productos_descripcion, int factura_varios_id) {
+	public FacturaVariosDetalleVista(int id, int cantidad, String descripcion, BigDecimal precio_unitario,
+			BigDecimal importe, float cuota_iva, BigDecimal iva, int conceptos_facturacion_id, int activo,
+			String cve_producto, String des_producto, String cve_medida, String des_medida, int factura_varios_id) {
+		super();
 		this.id = id;
+		this.cantidad = cantidad;
 		this.descripcion = descripcion;
+		this.precio_unitario = precio_unitario;
 		this.importe = importe;
+		this.cuota_iva = cuota_iva;
+		this.iva = iva;
+		this.conceptos_facturacion_id = conceptos_facturacion_id;
 		this.activo = activo;
-		this.productos_sat_id = productos_sat_id;
-		this.codigo = codigo;
-		this.productos_descripcion = productos_descripcion;
+		this.cve_producto = cve_producto;
+		this.des_producto = des_producto;
+		this.cve_medida = cve_medida;
+		this.des_medida = des_medida;
 		this.factura_varios_id = factura_varios_id;
 	}
 
@@ -34,6 +50,14 @@ public class FacturaVariosDetalleVista {
 		this.id = id;
 	}
 
+	public int getCantidad() {
+		return cantidad;
+	}
+
+	public void setCantidad(int cantidad) {
+		this.cantidad = cantidad;
+	}
+
 	public String getDescripcion() {
 		return descripcion;
 	}
@@ -42,12 +66,44 @@ public class FacturaVariosDetalleVista {
 		this.descripcion = descripcion;
 	}
 
-	public Float getImporte() {
+	public BigDecimal getPrecio_unitario() {
+		return precio_unitario;
+	}
+
+	public void setPrecio_unitario(BigDecimal precio_unitario) {
+		this.precio_unitario = precio_unitario;
+	}
+
+	public BigDecimal getImporte() {
 		return importe;
 	}
 
-	public void setImporte(Float importe) {
+	public void setImporte(BigDecimal importe) {
 		this.importe = importe;
+	}
+
+	public float getCuota_iva() {
+		return cuota_iva;
+	}
+
+	public void setCuota_iva(float cuota_iva) {
+		this.cuota_iva = cuota_iva;
+	}
+
+	public BigDecimal getIva() {
+		return iva;
+	}
+
+	public void setIva(BigDecimal iva) {
+		this.iva = iva;
+	}
+
+	public int getConceptos_facturacion_id() {
+		return conceptos_facturacion_id;
+	}
+
+	public void setConceptos_facturacion_id(int conceptos_facturacion_id) {
+		this.conceptos_facturacion_id = conceptos_facturacion_id;
 	}
 
 	public int getActivo() {
@@ -58,28 +114,36 @@ public class FacturaVariosDetalleVista {
 		this.activo = activo;
 	}
 
-	public int getProductos_sat_id() {
-		return productos_sat_id;
+	public String getCve_producto() {
+		return cve_producto;
 	}
 
-	public void setProductos_sat_id(int productos_sat_id) {
-		this.productos_sat_id = productos_sat_id;
+	public void setCve_producto(String cve_producto) {
+		this.cve_producto = cve_producto;
 	}
 
-	public String getCodigo() {
-		return codigo;
+	public String getDes_producto() {
+		return des_producto;
 	}
 
-	public void setCodigo(String codigo) {
-		this.codigo = codigo;
+	public void setDes_producto(String des_producto) {
+		this.des_producto = des_producto;
 	}
 
-	public String getProductos_descripcion() {
-		return productos_descripcion;
+	public String getCve_medida() {
+		return cve_medida;
 	}
 
-	public void setProductos_descripcion(String productos_descripcion) {
-		this.productos_descripcion = productos_descripcion;
+	public void setCve_medida(String cve_medida) {
+		this.cve_medida = cve_medida;
+	}
+
+	public String getDes_medida() {
+		return des_medida;
+	}
+
+	public void setDes_medida(String des_medida) {
+		this.des_medida = des_medida;
 	}
 
 	public int getFactura_varios_id() {

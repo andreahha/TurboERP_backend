@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.turbomaquinas.DAO.comercial.FacturaVariosDetalleDAO;
 import com.turbomaquinas.POJO.comercial.FacturaVariosDetalle;
+import com.turbomaquinas.POJO.comercial.FacturaVariosDetalleVista;
 
 @Service
 public class LogicaFacturaVariosDetalle implements FacturaVariosDetalleService{
@@ -16,23 +17,23 @@ public class LogicaFacturaVariosDetalle implements FacturaVariosDetalleService{
 	FacturaVariosDetalleDAO repositorio;
 	
 	@Override
-	public FacturaVariosDetalle crear(FacturaVariosDetalle fvd) throws DataAccessException{
+	public FacturaVariosDetalleVista crear(FacturaVariosDetalle fvd) throws DataAccessException{
 		int id = repositorio.crear(fvd);
 		return repositorio.buscar(id);
 	}
 
 	@Override
-	public FacturaVariosDetalle actualizar(FacturaVariosDetalle fvd) throws DataAccessException{
-		return repositorio.actualizar(fvd);
+	public void actualizar(FacturaVariosDetalle fvd) throws DataAccessException{
+		repositorio.actualizar(fvd);
 	}
 
 	@Override
-	public FacturaVariosDetalle buscar(int id) throws DataAccessException{
+	public FacturaVariosDetalleVista buscar(int id) throws DataAccessException{
 		return repositorio.buscar(id);
 	}
 
 	@Override
-	public List<FacturaVariosDetalle> consultar() throws DataAccessException{
+	public List<FacturaVariosDetalleVista> consultar() throws DataAccessException{
 		return repositorio.consultar();
 	}
 
