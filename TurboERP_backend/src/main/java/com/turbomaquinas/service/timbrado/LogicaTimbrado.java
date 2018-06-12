@@ -45,7 +45,7 @@ public class LogicaTimbrado implements TimbradoService{
         return headers;
 	}
 	
-	private ResponseEntity<String> timbrar(String json){
+	public ResponseEntity<String> timbrar(String json){
 		//Configurar petición Headers de las API enlace fiscal
 		HttpHeaders headers=configurarPeticionAPIEnlaceFiscal();
 		//PETICIÓN A LA API
@@ -116,7 +116,7 @@ public class LogicaTimbrado implements TimbradoService{
 	
 	@Override
 	@Transactional
-	public ResponseEntity<String> cancelarCFDiFacturaFinal(String jsonCancelarfactura, int id, int numEmpleado, String modo) {
+	public ResponseEntity<String> cancelarCFDiFacturaFinal(String jsonCancelarfactura) {
 		return cancelarCFDi(jsonCancelarfactura);
 	}
 	
