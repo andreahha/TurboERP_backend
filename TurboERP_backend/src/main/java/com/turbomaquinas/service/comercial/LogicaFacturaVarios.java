@@ -5,12 +5,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import com.turbomaquinas.DAO.comercial.FacturaVariosDAO;
 import com.turbomaquinas.DAO.comercial.DetalleFacturaVariosDAO;
+import com.turbomaquinas.DAO.comercial.FacturaVariosDAO;
+import com.turbomaquinas.POJO.comercial.DetalleFacturaVariosVista;
 import com.turbomaquinas.POJO.comercial.DocumentoFacturaVarios;
 import com.turbomaquinas.POJO.comercial.FacturaVarios;
-import com.turbomaquinas.POJO.comercial.DetalleFacturaVariosVista;
 import com.turbomaquinas.POJO.comercial.FacturaVariosVista;
 
 @Service
@@ -58,6 +59,7 @@ public class LogicaFacturaVarios implements FacturaVariosService {
 	}
 
 	@Override
+	@Transactional
 	public FacturaVariosVista crearDoc(DocumentoFacturaVarios doc) {
 		int id = repFV.crearDoc(doc.toString());
 		return repFV.buscar(id);
@@ -66,6 +68,13 @@ public class LogicaFacturaVarios implements FacturaVariosService {
 	@Override
 	public List<DetalleFacturaVariosVista> consultarDetalles(int id) {
 		return repoDetalles.consultarPorFacturaVarios(id);
+	}
+
+	@Override
+	@Transactional
+	public void baja(int id, int numUsuario) {
+		repFV.baja(id, numUsuario);	
+		repoDetalles.bajaPorIdFactura(id, numUsuario);
 	}
 
 }
