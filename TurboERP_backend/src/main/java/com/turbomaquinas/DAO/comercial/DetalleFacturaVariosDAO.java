@@ -11,5 +11,5 @@ public interface DetalleFacturaVariosDAO {
 	public DetalleFacturaVariosVista buscar(int id);
 	public List<DetalleFacturaVariosVista> consultar();
 	public List<DetalleFacturaVariosVista> consultarPorFacturaVarios(int id);
-	public void bajaPorIdFactura(int id, int idUsuario);
+	public void bajaPorIdFactura(int id, int numUsuario);
 }

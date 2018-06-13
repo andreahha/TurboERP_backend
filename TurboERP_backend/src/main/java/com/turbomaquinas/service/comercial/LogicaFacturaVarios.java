@@ -72,9 +72,9 @@ public class LogicaFacturaVarios implements FacturaVariosService {
 
 	@Override
 	@Transactional
-	public void baja(int id, int idUsuario) {
-		repFV.baja(id, idUsuario);	
-		repoDetalles.bajaPorIdFactura(id, idUsuario);
+	public void baja(int id, int numUsuario) {
+		repFV.baja(id, numUsuario);	
+		repoDetalles.bajaPorIdFactura(id, numUsuario);
 	}
 
 }
