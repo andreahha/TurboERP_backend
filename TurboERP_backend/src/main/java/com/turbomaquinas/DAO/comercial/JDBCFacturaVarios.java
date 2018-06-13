@@ -102,5 +102,10 @@ public class JDBCFacturaVarios implements FacturaVariosDAO {
 	    }		
 		return 0;
 	}
+
+	@Override
+	public void baja(int id, int idUsuario) {
+		jdbcTemplate.update("UPDATE FACTURA_VARIOS SET activo = 0, modificado_por = ? where id = ?", idUsuario, id);
+	}
 	
 }

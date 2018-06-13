@@ -76,4 +76,9 @@ public class JDBCDetalleFacturaVarios implements DetalleFacturaVariosDAO{
 		List<DetalleFacturaVariosVista> fdv = jdbcTemplate.query("SELECT * FROM DETALLE_FACTURA_VARIOS_V WHERE factura_varios_id = ?", new DetalleFacturaVariosVistaRM(), id);
 		return fdv;
 	}
+
+	@Override
+	public void bajaPorIdFactura(int id, int idUsuario) {
+		jdbcTemplate.update("UPDATE DETALLE_FACTURA_VARIOS SET activo = 0, modificado_por = ? where FACTURA_VARIOS_id = ?", idUsuario, id);		
+	}
 }

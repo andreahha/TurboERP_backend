@@ -17,5 +17,6 @@ public interface FacturaVariosService {
 	public FacturaVariosVista buscarFacturaFolio(String folio, String estado, String tipo);
 	public FacturaVariosVista buscarPorTipoNumero(int numero, String tipo, String estado);
 	public FacturaVariosVista crearDoc(DocumentoFacturaVarios doc);
-	public List<DetalleFacturaVariosVista> consultarDetalles(int id); 	
+	public List<DetalleFacturaVariosVista> consultarDetalles(int id);
+	public void baja(int id, int idUsuario); 	
 }

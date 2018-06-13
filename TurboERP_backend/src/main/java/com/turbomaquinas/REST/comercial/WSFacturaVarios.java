@@ -91,6 +91,17 @@ public class WSFacturaVarios {
 			return new ResponseEntity<Void>(HttpStatus.OK);		
 	}
 	
+	@DeleteMapping("{id}/baja/{idUsuario}")
+	public ResponseEntity<Void> baja(@PathVariable int id, @PathVariable int idUsuario){
+		try{
+			s.baja(id, idUsuario);
+		}catch(DataAccessException e){
+			bitacora.error(e.getMessage());
+			return new ResponseEntity<Void>(HttpStatus.CONFLICT);
+		}
+			return new ResponseEntity<Void>(HttpStatus.OK);		
+	}
+	
 	@GetMapping("/cliente/{id}/{moneda}")
 	public ResponseEntity<List<FacturaVariosVista>> consultarFacturasVariosPendientesPorCliente(@PathVariable int id,@PathVariable String moneda){
 		List<FacturaVariosVista> fvl = null;
