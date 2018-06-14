@@ -77,4 +77,9 @@ public class LogicaFacturaVarios implements FacturaVariosService {
 		repoDetalles.bajaPorIdFactura(id, numUsuario);
 	}
 
+	@Override
+	public List<FacturaVariosVista> consultarPorEstado(String estado) {
+		return repFV.consultarPorEstado(estado);
+	}
+
 }

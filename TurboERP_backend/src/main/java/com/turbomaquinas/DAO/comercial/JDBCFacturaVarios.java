@@ -105,8 +105,13 @@ public class JDBCFacturaVarios implements FacturaVariosDAO {
 
 	@Override
 	public void baja(int id, int numUsuario) {
-		jdbcTemplate.update("UPDATE FACTURA_VARIOS SET activo = 0, modificado_por = ?, fecha_baja = NOW(),"
+		jdbcTemplate.update("UPDATE FACTURA_VARIOS SET activo = 0, estado = 'B', modificado_por = ?, fecha_baja = NOW(),"
 				+ "mes_baja = DATE_FORMAT(NOW(), '%m'), anio_baja = DATE_FORMAT(NOW(), '%Y')  where id = ?", numUsuario, id);
+	}
+
+	@Override
+	public List<FacturaVariosVista> consultarPorEstado(String estado) {
+		return jdbcTemplate.query("SELECT * FROM FACTURA_VARIOS_V WHERE estado_factura = ?", new FacturaVariosVistaRM(), estado);
 	}
 	
 }
