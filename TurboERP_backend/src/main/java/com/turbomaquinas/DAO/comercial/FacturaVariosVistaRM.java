@@ -31,6 +31,8 @@ public class FacturaVariosVistaRM implements RowMapper<FacturaVariosVista> {
 		fv.setEstado_factura(rs.getString("estado_factura"));
 		fv.setDesc_estado_fact(rs.getString("desc_estado_fact"));
 		fv.setFactura_varios_id_sust(rs.getInt("factura_varios_id_sust"));
+		fv.setNumero_sustitucion(rs.getInt("numero_sustitucion"));
+		fv.setTipo_sustitucion(rs.getString("tipo_sustitucion"));
 		fv.setDes_conceptos_facturacion_contable(rs.getString("des_conceptos_facturacion_contable"));
 		fv.setClientes_id(rs.getInt("clientes_id"));
 		fv.setFolio_fiscal(rs.getString("folio_fiscal"));
