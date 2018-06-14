@@ -19,4 +19,9 @@ public class LogicaCronologiaOT implements CronologiaOTservice{
 	public List<CronologiaOT> consultarPorOrden(int id) throws DataAccessException{
 		return repositorio.consultarPorOrden(id);
 	}
+
+	@Override
+	public List<CronologiaOT> consultarPorOrdenyTipo(int id, String tipo) {
+		return repositorio.consultarPorOrdenyTipo(id, tipo);
+	}
 }

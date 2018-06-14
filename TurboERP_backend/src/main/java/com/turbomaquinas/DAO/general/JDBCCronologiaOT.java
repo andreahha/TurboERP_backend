@@ -21,4 +21,11 @@ public class JDBCCronologiaOT implements CronologiaOTDAO{
 				new CronologiaOTRM(), id);
 		return cron;
 	}
+
+	@Override
+	public List<CronologiaOT> consultarPorOrdenyTipo(int id, String tipo) throws DataAccessException {
+		List<CronologiaOT> crono = jdbcTemplate.query("SELECT * FROM CRONOLOGIA_OT_V WHERE ORDENES_id = ? and tipo = ? ORDER BY fecha, creado", 
+				new CronologiaOTRM(), id, tipo);
+		return crono;
+	}
 }
