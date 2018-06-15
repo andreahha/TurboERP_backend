@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.turbomaquinas.POJO.comercial.DetalleFacturaVariosVista;
 import com.turbomaquinas.POJO.comercial.DocumentoFacturaVarios;
 import com.turbomaquinas.POJO.comercial.FacturaVarios;
 import com.turbomaquinas.POJO.comercial.FacturaVariosVista;
@@ -90,6 +91,17 @@ public class WSFacturaVarios {
 			return new ResponseEntity<Void>(HttpStatus.OK);		
 	}
 	
+	@DeleteMapping("{id}/baja/{numUsuario}")
+	public ResponseEntity<Void> baja(@PathVariable int id, @PathVariable int numUsuario){
+		try{
+			s.baja(id, numUsuario);
+		}catch(DataAccessException e){
+			bitacora.error(e.getMessage());
+			return new ResponseEntity<Void>(HttpStatus.CONFLICT);
+		}
+			return new ResponseEntity<Void>(HttpStatus.OK);		
+	}
+	
 	@GetMapping("/cliente/{id}/{moneda}")
 	public ResponseEntity<List<FacturaVariosVista>> consultarFacturasVariosPendientesPorCliente(@PathVariable int id,@PathVariable String moneda){
 		List<FacturaVariosVista> fvl = null;
@@ -128,6 +140,33 @@ public class WSFacturaVarios {
 			return new ResponseEntity<FacturaVariosVista>(HttpStatus.NOT_FOUND);
 		}
 		return new ResponseEntity<FacturaVariosVista>(ffv, HttpStatus.OK);
-		
 	}
+	
+	@GetMapping("/{id}/detalles")
+	public ResponseEntity<List<DetalleFacturaVariosVista>> consultarDetalles(@PathVariable int id){
+		List<DetalleFacturaVariosVista> fvdv = null;
+		try {
+			fvdv = s.consultarDetalles(id);
+		} catch (Exception e) {
+			bitacora.error(e.getMessage());
+			return new ResponseEntity<List<DetalleFacturaVariosVista>> (HttpStatus.CONFLICT);
+		}
+		if (fvdv.isEmpty()) {
+			return new ResponseEntity<List<DetalleFacturaVariosVista>>(HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<List<DetalleFacturaVariosVista>> (fvdv, HttpStatus.OK);
+	}
+
+	@GetMapping("/estado/{estado}")
+	public ResponseEntity<List<FacturaVariosVista>> consultarPorEstado(@PathVariable String estado){
+		List<FacturaVariosVista> fvv = null;
+		try{
+			fvv = s.consultarPorEstado(estado);
+		}catch(DataAccessException e){
+			bitacora.error(e.getMessage());
+			return new ResponseEntity<List<FacturaVariosVista>>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<List<FacturaVariosVista>>(fvv, HttpStatus.OK);		
+	}
+	
 }

@@ -15,5 +15,6 @@ public interface FacturaVariosDAO {
 	public FacturaVariosVista buscarFacturaFolio(String folio, String estado, String tipo);
 	public FacturaVariosVista buscarPorTipoNumero(int numero, String tipo, String estado);
 	public int crearDoc(String doc);
-
+	public void baja(int id, int numUsuario);
+	public List<FacturaVariosVista> consultarPorEstado(String estado);
 }
