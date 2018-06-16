@@ -360,4 +360,12 @@ public class WSOrden {
 		return new ResponseEntity<List<CotizacionVista>>(cotizaciones, HttpStatus.OK);
 	}
 	
+	@GetMapping("/cliente/{id}")
+	public ResponseEntity<List<OrdenVista>> ordenesCliente(@PathVariable int id){
+		List<OrdenVista> o = os.OrdenesporCliente(id);
+		if (o == null)
+			return new ResponseEntity<List<OrdenVista>> (HttpStatus.NOT_FOUND);
+		return new ResponseEntity<List<OrdenVista>>(o, HttpStatus.OK);
+	}
+	
 }

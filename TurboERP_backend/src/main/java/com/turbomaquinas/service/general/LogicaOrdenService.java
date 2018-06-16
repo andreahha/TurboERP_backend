@@ -244,5 +244,11 @@ public class LogicaOrdenService implements OrdenService{
 	public List<CotizacionVista> consultarCotizacionesAutorizadas(int id) {
 		return repositorio.consultarCotizacionesAutorizadas(id);
 	}
+
+	@Override
+	public List<OrdenVista> OrdenesporCliente(int id) {
+		
+		return repositorio.OrdenesporCliente(id);
+	}
 	
 }
