@@ -104,14 +104,80 @@ public class JDBCFacturaVarios implements FacturaVariosDAO {
 	}
 
 	@Override
-	public void baja(int id, int numUsuario) {
-		jdbcTemplate.update("UPDATE FACTURA_VARIOS SET activo = 0, estado = 'B', modificado_por = ?, fecha_baja = NOW(),"
+	public void cancelar(int id, int numUsuario) {
+		jdbcTemplate.update("UPDATE FACTURA_VARIOS SET activo = 0, estado = 'C', modificado_por = ?, fecha_baja = NOW(),"
 				+ "mes_baja = DATE_FORMAT(NOW(), '%m'), anio_baja = DATE_FORMAT(NOW(), '%Y')  where id = ?", numUsuario, id);
 	}
 
 	@Override
 	public List<FacturaVariosVista> consultarPorEstado(String estado) {
 		return jdbcTemplate.query("SELECT * FROM FACTURA_VARIOS_V WHERE estado_factura = ?", new FacturaVariosVistaRM(), estado);
+	}
+
+	
+	@Override
+	public String obtenerJSONFacturaVarios(int idFactura,String modo) throws DataAccessException {
+		SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
+				.withProcedureName("JSON_TIMBRADO_FACTURA_VARIOS");
+
+		Map<String, Object> inParamMap = new HashMap<String, Object>();
+		inParamMap.put("p_idFactura", idFactura);
+		inParamMap.put("p_modo", modo);
+		SqlParameterSource in = new MapSqlParameterSource(inParamMap);
+	
+		Map<String, Object> simpleJdbcCallResult = simpleJdbcCall.execute(in);
+		
+		String json=null;
+		try{
+			for (Entry<String, Object> entry : simpleJdbcCallResult.entrySet()) {
+				if (entry.getKey().compareTo("jsonFactura") == 0) {
+		            json=(String)entry.getValue();
+		        }
+		    }
+			return json;
+		}catch(Exception e){return null;}
+	}
+	
+	@Override
+	public void actualizarEstado(int id, String estado) {
+		String sql="UPDATE FACTURA_VARIOS SET estado = ? WHERE id = ?";
+		jdbcTemplate.update(sql,estado,id);
+	}
+	
+	@Override
+	public void actualizarTipoCambio(int id, float tipoCambio) {
+		String sql="UPDATE FACTURA_VARIOS SET tipo_cambio = ? WHERE id = ?";
+		jdbcTemplate.update(sql,tipoCambio,id);
+	}
+	
+	@Override
+	public void actualizarIdDatosTimbrados(int id, int idDatosTimbrados) {
+		String sql="UPDATE FACTURA_VARIOS SET DATOS_TIMBRADO_id = ? WHERE id = ?";
+		jdbcTemplate.update(sql,idDatosTimbrados,id);
+	}
+	
+	@Override
+	public String obtenerJSONCancelarFacturaVarios(int idFactura,String modo,String justificacion) throws DataAccessException {
+		SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
+				.withProcedureName("JSON_CANCELACION_FACTURA_VARIOS");
+
+		Map<String, Object> inParamMap = new HashMap<String, Object>();
+		inParamMap.put("p_idFactura", idFactura);
+		inParamMap.put("p_modo", modo);
+		inParamMap.put("p_justificacion",justificacion);
+		SqlParameterSource in = new MapSqlParameterSource(inParamMap);
+	
+		Map<String, Object> simpleJdbcCallResult = simpleJdbcCall.execute(in);
+		
+		String json=null;
+		try{
+			for (Entry<String, Object> entry : simpleJdbcCallResult.entrySet()) {
+				if (entry.getKey().compareTo("jsonCancelacion") == 0) {
+		            json=(String)entry.getValue();
+		        }
+		    }
+			return json;
+		}catch(Exception e){return null;}
 	}
 	
 }
