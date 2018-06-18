@@ -20,4 +20,10 @@ public class LogicaParametro implements ParametroService{
 		return repParametro.consultar();
 	}
 
+	@Override
+	public Parametro cierreMes(Parametro par) throws DataAccessException{
+		repParametro.cierreMes(par);
+		return repParametro.buscar(par.getId());
+	}
+
 }
