@@ -246,9 +246,9 @@ public class LogicaOrdenService implements OrdenService{
 	}
 
 	@Override
-	public List<OrdenVista> OrdenesporCliente(int id) {
+	public List<OrdenVista> OrdenesporCliente(int id,int anio) {
 		
-		return repositorio.OrdenesporCliente(id);
+		return repositorio.OrdenesporCliente(id,anio);
 	}
 	
 }

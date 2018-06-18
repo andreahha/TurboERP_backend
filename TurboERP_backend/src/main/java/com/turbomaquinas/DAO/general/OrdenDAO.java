@@ -40,5 +40,5 @@ public interface OrdenDAO {
 	public void restarImporteAutorizado(int orden_id, BigDecimal importe_autorizado);
 	public List<Integer> consultarIdsFacturas(int orden_id);
 	public List<CotizacionVista> consultarCotizacionesAutorizadas(int id);
-	public List<OrdenVista> OrdenesporCliente(int idCliente);
+	public List<OrdenVista> OrdenesporCliente(int idCliente,int anio);
 }

@@ -475,9 +475,9 @@ public class JDBCOrden implements OrdenDAO {
 	}
 
 	@Override
-	public List<OrdenVista> OrdenesporCliente(int idCliente) throws DataAccessException{
-		List<OrdenVista> ov = jdbcTemplate.query("SELECT * FROM ORDENES_V ov WHERE ov.clientes_id=?", 
-				new OrdenVistaRM(), idCliente);
+	public List<OrdenVista> OrdenesporCliente(int idCliente,int anio) throws DataAccessException{
+		List<OrdenVista> ov = jdbcTemplate.query("SELECT * FROM ORDENES_V ov WHERE ov.clientes_id=? and ov.anio=?", 
+				new OrdenVistaRM(), idCliente,anio);
 		return ov;
 	}
 	
