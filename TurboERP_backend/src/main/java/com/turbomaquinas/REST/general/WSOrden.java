@@ -368,4 +368,12 @@ public class WSOrden {
 		return new ResponseEntity<List<OrdenVista>>(o, HttpStatus.OK);
 	}
 	
+	@GetMapping("/años/cliente/{id}")
+	public ResponseEntity<List<Integer>> anios(@PathVariable int id){
+		List<Integer> anios = os.anioOrdenCliente(id);
+		if (anios == null)
+			return new ResponseEntity<List<Integer>> (HttpStatus.NOT_FOUND);
+		return new ResponseEntity<List<Integer>>(anios, HttpStatus.OK);
+	}
+	
 }

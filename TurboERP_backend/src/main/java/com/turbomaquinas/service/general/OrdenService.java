@@ -51,4 +51,5 @@ public interface OrdenService {
 	public List<FacturaFinalVista> consultarFacturas(int id);
 	public List<CotizacionVista> consultarCotizacionesAutorizadas(int id);
 	public List<OrdenVista> OrdenesporCliente(int id,int anio);
+	public List<Integer> anioOrdenCliente(int id);
 }

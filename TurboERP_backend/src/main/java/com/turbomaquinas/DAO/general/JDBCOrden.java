@@ -480,6 +480,13 @@ public class JDBCOrden implements OrdenDAO {
 				new OrdenVistaRM(), idCliente,anio);
 		return ov;
 	}
+
+	@Override
+	public List<Integer> anioOrdenCliente(int idCliente) {
+		List<Integer> o = jdbcTemplate.queryForList("SELECT DISTINCT(anio) FROM ORDENES where clientes_id=? ORDER BY anio DESC", 
+				Integer.class,idCliente);
+		return o;
+	}
 	
 	
 	

@@ -41,4 +41,5 @@ public interface OrdenDAO {
 	public List<Integer> consultarIdsFacturas(int orden_id);
 	public List<CotizacionVista> consultarCotizacionesAutorizadas(int id);
 	public List<OrdenVista> OrdenesporCliente(int idCliente,int anio);
+	public List<Integer> anioOrdenCliente(int idCliente);
 }

@@ -250,5 +250,10 @@ public class LogicaOrdenService implements OrdenService{
 		
 		return repositorio.OrdenesporCliente(id,anio);
 	}
+
+	@Override
+	public List<Integer> anioOrdenCliente(int id) throws DataAccessException{
+		return repositorio.anioOrdenCliente(id);
+	}
 	
 }
