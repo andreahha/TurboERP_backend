@@ -22,5 +22,4 @@ public interface FacturaVariosService {
 	public List<FacturaVariosVista> consultarPorEstado(String estado); 	
 	public String obtenerJSONFacturaVarios(int idFactura,String modo);
 	public String obtenerJSONCancelarFacturaVarios(int idFactura,String modo,String justificacion);
-	public List<FacturaVariosVista> consultarPorEstado(String estado); 	
 }
