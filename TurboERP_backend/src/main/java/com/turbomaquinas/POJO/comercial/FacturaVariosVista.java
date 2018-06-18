@@ -46,6 +46,7 @@ public class FacturaVariosVista {
 	private int pais_id;
 	private String pais;
 	private int activo;
+	private int datos_timbrado_id;
 	
 	public FacturaVariosVista() {
 		super();
@@ -59,7 +60,8 @@ public class FacturaVariosVista {
 			String tipo_sustitucion, String des_conceptos_facturacion_contable, int clientes_id, String folio_fiscal,
 			String cve_formap, String des_formap, String cve_metodop, String des_metodop, String cve_uso,
 			String des_uso, int numero_cliente, int numero_giro, String nombre, String direccion, String colonia,
-			String codigo_postal, String ciudad, int estado_id, String estado, int pais_id, String pais, int activo) {
+			String codigo_postal, String ciudad, int estado_id, String estado, int pais_id, String pais, int activo,
+			int datos_timbrado_id) {
 		super();
 		this.id = id;
 		this.tipo = tipo;
@@ -102,7 +104,10 @@ public class FacturaVariosVista {
 		this.pais_id = pais_id;
 		this.pais = pais;
 		this.activo = activo;
+		this.datos_timbrado_id = datos_timbrado_id;
 	}
+
+
 
 	public int getId() {
 		return id;
@@ -432,5 +437,12 @@ public class FacturaVariosVista {
 		this.activo = activo;
 	}
 
-	
+	public int getDatos_timbrado_id() {
+		return datos_timbrado_id;
+	}
+
+	public void setDatos_timbrado_id(int datos_timbrado_id) {
+		this.datos_timbrado_id = datos_timbrado_id;
+	}
+		
 }

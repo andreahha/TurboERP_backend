@@ -54,6 +54,7 @@ public class FacturaVariosVistaRM implements RowMapper<FacturaVariosVista> {
 		fv.setPais(rs.getString("pais"));
 		fv.setPais_id(rs.getInt("pais_id"));
 		fv.setActivo(rs.getInt("activo"));
+		fv.setDatos_timbrado_id(rs.getInt("DATOS_TIMBRADO_id"));
 				
 		return fv;
 	}
