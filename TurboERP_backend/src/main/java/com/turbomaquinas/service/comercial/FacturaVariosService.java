@@ -18,6 +18,8 @@ public interface FacturaVariosService {
 	public FacturaVariosVista buscarPorTipoNumero(int numero, String tipo, String estado);
 	public FacturaVariosVista crearDoc(DocumentoFacturaVarios doc);
 	public List<DetalleFacturaVariosVista> consultarDetalles(int id);
-	public void baja(int id, int numUsuario);
+	public void cancelar(int id, int numUsuario);
 	public List<FacturaVariosVista> consultarPorEstado(String estado); 	
+	public String obtenerJSONFacturaVarios(int idFactura,String modo);
+	public String obtenerJSONCancelarFacturaVarios(int idFactura,String modo,String justificacion);
 }

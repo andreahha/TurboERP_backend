@@ -91,10 +91,10 @@ public class WSFacturaVarios {
 			return new ResponseEntity<Void>(HttpStatus.OK);		
 	}
 	
-	@DeleteMapping("{id}/baja/{numUsuario}")
-	public ResponseEntity<Void> baja(@PathVariable int id, @PathVariable int numUsuario){
+	@DeleteMapping("{id}/cancelacion/{numUsuario}")
+	public ResponseEntity<Void> cancelar(@PathVariable int id, @PathVariable int numUsuario){
 		try{
-			s.baja(id, numUsuario);
+			s.cancelar(id, numUsuario);
 		}catch(DataAccessException e){
 			bitacora.error(e.getMessage());
 			return new ResponseEntity<Void>(HttpStatus.CONFLICT);

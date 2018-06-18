@@ -72,14 +72,24 @@ public class LogicaFacturaVarios implements FacturaVariosService {
 
 	@Override
 	@Transactional
-	public void baja(int id, int numUsuario) {
-		repFV.baja(id, numUsuario);	
-		repoDetalles.bajaPorIdFactura(id, numUsuario);
+	public void cancelar(int id, int numUsuario) {
+		repFV.cancelar(id, numUsuario);	
+		repoDetalles.cancelarPorIdFactura(id, numUsuario);
 	}
 
 	@Override
 	public List<FacturaVariosVista> consultarPorEstado(String estado) {
 		return repFV.consultarPorEstado(estado);
+	}
+
+	@Override
+	public String obtenerJSONFacturaVarios(int idFactura, String modo) {
+		return repFV.obtenerJSONFacturaVarios(idFactura,modo);
+	}
+	
+	@Override
+	public String obtenerJSONCancelarFacturaVarios(int idFactura, String modo,String justificacion) {
+		return repFV.obtenerJSONCancelarFacturaVarios(idFactura,modo,justificacion);
 	}
 
 }

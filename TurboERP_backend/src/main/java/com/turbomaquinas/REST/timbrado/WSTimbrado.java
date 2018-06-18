@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.turbomaquinas.service.comercial.FacturaFinalService;
+import com.turbomaquinas.service.comercial.FacturaVariosService;
 import com.turbomaquinas.service.timbrado.LogicaTimbrado;
 import com.turbomaquinas.service.timbrado.TimbradoService;
 
@@ -38,6 +39,9 @@ public class WSTimbrado {
 	
 	@Autowired
 	LogicaTimbrado lt;
+	
+	@Autowired
+	FacturaVariosService fvs;
 	
 	@PostMapping("/facturafinal/{id}")
 	public ResponseEntity<String> timbrarFacturaFinal(@PathVariable int id,@RequestParam int numEmpleado,@RequestParam String modo) throws JsonParseException, JsonMappingException, IOException{
@@ -104,7 +108,88 @@ public class WSTimbrado {
 			return new ResponseEntity<String>(HttpStatus.CONFLICT);
 		}
         try{
-        	ResponseEntity<String> response=lt.timbrar(ffs.obtenerJSONFacturaFinal(id, modo));
+        	ResponseEntity<String> response=lt.timbrar(cfdi);
+	        JSONObject jsonRespuesta = new JSONObject(response.getBody());
+	        String AckEnlaceFiscal=(String) jsonRespuesta.getString("AckEnlaceFiscal");
+		    JSONObject json_AckEnlaceFiscal = new JSONObject(AckEnlaceFiscal);
+		    String estatusDocumento=(String) json_AckEnlaceFiscal.getString("estatusDocumento");
+		    if(estatusDocumento.equalsIgnoreCase("aceptado")){
+		    	return new ResponseEntity<String>(response.getBody(),HttpStatus.OK);
+		    }else if(estatusDocumento.equalsIgnoreCase("rechazado")){
+		    	return new ResponseEntity<String>(response.getBody(),HttpStatus.NOT_ACCEPTABLE);
+		    }else{
+		    	return null;
+		    }
+        }catch(Exception e){return new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);}
+        
+	}
+	
+	@PostMapping("/facturavarios/{id}")
+	public ResponseEntity<String> timbrarFacturaVarios(@PathVariable int id,@RequestParam int numEmpleado,@RequestParam String modo) throws JsonParseException, JsonMappingException, IOException{
+		//Recuperar JSON del PA TIMBRADO_FACTURA		
+		String cfdi=null;
+		try{
+			cfdi=fvs.obtenerJSONFacturaVarios(id,modo);//mandar modo
+		}catch(DataAccessException e){
+			bitacora.error(e.getMessage());
+			return new ResponseEntity<String>(HttpStatus.CONFLICT);
+		}
+        try{
+        	ResponseEntity<String> response=ts.timbrarFacturaVarios(cfdi,id,numEmpleado,modo);
+	        JSONObject jsonRespuesta = new JSONObject(response.getBody());
+	        String AckEnlaceFiscal=(String) jsonRespuesta.getString("AckEnlaceFiscal");
+		    JSONObject json_AckEnlaceFiscal = new JSONObject(AckEnlaceFiscal);
+		    String estatusDocumento=(String) json_AckEnlaceFiscal.getString("estatusDocumento");
+		    if(estatusDocumento.equalsIgnoreCase("aceptado")){
+		    	return new ResponseEntity<String>(response.getBody(),HttpStatus.OK);
+		    }else if(estatusDocumento.equalsIgnoreCase("rechazado")){
+		    	return new ResponseEntity<String>(response.getBody(),HttpStatus.NOT_ACCEPTABLE);
+		    }else{
+		    	return null;
+		    }
+        }catch(Exception e){return new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);}
+        
+	}
+	
+	@PostMapping("/facturavarios/{id}/cancelar")
+	public ResponseEntity<String> cancelarCFDiFacturaVarios(@PathVariable int id,@RequestParam int numEmpleado,@RequestParam String modo,@RequestParam String justificacion) throws JsonParseException, JsonMappingException, IOException{
+		//Recuperar JSON del PA TIMBRADO_FACTURA		
+		String cfdi=null;
+		try{
+			cfdi=fvs.obtenerJSONCancelarFacturaVarios(id,modo,justificacion);
+		}catch(DataAccessException e){
+			bitacora.error(e.getMessage());
+			return new ResponseEntity<String>(HttpStatus.CONFLICT);
+		}
+		try{
+        	ResponseEntity<String> response=ts.cancelarCFDiFacturaVarios(cfdi);
+	        JSONObject jsonRespuesta = new JSONObject(response.getBody());
+	        String AckEnlaceFiscal=(String) jsonRespuesta.getString("AckEnlaceFiscal");
+		    JSONObject json_AckEnlaceFiscal = new JSONObject(AckEnlaceFiscal);
+		    String estatusDocumento=(String) json_AckEnlaceFiscal.getString("estatusDocumento");
+		    if(estatusDocumento.equalsIgnoreCase("aceptado")){
+		    	return new ResponseEntity<String>(response.getBody(),HttpStatus.OK);
+		    }else if(estatusDocumento.equalsIgnoreCase("rechazado")){
+		    	return new ResponseEntity<String>(response.getBody(),HttpStatus.NOT_ACCEPTABLE);
+		    }else{
+		    	return null;
+		    }
+        }catch(Exception e){return new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);}
+        
+	}
+	
+	@GetMapping("/facturavarios/{id}")
+	public ResponseEntity<String> buscarFacturaVarios(@PathVariable int id,@RequestParam String modo) throws JsonParseException, JsonMappingException, IOException{
+		//Recuperar JSON del PA TIMBRADO_FACTURA		
+		String cfdi=null;
+		try{
+			cfdi=fvs.obtenerJSONFacturaVarios(id,modo);//mandar modo
+		}catch(DataAccessException e){
+			bitacora.error(e.getMessage());
+			return new ResponseEntity<String>(HttpStatus.CONFLICT);
+		}
+        try{
+        	ResponseEntity<String> response=lt.timbrar(cfdi);
 	        JSONObject jsonRespuesta = new JSONObject(response.getBody());
 	        String AckEnlaceFiscal=(String) jsonRespuesta.getString("AckEnlaceFiscal");
 		    JSONObject json_AckEnlaceFiscal = new JSONObject(AckEnlaceFiscal);
