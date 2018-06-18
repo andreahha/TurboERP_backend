@@ -113,6 +113,7 @@ public class JDBCFacturaVarios implements FacturaVariosDAO {
 	public List<FacturaVariosVista> consultarPorEstado(String estado) {
 		return jdbcTemplate.query("SELECT * FROM FACTURA_VARIOS_V WHERE estado_factura = ?", new FacturaVariosVistaRM(), estado);
 	}
+
 	
 	@Override
 	public String obtenerJSONFacturaVarios(int idFactura,String modo) throws DataAccessException {

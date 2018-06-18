@@ -437,6 +437,7 @@ public class FacturaVariosVista {
 		this.activo = activo;
 	}
 
+
 	public int getDatos_timbrado_id() {
 		return datos_timbrado_id;
 	}

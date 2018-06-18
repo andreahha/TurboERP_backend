@@ -91,6 +91,7 @@ public class WSFacturaVarios {
 			return new ResponseEntity<Void>(HttpStatus.OK);		
 	}
 	
+
 	@DeleteMapping("{id}/cancelacion/{numUsuario}")
 	public ResponseEntity<Void> cancelar(@PathVariable int id, @PathVariable int numUsuario){
 		try{
