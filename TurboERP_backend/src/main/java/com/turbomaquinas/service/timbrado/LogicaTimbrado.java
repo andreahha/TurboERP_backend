@@ -79,7 +79,7 @@ public class LogicaTimbrado implements TimbradoService{
 	}
 	
 	@Override
-	public ResponseEntity<String> timbrarFacturaVarios(String cfdi,int id,int numEmpleado,String modo) {
+	public ResponseEntity<String> timbrarFacturaVarios(String cfdi) {
 		return timbrar(cfdi);
 	}
 	
