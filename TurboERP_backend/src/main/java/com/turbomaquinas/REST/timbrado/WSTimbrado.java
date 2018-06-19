@@ -71,7 +71,7 @@ public class WSTimbrado {
 	}
 	
 	@PostMapping("/facturafinal/{id}/cancelacion")
-	public ResponseEntity<String> cancelarCFDiFacturaFinal(@PathVariable int id,@RequestParam int numEmpleado,@RequestParam String modo,@RequestParam String justificacion) throws JsonParseException, JsonMappingException, IOException{
+	public ResponseEntity<String> cancelarCFDiFacturaFinal(@PathVariable int id,@RequestParam String modo,@RequestParam String justificacion) throws JsonParseException, JsonMappingException, IOException{
 		//Recuperar JSON del PA TIMBRADO_FACTURA		
 		String cfdi=null;
 		try{
@@ -152,7 +152,7 @@ public class WSTimbrado {
 	}
 	
 	@PostMapping("/facturavarios/{id}/cancelacion")
-	public ResponseEntity<String> cancelarCFDiFacturaVarios(@PathVariable int id,@RequestParam int numEmpleado,@RequestParam String modo,@RequestParam String justificacion) throws JsonParseException, JsonMappingException, IOException{
+	public ResponseEntity<String> cancelarCFDiFacturaVarios(@PathVariable int id,@RequestParam String modo,@RequestParam String justificacion) throws JsonParseException, JsonMappingException, IOException{
 		//Recuperar JSON del PA TIMBRADO_FACTURA		
 		String cfdi=null;
 		try{

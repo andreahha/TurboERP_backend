@@ -82,9 +82,9 @@ public class LogicaFacturaVarios implements FacturaVariosService {
 
 	@Override
 	@Transactional
-	public void cancelar(int id, int numUsuario) {
-		repFV.cancelar(id, numUsuario);	
-		repoDetalles.cancelarPorIdFactura(id, numUsuario);
+	public void cancelar(int id, int modificado_por) {
+		repFV.cancelar(id, modificado_por);	
+		repoDetalles.cancelarPorIdFactura(id, modificado_por);
 	}
 
 	@Override
@@ -103,7 +103,7 @@ public class LogicaFacturaVarios implements FacturaVariosService {
 	}
 
 	@Override
-	public void timbrarDB(int id, String jsonAPI, int numEmpleado) {
+	public void timbrarDB(int id, String jsonAPI, int creado_por) {
 		try{
 			JSONObject jsonRespuesta = new JSONObject(jsonAPI);
 	        String AckEnlaceFiscal=(String) jsonRespuesta.getString("AckEnlaceFiscal");
@@ -124,7 +124,7 @@ public class LogicaFacturaVarios implements FacturaVariosService {
 		    	dt.setSello_sat((String) json_AckEnlaceFiscal.getString("selloSAT"));
 		    	dt.setLeyenda("leyenda");
 		    	dt.setActivo(1);
-		    	dt.setCreado_por(numEmpleado);
+		    	dt.setCreado_por(creado_por);
 		    	int idDatosTimbrados=repoDT.crear(dt);
 		    	//Actualizar DATOS_TIMBRADO_id
 		    	repFV.actualizarIdDatosTimbrados(id, idDatosTimbrados);
