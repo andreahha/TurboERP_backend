@@ -96,9 +96,9 @@ public class JDBCFacturaVarios implements FacturaVariosDAO {
 	}
 
 	@Override
-	public void cancelar(int id, int numUsuario) {
+	public void cancelar(int id, int modificado_por) {
 		jdbcTemplate.update("UPDATE FACTURA_VARIOS SET activo = 0, estado = 'C', modificado_por = ?, fecha_baja = NOW(),"
-				+ "mes_baja = DATE_FORMAT(NOW(), '%m'), anio_baja = DATE_FORMAT(NOW(), '%Y')  where id = ?", numUsuario, id);
+				+ "mes_baja = DATE_FORMAT(NOW(), '%m'), anio_baja = DATE_FORMAT(NOW(), '%Y')  where id = ?", modificado_por, id);
 	}
 
 	@Override

@@ -140,7 +140,7 @@ public class LogicaFacturaFinal implements FacturaFinalService {
 	
 	@Override
 	@Transactional
-	public void timbrarDB(int id, String jsonAPI,int numEmpleado) {
+	public void timbrarDB(int id, String jsonAPI,int creado_por) {
 		try{
 			JSONObject jsonRespuesta = new JSONObject(jsonAPI);
 	        String AckEnlaceFiscal=(String) jsonRespuesta.getString("AckEnlaceFiscal");
@@ -161,7 +161,7 @@ public class LogicaFacturaFinal implements FacturaFinalService {
 		    	dt.setSello_sat((String) json_AckEnlaceFiscal.getString("selloSAT"));
 		    	dt.setLeyenda("leyenda");
 		    	dt.setActivo(1);
-		    	dt.setCreado_por(numEmpleado);
+		    	dt.setCreado_por(creado_por);
 		    	int idDatosTimbrados=repoDT.crear(dt);		    	
 		    	//Actualizar DATOS_TIMBRADO_id
 		    	repFF.actualizarIdDatosTimbrados(id, idDatosTimbrados);

@@ -14,7 +14,7 @@ public interface FacturaVariosDAO {
 	public FacturaVariosVista buscarFacturaFolio(String folio, String estado, String tipo);
 	public FacturaVariosVista buscarPorTipoNumero(int numero, String tipo, String estado);
 	public int crearDoc(String doc);
-	public void cancelar(int id, int numUsuario);
+	public void cancelar(int id, int modificado_por);
 	public String obtenerJSONFacturaVarios(int idFactura, String modo);
 	public void actualizarEstado(int id, String estado);
 	public void actualizarTipoCambio(int id, float tipoCambio);

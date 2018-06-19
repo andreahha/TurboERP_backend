@@ -26,7 +26,7 @@ public interface FacturaFinalService {
 	public void actualizarIdAlfresco(int id, String alfresco_id);
 	public String obtenerJSONFacturaFinal(int idFactura,String modo);
 	public String obtenerJSONCancelarFacturaFinal(int idFactura,String modo,String justificacion);
-	public void cancelar(int id, int numUsuario);
-	public void baja(int id, int numUsuario);
-	public void timbrarDB(int id, String jsonAPI,int numEmpleado);
+	public void cancelar(int id, int modificado_por);
+	public void baja(int id, int modificado_por);
+	public void timbrarDB(int id, String jsonAPI,int creado_por);
 }
