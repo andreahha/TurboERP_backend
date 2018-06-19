@@ -263,7 +263,7 @@ public class JDBCFacturaFinal implements FacturaFinalDAO {
 				.withProcedureName("BAJA_FACTURA_FINAL");
 
 		Map<String, Object> inParamMap = new HashMap<String, Object>();
-		inParamMap.put("p_id", id);
+		inParamMap.put("p_factura_id", id);
 		inParamMap.put("p_modificado_por", numUsuario);
 		SqlParameterSource in = new MapSqlParameterSource(inParamMap);
 	
