@@ -91,15 +91,6 @@ public class JDBCFacturaFinal implements FacturaFinalDAO {
 	}
 
 	@Override
-	public void cancelar(FacturaFinal ff) throws DataAccessException{
-		ff.setActivo(0);
-		jdbcTemplate.update("UPDATE FACTURA_FINAL SET fecha_baja = ?, mes_baja = ?, "
-				+ " anio_baja = ?, activo = ?, modificado_por = ? WHERE id = ?",
-				ff.getFecha_baja(), ff.getMes_baja(), ff.getAnio_baja(), ff.getActivo(),
-				ff.getModificado_por(), ff.getId());
-	}
-
-	@Override
 	public FacturaFinalVista buscarPorTipoNumero(int numero, String tipo,String estado) {
 		FacturaFinalVista ffv = jdbcTemplate.queryForObject("SELECT * FROM FACTURA_FINAL_V WHERE numero = ? and tipo = ? and estado_factura=?",
 				new FacturaFinalVistaRM(), numero, tipo,estado);
@@ -264,6 +255,20 @@ public class JDBCFacturaFinal implements FacturaFinalDAO {
 		    }
 			return json;
 		}catch(Exception e){return null;}
+	}
+
+	@Override
+	public void baja(int id, int numUsuario) {
+		SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
+				.withProcedureName("BAJA_FACTURA_FINAL");
+
+		Map<String, Object> inParamMap = new HashMap<String, Object>();
+		inParamMap.put("p_id", id);
+		inParamMap.put("p_modificado_por", numUsuario);
+		SqlParameterSource in = new MapSqlParameterSource(inParamMap);
+	
+		Map<String, Object> simpleJdbcCallResult = simpleJdbcCall.execute(in);
+		System.out.println(simpleJdbcCallResult);
 	}
 
 }

@@ -66,17 +66,6 @@ public class WSFacturaFinal {
 		return new ResponseEntity<List<FacturaFinalVista>>(ffl, HttpStatus.OK);
 		
 	}
-	
-	@DeleteMapping()
-	public ResponseEntity<Void> cancelar(@RequestBody FacturaFinal ff){
-		try{
-			s.cancelar(ff);
-		}catch(DataAccessException e){
-			bitacora.error(e.getMessage());
-			return new ResponseEntity<Void>(HttpStatus.CONFLICT);
-		}
-			return new ResponseEntity<Void>(HttpStatus.OK);		
-	}
 
 	@GetMapping("factura/{tipo}/{numero}/{estado}")
 	public ResponseEntity<FacturaFinalVista> buscarPorNumero(@PathVariable String tipo, @PathVariable int numero, @PathVariable String estado){
@@ -211,6 +200,39 @@ public class WSFacturaFinal {
 		} catch (Exception e) {
 			bitacora.error(e.getMessage());
 			return new ResponseEntity<Void> (HttpStatus.CONFLICT);
+		}
+		return new ResponseEntity<Void>(HttpStatus.OK);
+	}
+	
+	@DeleteMapping("{id}/cancelacion/{numUsuario}")
+	public ResponseEntity<Void> cancelar(@PathVariable int id, @PathVariable int numUsuario){
+		try{
+			s.cancelar(id, numUsuario);
+		}catch(DataAccessException e){
+			bitacora.error(e.getMessage());
+			return new ResponseEntity<Void>(HttpStatus.CONFLICT);
+		}
+			return new ResponseEntity<Void>(HttpStatus.OK);		
+	}
+	
+	@DeleteMapping("{id}/baja/{numUsuario}")
+	public ResponseEntity<Void> baja(@PathVariable int id, @PathVariable int numUsuario){
+		try{
+			s.baja(id, numUsuario);
+		}catch(DataAccessException e){
+			bitacora.error(e.getMessage());
+			return new ResponseEntity<Void>(HttpStatus.CONFLICT);
+		}
+			return new ResponseEntity<Void>(HttpStatus.OK);		
+	}
+	
+	@PutMapping("{id}/timbrado")
+	public ResponseEntity<Void> timbrarDB(@PathVariable int id,@RequestBody String jsonAPI,@RequestParam int numEmpleado){
+		try {
+			s.timbrarDB(id,jsonAPI,numEmpleado);
+		} catch (Exception e) {
+			bitacora.error(e.getMessage());
+			return new ResponseEntity<Void>(HttpStatus.CONFLICT);
 		}
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}

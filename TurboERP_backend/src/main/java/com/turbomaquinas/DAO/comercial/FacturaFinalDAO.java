@@ -10,7 +10,6 @@ public interface FacturaFinalDAO {
 	public FacturaFinal actualizar(FacturaFinal ff);
 	public FacturaFinalVista buscar(int id);
 	public List<FacturaFinalVista> consultar();
-	public void cancelar(FacturaFinal ff);
 	public FacturaFinalVista buscarPorTipoNumero (int numero, String tipo,String estado);
 	public List<FacturaFinalVista> consultarFacturasPendientesPorCliente(int id, String moneda);
 	public List<Integer> consultarIdsOrdenesFactura(int id);
@@ -25,4 +24,5 @@ public interface FacturaFinalDAO {
 	public void actualizarIdAlfresco(int id, String alfresco_id);
 	public String obtenerJSONFacturaFinal(int idFactura,String modo);
 	public String obtenerJSONCancelarFacturaFinal(int idFactura, String modo,String justificacion);
+	public void baja(int id, int numUsuario);
 }

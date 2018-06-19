@@ -8,13 +8,19 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.turbomaquinas.DAO.comercial.ActividadesFFDAO;
+import com.turbomaquinas.DAO.comercial.DatosTimbradosDAO;
 import com.turbomaquinas.DAO.comercial.FacturaFinalDAO;
+import com.turbomaquinas.DAO.general.ServidorDAO;
+import com.turbomaquinas.DAO.general.TipoCambioDAO;
 import com.turbomaquinas.POJO.comercial.ActividadesFFVista;
+import com.turbomaquinas.POJO.comercial.DatosTimbrados;
 import com.turbomaquinas.POJO.comercial.DocumentoFacturaFinal;
 import com.turbomaquinas.POJO.comercial.FacturaFinal;
 import com.turbomaquinas.POJO.comercial.FacturaFinalVista;
 import com.turbomaquinas.POJO.general.OrdenFactura;
 import com.turbomaquinas.service.general.OrdenService;
+
+import twitter4j.JSONObject;
 
 @Service
 public class LogicaFacturaFinal implements FacturaFinalService {
@@ -27,6 +33,15 @@ public class LogicaFacturaFinal implements FacturaFinalService {
 	
 	@Autowired
 	ActividadesFFDAO repActividadesFF;
+	
+	@Autowired
+	DatosTimbradosDAO repoDT;
+	
+	@Autowired
+	TipoCambioDAO repoTC;
+	
+	@Autowired
+	ServidorDAO repoS;
 
 	
 	@Override
@@ -42,11 +57,6 @@ public class LogicaFacturaFinal implements FacturaFinalService {
 	@Override
 	public List<FacturaFinalVista> consultar() throws DataAccessException {
 		return repFF.consultar();
-	}
-
-	@Override
-	public void cancelar(FacturaFinal ff) throws DataAccessException {
-			repFF.cancelar(ff);
 	}
 
 	@Override
@@ -114,6 +124,50 @@ public class LogicaFacturaFinal implements FacturaFinalService {
 	@Override
 	public String obtenerJSONCancelarFacturaFinal(int idFactura, String modo,String justificacion) {
 		return repFF.obtenerJSONCancelarFacturaFinal(idFactura,modo,justificacion);
+	}
+
+	@Override
+	public void cancelar(int id, int numUsuario) {
+		repFF.baja(id, numUsuario);	
+		repFF.actualizarEstado(id, "C");
+	}
+
+	@Override
+	public void baja(int id, int numUsuario) {
+		repFF.baja(id, numUsuario);			
+	}
+
+	
+	@Override
+	@Transactional
+	public void timbrarDB(int id, String jsonAPI,int numEmpleado) {
+		try{
+			JSONObject jsonRespuesta = new JSONObject(jsonAPI);
+	        String AckEnlaceFiscal=(String) jsonRespuesta.getString("AckEnlaceFiscal");
+		    JSONObject json_AckEnlaceFiscal = new JSONObject(AckEnlaceFiscal);
+		    String estatusDocumento=(String) json_AckEnlaceFiscal.getString("estatusDocumento");
+		    if(estatusDocumento.equalsIgnoreCase("aceptado")){
+		    	//Actualizar estado de la factura a Timbrado
+		    	actualizarEstado(id, "T");
+		    	//Actualizar el tipo_cambio de la Factura a cambio del dia que se genera en el JSON del PA
+		    	float tipo_cambio=repoTC.buscarPorFecha(repoS.obtenerfecha()).getTipo_cambio();		    	
+		    	repFF.actualizarTipoCambio(id,tipo_cambio);
+		    	//Insertar registro en Datos Timbrados
+				DatosTimbrados dt=new DatosTimbrados();
+		    	dt.setFolio_fiscal((String) json_AckEnlaceFiscal.getString("folioFiscalUUID"));
+		    	dt.setFecha((String) json_AckEnlaceFiscal.getString("fechaTFD"));
+		    	dt.setSello_emisor((String) json_AckEnlaceFiscal.getString("selloCFDi"));
+		    	dt.setCadena_original((String) json_AckEnlaceFiscal.getString("cadenaTFD"));
+		    	dt.setSello_sat((String) json_AckEnlaceFiscal.getString("selloSAT"));
+		    	dt.setLeyenda("leyenda");
+		    	dt.setActivo(1);
+		    	dt.setCreado_por(numEmpleado);
+		    	int idDatosTimbrados=repoDT.crear(dt);		    	
+		    	//Actualizar DATOS_TIMBRADO_id
+		    	repFF.actualizarIdDatosTimbrados(id, idDatosTimbrados);
+		    }
+		}catch(Exception e){System.out.println(e);}
+		
 	}
 
 }
