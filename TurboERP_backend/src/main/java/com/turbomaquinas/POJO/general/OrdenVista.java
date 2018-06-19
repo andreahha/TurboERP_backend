@@ -1,5 +1,6 @@
 package com.turbomaquinas.POJO.general;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class OrdenVista {
@@ -13,12 +14,14 @@ public class OrdenVista {
 	private String moneda;
 	private int creado_por;
 	private Date creado;
-	private Float importe_cotizado;
-	private Float importe_autorizado;
-	private Float importe_bajas;
-	private Float importe_facturado;
-	private Float importe_descuento;
-	private Float importe_pedido;
+	private BigDecimal importe_cotizado;
+	private BigDecimal importe_autorizado;
+	private BigDecimal importe_bajas;
+	private BigDecimal importe_facturado;
+	private BigDecimal importe_descuento;
+	private BigDecimal importe_pedido;
+	private BigDecimal importe_pagado;
+	private BigDecimal importe_pendiente;
 	private int clientes_id;
 	private int cliente_no;
 	private String nombre_fiscal;
@@ -37,11 +40,12 @@ public class OrdenVista {
 	}
 
 	public OrdenVista(int id, int numero, int anio, String numero_orden, String descripcion, String estado, String tipo,
-			String moneda, int creado_por, Date creado, Float importe_cotizado, Float importe_autorizado,
-			Float importe_bajas, Float importe_facturado, Float importe_descuento, Float importe_pedido,
-			int clientes_id, int cliente_no, String nombre_fiscal, String nombre_comercial, String giro,
-			int marcas_equipos_id, String marca_equipo, int modelos_equipos_id, String modelo_equipo,
-			String alfresco_id_OIT, String cliente, int cliente_factura_id) {
+			String moneda, int creado_por, Date creado, BigDecimal importe_cotizado, BigDecimal importe_autorizado,
+			BigDecimal importe_bajas, BigDecimal importe_facturado, BigDecimal importe_descuento,
+			BigDecimal importe_pedido, BigDecimal importe_pagado, BigDecimal importe_pendiente, int clientes_id,
+			int cliente_no, String nombre_fiscal, String nombre_comercial, String giro, int marcas_equipos_id,
+			String marca_equipo, int modelos_equipos_id, String modelo_equipo, String alfresco_id_OIT, String cliente,
+			int cliente_factura_id) {
 		super();
 		this.id = id;
 		this.numero = numero;
@@ -59,6 +63,8 @@ public class OrdenVista {
 		this.importe_facturado = importe_facturado;
 		this.importe_descuento = importe_descuento;
 		this.importe_pedido = importe_pedido;
+		this.importe_pagado = importe_pagado;
+		this.importe_pendiente = importe_pendiente;
 		this.clientes_id = clientes_id;
 		this.cliente_no = cliente_no;
 		this.nombre_fiscal = nombre_fiscal;
@@ -153,52 +159,68 @@ public class OrdenVista {
 		this.creado = creado;
 	}
 
-	public Float getImporte_cotizado() {
+	public BigDecimal getImporte_cotizado() {
 		return importe_cotizado;
 	}
 
-	public void setImporte_cotizado(Float importe_cotizado) {
+	public void setImporte_cotizado(BigDecimal importe_cotizado) {
 		this.importe_cotizado = importe_cotizado;
 	}
 
-	public Float getImporte_autorizado() {
+	public BigDecimal getImporte_autorizado() {
 		return importe_autorizado;
 	}
 
-	public void setImporte_autorizado(Float importe_autorizado) {
+	public void setImporte_autorizado(BigDecimal importe_autorizado) {
 		this.importe_autorizado = importe_autorizado;
 	}
 
-	public Float getImporte_bajas() {
+	public BigDecimal getImporte_bajas() {
 		return importe_bajas;
 	}
 
-	public void setImporte_bajas(Float importe_bajas) {
+	public void setImporte_bajas(BigDecimal importe_bajas) {
 		this.importe_bajas = importe_bajas;
 	}
 
-	public Float getImporte_facturado() {
+	public BigDecimal getImporte_facturado() {
 		return importe_facturado;
 	}
 
-	public void setImporte_facturado(Float importe_facturado) {
+	public void setImporte_facturado(BigDecimal importe_facturado) {
 		this.importe_facturado = importe_facturado;
 	}
 
-	public Float getImporte_descuento() {
+	public BigDecimal getImporte_descuento() {
 		return importe_descuento;
 	}
 
-	public void setImporte_descuento(Float importe_descuento) {
+	public void setImporte_descuento(BigDecimal importe_descuento) {
 		this.importe_descuento = importe_descuento;
 	}
 
-	public Float getImporte_pedido() {
+	public BigDecimal getImporte_pedido() {
 		return importe_pedido;
 	}
 
-	public void setImporte_pedido(Float importe_pedido) {
+	public void setImporte_pedido(BigDecimal importe_pedido) {
 		this.importe_pedido = importe_pedido;
+	}
+
+	public BigDecimal getImporte_pagado() {
+		return importe_pagado;
+	}
+
+	public void setImporte_pagado(BigDecimal importe_pagado) {
+		this.importe_pagado = importe_pagado;
+	}
+
+	public BigDecimal getImporte_pendiente() {
+		return importe_pendiente;
+	}
+
+	public void setImporte_pendiente(BigDecimal importe_pendiente) {
+		this.importe_pendiente = importe_pendiente;
 	}
 
 	public int getClientes_id() {
@@ -297,7 +319,5 @@ public class OrdenVista {
 		this.cliente_factura_id = cliente_factura_id;
 	}
 
-	
-	
 	
 }
