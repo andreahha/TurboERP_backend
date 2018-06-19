@@ -44,7 +44,7 @@ public class WSTimbrado {
 	FacturaVariosService fvs;
 	
 	@PostMapping("/facturafinal/{id}")
-	public ResponseEntity<String> timbrarFacturaFinal(@PathVariable int id,@RequestParam int numEmpleado,@RequestParam String modo) throws JsonParseException, JsonMappingException, IOException{
+	public ResponseEntity<String> timbrarFacturaFinal(@PathVariable int id,@RequestParam String modo) throws JsonParseException, JsonMappingException, IOException{
 		//Recuperar JSON del PA TIMBRADO_FACTURA		
 		String cfdi=null;
 		try{
@@ -54,7 +54,7 @@ public class WSTimbrado {
 			return new ResponseEntity<String>(HttpStatus.CONFLICT);
 		}
         try{
-        	ResponseEntity<String> response=ts.timbrarFacturaFinal(cfdi,id,numEmpleado,modo);
+        	ResponseEntity<String> response=ts.timbrarFacturaFinal(cfdi);
 	        JSONObject jsonRespuesta = new JSONObject(response.getBody());
 	        String AckEnlaceFiscal=(String) jsonRespuesta.getString("AckEnlaceFiscal");
 		    JSONObject json_AckEnlaceFiscal = new JSONObject(AckEnlaceFiscal);
@@ -125,7 +125,7 @@ public class WSTimbrado {
 	}
 	
 	@PostMapping("/facturavarios/{id}")
-	public ResponseEntity<String> timbrarFacturaVarios(@PathVariable int id,@RequestParam int numEmpleado,@RequestParam String modo) throws JsonParseException, JsonMappingException, IOException{
+	public ResponseEntity<String> timbrarFacturaVarios(@PathVariable int id,@RequestParam String modo) throws JsonParseException, JsonMappingException, IOException{
 		//Recuperar JSON del PA TIMBRADO_FACTURA		
 		String cfdi=null;
 		try{
@@ -135,7 +135,7 @@ public class WSTimbrado {
 			return new ResponseEntity<String>(HttpStatus.CONFLICT);
 		}
         try{
-        	ResponseEntity<String> response=ts.timbrarFacturaVarios(cfdi,id,numEmpleado,modo);
+        	ResponseEntity<String> response=ts.timbrarFacturaVarios(cfdi);
 	        JSONObject jsonRespuesta = new JSONObject(response.getBody());
 	        String AckEnlaceFiscal=(String) jsonRespuesta.getString("AckEnlaceFiscal");
 		    JSONObject json_AckEnlaceFiscal = new JSONObject(AckEnlaceFiscal);

@@ -78,19 +78,7 @@ public class WSFacturaVarios {
 		if (fvl == null)
 			return new ResponseEntity<List<FacturaVariosVista>>(HttpStatus.NO_CONTENT);
 		return new ResponseEntity<List<FacturaVariosVista>>(fvl,HttpStatus.OK);
-	}
-
-	@DeleteMapping()
-	public ResponseEntity<Void> cancelar(@RequestBody FacturaVarios fv){
-		try{
-			s.cancelar(fv);
-		}catch(DataAccessException e){
-			bitacora.error(e.getMessage());
-			return new ResponseEntity<Void>(HttpStatus.CONFLICT);
-		}
-			return new ResponseEntity<Void>(HttpStatus.OK);		
-	}
-	
+	}	
 
 	@DeleteMapping("{id}/cancelacion/{numUsuario}")
 	public ResponseEntity<Void> cancelar(@PathVariable int id, @PathVariable int numUsuario){
@@ -168,6 +156,17 @@ public class WSFacturaVarios {
 			return new ResponseEntity<List<FacturaVariosVista>>(HttpStatus.NOT_FOUND);
 		}
 		return new ResponseEntity<List<FacturaVariosVista>>(fvv, HttpStatus.OK);		
+	}
+	
+	@PutMapping("{id}/timbrado")
+	public ResponseEntity<Void> timbrarDB(@PathVariable int id,@RequestBody String jsonAPI,@RequestParam int numEmpleado){
+		try {
+			s.timbrarDB(id,jsonAPI,numEmpleado);
+		} catch (Exception e) {
+			bitacora.error(e.getMessage());
+			return new ResponseEntity<Void>(HttpStatus.CONFLICT);
+		}
+		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 	
 }
