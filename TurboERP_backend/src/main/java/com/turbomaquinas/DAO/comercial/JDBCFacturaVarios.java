@@ -40,15 +40,7 @@ public class JDBCFacturaVarios implements FacturaVariosDAO {
 	@Override
 	public List<FacturaVariosVista> consultar() throws DataAccessException {
 		List<FacturaVariosVista> fvl = jdbcTemplate.query("SELECT * FROM FACTURA_VARIOS_V", new FacturaVariosVistaRM());
-		return fvl;	}
-
-	@Override
-	public void cancelar(FacturaVarios fv) throws DataAccessException{
-		fv.setActivo(0);
-		jdbcTemplate.update("UPDATE FACTURA_VARIOS SET fecha_baja = ?, mes_baja = ?, "
-				+ " anio_baja = ?, activo = ?, modificado_por = ? WHERE id = ?",
-				fv.getFecha_baja(), fv.getMes_baja(), fv.getAnio_baja(), fv.getActivo(),
-				fv.getModificado_por(), fv.getId());
+		return fvl;	
 	}
 
 	@Override
@@ -104,9 +96,9 @@ public class JDBCFacturaVarios implements FacturaVariosDAO {
 	}
 
 	@Override
-	public void cancelar(int id, int numUsuario) {
+	public void cancelar(int id, int modificado_por) {
 		jdbcTemplate.update("UPDATE FACTURA_VARIOS SET activo = 0, estado = 'C', modificado_por = ?, fecha_baja = NOW(),"
-				+ "mes_baja = DATE_FORMAT(NOW(), '%m'), anio_baja = DATE_FORMAT(NOW(), '%Y')  where id = ?", numUsuario, id);
+				+ "mes_baja = DATE_FORMAT(NOW(), '%m'), anio_baja = DATE_FORMAT(NOW(), '%Y')  where id = ?", modificado_por, id);
 	}
 
 	@Override

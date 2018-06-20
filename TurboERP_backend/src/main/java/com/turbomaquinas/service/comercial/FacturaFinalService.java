@@ -13,7 +13,6 @@ public interface FacturaFinalService {
 	public FacturaFinal actualizar(FacturaFinal ff);
 	public FacturaFinalVista buscar(int id);
 	public List<FacturaFinalVista> consultar();
-	public void cancelar(FacturaFinal ff);	
 	public FacturaFinalVista buscarPorTipoNumero (int numero, String tipo,String estado);
 	public List<FacturaFinalVista> consultarFacturasPendientesPorCliente(int id,String moneda);
 	public List<OrdenFactura> consultarOrdenes(int id);
@@ -27,4 +26,7 @@ public interface FacturaFinalService {
 	public void actualizarIdAlfresco(int id, String alfresco_id);
 	public String obtenerJSONFacturaFinal(int idFactura,String modo);
 	public String obtenerJSONCancelarFacturaFinal(int idFactura,String modo,String justificacion);
+	public void cancelar(int id, int modificado_por);
+	public void baja(int id, int modificado_por);
+	public void timbrarDB(int id, String jsonAPI,int creado_por);
 }
