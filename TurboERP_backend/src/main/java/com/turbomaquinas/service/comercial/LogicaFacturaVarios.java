@@ -113,7 +113,11 @@ public class LogicaFacturaVarios implements FacturaVariosService {
 		    	//Actualizar estado de la factura a Timbrado
 		    	repFV.actualizarEstado(id, "T");
 		    	//Actualizar el tipo_cambio de la Factura a cambio del dia que se genera en el JSON del PA
-		    	float tipo_cambio=repoTC.buscarPorFecha(repoS.obtenerfecha()).getTipo_cambio();	    	
+		    	FacturaVariosVista factura=repFV.buscar(id);
+		    	float tipo_cambio=1;
+		    	if(!factura.getMoneda().equals("MXN")){
+		    		tipo_cambio=repoTC.buscarPorFecha(repoS.obtenerfecha()).getTipo_cambio();	
+		    	}
 		    	repFV.actualizarTipoCambio(id,tipo_cambio);
 		    	//Insertar registro en Datos Timbrados
 		    	DatosTimbrados dt=new DatosTimbrados();
