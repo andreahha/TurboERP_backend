@@ -150,7 +150,11 @@ public class LogicaFacturaFinal implements FacturaFinalService {
 		    	//Actualizar estado de la factura a Timbrado
 		    	actualizarEstado(id, "T");
 		    	//Actualizar el tipo_cambio de la Factura a cambio del dia que se genera en el JSON del PA
-		    	float tipo_cambio=repoTC.buscarPorFecha(repoS.obtenerfecha()).getTipo_cambio();		    	
+		    	FacturaFinalVista factura=repFF.buscar(id);
+		    	float tipo_cambio=1;
+		    	if(!factura.getMoneda().equals("MXN")){
+		    		tipo_cambio=repoTC.buscarPorFecha(repoS.obtenerfecha()).getTipo_cambio();	
+		    	}
 		    	repFF.actualizarTipoCambio(id,tipo_cambio);
 		    	//Insertar registro en Datos Timbrados
 				DatosTimbrados dt=new DatosTimbrados();
