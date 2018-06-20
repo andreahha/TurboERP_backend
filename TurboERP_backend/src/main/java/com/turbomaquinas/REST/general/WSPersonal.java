@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.turbomaquinas.POJO.general.Personal;
@@ -126,6 +127,32 @@ public class WSPersonal {
 		
 		List<PersonalVista> lpcv = ps.consultarPersonalCompras();
 		if (lpcv == null )
+			return new ResponseEntity<List<PersonalVista>>(HttpStatus.NO_CONTENT);
+		return new ResponseEntity<List<PersonalVista>>(lpcv, HttpStatus.OK);
+	}
+	
+	@GetMapping("/{numero}/departameto")
+	public ResponseEntity<PersonalVista> buscarPorNumeroYDepto(@PathVariable int numero,@RequestParam String clave){
+		PersonalVista pcv = null;
+		try {
+			pcv = ps.buscarPorNumeroYDepto(numero, clave);
+		} catch (Exception e) {
+			//bitacora.error(e.getMessage());
+			return new ResponseEntity<PersonalVista>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<PersonalVista>(pcv, HttpStatus.OK);
+	}
+	
+	@GetMapping("/departamento/{clave}")
+	public ResponseEntity<List<PersonalVista>> consultarPersonalPorDepto(@PathVariable String clave){
+		List<PersonalVista> lpcv = null;
+		try{
+			lpcv = ps.consultarPersonalPorDepto(clave);
+		}catch(DataAccessException e){
+			bitacora.error(e.getMessage());
+			return new ResponseEntity<List<PersonalVista>>(HttpStatus.NO_CONTENT);
+		}
+		if (lpcv.isEmpty())
 			return new ResponseEntity<List<PersonalVista>>(HttpStatus.NO_CONTENT);
 		return new ResponseEntity<List<PersonalVista>>(lpcv, HttpStatus.OK);
 	}

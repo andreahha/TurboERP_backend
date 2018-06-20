@@ -63,4 +63,14 @@ public class LogicaPersonal implements PersonalService {
 		return repPersonal.consultarPersonalCompras();
 	}
 
+	@Override
+	public PersonalVista buscarPorNumeroYDepto(int numero, String clave) {
+		return repPersonal.buscarPorNumeroYDepto(numero, clave);
+	}
+
+	@Override
+	public List<PersonalVista> consultarPersonalPorDepto(String clave) {
+		return repPersonal.consultarPersonalPorDepto(clave);
+	}
+
 }

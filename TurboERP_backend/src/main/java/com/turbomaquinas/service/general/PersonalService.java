@@ -16,4 +16,6 @@ public interface PersonalService {
 	public List<PersonalVista> consultarPersonalAutorizadoRE();
 	public PersonalVista buscarPersonalCompras(int numero);
 	public List<PersonalVista> consultarPersonalCompras();
+	public PersonalVista buscarPorNumeroYDepto(int numero, String clave);
+	public List<PersonalVista> consultarPersonalPorDepto(String clave);
 }
