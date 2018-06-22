@@ -109,4 +109,18 @@ public class JDBCPersonal implements PersonalDAO {
 		return lpcv;
 	}
 
+	@Override
+	public PersonalVista buscarPorNumeroYDepto(int numero, String clave) throws DataAccessException{
+		PersonalVista pcv = jdbcTemplate.queryForObject("SELECT * FROM PERSONAL_V WHERE numero=? "
+				+ "AND clave_depto=?", new PersonalVistaRM(), numero, clave);
+		return pcv;
+	}
+
+	@Override
+	public List<PersonalVista> consultarPersonalPorDepto(String clave) {
+		List<PersonalVista> lpcv = jdbcTemplate.query("SELECT * FROM PERSONAL_V WHERE clave_depto=?",
+				new PersonalVistaRM(), clave);
+		return lpcv;
+	}
+
 }
