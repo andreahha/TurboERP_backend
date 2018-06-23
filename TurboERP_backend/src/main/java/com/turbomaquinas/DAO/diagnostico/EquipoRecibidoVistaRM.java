@@ -30,6 +30,7 @@ public class EquipoRecibidoVistaRM implements RowMapper<EquipoRecibidoVista> {
 		erv.setVehiculo(rs.getString("vehiculo"));
 		erv.setPlacas(rs.getString("placas"));
 		erv.setTipo(rs.getString("tipo"));
+		
 		return erv;
 	}
 
