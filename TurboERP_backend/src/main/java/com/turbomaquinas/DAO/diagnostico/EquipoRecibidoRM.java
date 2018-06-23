@@ -29,6 +29,7 @@ public class EquipoRecibidoRM implements RowMapper<EquipoRecibido>{
 		er.setOrdenes_id(rs.getInt("ordenes_id"));
 		er.setOrdenes_id_adonde(rs.getInt("ordenes_id"));
 		er.setEs_recibir_equipo(rs.getInt("es_recibir_equipo"));
+		er.setTipo(rs.getString("tipo"));
 		return er;
 	}
 
