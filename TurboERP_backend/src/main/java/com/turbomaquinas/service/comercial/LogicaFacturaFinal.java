@@ -127,14 +127,15 @@ public class LogicaFacturaFinal implements FacturaFinalService {
 	}
 
 	@Override
-	public void cancelar(int id, int numUsuario) {
-		repFF.baja(id, numUsuario);	
+	@Transactional
+	public void cancelar(int id, int modificado_por) {
+		repFF.baja(id, modificado_por);	
 		repFF.actualizarEstado(id, "C");
 	}
 
 	@Override
-	public void baja(int id, int numUsuario) {
-		repFF.baja(id, numUsuario);			
+	public void baja(int id, int modificado_por) {
+		repFF.baja(id, modificado_por);			
 	}
 
 	
