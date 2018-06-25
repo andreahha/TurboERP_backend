@@ -29,6 +29,8 @@ public class EquipoRecibidoVistaRM implements RowMapper<EquipoRecibidoVista> {
 		erv.setEs_recibir_equipo(rs.getInt("es_recibir_equipo"));
 		erv.setVehiculo(rs.getString("vehiculo"));
 		erv.setPlacas(rs.getString("placas"));
+		erv.setTipo(rs.getString("tipo"));
+		
 		return erv;
 	}
 

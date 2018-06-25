@@ -19,6 +19,7 @@ public class EquipoRecibidoVista {
 	private int es_recibir_equipo;
 	private String vehiculo;
 	private String placas;
+	private String tipo;
 	
 	public EquipoRecibidoVista() {
 		super();
@@ -26,7 +27,7 @@ public class EquipoRecibidoVista {
 
 	public EquipoRecibidoVista(int id, String descripcion_equipo, Date fecha_ingreso, String descripcion_empaque,
 			int cantidad, int peso, int usuario_acepta, Date fecha_acepta, int ordenes_id, String numero_orden,
-			int ordenes_id_adonde, String numero_orden_adonde, int es_recibir_equipo, String vehiculo, String placas) {
+			int ordenes_id_adonde, String numero_orden_adonde, int es_recibir_equipo, String vehiculo, String placas, String tipo) {
 		this.id = id;
 		this.descripcion_equipo = descripcion_equipo;
 		this.fecha_ingreso = fecha_ingreso;
@@ -42,6 +43,7 @@ public class EquipoRecibidoVista {
 		this.es_recibir_equipo = es_recibir_equipo;
 		this.vehiculo = vehiculo;
 		this.placas = placas;
+		this.tipo = tipo;
 	}
 
 	public int getId() {
@@ -162,6 +164,14 @@ public class EquipoRecibidoVista {
 
 	public void setPlacas(String placas) {
 		this.placas = placas;
+	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
 	}
 	
 }

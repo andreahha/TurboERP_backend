@@ -20,6 +20,7 @@ public class EquipoRecibido {
 	private int ordenes_id;
 	private int ordenes_id_adonde;
 	private int es_recibir_equipo;
+	private String tipo;
 	
 	public EquipoRecibido() {
 		super();
@@ -27,7 +28,7 @@ public class EquipoRecibido {
 
 	public EquipoRecibido(int id, String descripcion_equipo, Date fecha_ingreso, String descripcion_empaque,
 			int cantidad, int peso, int usuario_acepta, Date fecha_acepta, int activo, int creado_por, Date creado,
-			int modificado_por, Date modificado, int ordenes_id, int ordenes_id_adonde, int es_recibir_equipo) {
+			int modificado_por, Date modificado, int ordenes_id, int ordenes_id_adonde, int es_recibir_equipo, String tipo) {
 		this.id = id;
 		this.descripcion_equipo = descripcion_equipo;
 		this.fecha_ingreso = fecha_ingreso;
@@ -44,6 +45,7 @@ public class EquipoRecibido {
 		this.ordenes_id = ordenes_id;
 		this.ordenes_id_adonde = ordenes_id_adonde;
 		this.es_recibir_equipo = es_recibir_equipo;
+		this.tipo = tipo;
 	}
 
 	public int getId() {
@@ -172,6 +174,14 @@ public class EquipoRecibido {
 
 	public void setEs_recibir_equipo(int es_recibir_equipo) {
 		this.es_recibir_equipo = es_recibir_equipo;
+	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
 	}
 
 }
