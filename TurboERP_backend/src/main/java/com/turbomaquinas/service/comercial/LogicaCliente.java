@@ -58,5 +58,10 @@ public class LogicaCliente implements ClienteService {
 		return repCliente.buscarTipoCliente(id);
 	}
 
+	@Override
+	public List<ClienteVista> consultarPorGiro(int numero_giro) {
+		return repCliente.consultarPorGiro(numero_giro);
+	}
+
 	
 }

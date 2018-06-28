@@ -116,4 +116,9 @@ public class JDBCCliente implements ClienteDAO{
 		String tipo = jdbcTemplate.queryForObject("SELECT TIPOFACTURA_CLIENTE(?)", String.class, id);
 		return tipo;
 	}
+
+	@Override
+	public List<ClienteVista> consultarPorGiro(int numero_giro) {
+		return jdbcTemplate.query("SELECT * FROM CLIENTES_V c WHERE c.num_giro = ?", new ClienteVistaRM(),numero_giro);
+	}
 }

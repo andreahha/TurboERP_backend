@@ -124,4 +124,12 @@ public class WSCliente {
 		}
 		return new ResponseEntity<String>(tipo, HttpStatus.OK);
 	}
+	
+	@GetMapping("/{numero_giro}/giro")
+	public ResponseEntity<List<ClienteVista>> consultarPorGiro(@PathVariable int numero_giro) {
+		List<ClienteVista> ctes = s.consultarPorGiro(numero_giro);
+		if (ctes == null)
+			return new ResponseEntity<List<ClienteVista>>(HttpStatus.NO_CONTENT);
+		return new ResponseEntity<List<ClienteVista>>(ctes, HttpStatus.OK);
+	}
 }
