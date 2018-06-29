@@ -16,6 +16,7 @@ public class IndicadoresTotalesDeRequisiciones {
 		super();
 	}
 
+	
 	public IndicadoresTotalesDeRequisiciones(int id, int favor_requeridosentiempo, int encontra_requeridosentiempo,
 			int favor_plandeproduccion, int encontra_plandeproduccion, int favor_entregasentiempo,
 			int encontra_entregasentiempo, int liberadas, int rechazadas) {
