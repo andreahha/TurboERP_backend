@@ -17,4 +17,7 @@ public interface ClienteService {
 	public ClienteVista buscarClientePorOrden(int id);
 	public String buscarTipoCliente(int id);
 	public List<EquipoSolicitudFletesVista> consultarPorCliente(int id);
+
+	public List<ClienteVista> consultarPorGiro(int numero_giro);
+
 }
